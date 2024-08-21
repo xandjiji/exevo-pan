@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import Head from 'next/head'
-import NextLink from 'next/link'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
 import { useCallback, useState } from 'react'
 import { parse, stringify } from 'devalue'
@@ -271,7 +270,7 @@ export default function GuildPage({
                             </strong>
                           ),
                           earnTc: (
-                            <NextLink
+                            <a
                               href={routes.DASHBOARD.REFERRALS}
                               className="text-primaryHighlight font-bold underline underline-offset-2"
                             >
@@ -282,7 +281,7 @@ export default function GuildPage({
                                   />
                                 ),
                               })}
-                            </NextLink>
+                            </a>
                           ),
                         })}
                         !

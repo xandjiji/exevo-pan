@@ -1,10 +1,9 @@
 import clsx from 'clsx'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import NextLink from 'next/link'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import {
-  Input as BaseInput,
   Chip as BaseChip,
   ExevoProLink,
+  Input as BaseInput,
 } from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
 import { routes } from 'Constants'
@@ -66,14 +65,14 @@ export const ExevoProExclusive = () => {
   const { homepage } = useTranslations()
 
   return (
-    <NextLink
+    <a
       href={routes.EXEVOPRO}
       className="text-onSurface text-xs font-light tracking-wider"
     >
       {templateMessage(homepage.FilterDrawer.exevoProExclusive, {
         exevopro: <ExevoProLink>🚀</ExevoProLink>,
       })}
-    </NextLink>
+    </a>
   )
 }
 

@@ -1,18 +1,17 @@
-import { createContext, useContext, useState, useCallback } from 'react'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { createContext, useCallback, useContext, useState } from 'react'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
-import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
 import {
-  Dialog,
-  LoadingAlert,
-  Input,
-  Checkbox,
   Button,
+  Checkbox,
+  Dialog,
   ExevoProLink,
+  Input,
+  LoadingAlert,
 } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import AuctionEnd from 'components/CharacterCard/Parts/Textbox/AuctionEnd'
@@ -22,9 +21,9 @@ import { loadOutfitSrc } from 'utils'
 import { routes } from 'Constants'
 import { isNotificationDateValid } from './utils'
 import {
+  AuctionConfigProps,
   AuctionNotificationsContextData,
   AuctionNotificationsProviderProps,
-  AuctionConfigProps,
 } from './types'
 
 type RegisterAuctionNotificationInput =
@@ -139,10 +138,7 @@ export const AuctionNotificationsProvider = ({
                             .bidNotification
                         }{' '}
                         {!isPro && (
-                          <NextLink
-                            href={routes.EXEVOPRO}
-                            className="text-onSurface"
-                          >
+                          <a href={routes.EXEVOPRO} className="text-onSurface">
                             {templateMessage(
                               homepage.AuctionsGrid.useAuctionNotifications
                                 .proExclusive,
@@ -150,7 +146,7 @@ export const AuctionNotificationsProvider = ({
                                 exevopro: <ExevoProLink>🧞‍♀️</ExevoProLink>,
                               },
                             )}
-                          </NextLink>
+                          </a>
                         )}
                       </span>
                     }

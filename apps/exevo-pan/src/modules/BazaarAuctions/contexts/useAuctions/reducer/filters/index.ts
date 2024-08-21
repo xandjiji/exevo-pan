@@ -9,7 +9,7 @@ import { Reducer } from '../types'
 import { FilterAction } from './types'
 import { toggleSet } from './utils'
 
-const sharedGems = new Set(Object.values(sharedGreaterGems))
+const sharedGems = new Set<string>(Object.values(sharedGreaterGems))
 
 const FilterReducer: Reducer<FilterAction> = (state, action) => {
   switch (action.type) {

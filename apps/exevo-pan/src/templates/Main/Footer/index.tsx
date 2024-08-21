@@ -2,13 +2,15 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
-import Image from 'next/image'
+import { loadRawSrc } from 'utils'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
-import tbjSrc from 'assets/tibiablackjack.png'
-import ravendawnSrc from 'assets/ravendawn-logo.png'
 import { FooterProps, RouteItem } from './types'
+
+const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo.png')
+const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
+const edgarSrc = loadRawSrc('/edgartc.png')
+const rdcSrc = loadRawSrc('/reidoscoins.png')
 
 const listItems: RouteItem[] = [
   { href: routes.HOME, content: 'charBazaar' },
@@ -78,7 +80,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
             </a>
 
             <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
-              <NextLink href={routes.EXEVOPRO}>
+              <a href={routes.EXEVOPRO}>
                 <Card>
                   <ExevoPanIcon width={36} height={36} />
 
@@ -92,7 +94,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                     })}
                   </span>
                 </Card>
-              </NextLink>
+              </a>
 
               <a
                 href={common.Ravendawn.link}
@@ -101,9 +103,10 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                 aria-label="Play Ravendawn for free"
               >
                 <Card>
-                  <Image
+                  <img
                     src={ravendawnSrc}
                     alt="Play Ravendawn for free"
+                    loading="lazy"
                     style={{ filter: 'drop-shadow(0 0 1px black)' }}
                   />
                 </Card>
@@ -118,11 +121,12 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   href={links.TIBIA_BLACKJACK}
                 >
                   <Card variant="secondary">
-                    <Image
+                    <img
                       src={tbjSrc}
                       width={97}
                       height={61}
                       alt="Tibia Blackjack"
+                      loading="lazy"
                     />
                   </Card>
                 </a>
@@ -133,11 +137,12 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   rel="noopener external nofollow"
                 >
                   <Card variant="secondary">
-                    <Image
-                      src="/edgartc.png"
+                    <img
+                      src={edgarSrc}
                       width={117}
                       height={61}
                       alt="Edgar Tc"
+                      loading="lazy"
                     />
                   </Card>
                 </a>
@@ -148,11 +153,12 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   rel="noopener external nofollow"
                 >
                   <Card variant="secondary">
-                    <Image
-                      src="/reidoscoins.png"
+                    <img
+                      src={rdcSrc}
                       width={51}
                       height={61}
                       alt="Rei dos Coins"
+                      loading="lazy"
                     />
                   </Card>
                 </a>
@@ -173,7 +179,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                     variant === 'surface' && 'text-onSurface/50',
                   )}
                 >
-                  <NextLink
+                  <a
                     href={href}
                     className={clsx(
                       'text-s cursor-pointer tracking-wider md:text-base',
@@ -189,7 +195,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                         content as keyof typeof common.Header.nav
                       ]
                     }
-                  </NextLink>
+                  </a>
                 </li>
               ))}
             </ul>

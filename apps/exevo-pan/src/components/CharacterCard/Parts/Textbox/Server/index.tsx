@@ -1,12 +1,13 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
-import euFlag from 'assets/eu-flag.png'
-import naFlag from 'assets/na-flag.png'
-import brFlag from 'assets/br-flag.png'
+import { loadRawSrc } from 'utils'
 import TransferIcon from './TransferIcon'
 import { LabeledTextBox } from '../../atoms'
 import { ServerInfoProps } from './types'
+
+const brFlag = loadRawSrc('/assets/br-flag.png')
+const naFlag = loadRawSrc('/assets/na-flag.png')
+const euFlag = loadRawSrc('/assets/eu-flag.png')
 
 export const flags = [euFlag, naFlag, brFlag]
 
@@ -30,7 +31,7 @@ const Server = ({
           : undefined
       }
     >
-      <Image
+      <img
         alt={serverData.serverLocation.string}
         title={serverData.serverLocation.string}
         src={flags[serverData.serverLocation.type] ?? fallbackFlag}

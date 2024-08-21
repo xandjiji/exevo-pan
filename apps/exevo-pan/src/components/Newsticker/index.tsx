@@ -1,7 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
-import NextLink from 'next/link'
 import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import { NewstickerProps } from './types'
@@ -37,7 +36,6 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
                 width={48}
                 height={48}
                 alt={title}
-                unoptimized
                 className="relative h-12 w-12"
               />
             </div>
@@ -59,12 +57,12 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
               </div>
             </div>
 
-            <NextLink
+            <a
               href={`${routes.BLOG}/${slug}`}
               className="absolute top-0 left-0 h-full w-full text-transparent"
             >
               {title}
-            </NextLink>
+            </a>
           </article>
         ))}
       </div>

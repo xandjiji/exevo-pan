@@ -1,7 +1,5 @@
-import { StaticImageData } from 'next/image'
-
 export type Material = {
-  src: StaticImageData
+  src: string
   name: string
   amount: number
 }

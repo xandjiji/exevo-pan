@@ -1,7 +1,9 @@
 import clsx from 'clsx'
-import { FadeImage, Button } from 'components/Atoms'
-import notFoundSrc from 'assets/notFound.png'
+import { loadRawSrc } from 'utils'
+import { Button, FadeImage } from 'components/Atoms'
 import { EmptyStateProps } from './types'
+
+const notFoundSrc = loadRawSrc('/assets/notFound.png')
 
 const EmptyState = ({
   variant,

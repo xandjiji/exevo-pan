@@ -1,8 +1,8 @@
 import { memo } from 'react'
-import Image from 'next/image'
-import goldCoinSrc from 'assets/goldcoin.png'
-import { formatNumberWithCommas } from 'utils'
+import { formatNumberWithCommas, loadRawSrc } from 'utils'
 import * as S from './atoms'
+
+const goldCoinSrc = loadRawSrc('/assets/goldcoin.png')
 
 type GoldCoinProps = {
   value: number
@@ -14,10 +14,9 @@ const GoldCoin = ({ value, displaySign = false, ...props }: GoldCoinProps) => {
 
   return (
     <S.Flex title={`${formattedValue} gp`} {...props}>
-      <Image
+      <img
         src={goldCoinSrc}
         alt="Gold Coin"
-        unoptimized
         width={9}
         height={9}
         className="pixelated select-none self-center"

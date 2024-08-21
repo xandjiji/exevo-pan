@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { routes, locales } from 'Constants'
+import { locales, routes } from 'Constants'
 import { a as A } from '../../Style/Link'
 
 const { BLOG } = routes
@@ -21,7 +21,7 @@ export const SlugLink = ({ children, href }: LinkProps) => {
   )
 
   return (
-    <NextLink href={href} legacyBehavior>
+    <NextLink href={href} legacyBehavior prefetch={false}>
       <A href={routedHref} target="_blank" rel="noreferrer noopener">
         {children}
       </A>
@@ -30,7 +30,7 @@ export const SlugLink = ({ children, href }: LinkProps) => {
 }
 
 export const RouteLink = ({ children, href, ...props }: LinkProps) => (
-  <NextLink href={href} legacyBehavior {...props}>
+  <NextLink href={href} legacyBehavior {...props} prefetch={false}>
     <A href={href}>{children}</A>
   </NextLink>
 )

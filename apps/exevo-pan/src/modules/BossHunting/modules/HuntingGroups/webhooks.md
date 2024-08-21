@@ -133,7 +133,7 @@ export default {
       //  {
       //    author: {
       //      name: displayedBossName,
-      //      icon_url: 'https://exevopan.com/sprites/bosses/Yeti.gif',
+      //      icon_url: 'https://assets.service-exevopan.com/public/sprites/bosses/Yeti.gif',
       //      url: 'https://www.exevopan.com/bosses/hunting-groups/Your-Guild-Name',
       //    },
       //    color: 4149685,

@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import { useRef, useEffect } from 'react'
-import NextLink from 'next/link'
+import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { LinkProps } from './types'
 
@@ -22,7 +21,7 @@ const Link = ({
   }, [scrollOnCurrent, isCurrent])
 
   return (
-    <NextLink
+    <a
       ref={aRef as any}
       href={href}
       aria-current={isCurrent ? 'page' : undefined}

@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import clsx from 'clsx'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useCallback, useState } from 'react'
-import Link from 'next/link'
-import { LabeledCard, Button, Input, LabeledTextBox } from 'components/Atoms'
+import { Button, Input, LabeledCard, LabeledTextBox } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
@@ -13,14 +12,14 @@ import CharacterModal from 'components/CharacterModal'
 import { sortSchema } from 'shared-utils/dist/contracts/Filters/schemas'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
-import { TibiaIcons, SearchIcon } from 'assets/svgs'
+import { SearchIcon, TibiaIcons } from 'assets/svgs'
 import { loadOutfitSrc } from 'utils'
 import { routes } from 'Constants'
 import {
-  vocationOptions,
-  skillOptions,
-  pvpOptions,
   locationOptions,
+  pvpOptions,
+  skillOptions,
+  vocationOptions,
 } from '../../options'
 import { Skill } from '../../types'
 import { ProCardSkeleton } from './ProCardSkeleton'
@@ -343,12 +342,12 @@ const AuctionEstimation = () => {
           <p className="text-tsm text-right">
             {templateMessage(i18n.goToHistory, {
               history: (
-                <Link
+                <a
                   href={`${routes.HOME}?mode=${historyMode}&${descendingUrlKey}=true`}
                   className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
                 >
                   {i18n.history}
-                </Link>
+                </a>
               ),
             })}
           </p>

@@ -1,9 +1,10 @@
 import clsx from 'clsx'
 import { Checkbox as BaseCheckbox } from 'components/Atoms'
-import Image from 'next/image'
-import tibiaCoinSrc from 'assets/tibiacoin.png'
+import { loadRawSrc } from 'utils'
 import styles from './styles.module.css'
-import { WrapperProps, FlexColumnProps, BodyProps } from './types'
+import { BodyProps, FlexColumnProps, WrapperProps } from './types'
+
+const tibiaCoinSrc = loadRawSrc('/assets/tibiacoin.png')
 
 export const Wrapper = ({
   highlighted = false,
@@ -25,10 +26,9 @@ export const Wrapper = ({
 
 export const Icons = {
   TibiaCoin: () => (
-    <Image
+    <img
       src={tibiaCoinSrc}
       alt="Tibia Coin"
-      unoptimized
       width={12}
       height={12}
       className="pixelated"

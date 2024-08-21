@@ -1,5 +1,4 @@
 import { useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
 import { routes } from 'Constants'
 import { BreadcrumbsProps } from './types'
 
@@ -12,13 +11,13 @@ const Breadcrumbs = ({ postTitle, ...props }: BreadcrumbsProps) => {
       className="text-tsm max-w-min overflow-hidden text-ellipsis whitespace-nowrap"
       {...props}
     >
-      <NextLink href={routes.HOME} className="text-primaryHighlight">
+      <a href={routes.HOME} className="text-primaryHighlight">
         {blog.Meta.breadcrumbRoot}
-      </NextLink>
+      </a>
       <Separator />
-      <NextLink href={routes.BLOG} className="text-primaryHighlight">
+      <a href={routes.BLOG} className="text-primaryHighlight">
         {blog.Meta.title}
-      </NextLink>
+      </a>
       <Separator />
       <span>{postTitle}</span>
     </div>

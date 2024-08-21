@@ -1,8 +1,8 @@
-import { useState, useMemo, memo } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import Image from 'next/image'
-import { Accordion, Label, ActiveCount, Input } from 'components/Atoms'
+import { loadRawSrc } from 'utils'
+import { Accordion, ActiveCount, Input, Label } from 'components/Atoms'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { ExevoProExclusive } from '../atoms'
 import { SpritePickerProps } from './types'
@@ -102,9 +102,11 @@ const SpritePicker = ({
                   : 'bg-separator/50',
               )}
             >
-              <Image
+              <img
                 alt={name}
-                src={`/sprites/${spriteDirectory}/${name}${directorySuffix}.gif`}
+                src={loadRawSrc(
+                  `/sprites/${spriteDirectory}/${name}${directorySuffix}.gif`,
+                )}
                 width="64"
                 height="64"
                 className="pixelated pointer-events-none -ml-6 -mt-6"

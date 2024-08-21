@@ -1,22 +1,21 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import {
-  Dialog,
-  Button,
-  Input,
-  Checkbox,
   Alert,
+  Button,
+  Checkbox,
+  Dialog,
   ExevoProLink,
+  Input,
 } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
-import { Select, InfoTooltip } from 'components/Organisms'
+import { InfoTooltip, Select } from 'components/Organisms'
 import {
-  useTranslations,
-  templateString,
   templateMessage,
+  templateString,
+  useTranslations,
 } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
-import NextLink from 'next/link'
 import { trpc } from 'lib/trpc'
 import { avatar, getGuildPermalink } from 'utils'
 import { routes } from 'Constants'
@@ -119,14 +118,14 @@ const CreateGuildDialog = ({
                       <p>{i18n.privateTooltip}</p>
 
                       {!isPro && (
-                        <NextLink
+                        <a
                           href={routes.EXEVOPRO}
                           className="text-onSurface mt-4 block"
                         >
                           {templateMessage(i18n.exevoProExclusive, {
                             exevopro: <ExevoProLink>🕵️</ExevoProLink>,
                           })}
-                        </NextLink>
+                        </a>
                       )}
                     </div>
                   }
@@ -136,7 +135,10 @@ const CreateGuildDialog = ({
             aria-label={i18n.privateGroup}
             checked={formState.private}
             onChange={() =>
-              setFormState((prev) => ({ ...prev, private: !formState.private }))
+              setFormState((prev) => ({
+                ...prev,
+                private: !formState.private,
+              }))
             }
             disabled={!isPro}
           />
@@ -146,12 +148,12 @@ const CreateGuildDialog = ({
           <Alert variant="alert">
             {templateMessage(i18n.unauthedAlert, {
               login: (
-                <NextLink
+                <a
                   href={routes.LOGIN}
                   className="text-onAlert font-bold underline underline-offset-2"
                 >
                   {i18n.login}
-                </NextLink>
+                </a>
               ),
             })}
           </Alert>

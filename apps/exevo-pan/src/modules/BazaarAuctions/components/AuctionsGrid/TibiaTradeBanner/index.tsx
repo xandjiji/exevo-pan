@@ -2,10 +2,11 @@
 import clsx from 'clsx'
 import { links } from 'Constants'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
+import { loadRawSrc } from 'utils'
 import { Chip, SpritePortrait, Text } from 'components/Atoms'
-import yellowSrc from 'assets/yellowbattleye.png'
-import greenSrc from 'assets/greenbattleye.png'
+
+const greenSrc = loadRawSrc('/assets/greenbattleye.png')
+const yellowSrc = loadRawSrc('/assets/yellowbattleye.png')
 
 const { TIBIA_TRADE: TIBIA_TRADE_URL } = links
 
@@ -39,7 +40,7 @@ export const Item = ({ item }: { item: TibiaTradeHighlightedItem }) => {
         <div className="flex items-center gap-2">
           <Chip>{item.offer === 'buy' ? i18n.buying : i18n.selling}</Chip>
           <Chip>
-            <Image
+            <img
               role="none"
               alt={item.greenBattleye ? 'Green BattlEye' : 'Yellow BattlEye'}
               src={item.greenBattleye ? greenSrc : yellowSrc}

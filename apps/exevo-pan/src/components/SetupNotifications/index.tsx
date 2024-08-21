@@ -1,9 +1,8 @@
 import clsx from 'clsx'
 import { useCallback } from 'react'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
-import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
 import { Alert } from 'components/Atoms'
 import { routes } from 'Constants'
@@ -61,9 +60,9 @@ const SetupNotifications = ({
       <Alert variant="alert" {...props}>
         {templateMessage(i18n.notAuthed, {
           logIn: (
-            <NextLink href={routes.LOGIN}>
+            <a href={routes.LOGIN}>
               <ActionButton className="text-onAlert">{i18n.logIn}</ActionButton>
-            </NextLink>
+            </a>
           ),
         })}
       </Alert>

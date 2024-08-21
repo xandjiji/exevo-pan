@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
-import coinsGif from 'assets/tibiaCoins.gif'
+import { loadRawSrc } from 'utils'
+
+const coinsGif = loadRawSrc('/assets/tibiaCoins.gif')
 
 const CtaButton = ({ ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
   const { common } = useTranslations()
@@ -14,7 +15,7 @@ const CtaButton = ({ ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
       className="clickable text-tsm text-onSurface md:z-1 hover:highlight-10 animated-background relative z-10 ml-2 hidden items-end whitespace-nowrap rounded-2xl py-2 pr-4 pl-10 tracking-wider shadow-md transition-all md:flex"
       {...props}
     >
-      <Image
+      <img
         src={coinsGif}
         alt="Tibia Coins"
         width="24"

@@ -1,10 +1,9 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { ClientComponent } from 'components/Organisms'
-import { Link, Switch, CtaButton } from 'components/Atoms'
-import NextLink from 'next/link'
+import { CtaButton, Link, Switch } from 'components/Atoms'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
 import { ExevoPanIcon, MoonIcon } from 'assets/svgs'
@@ -69,7 +68,7 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
             />
           )}
 
-          <NextLink href={routes.HOME} aria-label={accessibleLogoName}>
+          <a href={routes.HOME} aria-label={accessibleLogoName}>
             <div
               className={clsx(
                 'mr-4 shrink-0 cursor-pointer items-center justify-center md:flex',
@@ -83,7 +82,7 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
                 aria-label={common.Header.logoLabel}
               />
             </div>
-          </NextLink>
+          </a>
 
           {!clean && (
             <ul

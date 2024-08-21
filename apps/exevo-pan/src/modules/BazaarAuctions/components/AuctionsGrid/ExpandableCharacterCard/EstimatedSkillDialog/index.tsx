@@ -1,19 +1,18 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import clsx from 'clsx'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import NextLink from 'next/link'
-import { Dialog, Slider, Chip, Text, SkillBar } from 'components/Atoms'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
+import { Chip, Dialog, SkillBar, Slider, Text } from 'components/Atoms'
 import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks, skillAfterLoyalty } from 'utils'
 import { routes } from 'Constants'
 import { parameterNames } from 'modules/Calculators/modules/ExerciseWeapons/CharacterConfig/constants'
 import {
-  getInitialSkill,
   calculateMinimumSkillCost,
-  getVocationName,
-  getSkillType,
+  getInitialSkill,
   getPercentageLeft,
+  getSkillType,
+  getVocationName,
 } from './utils'
 import { skillOptions } from './options'
 import { EstimatedSkillDialogProps, Skill } from './types'
@@ -128,7 +127,7 @@ export const EstimatedSkillDialog = ({
       <p className="text-tsm mt-6 text-right">
         {templateMessage(i18n.goToCalculator, {
           calculatorPage: (
-            <NextLink
+            <a
               href={`${routes.EXERCISE_WEAPONS}?${[
                 `${parameterNames.vocation}=${vocation}`,
                 `${parameterNames.skill}=${skillType}`,
@@ -140,7 +139,7 @@ export const EstimatedSkillDialog = ({
               className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
             >
               {i18n.calculatorPage}
-            </NextLink>
+            </a>
           ),
         })}
       </p>

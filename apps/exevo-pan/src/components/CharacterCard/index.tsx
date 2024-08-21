@@ -1,6 +1,5 @@
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
-import NextLink from 'next/link'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
 import {
@@ -124,7 +123,7 @@ const CharacterCard = ({
                   </div>
                 ),
                 HIDDEN: (
-                  <NextLink
+                  <a
                     href={routes.EXEVOPRO}
                     className="text-onSurface text-tsm mt-auto flex flex-wrap items-center gap-1.5"
                     style={{ height: 'unset' }}
@@ -148,7 +147,7 @@ const CharacterCard = ({
                         },
                       )}
                     </small>
-                  </NextLink>
+                  </a>
                 ),
                 NO_TC: null,
               }[tcState]

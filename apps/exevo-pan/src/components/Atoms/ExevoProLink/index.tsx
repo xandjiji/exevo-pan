@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import Link from 'next/link'
 import { routes } from 'Constants'
 
 const ExevoProLink = ({
@@ -7,7 +6,7 @@ const ExevoProLink = ({
   className,
   ...props
 }: Omit<JSX.IntrinsicElements['a'], 'href' | 'ref'>) => (
-  <Link
+  <a
     href={routes.EXEVOPRO}
     className={clsx(
       className,
@@ -17,8 +16,8 @@ const ExevoProLink = ({
   >
     Exevo Pro
     {children ? ' ' : null}
-    {children ? <span className="text-onSurface"> {children}</span> : null}
-  </Link>
+    {children ? <span className="text-onSurface">{children}</span> : null}
+  </a>
 )
 
 export default ExevoProLink
