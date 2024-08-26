@@ -1724,6 +1724,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Skelaptor',
     value: 180,
   },
+  'cave cabinet': {
+    name: 'Cave Cabinet',
+    value: 90,
+  },
   'cave bed': {
     name: 'Cave Bed',
     value: 120,
@@ -1847,6 +1851,30 @@ export const storeItems: Record<string, StoreItem> = {
   'crystal wall lamp': {
     name: 'Crystal Wall Lamp',
     value: 60,
+  },
+  beehive: {
+    name: 'Beehive',
+    value: 80,
+  },
+  'candy chest': {
+    name: 'Candy Chest',
+    value: 60,
+  },
+  'gravestone table': {
+    name: 'Gravestone Table',
+    value: 80,
+  },
+  'morbid floor lamp': {
+    name: 'Morbid Floor Lamp',
+    value: 120,
+  },
+  'blossom cabinet': {
+    name: 'Blossom Cabinet',
+    value: 100,
+  },
+  'sweet present': {
+    name: 'Sweet Present',
+    value: 0,
   },
   /* RASCACOON */
   'blue shark trophy': {
