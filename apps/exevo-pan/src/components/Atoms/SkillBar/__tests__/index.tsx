@@ -1,5 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { renderWithProviders, randomDataset } from 'utils/test'
+import { randomDataset, renderWithProviders } from 'utils/test'
 import SkillBar from '..'
 
 const { characterData } = randomDataset()
