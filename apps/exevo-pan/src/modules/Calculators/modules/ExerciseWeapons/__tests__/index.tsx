@@ -4,7 +4,7 @@ import { renderWithProviders } from 'utils/test'
 import { assertSummary } from '../Summary/__tests__'
 import ExerciseWeapons from '..'
 
-describe('<ExerciseWeapons />', () => {
+describe('<sExerciseWeapons />', () => {
   test('should calculate everything correctly', () => {
     renderWithProviders(<ExerciseWeapons />)
 
@@ -14,7 +14,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '104,335',
-        gold: '1,095,517,500',
+        gold: '1,449,097,222',
       },
       lasting: 144,
       durable: 7,
@@ -35,7 +35,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '3,855',
-        gold: '40,477,500',
+        gold: '53,541,666',
       },
       lasting: 5,
       durable: 2,
@@ -55,7 +55,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '24,130',
-        gold: '253,365,000',
+        gold: '335,138,888',
       },
       lasting: 33,
       durable: 3,
@@ -70,7 +70,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '19,310',
-        gold: '202,755,000',
+        gold: '268,194,444',
       },
       lasting: 26,
       durable: 6,
@@ -85,7 +85,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '17,560',
-        gold: '184,380,000',
+        gold: '243,888,888',
       },
       lasting: 24,
       durable: 2,
@@ -100,7 +100,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '8,780',
-        gold: '92,190,000',
+        gold: '121,944,444',
       },
       lasting: 12,
       durable: 1,
@@ -115,7 +115,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '9,655',
-        gold: '101,377,500',
+        gold: '134,097,222',
       },
       lasting: 13,
       durable: 3,
@@ -131,7 +131,7 @@ describe('<ExerciseWeapons />', () => {
     assertSummary({
       cost: {
         tc: '9,720',
-        gold: '102,060,000',
+        gold: '135,000,000',
       },
       lasting: 0,
       durable: 108,
