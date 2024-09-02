@@ -31,7 +31,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '370',
-          gold: '3,885,000',
+          gold: '5,138,888',
         },
         regular: 4,
         durable: 3,
@@ -43,7 +43,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '345',
-          gold: '3,622,500',
+          gold: '4,791,666',
         },
         regular: 3,
         durable: 3,
@@ -55,7 +55,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '165',
-          gold: '1,732,500',
+          gold: '2,291,666',
         },
         regular: 3,
         durable: 1,
@@ -67,7 +67,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '180',
-          gold: '1,890,000',
+          gold: '2,500,000',
         },
         regular: 0,
         durable: 2,
@@ -84,7 +84,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '25',
-          gold: '262,500',
+          gold: '347,222',
         },
         regular: 1,
         durable: 0,
@@ -96,7 +96,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '25',
-          gold: '262,500',
+          gold: '347,222',
         },
         regular: 1,
         durable: 0,
@@ -108,7 +108,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '25',
-          gold: '262,500',
+          gold: '347,222',
         },
         regular: 1,
         durable: 0,
@@ -120,7 +120,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '90',
-          gold: '945,000',
+          gold: '1,250,000',
         },
         regular: 0,
         durable: 1,
@@ -137,7 +137,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '820,645',
-          gold: '8,616,772,500',
+          gold: '11,397,847,222',
         },
         regular: 1,
         durable: 6,
@@ -149,7 +149,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '746,035',
-          gold: '7,833,367,500',
+          gold: '10,361,597,222',
         },
         regular: 1,
         durable: 1,
@@ -161,7 +161,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '373,035',
-          gold: '3,916,867,500',
+          gold: '5,181,041,666',
         },
         regular: 3,
         durable: 0,
@@ -173,7 +173,7 @@ export const cases: Case[] = [
       {
         cost: {
           tc: '373,050',
-          gold: '3,917,025,000',
+          gold: '5,181,250,000',
         },
         regular: 0,
         durable: 4145,
