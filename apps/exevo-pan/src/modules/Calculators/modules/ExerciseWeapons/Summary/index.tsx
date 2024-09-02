@@ -1,20 +1,20 @@
 import { useMemo } from 'react'
 import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
-import { LabeledCard, Checkbox, Text } from 'components/Atoms'
-import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
+import { Checkbox, LabeledCard, Text } from 'components/Atoms'
+import { ClientComponent, InfoTooltip, Select } from 'components/Organisms'
 import {
-  isObjectEmpty,
   autoRequiredWeaponsCount,
   customRequiredWeaponsCount,
-  skillCost,
+  isObjectEmpty,
   SKILL_CONSTANTS,
+  skillCost,
 } from 'utils'
 import {
   Chip,
   ChipWrapper,
-  Group,
   Empty,
+  Group,
   TimeBubbles,
 } from '../../../components'
 import { weaponOptions } from './options'
@@ -94,7 +94,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
                   <strong>{calculators.ExerciseWeapons.moneyTooltip.b}</strong>{' '}
                   {calculators.ExerciseWeapons.moneyTooltip.c}{' '}
                   <Text.GoldCoin
-                    value={10500}
+                    value={13888}
                     style={{ alignItems: 'baseline' }}
                   />{' '}
                   gp {calculators.ExerciseWeapons.moneyTooltip.d}{' '}
