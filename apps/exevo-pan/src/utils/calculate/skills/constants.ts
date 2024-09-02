@@ -13,9 +13,9 @@ const charges: WeaponsObject = {
 }
 
 const goldPrice: WeaponsObject = {
-  lasting: 7560000,
-  durable: 945000,
-  regular: 262500,
+  lasting: 10000000,
+  durable: 1250000,
+  regular: 347222,
 }
 
 const tcPrice: WeaponsObject = {
