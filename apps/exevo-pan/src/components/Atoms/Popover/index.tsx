@@ -117,7 +117,7 @@ const Popover = ({
           style={styles.popper}
           {...attributes.popper}
           className={clsx(
-            'z-51 animate-fadeIn',
+            'z-71 animate-fadeIn',
             className,
             attributes.popper?.className,
           )}
