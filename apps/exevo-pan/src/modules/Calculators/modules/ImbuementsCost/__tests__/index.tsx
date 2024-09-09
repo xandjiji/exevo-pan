@@ -19,7 +19,7 @@ describe('<ImbuementsCost />', () => {
     type(screen.getByRole('textbox', { name: 'Bloody Pincers' }), '6468')
     type(screen.getByRole('textbox', { name: 'Piece of Dead Brain' }), '9885')
 
-    expect(screen.getByTitle('298,625 gp')).toBeInTheDocument()
+    expect(screen.getByTitle('398,625 gp')).toBeInTheDocument()
     expect(screen.getByText('vampirism intricate yes')).toBeInTheDocument()
 
     expect(
@@ -39,7 +39,7 @@ describe('<ImbuementsCost />', () => {
       '{arrowup}',
     )
 
-    expect(screen.getByTitle('298,800 gp')).toBeInTheDocument()
+    expect(screen.getByTitle('398,800 gp')).toBeInTheDocument()
     expect(screen.getByText('vampirism powerful yes')).toBeInTheDocument()
 
     expect(

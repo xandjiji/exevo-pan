@@ -96,8 +96,8 @@ export const RECIPES: RecipeSchema[] = [
 
 export const tierBasePrice: Record<number, number> = {
   1: 15000,
-  2: 55000,
-  3: 150000,
+  2: 60000,
+  3: 250000,
 }
 
 export const tierName: Record<number, string> = {
