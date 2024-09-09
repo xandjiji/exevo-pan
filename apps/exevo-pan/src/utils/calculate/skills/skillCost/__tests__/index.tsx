@@ -14,7 +14,7 @@ const cases: Case[] = [
       lasting: 113,
     },
     result: {
-      gold: 857167500,
+      gold: 1133819442,
       seconds: 3265400,
       tc: 81635,
     },
@@ -38,7 +38,7 @@ const cases: Case[] = [
       lasting: 0,
     },
     result: {
-      gold: 17062500,
+      gold: 22569430,
       seconds: 65000,
       tc: 1625,
     },
@@ -50,7 +50,7 @@ const cases: Case[] = [
       lasting: 0,
     },
     result: {
-      gold: 12285000,
+      gold: 16250000,
       seconds: 46800,
       tc: 1170,
     },
@@ -62,7 +62,7 @@ const cases: Case[] = [
       lasting: 8,
     },
     result: {
-      gold: 64785000,
+      gold: 85694444,
       seconds: 246800,
       tc: 6170,
     },

@@ -360,6 +360,11 @@ const mounts: MountToken[] = [
     id: 1721,
     value: 0,
   },
+  {
+    name: 'Pegasus',
+    id: 1730,
+    value: 0,
+  },
 ]
 
 export const scrapingTokens = lowerCaseKeys(nameableToScrapingTokens(mounts))
