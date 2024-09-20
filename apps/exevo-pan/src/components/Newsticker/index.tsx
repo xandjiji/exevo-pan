@@ -1,9 +1,11 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
-import { loadThumbnail } from 'utils'
+import { loadRawSrc, loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import { NewstickerProps } from './types'
+
+const noPingSrc = loadRawSrc('/assets/noping-header.png')
 
 const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
   const { common } = useTranslations()
@@ -24,7 +26,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
         {common.Newsticker}
       </h2>
 
-      <div className="negative-container custom-scrollbar lgr:gap-6 flex gap-3 overflow-auto pb-3 before:w-2 before:flex-none after:w-2 after:flex-none md:m-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0 md:before:content-[unset] md:after:content-[unset]">
+      <div className="negative-container custom-scrollbar lgr:gap-6 flex gap-3 overflow-auto pb-3 before:w-2 before:flex-none after:w-2 after:flex-none md:m-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:pb-0 md:before:content-[unset] md:after:content-[unset]">
         {blogPosts.map(({ slug, title, tags, thumbnail }) => (
           <article
             key={slug}
@@ -67,7 +69,25 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
         ))}
       </div>
 
-      <TibiaBlackjack.Banner className="hidden md:block" />
+      <div className="ml-auto hidden gap-3 md:flex">
+        <TibiaBlackjack.Banner />
+
+        <a
+          className="card clickable hidden bg-black/40 p-1 transition-all hover:bg-black/30 md:block"
+          target="_blank"
+          rel="noopener external nofollow noreferrer"
+          href={common.NoPing.link}
+        >
+          <FadeImage
+            className="self-start"
+            src={noPingSrc}
+            alt="NoPing"
+            width={66}
+            height={61}
+            loading="lazy"
+          />
+        </a>
+      </div>
     </aside>
   )
 }
