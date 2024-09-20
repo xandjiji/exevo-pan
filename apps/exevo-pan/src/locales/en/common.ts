@@ -123,6 +123,10 @@ export default {
     link: 'https://ravendawn.online/en/?ref=exevopan',
     text: 'Play Ravendawn',
   },
+  NoPing: {
+    link: 'https://noping.com/en',
+    text: 'Improve your ping',
+  },
   CloseDrawerLabel: 'Close drawer',
   RepoLinkText: 'Go to this repository',
   MadeBy: 'made by',

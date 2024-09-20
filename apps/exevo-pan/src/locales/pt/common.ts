@@ -126,6 +126,10 @@ export default defaultComposer(defaultTranslations, {
     link: 'https://ravendawn.online/pt/?ref=exevopan',
     text: 'Jogar Ravendawn',
   },
+  NoPing: {
+    link: 'https://noping.com/',
+    text: 'Melhore seu ping',
+  },
   CloseDrawerLabel: 'Fechar menu',
   RepoLinkText: 'Ir para este repositório',
   MadeBy: 'criado por',

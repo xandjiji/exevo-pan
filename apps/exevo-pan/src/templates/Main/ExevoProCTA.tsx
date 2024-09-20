@@ -14,7 +14,7 @@ export const ExevoProCTA = () => {
 
   return (
     <a
-      className="bg-surface text-onSurface clickable animate-fadeIn z-71 border-1 border-separator/50 text-s fixed bottom-3 left-[calc(100vw-12px)] flex items-center gap-2 whitespace-nowrap rounded-md border-solid px-3 py-2 shadow md:bottom-6 md:left-[calc(100vw-24px)]"
+      className="bg-surface text-onSurface clickable animate-fadeIn z-71 border-1 border-separator/50 text-s fixed bottom-3 left-[calc(100vw-12px)] flex items-center gap-2 whitespace-nowrap rounded-md border-solid py-2.5 px-3 shadow md:bottom-6 md:left-[calc(100vw-24px)] md:py-2"
       href={routes.EXEVOPRO}
       style={{ transform: 'translateX(-100%)' }}
     >
