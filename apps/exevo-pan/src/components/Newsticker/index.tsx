@@ -73,7 +73,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
         <TibiaBlackjack.Banner />
 
         <a
-          className="card clickable hidden bg-black/40 p-1 transition-all hover:bg-black/30 md:block"
+          className="card clickable hidden bg-black/40 p-1 px-2 transition-all hover:bg-black/30 md:block"
           target="_blank"
           rel="noopener external nofollow noreferrer"
           href={common.NoPing.link}
