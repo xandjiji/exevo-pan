@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { FadeImage, Tag } from 'components/Atoms'
+import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
 import { loadRawSrc, loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import { NewstickerProps } from './types'
