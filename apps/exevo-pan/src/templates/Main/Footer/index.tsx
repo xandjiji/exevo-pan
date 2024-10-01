@@ -117,6 +117,23 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
             <div>
               <div className="flex flex-wrap items-center justify-center gap-6">
                 <a
+                  target="_blank"
+                  rel="noopener external nofollow"
+                  href={links.TIBIA_BLACKJACK}
+                >
+                  <Card variant="secondary">
+                    <img
+                      src={tbjSrc}
+                      width={97}
+                      height={61}
+                      alt="Tibia Blackjack"
+                      loading="lazy"
+                      style={{ filter: 'drop-shadow(0 0 1px black)' }}
+                    />
+                  </Card>
+                </a>
+
+                <a
                   href={links.EDGAR_TC}
                   target="_blank"
                   rel="noopener external nofollow"
