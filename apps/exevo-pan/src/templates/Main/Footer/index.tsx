@@ -8,7 +8,6 @@ import { links, routes } from 'Constants'
 import { FooterProps, RouteItem } from './types'
 
 const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo.png')
-const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
 const edgarSrc = loadRawSrc('/edgartc.png')
 const rdcSrc = loadRawSrc('/reidoscoins.png')
 const noPingSrc = loadRawSrc('/assets/noping-footer.png')
