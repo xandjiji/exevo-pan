@@ -210,7 +210,8 @@ export default class AuctionPage {
     return huntingSlotText === '1'
   }
 
-  allCharmPoints($: CheerioAPI): Pick<CharmInfo, 'total' | 'unspent'> {
+  allCharmPoints($: CheerioAPI) {
+    // @ ToDo: update this scrapping
     const unspent = stringToNumber(
       $('.LabelV:contains("Available Charm Points:")').next().text(),
     )
@@ -219,10 +220,7 @@ export default class AuctionPage {
       $('.LabelV:contains("Spent Charm Points:")').next().text(),
     )
 
-    return {
-      unspent,
-      total: unspent + spentCharmPoints,
-    }
+    return unspent + spentCharmPoints
   }
 
   hirelings($: CheerioAPI): HirelingsInfo {
@@ -291,20 +289,6 @@ export default class AuctionPage {
     })
 
     return imbuementArray.sort()
-  }
-
-  charms($: CheerioAPI): string[] {
-    const charmElements = $(
-      '#Charms .TableContentContainer tbody td:last-child',
-    )
-
-    const charmArray: string[] = []
-    charmElements.filter(filterListTable).each((_, element) => {
-      const charm = cheerio(element).text()
-      charmArray.push(charm)
-    })
-
-    return charmArray
   }
 
   quests($: CheerioAPI): string[] {
@@ -478,7 +462,6 @@ export default class AuctionPage {
       tags: [],
       skills: this.skills($),
       items: this.items($),
-      charms: this.charms($),
       transfer: this.transfer($),
       imbuements: this.imbuements($),
       quests: this.quests($),
@@ -488,7 +471,7 @@ export default class AuctionPage {
       huntingSlot: this.huntingSlot($),
       preySlot: this.preySlot($),
       charmInfo: {
-        ...this.allCharmPoints($),
+        total: this.allCharmPoints($),
         expansion: this.charmExpansion($),
       },
       gems: this.gemCount($),
