@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import ExevoProCTA from './ExevoProCTA'
 import { RavendawnCTA } from './RavendawnCTA'
-import { NoPingCTA } from './NoPingCTA'
+// import { NoPingCTA } from './NoPingCTA'
 
 type MainProps = { clean?: boolean; children: React.ReactNode }
 
@@ -16,10 +16,11 @@ export default ({ clean = false, children }: MainProps) => (
 
     {!clean && (
       <>
-        <NoPingCTA />
         <RavendawnCTA />
         <ExevoProCTA />
       </>
     )}
   </div>
 )
+
+// <NoPingCTA />
