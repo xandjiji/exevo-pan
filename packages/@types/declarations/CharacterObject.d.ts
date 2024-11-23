@@ -12,7 +12,6 @@ declare type HirelingsInfo = {
 declare type CharmInfo = {
   expansion: boolean
   total: number
-  unspent: number
 }
 
 declare interface CharacterSkillsObject {

@@ -73,7 +73,6 @@ const GoodAuction = () => (
       huntingSlot: false,
       preySlot: false,
       charmInfo: {
-        unspent: 554,
         total: 3354,
         expansion: false,
       },

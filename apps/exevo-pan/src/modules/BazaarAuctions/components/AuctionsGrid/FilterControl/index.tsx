@@ -19,7 +19,7 @@ const FilterControl = ({
 }: JSX.IntrinsicElements['section']) => {
   const { common, homepage } = useTranslations()
 
-  const { imbuementOptions, charmOptions } = useDrawerFields()
+  const { imbuementOptions } = useDrawerFields()
   const { activeFilterCount, filterState, mode, dispatch } = useAuctions()
   const notDefault = useNotDefault(filterState)
 
@@ -401,30 +401,6 @@ const FilterControl = ({
                 }
               >
                 🪄 {imbuement}
-              </S.Chip>
-            ))
-          )}
-
-          {charmOptions.length === filterState.charmsSet.size ? (
-            <S.Chip
-              onClose={() =>
-                dispatch({ type: 'SET_DEFAULT', key: 'charmsSet' })
-              }
-            >
-              ♉ {homepage.FilterControl.allCharms}
-            </S.Chip>
-          ) : (
-            [...filterState.charmsSet].map((charm) => (
-              <S.Chip
-                onClose={() =>
-                  dispatch({
-                    type: 'TOGGLE_FILTER_SET',
-                    key: 'charmsSet',
-                    value: charm,
-                  })
-                }
-              >
-                ♉ {charm}
               </S.Chip>
             ))
           )}

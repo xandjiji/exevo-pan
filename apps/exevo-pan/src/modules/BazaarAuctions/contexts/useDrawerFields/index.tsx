@@ -9,7 +9,6 @@ const DEFAULT_STATE: DrawerFieldsContextData = {
   serverOptions: [],
   rareItemData: {},
   imbuementOptions: [],
-  charmOptions: [],
   questOptions: [],
   achievementOptions: [],
   outfitValues: [],

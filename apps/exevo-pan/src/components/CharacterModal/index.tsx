@@ -60,7 +60,6 @@ const CharacterModal = ({
     huntingSlot,
     storeItems,
     imbuements,
-    charms,
     quests,
     outfits,
     mounts,
@@ -138,11 +137,7 @@ const CharacterModal = ({
 
             <S.TooltipSection>
               <ImbuementsTooltip placement="top-start" items={imbuements} />
-              <CharmsTooltip
-                placement="top-start"
-                items={charms}
-                charmInfo={charmInfo}
-              />
+              <CharmsTooltip charmPoints={charmInfo.total} />
               <QuestsTooltip placement="top-start" items={quests} />
               <GemsTooltip
                 placement="top-start"

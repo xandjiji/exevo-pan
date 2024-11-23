@@ -43,7 +43,6 @@ const CharacterCard = ({
     items,
     skills,
     imbuements,
-    charms,
     quests,
     charmInfo,
     preySlot,
@@ -93,7 +92,7 @@ const CharacterCard = ({
         <S.FlexFooter>
           <S.FlexColumn>
             <ImbuementsTooltip items={imbuements} />
-            <CharmsTooltip items={charms} />
+            <CharmsTooltip charmPoints={charmInfo.total} />
             <QuestsTooltip items={quests} />
             <BossPoints bossPoints={bossPoints} />
           </S.FlexColumn>

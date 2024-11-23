@@ -55,7 +55,6 @@ const randomCharmInfo = (): CharmInfo => {
   return {
     expansion: faker.datatype.boolean(),
     total: spent + unspent,
-    unspent,
   }
 }
 

@@ -5,8 +5,9 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   placement?: Placement
 }
 
-export interface CharacterCharmsProps extends TooltipProps {
-  charmInfo?: CharmInfo
+export interface CharacterCharmsProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  charmPoints?: number
 }
 
 export interface CharacterAchievementsProps
