@@ -2,7 +2,7 @@ import { dictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { constTokens as achievementTokens } from 'data-dictionary/dist/dictionaries/rareAchievement'
 
-const CHARM_CHECK = 7
+const CHARM_CHECK = 4800
 const QUEST_CHECK = 26
 const MOUNT_CHECK = 35
 const STORE_CHECK = 4
@@ -63,7 +63,7 @@ const wasBeforeUpdate = (
 
 export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
   const {
-    charms,
+    charmInfo,
     quests,
     mounts,
     outfits,
@@ -75,7 +75,7 @@ export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
 
   const tags: Tag[] = []
 
-  if (charms.length >= CHARM_CHECK) tags.push('manyCharms')
+  if (charmInfo.total >= CHARM_CHECK) tags.push('manyCharms')
   if (quests.length >= QUEST_CHECK) tags.push('manyQuests')
   if (mounts.length >= MOUNT_CHECK) tags.push('manyMounts')
   if (storeOutfits.length + storeMounts.length >= STORE_CHECK) {

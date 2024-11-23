@@ -81,7 +81,6 @@ const HirelingsInfoSchema: z.ZodType<HirelingsInfo> = z.object({
 const CharmInfoSchema: z.ZodType<CharmInfo> = z.object({
   expansion: z.boolean(),
   total: z.number(),
-  unspent: z.number(),
 })
 
 export const CharacterObjectSchema: z.ZodType<CharacterObject> = z.object({

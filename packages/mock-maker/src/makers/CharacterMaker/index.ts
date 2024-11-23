@@ -1,6 +1,5 @@
 import * as faker from 'faker'
 import {
-  charm,
   imbuement,
   mount,
   quest,
@@ -101,7 +100,6 @@ export const randomCharacter = (): PartialCharacterObject => {
       shielding: randomSkillValue(),
     },
     items: randomArrayFrom(auctions.items.array, randomItem),
-    charms: samplesFrom(charm.tokens),
     imbuements: samplesFrom(imbuement.tokens),
     quests: samplesFrom(quest.tokens),
     rareAchievements: samplesFrom(rareAchievement.tokens),
