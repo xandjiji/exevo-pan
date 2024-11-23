@@ -25,7 +25,6 @@
       "shielding": 37.68
     },
     "items": [],
-    "charms": ["Dodge", "Freeze", "Poison"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -252,7 +251,7 @@
     "hirelings": { "count": 0, "jobs": 0, "outfits": 0 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 114, "total": 2114, "expansion": true },
+    "charmInfo": { "total": 2114, "expansion": true },
     "serverData": {
       "serverId": 59,
       "serverName": "Quintera",
@@ -300,18 +299,6 @@
       "shielding": 119.97
     },
     "items": [],
-    "charms": [
-      "Adrenaline Burst",
-      "Curse",
-      "Divine Wrath",
-      "Dodge",
-      "Enflame",
-      "Freeze",
-      "Parry",
-      "Poison",
-      "Wound",
-      "Zap"
-    ],
     "transfer": false,
     "imbuements": [
       "Axe Skill",
@@ -588,7 +575,7 @@
     "hirelings": { "count": 3, "jobs": 3, "outfits": 1 },
     "huntingSlot": true,
     "preySlot": true,
-    "charmInfo": { "unspent": 1653, "total": 9953, "expansion": true },
+    "charmInfo": { "total": 9953, "expansion": true },
     "serverData": {
       "serverId": 6,
       "serverName": "Bona",
@@ -636,7 +623,6 @@
       "shielding": 36.65
     },
     "items": [],
-    "charms": ["Curse", "Dodge", "Enflame", "Freeze", "Poison", "Wound", "Zap"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -849,7 +835,7 @@
     "hirelings": { "count": 4, "jobs": 3, "outfits": 4 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 508, "total": 5808, "expansion": false },
+    "charmInfo": { "total": 5808, "expansion": false },
     "serverData": {
       "serverId": 30,
       "serverName": "Honbra",
@@ -891,7 +877,6 @@
       "shielding": 99.62
     },
     "items": [2367, 3510, 16110, 26003],
-    "charms": ["Curse", "Dodge", "Freeze"],
     "transfer": true,
     "imbuements": [
       "Death Damage",
@@ -1039,7 +1024,7 @@
     "hirelings": { "count": 3, "jobs": 3, "outfits": 3 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 143, "total": 2443, "expansion": false },
+    "charmInfo": { "total": 2443, "expansion": false },
     "serverData": {
       "serverId": 117,
       "serverName": "Seanera",
@@ -1088,20 +1073,6 @@
       "shielding": 36.23
     },
     "items": [],
-    "charms": [
-      "Adrenaline Burst",
-      "Curse",
-      "Divine Wrath",
-      "Dodge",
-      "Enflame",
-      "Freeze",
-      "Low Blow",
-      "Parry",
-      "Poison",
-      "Scavenge",
-      "Wound",
-      "Zap"
-    ],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -1381,7 +1352,7 @@
     "hirelings": { "count": 4, "jobs": 4, "outfits": 3 },
     "huntingSlot": true,
     "preySlot": true,
-    "charmInfo": { "unspent": 1043, "total": 12143, "expansion": true },
+    "charmInfo": { "total": 12143, "expansion": true },
     "serverData": {
       "serverId": 111,
       "serverName": "Collabra",
@@ -1423,7 +1394,6 @@
       "shielding": 36.13
     },
     "items": [3387, 3422, 11688, 19358],
-    "charms": ["Freeze", "Wound", "Zap"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -1658,7 +1628,7 @@
     "hirelings": { "count": 8, "jobs": 4, "outfits": 6 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 191, "total": 2391, "expansion": false },
+    "charmInfo": { "total": 2391, "expansion": false },
     "serverData": {
       "serverId": 1,
       "serverName": "Antica",
@@ -1700,7 +1670,6 @@
       "shielding": 36.38
     },
     "items": [],
-    "charms": ["Curse", "Dodge", "Enflame", "Freeze", "Poison", "Wound", "Zap"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -1888,7 +1857,7 @@
     "hirelings": { "count": 0, "jobs": 0, "outfits": 0 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 508, "total": 5808, "expansion": false },
+    "charmInfo": { "total": 5808, "expansion": false },
     "serverData": {
       "serverId": 83,
       "serverName": "Zenobra",
@@ -1930,7 +1899,6 @@
       "shielding": 36.21
     },
     "items": [14769, 28716, 32619],
-    "charms": ["Curse", "Enflame", "Freeze", "Poison", "Wound", "Zap"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -2111,7 +2079,7 @@
     "hirelings": { "count": 0, "jobs": 0, "outfits": 0 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 8, "total": 4708, "expansion": false },
+    "charmInfo": { "total": 4708, "expansion": false },
     "serverData": {
       "serverId": 113,
       "serverName": "Impulsa",
@@ -2153,7 +2121,6 @@
       "shielding": 105.58
     },
     "items": [],
-    "charms": ["Dodge", "Freeze", "Poison"],
     "transfer": true,
     "imbuements": [],
     "quests": [
@@ -2376,7 +2343,7 @@
     "hirelings": { "count": 0, "jobs": 0, "outfits": 0 },
     "huntingSlot": true,
     "preySlot": true,
-    "charmInfo": { "unspent": 461, "total": 2461, "expansion": false },
+    "charmInfo": { "total": 2461, "expansion": false },
     "serverData": {
       "serverId": 1,
       "serverName": "Antica",
@@ -2418,7 +2385,6 @@
       "shielding": 113.6
     },
     "items": [],
-    "charms": ["Curse", "Dodge", "Enflame", "Freeze", "Wound"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -2579,7 +2545,7 @@
     "hirelings": { "count": 5, "jobs": 4, "outfits": 1 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 773, "total": 4673, "expansion": false },
+    "charmInfo": { "total": 4673, "expansion": false },
     "serverData": {
       "serverId": 21,
       "serverName": "Ferobra",
@@ -2621,7 +2587,6 @@
       "shielding": 103.6
     },
     "items": [],
-    "charms": ["Poison"],
     "transfer": true,
     "imbuements": [],
     "quests": [
@@ -2840,7 +2805,7 @@
     "hirelings": { "count": 0, "jobs": 0, "outfits": 0 },
     "huntingSlot": true,
     "preySlot": true,
-    "charmInfo": { "unspent": 311, "total": 911, "expansion": false },
+    "charmInfo": { "total": 911, "expansion": false },
     "serverData": {
       "serverId": 77,
       "serverName": "Wintera",
@@ -2888,7 +2853,6 @@
       "shielding": 35.16
     },
     "items": [],
-    "charms": ["Curse", "Dodge", "Enflame", "Freeze", "Poison", "Wound", "Zap"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -3135,7 +3099,7 @@
     "hirelings": { "count": 0, "jobs": 0, "outfits": 0 },
     "huntingSlot": true,
     "preySlot": true,
-    "charmInfo": { "unspent": 13, "total": 5313, "expansion": false },
+    "charmInfo": { "total": 5313, "expansion": false },
     "serverData": {
       "serverId": 32,
       "serverName": "Inabra",
@@ -3183,7 +3147,6 @@
       "shielding": 35.19
     },
     "items": [31369, 31370, 31371, 31372],
-    "charms": ["Curse", "Freeze", "Poison", "Wound", "Zap"],
     "transfer": true,
     "imbuements": [
       "Axe Skill",
@@ -3423,7 +3386,7 @@
     "hirelings": { "count": 0, "jobs": 0, "outfits": 0 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 775, "total": 4475, "expansion": false },
+    "charmInfo": { "total": 4475, "expansion": false },
     "serverData": {
       "serverId": 61,
       "serverName": "Refugia",
@@ -3472,19 +3435,6 @@
       "shielding": 38.11
     },
     "items": [],
-    "charms": [
-      "Adrenaline Burst",
-      "Curse",
-      "Divine Wrath",
-      "Dodge",
-      "Freeze",
-      "Gut",
-      "Parry",
-      "Poison",
-      "Void's Call",
-      "Wound",
-      "Zap"
-    ],
     "transfer": false,
     "imbuements": [
       "Axe Skill",
@@ -3722,7 +3672,7 @@
     "hirelings": { "count": 2, "jobs": 4, "outfits": 1 },
     "huntingSlot": true,
     "preySlot": true,
-    "charmInfo": { "unspent": 948, "total": 10548, "expansion": true },
+    "charmInfo": { "total": 10548, "expansion": true },
     "serverData": {
       "serverId": 9,
       "serverName": "Celebra",
@@ -3764,7 +3714,6 @@
       "shielding": 33.4
     },
     "items": [2994, 3360, 9081, 29419],
-    "charms": ["Freeze", "Zap"],
     "transfer": true,
     "imbuements": [
       "Critical Hit",
@@ -3944,7 +3893,7 @@
     "hirelings": { "count": 10, "jobs": 4, "outfits": 2 },
     "huntingSlot": false,
     "preySlot": true,
-    "charmInfo": { "unspent": 367, "total": 1967, "expansion": false },
+    "charmInfo": { "total": 1967, "expansion": false },
     "serverData": {
       "serverId": 51,
       "serverName": "Ombra",

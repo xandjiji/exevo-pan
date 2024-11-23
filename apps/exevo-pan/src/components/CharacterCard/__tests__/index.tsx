@@ -1,8 +1,7 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders, randomDataset } from 'utils/test'
+import { randomDataset, renderWithProviders } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
-import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import CharacterCard from '..'
@@ -73,7 +72,7 @@ describe('<CharacterCard />', () => {
 
     expect(
       screen.getByText(
-        `Charms: ${character.charms.length}/${charm.tokens.length}`,
+        `Charm points: ${formatNumberWithCommas(character.charmInfo.total)}`,
       ),
     ).toBeInTheDocument()
 

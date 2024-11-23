@@ -114,7 +114,6 @@ const character: PartialCharacterObject = {
     distance: 23.65,
     shielding: 98.62,
   },
-  charms: ['Dodge', 'Freeze', 'Parry'],
   imbuements: ['Critical Hit', 'Mana Leech'],
   quests: ['Feaster of Souls', 'Grimvale'],
   outfits: [
@@ -139,7 +138,7 @@ const character: PartialCharacterObject = {
   achievementPoints: 201,
   huntingSlot: false,
   preySlot: true,
-  charmInfo: { unspent: 746, total: 4546, expansion: true },
+  charmInfo: { total: 4546, expansion: true },
   hirelings: { count: 2, jobs: 2, outfits: 0 },
   storeItems: [
     {
