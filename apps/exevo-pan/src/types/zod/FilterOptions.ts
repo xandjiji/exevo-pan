@@ -20,7 +20,6 @@ export const FilterOptionsSchema: z.ZodType<Partial<FilterOptions>> = z
     tags: z.set(z.string()),
     skillKey: z.set(z.string()),
     imbuementsSet: z.set(z.string()),
-    charmsSet: z.set(z.string()),
     rareNick: z.boolean(),
     questSet: z.set(z.string()),
     addon: z.number(),

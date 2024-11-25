@@ -115,12 +115,6 @@ export const filterSchema: SchemaCodec<FilterOptions> = {
     encode: codecs.encode.StringSet,
     decode: codecs.decode.StringSet,
   },
-  charmsSet: {
-    urlKey: 'charmSet',
-    defaultValue: DEFAULT_FILTER_OPTIONS.charmsSet,
-    encode: codecs.encode.StringSet,
-    decode: codecs.decode.StringSet,
-  },
   questSet: {
     urlKey: 'questSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.questSet,

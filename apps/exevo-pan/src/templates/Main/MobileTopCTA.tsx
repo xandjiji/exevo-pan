@@ -5,7 +5,7 @@ import { links } from 'Constants'
 const ravenSrc = loadRawSrc('/assets/ravendawn-ico.png')
 const tcSrc = loadRawSrc('/assets/tibiaCoins.gif')
 const tbjSrc = loadRawSrc('/assets/tibiablackjack-24x24.png')
-const noPingSrc = loadRawSrc('/assets/noping-mini.png')
+// const noPingSrc = loadRawSrc('/assets/noping-mini.png')
 
 const MobileTopCTA = () => {
   const { common } = useTranslations()
@@ -40,19 +40,7 @@ const MobileTopCTA = () => {
         </a>
       </li>
 
-      <li className="h-8">
-        <a
-          className="flex h-full w-full items-center justify-center gap-2 bg-[#222222] px-2 font-bold text-[#70d967]"
-          target="_blank"
-          rel="noopener external nofollow noreferrer"
-          href={common.NoPing.link}
-        >
-          <img src={noPingSrc} alt="NoPing" width={16} height={16} />
-          <span>{common.NoPing.text}</span>
-        </a>
-      </li>
-
-      <li className="h-8">
+      <li className="col-span-full h-8">
         <a
           className="bg-darkerPrimary flex h-full w-full items-center justify-center gap-2 px-2 font-bold text-[#fbc321]"
           target="_blank"
@@ -76,3 +64,15 @@ const MobileTopCTA = () => {
 }
 
 export default MobileTopCTA
+
+// <li className="h-8">
+//   <a
+//     className="flex h-full w-full items-center justify-center gap-2 bg-[#222222] px-2 font-bold text-[#70d967]"
+//     target="_blank"
+//     rel="noopener external nofollow noreferrer"
+//     href={common.NoPing.link}
+//   >
+//     <img src={noPingSrc} alt="NoPing" width={16} height={16} />
+//     <span>{common.NoPing.text}</span>
+//   </a>
+// </li>

@@ -4,7 +4,6 @@ export interface DrawerFieldsContextData {
   serverOptions: Option[]
   rareItemData: RareItemData
   imbuementOptions: Option[]
-  charmOptions: Option[]
   questOptions: Option[]
   achievementOptions: Option[]
   outfitValues: string[]

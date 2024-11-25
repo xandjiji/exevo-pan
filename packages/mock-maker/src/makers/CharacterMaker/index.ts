@@ -1,6 +1,5 @@
 import * as faker from 'faker'
 import {
-  charm,
   imbuement,
   mount,
   quest,
@@ -55,7 +54,6 @@ const randomCharmInfo = (): CharmInfo => {
   return {
     expansion: faker.datatype.boolean(),
     total: spent + unspent,
-    unspent,
   }
 }
 
@@ -102,7 +100,6 @@ export const randomCharacter = (): PartialCharacterObject => {
       shielding: randomSkillValue(),
     },
     items: randomArrayFrom(auctions.items.array, randomItem),
-    charms: samplesFrom(charm.tokens),
     imbuements: samplesFrom(imbuement.tokens),
     quests: samplesFrom(quest.tokens),
     rareAchievements: samplesFrom(rareAchievement.tokens),

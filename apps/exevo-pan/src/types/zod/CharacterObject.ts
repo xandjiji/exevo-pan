@@ -81,7 +81,6 @@ const HirelingsInfoSchema: z.ZodType<HirelingsInfo> = z.object({
 const CharmInfoSchema: z.ZodType<CharmInfo> = z.object({
   expansion: z.boolean(),
   total: z.number(),
-  unspent: z.number(),
 })
 
 export const CharacterObjectSchema: z.ZodType<CharacterObject> = z.object({
@@ -101,7 +100,6 @@ export const CharacterObjectSchema: z.ZodType<CharacterObject> = z.object({
   tags: z.array(z.string()),
   imbuements: z.array(z.string()),
   items: z.array(z.number()),
-  charms: z.array(z.string()),
   transfer: z.boolean(),
   quests: z.array(z.string()),
   storeItems: z.array(CharacterItemSchema),

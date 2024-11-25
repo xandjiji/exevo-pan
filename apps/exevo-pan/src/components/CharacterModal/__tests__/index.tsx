@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders, randomDataset, setup } from 'utils/test'
+import { randomDataset, renderWithProviders, setup } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
 import CharacterModal from '..'
 import { tabCounter } from '../utils'
@@ -33,7 +33,6 @@ describe('<CharacterModal />', () => {
         mounts,
         storeMounts,
         storeItems,
-        charms,
         charmInfo,
         hirelings,
         achievementPoints,
@@ -82,11 +81,11 @@ describe('<CharacterModal />', () => {
         ).not.toBeInTheDocument()
       }
 
-      expect(screen.getByText('Charms:', { exact: false }).textContent).toEqual(
-        `Charms: ${charms.length}/19 (${formatNumberWithCommas(
-          charmInfo.total,
-        )} total points,${formatNumberWithCommas(charmInfo.unspent)} unspent)`,
-      )
+      expect(
+        screen.getByText(
+          `Charm points: ${formatNumberWithCommas(charmInfo.total)}`,
+        ),
+      ).toBeInTheDocument()
 
       expect(
         screen.getByText(`Boss points: ${formatNumberWithCommas(bossPoints)}`, {

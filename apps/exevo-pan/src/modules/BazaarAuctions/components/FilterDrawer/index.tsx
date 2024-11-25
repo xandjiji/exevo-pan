@@ -18,7 +18,6 @@ import { InfoTooltip, Tooltip } from 'components/Organisms'
 import { blurOnEnter, loadRawSrc, proTagsSet } from 'utils'
 import {
   BookIcon,
-  CharmsIcon,
   DiamondIcon,
   GoblinIcon,
   MagicIcon,
@@ -62,7 +61,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     serverOptions: allServerOptions,
     rareItemData,
     imbuementOptions,
-    charmOptions,
     questOptions,
     achievementOptions,
     outfitValues,
@@ -154,11 +152,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const availableImbuementOptions = useOptionsSet(
     imbuementOptions,
     filterState.imbuementsSet,
-  )
-
-  const availableCharmOptions = useOptionsSet(
-    charmOptions,
-    filterState.charmsSet,
   )
 
   const availableGemsOptions = useOptionsSet(
@@ -850,72 +843,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </FilterGroup>
 
         <FilterGroup className="grid gap-4">
-          <S.InputWrapper style={{ marginBottom: 0 }}>
-            <S.AutocompleteInput
-              id="charms-input"
-              label={
-                <span>
-                  <CharmsIcon
-                    className="fill-onSurface inline-block h-4 w-4 align-middle"
-                    style={{ translate: '0 -1px' }}
-                  />{' '}
-                  Charms
-                </span>
-              }
-              aria-label="Charms"
-              aria-controls="charms-list"
-              placeholder={i18n.placeholders.charms}
-              itemList={availableCharmOptions}
-              disabled={availableCharmOptions.length === 0}
-              onItemSelect={useCallback(
-                ({ value }: Option) =>
-                  dispatch({
-                    type: 'TOGGLE_FILTER_SET',
-                    key: 'charmsSet',
-                    value,
-                  }),
-                [],
-              )}
-              onKeyPress={blurOnEnter}
-              enterKeyHint="done"
-            />
-            <Chip
-              overrideStatus={
-                filterState.charmsSet.size === charmOptions.length
-              }
-              onClick={() =>
-                dispatch({
-                  type: 'TOGGLE_ALL_FILTER_SET_OPTION',
-                  key: 'charmsSet',
-                  allOptions: charmOptions,
-                })
-              }
-            >
-              {i18n.toggleAll.charms}
-            </Chip>
-          </S.InputWrapper>
-
-          <>
-            {filterState.charmsSet.size > 0 && (
-              <S.ChipWrapper id="charms-list">
-                {[...filterState.charmsSet].map((charm) => (
-                  <Chip
-                    key={charm}
-                    onClose={() =>
-                      dispatch({
-                        type: 'TOGGLE_FILTER_SET',
-                        key: 'charmsSet',
-                        value: charm,
-                      })
-                    }
-                  >
-                    {charm}
-                  </Chip>
-                ))}
-              </S.ChipWrapper>
-            )}
-          </>
-
           <S.DoubleColumnInput className="!w-64">
             <NumberInput
               min={0}

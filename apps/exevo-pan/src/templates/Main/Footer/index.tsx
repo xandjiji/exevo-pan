@@ -11,7 +11,7 @@ const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo.png')
 const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
 const edgarSrc = loadRawSrc('/edgartc.png')
 const rdcSrc = loadRawSrc('/reidoscoins.png')
-const noPingSrc = loadRawSrc('/assets/noping-footer.png')
+// const noPingSrc = loadRawSrc('/assets/noping-footer.png')
 
 const listItems: RouteItem[] = [
   { href: routes.HOME, content: 'charBazaar' },
@@ -164,23 +164,6 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                     />
                   </Card>
                 </a>
-
-                <a
-                  href={common.NoPing.link}
-                  target="_blank"
-                  rel="noopener external nofollow"
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={noPingSrc}
-                      width={234}
-                      height={61}
-                      alt="NoPing"
-                      loading="lazy"
-                      style={{ filter: 'drop-shadow(0 0 2px black)' }}
-                    />
-                  </Card>
-                </a>
               </div>
             </div>
           </div>
@@ -264,3 +247,20 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
 }
 
 export default Footer
+
+// <a
+//   href={common.NoPing.link}
+//   target="_blank"
+//   rel="noopener external nofollow"
+// >
+//   <Card variant="secondary">
+//     <img
+//       src={noPingSrc}
+//       width={234}
+//       height={61}
+//       alt="NoPing"
+//       loading="lazy"
+//       style={{ filter: 'drop-shadow(0 0 2px black)' }}
+//     />
+//   </Card>
+// </a>

@@ -32,7 +32,6 @@ const GoodAuction = () => (
         shielding: 22.67,
       },
       items: [12077],
-      charms: ['Dodge', 'Freeze'],
       transfer: false,
       imbuements: [
         'Axe Skill',
@@ -73,7 +72,6 @@ const GoodAuction = () => (
       huntingSlot: false,
       preySlot: false,
       charmInfo: {
-        unspent: 554,
         total: 3354,
         expansion: false,
       },

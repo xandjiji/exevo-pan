@@ -38,20 +38,6 @@ const GoodAuction = () => (
         shielding: 103.61,
       },
       items: [34085, 28720, 28715, 34097],
-      charms: [
-        'Dodge',
-        'Freeze',
-        'Wound',
-        'Zap',
-        'Curse',
-        'Enflame',
-        'Low Blow',
-        'Parry',
-        'Poison',
-        'Divine Wrath',
-        'Adrenaline Burst',
-        'Gut',
-      ],
       transfer: true,
       imbuements: [
         'Axe Skill',
@@ -135,7 +121,6 @@ const GoodAuction = () => (
       huntingSlot: true,
       preySlot: true,
       charmInfo: {
-        unspent: 554,
         total: 3354,
         expansion: true,
       },
