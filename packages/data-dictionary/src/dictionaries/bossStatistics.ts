@@ -147,7 +147,7 @@ bossStatistics.set('Flamecaller Zazrak', {
     min: 6,
     max: 19,
   },
-  spawnCount: 2,
+  spawnCount: 3,
 })
 
 bossStatistics.set('Fleabringer', {
