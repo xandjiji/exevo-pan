@@ -77,6 +77,10 @@ bossInfo.set('Battlemaster Zunzu', {
       description: 'Muggy Plains (Farmine)',
     },
     {
+      src: 'https://tibiamaps.io/map/embed#33237,31240,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
       src: 'https://tibiamaps.io/map/embed#33284,31241,7:1',
       description: 'Muggy Plains (Farmine)',
     },
@@ -490,10 +494,6 @@ bossInfo.set('Flamecaller Zazrak', {
   locations: [
     {
       src: 'https://tibiamaps.io/map/embed#33180,31220,7:1',
-      description: 'Muggy Plains (Farmine)',
-    },
-    {
-      src: 'https://tibiamaps.io/map/embed#33237,31240,7:1',
       description: 'Muggy Plains (Farmine)',
     },
     {
