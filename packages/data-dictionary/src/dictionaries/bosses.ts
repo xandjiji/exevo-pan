@@ -56,6 +56,7 @@ export const constTokens = {
   'Oodok Witchmaster': 'Oodok Witchmaster',
   Orshabaal: 'Orshabaal',
   'Robby the Reckless': 'Robby the Reckless',
+  Rotrender: 'Rotrender',
   Rotspit: 'Rotspit',
   'Rottie the Rotworm': 'Rottie the Rotworm',
   'Rotworm Queen': 'Rotworm Queen',
