@@ -59,9 +59,11 @@ const AuctionEstimation = () => {
         skillKey: skill
           ? new Set(
               {
+                fist: ['fist'],
                 melee: ['axe', 'club', 'sword'],
                 distance: ['distance'],
                 magic: ['magic'],
+                shield: ['shielding'],
               }[skill as Skill],
             )
           : undefined,

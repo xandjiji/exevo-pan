@@ -30,5 +30,6 @@ export default {
     sword: TibiaIcons.Sword,
     axe: TibiaIcons.Axe,
     fist: TibiaIcons.Fist,
+    shielding: TibiaIcons.Shield,
   },
 }
