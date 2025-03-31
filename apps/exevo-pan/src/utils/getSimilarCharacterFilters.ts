@@ -68,6 +68,10 @@ export const getSimilarCharacterFilters = ({
     skillKey.add(getSkillKey('magic'))
   }
 
+  if (vocationName === 'Monk') {
+    skillKey.add(getSkillKey('fist'))
+  }
+
   return {
     ...filters,
     ...getApproximate.skill(Math.round(getHighestSkill(skills).value)),

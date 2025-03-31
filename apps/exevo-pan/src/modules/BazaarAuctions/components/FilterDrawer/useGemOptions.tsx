@@ -17,6 +17,7 @@ const allOptions = [
     ...Object.keys(vocationGreaterGems.paladin),
     ...Object.keys(vocationGreaterGems.sorcerer),
     ...Object.keys(vocationGreaterGems.druid),
+    ...Object.keys(vocationGreaterGems.monk),
   ]),
 ].map(buildOption)
 
@@ -26,6 +27,7 @@ const vocationGemOptions = {
   paladin: Object.keys(vocationGreaterGems.paladin).map(buildOption),
   sorcerer: Object.keys(vocationGreaterGems.sorcerer).map(buildOption),
   druid: Object.keys(vocationGreaterGems.druid).map(buildOption),
+  monk: Object.keys(vocationGreaterGems.monk).map(buildOption),
 }
 
 export const useGemOptions = (vocationSet: FilterOptions['vocation']) =>
@@ -45,6 +47,8 @@ export const useGemOptions = (vocationSet: FilterOptions['vocation']) =>
     if (vocationSet.has(vocation.VOCATION_IDS.DRUID)) {
       filteredOptions = [...filteredOptions, ...vocationGemOptions.druid]
     }
-
+    if (vocationSet.has(vocation.VOCATION_IDS.MONK)) {
+      filteredOptions = [...filteredOptions, ...vocationGemOptions.monk]
+    }
     return [...new Set([...sharedGems.map(buildOption), ...filteredOptions])]
   }, [vocationSet])
