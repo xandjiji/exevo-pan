@@ -151,7 +151,7 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'hireling lamp': {
     name: 'Hireling Lamp',
-    value: 150,
+    value: 0,
   },
   'hireling name change scroll': {
     name: 'Hireling Name Change Scroll',
