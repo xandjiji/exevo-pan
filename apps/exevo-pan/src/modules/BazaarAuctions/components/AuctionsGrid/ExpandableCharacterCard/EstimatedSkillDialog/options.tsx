@@ -23,6 +23,15 @@ export const skillOptions: SkillOptions[] = [
   {
     name: (
       <>
+        <TibiaIcons.Fist />
+        Fist
+      </>
+    ),
+    value: 'fist',
+  },
+  {
+    name: (
+      <>
         <TibiaIcons.Club />
         Club
       </>
@@ -46,5 +55,14 @@ export const skillOptions: SkillOptions[] = [
       </>
     ),
     value: 'axe',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.Shield />
+        Shield
+      </>
+    ),
+    value: 'shielding',
   },
 ]
