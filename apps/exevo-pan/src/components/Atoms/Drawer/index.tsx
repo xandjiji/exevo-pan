@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import { createPortal } from 'react-dom'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import FocusLock from 'react-focus-lock'
 import { useDrag, useEscToClose, useIsMounted, useLockBody } from 'hooks'
@@ -72,7 +72,7 @@ const Drawer = ({
             ref={elementToFocusRef}
             onKeyDown={onKeyDown}
             className={clsx(
-              'animate-slideIn z-75 bg-surface fixed top-0 left-0 flex h-screen w-[90vw] max-w-[600px] flex-col shadow-lg outline-none',
+              'animate-slideIn z-75 bg-surface fixed top-0 left-0 flex h-screen w-[90vw] max-w-[620px] flex-col shadow-lg outline-none',
               !isOpen && 'invisible opacity-0',
               className,
             )}
