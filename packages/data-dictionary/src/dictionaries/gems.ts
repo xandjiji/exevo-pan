@@ -411,6 +411,8 @@ export const tokensByCategory = {
       'Aug. Strong Ethereal Spear (+9.6% Base Damage)',
       'Aug. Strong Ethereal Spear (+12% Base Damage)',
     ],
+    // @ ToDo: add monk gems
+    monk: [],
   },
 } as const
 
@@ -423,4 +425,5 @@ export const vocationGreaterGems = {
   druid: generateIdentity(tokensByCategory.vocationGreaterGems.druid),
   sorcerer: generateIdentity(tokensByCategory.vocationGreaterGems.sorcerer),
   paladin: generateIdentity(tokensByCategory.vocationGreaterGems.paladin),
+  monk: generateIdentity(tokensByCategory.vocationGreaterGems.monk),
 }

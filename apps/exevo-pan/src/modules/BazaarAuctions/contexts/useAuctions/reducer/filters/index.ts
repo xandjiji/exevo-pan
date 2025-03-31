@@ -110,6 +110,12 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
         ]
       ) {
         nextVocation.add(vocation.VOCATION_IDS.DRUID)
+      } else if (
+        vocationGreaterGems.monk[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.monk
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.MONK)
       }
 
       nextState.filterState.vocation = nextVocation

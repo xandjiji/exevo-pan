@@ -20,9 +20,10 @@ export const EMPTY_STATISTICS: StatisticsData = {
   top10Shielding: [],
   vocationPercentage: {
     rooker: 0,
-    knight: 25,
-    paladin: 25,
-    sorcerer: 25,
-    druid: 25,
+    knight: 20,
+    paladin: 20,
+    sorcerer: 20,
+    druid: 20,
+    monk: 20,
   },
 }

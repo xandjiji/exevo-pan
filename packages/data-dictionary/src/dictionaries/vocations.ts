@@ -4,6 +4,7 @@ const VOCATION_IDS = {
   PALADIN: 2,
   SORCERER: 3,
   DRUID: 4,
+  MONK: 5,
 } as const
 
 const VOCATION_NAMES = {
@@ -12,6 +13,7 @@ const VOCATION_NAMES = {
   2: 'Paladin',
   3: 'Sorcerer',
   4: 'Druid',
+  5: 'Monk',
 } as const
 
 const PROMOTED_VOCATION_TITLE = {
@@ -20,6 +22,7 @@ const PROMOTED_VOCATION_TITLE = {
   2: 'Royal',
   3: 'Master',
   4: 'Elder',
+  5: 'Exalted',
 } as const
 
 export type VocationId = ValueOf<typeof VOCATION_IDS>
@@ -48,6 +51,7 @@ export const vocation = {
     if (/paladin/gi.test(name)) return VOCATION_IDS.PALADIN
     if (/sorcerer/gi.test(name)) return VOCATION_IDS.SORCERER
     if (/druid/gi.test(name)) return VOCATION_IDS.DRUID
+    if (/monk/gi.test(name)) return VOCATION_IDS.MONK
 
     return VOCATION_IDS.NONE
   },

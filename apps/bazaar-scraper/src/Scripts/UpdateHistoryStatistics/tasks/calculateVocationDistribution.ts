@@ -6,6 +6,7 @@ const vocationIdToKey = {
   2: 'paladin',
   3: 'sorcerer',
   4: 'druid',
+  5: 'monk',
 } as const
 
 type VocationCountKey = typeof vocationIdToKey[keyof typeof vocationIdToKey]
@@ -37,6 +38,7 @@ export const calculateVocationDistribution = (
     paladin: 0,
     sorcerer: 0,
     druid: 0,
+    monk: 0,
   }
 
   history.forEach(({ vocationId }) => {
@@ -50,5 +52,6 @@ export const calculateVocationDistribution = (
     paladin: fixedPercentage(vocationCount.paladin / totalCount),
     sorcerer: fixedPercentage(vocationCount.sorcerer / totalCount),
     druid: fixedPercentage(vocationCount.druid / totalCount),
+    monk: fixedPercentage(vocationCount.monk / totalCount),
   }
 }

@@ -15,12 +15,15 @@ const doveSrc = loadRawSrc('/assets/dove.png')
 const axeSrc = loadRawSrc('/assets/axe.png')
 const swordSrc = loadRawSrc('/assets/sword.png')
 const clubSrc = loadRawSrc('/assets/club.png')
+const fistSrc = loadRawSrc('/assets/fist.png')
+const shieldSrc = loadRawSrc('/assets/shield.png')
 const distanceSrc = loadRawSrc('/assets/distance.png')
 const magicSrc = loadRawSrc('/assets/magic.png')
 const druidSrc = loadRawSrc('/assets/druid.png')
 const sorcererSrc = loadRawSrc('/assets/sorcerer.png')
 const paladinSrc = loadRawSrc('/assets/paladin.png')
 const knightSrc = loadRawSrc('/assets/knight.png')
+const monkSrc = loadRawSrc('/assets/monk.png')
 const rookSrc = loadRawSrc('/assets/rook.png')
 
 export const Reset = (args: JSX.IntrinsicElements['svg']) => (
@@ -34,6 +37,7 @@ export const Sorcerer = () => (
   <img role="none" alt="Sorcerer" src={sorcererSrc} />
 )
 export const Druid = () => <img role="none" alt="Druid" src={druidSrc} />
+export const Monk = () => <img role="none" alt="Monk" src={monkSrc} />
 
 export const Magic = () => <img role="none" alt="Magic Level" src={magicSrc} />
 export const Distance = () => (
@@ -44,6 +48,8 @@ export const Sword = () => (
   <img role="none" alt="Sword Fighting" src={swordSrc} />
 )
 export const Axe = () => <img role="none" alt="Axe Fighting" src={axeSrc} />
+export const Fist = () => <img role="none" alt="Fist Fighting" src={fistSrc} />
+export const Shield = () => <img role="none" alt="Shielding" src={shieldSrc} />
 
 export const Dove = () => <img role="none" alt="Optional Pvp" src={doveSrc} />
 export const WhiteSkull = () => (

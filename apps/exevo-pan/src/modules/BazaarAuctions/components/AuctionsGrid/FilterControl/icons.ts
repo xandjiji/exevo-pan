@@ -7,6 +7,7 @@ export default {
     Paladin: TibiaIcons.Paladin,
     Sorcerer: TibiaIcons.Sorcerer,
     Druid: TibiaIcons.Druid,
+    Monk: TibiaIcons.Monk,
   },
   Pvps: {
     Optional: TibiaIcons.Dove,
@@ -28,5 +29,7 @@ export default {
     club: TibiaIcons.Club,
     sword: TibiaIcons.Sword,
     axe: TibiaIcons.Axe,
+    fist: TibiaIcons.Fist,
+    shielding: TibiaIcons.Shield,
   },
 }

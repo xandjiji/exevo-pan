@@ -272,6 +272,18 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <TibiaIcons.Druid />
               {VOCATION_NAMES[VOCATION_IDS.DRUID]}
             </S.IconChip>
+            <S.IconChip
+              overrideStatus={filterState.vocation.has(VOCATION_IDS.MONK)}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_VOCATION',
+                  value: VOCATION_IDS.MONK,
+                })
+              }
+            >
+              <TibiaIcons.Monk />
+              {VOCATION_NAMES[VOCATION_IDS.MONK]}
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
@@ -684,6 +696,36 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             >
               <TibiaIcons.Axe />
               Axe
+            </S.IconChip>
+            <S.IconChip
+              overrideStatus={filterState.skillKey.has(
+                skills.getSkillKey('fist'),
+              )}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'skillKey',
+                  value: skills.getSkillKey('fist'),
+                })
+              }
+            >
+              <TibiaIcons.Fist />
+              Fist
+            </S.IconChip>
+            <S.IconChip
+              overrideStatus={filterState.skillKey.has(
+                skills.getSkillKey('shielding'),
+              )}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'skillKey',
+                  value: skills.getSkillKey('shielding'),
+                })
+              }
+            >
+              <TibiaIcons.Shield />
+              Shield
             </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>

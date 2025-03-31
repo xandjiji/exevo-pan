@@ -1,14 +1,21 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useMemo, useId, memo } from 'react'
+import { memo, useId, useMemo } from 'react'
 import clsx from 'clsx'
 import { Doughnut } from 'react-chartjs-2'
 import { useTheme } from 'contexts/useTheme'
 import { capitalizeFirstLetter } from 'utils'
 import { PieChartProps } from './types'
 
-const chartColors = ['#8338EC', '#FFD166', '#118AB2', '#06D6A0', '#EF476F']
+const chartColors = [
+  '#000000',
+  '#FFD166',
+  '#118AB2',
+  '#06D6A0',
+  '#EF476F',
+  '#8338EC',
+]
 
 const PieChart = ({
   title,
