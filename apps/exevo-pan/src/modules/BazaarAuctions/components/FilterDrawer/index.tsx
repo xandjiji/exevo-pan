@@ -272,6 +272,18 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <TibiaIcons.Druid />
               {VOCATION_NAMES[VOCATION_IDS.DRUID]}
             </S.IconChip>
+            <S.IconChip
+              overrideStatus={filterState.vocation.has(VOCATION_IDS.MONK)}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_VOCATION',
+                  value: VOCATION_IDS.MONK,
+                })
+              }
+            >
+              <TibiaIcons.Monk />
+              {VOCATION_NAMES[VOCATION_IDS.MONK]}
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 

@@ -7,6 +7,7 @@ export default {
     Paladin: TibiaIcons.Paladin,
     Sorcerer: TibiaIcons.Sorcerer,
     Druid: TibiaIcons.Druid,
+    Monk: TibiaIcons.Monk,
   },
   Pvps: {
     Optional: TibiaIcons.Dove,

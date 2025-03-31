@@ -4,7 +4,7 @@ const VOCATION_IDS = {
   PALADIN: 2,
   SORCERER: 3,
   DRUID: 4,
-  MONK: 4,
+  MONK: 5,
 } as const
 
 const VOCATION_NAMES = {
