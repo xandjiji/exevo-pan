@@ -1,5 +1,5 @@
 import { TibiaIcons } from 'assets/svgs'
-import { TypedOption, Vocation, Skill } from './types'
+import { Skill, TypedOption, Vocation } from './types'
 
 export const vocationOptions: TypedOption<Vocation>[] = [
   {
@@ -37,6 +37,15 @@ export const vocationOptions: TypedOption<Vocation>[] = [
       </>
     ),
     value: 'druid',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.Monk />
+        Monk
+      </>
+    ),
+    value: 'monk',
   },
 ]
 

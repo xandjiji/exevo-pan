@@ -7,6 +7,6 @@ export type CalculatorRoute = {
   sprite: string
 } & NavItem
 
-export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer'
+export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer' | 'monk'
 
 export type Skill = 'magic' | 'melee' | 'distance'
