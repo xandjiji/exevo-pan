@@ -29,5 +29,6 @@ export default {
     club: TibiaIcons.Club,
     sword: TibiaIcons.Sword,
     axe: TibiaIcons.Axe,
+    fist: TibiaIcons.Fist,
   },
 }

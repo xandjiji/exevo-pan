@@ -697,6 +697,21 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <TibiaIcons.Axe />
               Axe
             </S.IconChip>
+            <S.IconChip
+              overrideStatus={filterState.skillKey.has(
+                skills.getSkillKey('fist'),
+              )}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'skillKey',
+                  value: skills.getSkillKey('fist'),
+                })
+              }
+            >
+              <TibiaIcons.Fist />
+              Fist
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
