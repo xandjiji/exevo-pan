@@ -9,4 +9,4 @@ export type CalculatorRoute = {
 
 export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer' | 'monk'
 
-export type Skill = 'magic' | 'melee' | 'distance'
+export type Skill = 'magic' | 'melee' | 'distance' | 'shield' | 'fist'

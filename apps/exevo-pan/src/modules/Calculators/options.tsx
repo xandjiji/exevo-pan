@@ -53,6 +53,15 @@ export const skillOptions: TypedOption<Skill>[] = [
   {
     name: (
       <>
+        <TibiaIcons.Fist />
+        Fist
+      </>
+    ),
+    value: 'fist',
+  },
+  {
+    name: (
+      <>
         <TibiaIcons.Axe />
         Axe/Club/Sword
       </>
@@ -76,6 +85,15 @@ export const skillOptions: TypedOption<Skill>[] = [
       </>
     ),
     value: 'magic',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.Shield />
+        Shield
+      </>
+    ),
+    value: 'shield',
   },
 ]
 

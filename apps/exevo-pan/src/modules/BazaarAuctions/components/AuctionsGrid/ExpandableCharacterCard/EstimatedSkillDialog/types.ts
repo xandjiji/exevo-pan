@@ -6,7 +6,7 @@ export type EstimatedSkillDialogProps = {
   onClose: () => void
 }
 
-export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer'
+export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer' | 'monk'
 
 export type Skill = 'magic' | 'distance' | 'club' | 'axe' | 'sword'
 

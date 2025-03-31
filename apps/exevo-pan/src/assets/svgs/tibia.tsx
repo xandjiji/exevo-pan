@@ -16,6 +16,7 @@ const axeSrc = loadRawSrc('/assets/axe.png')
 const swordSrc = loadRawSrc('/assets/sword.png')
 const clubSrc = loadRawSrc('/assets/club.png')
 const fistSrc = loadRawSrc('/assets/fist.png')
+const shieldSrc = loadRawSrc('/assets/shield.png')
 const distanceSrc = loadRawSrc('/assets/distance.png')
 const magicSrc = loadRawSrc('/assets/magic.png')
 const druidSrc = loadRawSrc('/assets/druid.png')
@@ -48,6 +49,7 @@ export const Sword = () => (
 )
 export const Axe = () => <img role="none" alt="Axe Fighting" src={axeSrc} />
 export const Fist = () => <img role="none" alt="Fist Fighting" src={fistSrc} />
+export const Shield = () => <img role="none" alt="Shielding" src={shieldSrc} />
 
 export const Dove = () => <img role="none" alt="Optional Pvp" src={doveSrc} />
 export const WhiteSkull = () => (
