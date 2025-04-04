@@ -1,0 +1,83 @@
+---
+title: 'Exevo Pan update: Auction price estimations'
+description: 'Are you not sure about how much to bid on a certain auction? Our new Auction Price Calculator now got you covered!'
+date: 28-04-2023
+thumbnail: /blog/thumbnails/abacus.png
+author: Ksu
+tags:
+  - news
+---
+
+<TranslationAlert />
+
+## Announcement
+
+Are you not sure about how much to bid on a certain auction? Or perhaps you're curious about your own character value? Our new **Auction Price Calculator** 📊 now got you covered!
+
+Our algorithm will compare any character auction (or even an hypothetical character) to all similar characters from our auction history database and calculate its average price!
+
+<Image
+  src="/blog/images/price-estimation-menu.png"
+  width={374}
+  height={320}
+  align="center"
+  alt="Accessing the Char Bazaar auction price calculator"
+  caption="Accessing the price calculator for a specific auction"
+  unoptimized
+/>
+
+<Image
+  src="/blog/images/estimation-dialog.png"
+  width={332}
+  height={301}
+  align="center"
+  alt="The estimated price for a Char Bazaar auction"
+  caption="Calculating the estimated price"
+  unoptimized
+/>
+
+---
+
+Additionally, you will be able to estimate the auction price for a hypothetical character as well! Just go to our <RouteLink href="/calculators/auction-estimations">Auction Price Estimator</RouteLink> in our calculators section:
+
+<Image
+  src="/blog/images/estimation-calculator.png"
+  width={1016}
+  height={508}
+  align="center"
+  alt="Calculating the estimated price for an hypothetical character"
+  caption="Estimating the value of my own character 😛"
+  unoptimized
+/>
+
+## About the calculator
+
+We experimented with several different statistical algorithms and backtested them against our own database to see which one outputted the best results. The overall conclusion was that the price of an auction was strongly correlated with the combination of **server type** and character **level** + **skills**.
+
+Our calculator won't be considering some other valuable aspects, such as:
+
+- Items and equipments
+- Mounts and outfits
+- Tibia Coin invested
+- Charms
+
+Since these characteristics are very **variable** and **subjective**, they end up adding too much noise to our calculations.
+
+Every character is very unique, but our algorithm will perform better when these singularities are ignored. This means that our calculator will point you to an overall baseline value for your character, but it can still vary a lot.
+
+---
+
+We also silently shipped (🥷) some other features and improvements since our last changelog! Here is the complete set of changes:
+
+## 🎉 Features
+
+- Auction price estimations
+- Checking boss system for <RouteLink href="/bosses/hunting-groups">boss hunting groups</RouteLink>
+- Your <RouteLink href="/dashboard">user dashboard</RouteLink> now nas several new pages: **transaction history**, **auction notifications** and **notification devices**
+- Auction filters for **minimum skill**, **maximum skill**, **minimum charm points** and **maximum charm points**
+
+## 🔧 Refactors
+
+- Fixed several minor bugs in our Boss Tracker scripts. Boss spawn chances are now more precise 💪
+- The skill estimation dialog for auction characters was moved from the details dialog to the dropdown menu
+- Improvements to our partners advertisement UI

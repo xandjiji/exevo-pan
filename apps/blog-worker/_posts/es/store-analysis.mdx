@@ -1,0 +1,154 @@
+---
+title: 'Hemos hecho los cálculos: ¿Cuánto dinero ha ganado Cipsoft de la Tienda?'
+description: ¿Cuántas Tibia Coins se han gastado en la Tienda? ¿Cuales han sido las compras más populares? Hagamos un profundo análisis y descubramoslo!
+date: 06-04-2022
+thumbnail: /blog/thumbnails/goldPouch.png
+author: Ksu
+translator: Xonateran
+tags:
+  - article
+---
+
+### Introducción
+
+Después de empezar a hacer seguimiento de <SlugLink href="changelog-3">los objetos de tienda</SlugLink>, hemos tenido la curiosidad de analizar más a fondo las estadísticas del Bazaar de Personajes. Esta vez, echaremos un vistazo **como los jugadores han gastado sus Tibia Coins en en compras de la tienda 🛍️**.
+
+Como en nuestros análisis previos, estas estadísticas han sido extraídas de nuestra base de datos histórica del Bazaar de personajes. Puesto que nuestra base de datos no está completa al 100% (lee aquí la <SlugLink href="about-our-data">explicación</SlugLink>) y puesto que no es posible hacer un seguimiento de todo, este análisis es una **estimación a la baja bound estimate**. Eso significa, que en realidad los jugadores han gastado muchas más Tibia Coins de lo que nosotros podemos observar.
+
+Algunos factores que **no** hemos podido tener en cuenta:
+
+- Consumibles de Tienda: runas, pociones, gold converters, teleport scrolls, etc
+- Utilidades de Tienda: blessings, xp boosts, cartas de prey, cambios de nombre, etc
+
+Dicho esto, veamos algunos datos! 📚
+
+## Ganancias de Cipsoft por objetos de la Tienda
+
+Hasta ahora, Cipsoft ha tenido unas ganancias de al menos <code><TibiaCoin value={148253335} /></code> Tibia Coins por compras de la tienda, sumando todos los personajes del Bazaar.
+
+Comparado con sus <RouteLink href="/statistics">ganancias por tasas del bazaar</RouteLink>, la Tienda parece ofrecer mucho más dinero para Cipsoft. Más adelante en este hilo discutiremos sobre las compras más populares.
+
+## Personajes que más Tibia Coins han gastado
+
+<TopSpenders
+  characterLabel="Personaje"
+  spentLabel="Gastado"
+  soldForLabel="Vendido por"
+/>
+<small align="center">
+  Consejo: pincha en cualquier personaje para expandir sus detalles!
+</small>
+
+## Diferencias por región
+
+La lista del top 1,000 de gente que más gasta está igualmente distribuida a través de SA, NA EU. Pero si miramos a la media de Tibia Coins gastadas por **todos los personajes** de cada región, vemos algunas diferencias:
+
+|    Región     |     Media TC gastadas     |
+| :-----------: | :-----------------------: |
+|    Europa     | <TibiaCoin value={591} /> |
+|  Sur America  | <TibiaCoin value={464} /> |
+| Norte America | <TibiaCoin value={438} /> |
+
+<small align="center">
+  Confirmando una creencia popular, los jugadores de Europa de hecho, gastan más
+  de media
+</small>
+
+---
+
+Testa diferencia se explica por el hecho de que aproximadamente el `80%` de personajes de NA y SA han gastado <code><TibiaCoin value={0} /></code> Tibia Coins, mientras que este número es menor en EU: `74%` de sus personajes.
+
+Si excluimos los personajes que no han gastado nada, las tres regiones tienen la misma media aproximadamente <code><TibiaCoin value={2300} /></code> Tibia Coins gastadas por personaje.
+
+### ¿Está Cipsoft tratando de enfocarse en un mercado de <em>whale</em>?
+
+Estos números no son suficientes para averiguar si Cipsoft está tratando de enfocarse en las _whales_. Recuerda: estamos cogiendo como muestra **personajes**, no **jugadores**. Un jugador puede tener múltiples personajes, así que no podemos deducir el perfil típico de un jugador de Tibia.
+
+> Una "whale" (o ballena) es un jugador con un fuerte hábito de gastar dinero. A pesar de ser un pequeño porcentaje de los jugadores (sobre un 2%), pueden suponer la mayoría de los ingresos para una compañía de videojuegos.
+
+Aun así, si lo comparamos con otros juegos online, **los cosméticos en Tibia son realmente caros**. Y es todavía peor por el hecho de que muchos jugadores de Tibia son de regiones con una pobre economía y por tanto, bajo poder adquisitivo <small>(yo incluido 😔)</small>. Esto plantea varias preguntas acerca de los objetos de la Tienda:
+
+- ¿Debería bajarse su precio?
+- ¿Debería Cipsoft ofrecer descuentos ocasionales?
+- ¿Deberían estar las compras vinculadas a la cuenta, en lugar del personaje?
+
+En términos de generar dinero, Cipsoft parece estar tomando unas buenas decisiones últimamente. Esperemos que consideren alguna de estas sugerencias que podrían beneficiar tanto a algunos jugadores, como a la compañía.
+
+<Image
+  src="/blog/images/cipsoftRevenue.png"
+  width={936}
+  height={318}
+  align="center"
+  caption={
+    <>
+      Facturación de Cipsoft por años. En 2020 hubo un gran salto con la
+      introducción del Bazaar de personajes. <br />
+      Fuente: <ExternalLink href="https://www.cipsoft.com/en/company">
+        Cipsoft
+      </ExternalLink>.
+    </>
+  }
+  alt="Facturación de Cipsoft por año desde 2001 hasta 2021. Sus ganancias tuvieron un gran incremento en 2021"
+  unoptimized
+/>
+
+## Diferencias por tipo de PvP
+
+Esto no será una sorpresa para nadie: los servidores Optional PvP tienden a atraer a jugadores que gastan más. Estos jugadores compran más **cosméticos**, mientras que los jugadores enfocados en el pvp prefieren mas hile pvp focused players prefer more **boosts y consumibles**.
+
+Puesto que es imposible hacer un seguimiento de todas las compras de tienda, estos datos deben ser tratados con cuidado:
+
+| PvP            |   Media de TC gastadas    |
+| :------------- | :-----------------------: |
+| Optional       | <TibiaCoin value={715} /> |
+| Open           | <TibiaCoin value={414} /> |
+| Retro Open     | <TibiaCoin value={338} /> |
+| Hardcore       | <TibiaCoin value={344} /> |
+| Retro Hardcore | <TibiaCoin value={254} /> |
+
+<small align="center">
+  Cuanto más restringido en cuanto a PvP sea un servidor, más jugadores{' '}
+  <em>charlovers</em> se unirán 💅
+</small>
+
+## Objetos de tienda más populares
+
+Aquí se puede ver la popularidad entre lo que nos gusta llamar **útiles de tienda**:
+
+<StoreItemDistribution />
+
+<small align="center">
+  Solo personajes con al menos 1 compra de utilidad han sido considerados
+</small>
+
+---
+
+De nuevo, no hay sorpresas aquí. **Training dummies** y **prey slots** son las compras más populares, a pesar de ser también las más caras (<code><TibiaCoin value={900} /></code> y <code><TibiaCoin value={750} /></code>, respectivamente), puesto que dan una ventaja real a los personajes.
+
+Casi todas las demás utilidades solo te dan una pequeña comodidad y pueden ser fácilmente compartidas en público entre los jugadores. Este no es el caso del **Gold pouch**, **Charm expansion** y **Hunting task slot**. No obstante, es altamente discutible si esas utilidades merecen realmente la pena o no.
+
+## Cosméticos de tienda más populares
+
+De todos los personajes del bazaar, `14,7%` de ellos tenían al menos un outfit o montura de la Tienda. Estos jugadores parecen preferir outfits (`78,7%`) antes que monturas (`51,7%`).
+
+Aqui esta el top 10 de **outfits de tienda** preferidos:
+
+<TopCosmetics />
+
+---
+
+...y aqui esta el top 10 más popular de **monturas de tienda**:
+
+<TopCosmetics mounts />
+
+---
+
+### En resumen
+
+Esperamos que este artículo arroje algo de luz y datos interesantes a la comunidad, datos que nunca antes habíamos visto 🔭
+
+Si aún quieres saber más cosas acerca del Bazaar de Personajes, tal vez te interese revisar nuestro <RouteLink href="/?history=true&descending=true">Histórico del Bazaa</RouteLink>.
+
+No olvides suscribirte a nuestra **newsletter** para no perderte nuestro contenido!
+
+Esto es todo por hoy, nos vemos la próxima vez! 👋

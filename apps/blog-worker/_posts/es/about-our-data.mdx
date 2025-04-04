@@ -1,0 +1,82 @@
+---
+title: Acerca de nuestros datos
+description: Algunos apuntes sobre cómo obtenemos nuestros datos y cuales son sus limitaciones
+date: 21-09-2021
+thumbnail: /blog/thumbnails/dataTome.png
+author: Ksu
+translator: Xonateran
+tags:
+  - article
+---
+
+## ¿De donde viene?
+
+Puesto que no existe una API pública de Tibia, casi todos nuestros datos sobre el juego vienen directamente de la página oficial de Tibia. Utilizamos una técnica llamada _data scraping_, lo que significa que hacemos llamadas `HTTP` al servidor oficial de la página y recogemos nuestra propia información basada en las respuestas.
+
+Esta no es la forma más elegante de hacerlo, pero actualmente es la única solución disponible para desarrolladores que quieran construir una aplicación usando datos reales de Tibia. Y viene con unos cuantos **challenges** al respecto:
+
+- Cambios menores en la estructura de la página puede romper fácilmente nuestros scripts
+- Las peticiones son rechazadas muchas veces (mayormente como medida anti DDOS)
+- Detectar y actualizar información vieja
+
+Son muchas cosas que tener en cuenta y automatizar, incluso antes de empezar con el desarrollo de la aplicación que consuma esta información. Esta ardua tarea puede echar para atrás fácilmente a muchos desarrolladores que quieran hacer nuevas aplicaciones de Tibia. Si Cipsoft publicase una API oficial para desarrolladores, muchas nuevas aplicaciones y herramientas interesantes verían la luz 🌱.
+
+## ¿Cómo de precisa es nuestra información?
+
+No podemos garantizar que nuestra información sea 100% precisa, aunque venga de la página oficial.
+
+Para pujas en proceso, nuestra información puede estar **desfasada hasta 10 minutos**. Esto significa que si necesitas la informacion lo mas actualizada posible sobre **el precio**, de una puja actual, deberías visitar la página oficial. Todo lo demás es estable.
+
+---
+
+En cuanto a las pujas del histórico, las cosas se vuelven más complicadas. Oficialmente, Cipsoft tiene su propio <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=pastcharactertrades">historico</ExternalLink>, pero su informacion **caduca pasados 30 dias**. Esto no significa que esa información se pierda por completo. Todavía puedes acceder a antiguas subastas utilizando el id de subasta:
+
+<pre>
+  <code>
+    https://www.tibia.com/charactertrade
+    <br />
+    /?subtopic=currentcharactertrades&page=details<b>{'&auctionid=0'}</b>
+  </code>
+</pre>
+
+Desafortunadamente, gran parte de esa información está rota. Por ejemplo, con gran frecuencia verás personajes sin achievement points (lo cual es imposible). En el peor de los casos, puede que alguna vieja subasta no esté disponible en absoluto:
+
+> An internal error has occurred. Please try again later!
+
+Pero estas subastas si existieron! De echo, <ExternalLink href="https://tibiavip.app/auctions">TibiaVIP</ExternalLink> aun tiene información sobre algunas de ellas:
+
+<Image
+  src="/blog/images/tibiaVip.png"
+  width={508}
+  height={57}
+  align="center"
+  alt="Una subasta vieja"
+  caption={
+    <>
+      Si tratas de acceder al id de subasta{' '}
+      <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=3">
+        #3
+      </ExternalLink>
+      , ya no estará disponible
+    </>
+  }
+  unoptimized
+/>
+
+Puesto que esto pasa más a menudo con subastas **más viejas** creemos que puede tener que ver con el hecho de que Cipsoft no es capaz de actualizar de manera retroactiva viejas entradas de la casa de subastas. A medida que suben más actualizaciones (y más información) algunas viejas subastas se corrompen.
+
+Creemos que en nuestro historico faltan alrededor de `200,000` subastas. Y dado que nuestras <RouteLink href="/statistics">estadísticas</RouteLink> son calculadas en base a nuestra propia base de datos, algunos números deberían ser de hecho **mayores** de lo que creemos.
+
+Si tienes más dudas acerca de nuestro sistema de scraping y scripts, echa un vistazo <ExternalLink href="https://github.com/xandjiji/exevo-pan/tree/master/apps/bazaar-scraper">aqui</ExternalLink>. Todo está perfectamente documentado y puedes incluso montar tu propio entorno para ejecutar estos scripts tu mismo 😄
+
+## ¿Puedo utilizar vuestras APIs?
+
+Si puedes. Pero no podemos ofrecerte soporte ni garantía! ⚠️
+
+Nuestras APIs cambian de forma frecuente, y eso significa que no deberías desarrollar ninguna aplicación que dependa de ellas. Si necesitas una API estable puedes usar <ExternalLink href="https://github.com/xandjiji/exevo-pan">nuestro codigo</ExternalLink> para hacer el scraping y servir la información tu mismo.
+
+Si vas a hacer llamadas automatizadas a nuestros endpoints, asegúrate de no hacerlas demasiado rápido. Cualquier abuso es muy probable que sea detectado y denegado por nuestros proveedores(AWS, Cloudflare, etc).
+
+---
+
+Si tienes alguna otra pregunta, no dudes en <RouteLink href="/about#Contact-Information">consultarme</RouteLink>.

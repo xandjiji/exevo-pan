@@ -1,0 +1,81 @@
+---
+title: 'Exevo Pan update: Estimativas de preços de leilões'
+description: 'Está com dúvida de quanto bidar em um leilão? Nossa nova calculadora de preços vai te ajudar!'
+date: 28-04-2023
+thumbnail: /blog/thumbnails/abacus.png
+author: Ksu
+tags:
+  - news
+---
+
+## Introdução
+
+Você está com dúvida de quanto bidar em um leilão? Ou talvez você tenha curiosidade de saber qual o valor do seu próprio personagem? A nossa nova **Calculadora de Preços de Leilões** 📊 vai te ajudar!
+
+Nosso algoritmo irá comparar qualquer personagem de leilão (ou mesmo um personagem hipotético) com todos os personagens similares do nosso histórico de leilões do Bazaar e calcular qual seria o seu preço médio!
+
+<Image
+  src="/blog/images/price-estimation-menu.png"
+  width={374}
+  height={320}
+  align="center"
+  alt="Acessando a calculadora de preços do Char Bazaar"
+  caption="Acessando a calculadora de preços para um leilão específico"
+  unoptimized
+/>
+
+<Image
+  src="/blog/images/estimation-dialog.png"
+  width={332}
+  height={301}
+  align="center"
+  alt="O preço estimado de um leilão do Char Bazaar"
+  caption="Calculando o preço estimado"
+  unoptimized
+/>
+
+---
+
+Adicionalmente, você também poderá estimar o preço de um personagem hipotético! Confira a página de <RouteLink href="/calculators/auction-estimations">estimar preços de leilões</RouteLink> na nossa seção de calculadoras:
+
+<Image
+  src="/blog/images/estimation-calculator.png"
+  width={1016}
+  height={508}
+  align="center"
+  alt="Calculando o preço estimado de um personagem hipotético"
+  caption="Estimando o valor do meu próprio personagem 😛"
+  unoptimized
+/>
+
+## Sobre a calculadora
+
+Nós experimentamos vários diferentes algoritmos estatísticos e os testamos com a nossa própria base de dados para ver qual deles traziam os melhores resultados. A conclusão final foi de que o preço de um leilão estava fortemente correlacionado com a combinação do **tipo de servidor** e o **level** + **skills** do personagem.
+
+Nossa calculadora não considerará outros aspectos valiosos dele, como:
+
+- Itens e equipamentos
+- Mounts e outfits
+- Tibia Coins investidas
+- Charms
+
+Como essas características são muito **variáveis** e **subjetivas**, elas acabam trazendo muito ruído em nossos cálculos.
+
+Todo personagem tem suas particularidades, mas o nosso algoritmo irá performar melhor quando essas singularidades são ignoradas. Isso significa que a nossa calculadora irá te apontar para um valor base para o seu personagem, mas o preço final ainda pode variar muito.
+
+---
+
+Nós também entregamos, silenciosamente (🥷), outras features e melhorias desde o nosso último changelog! Aqui está todo o conjunto das últimas mudanças:
+
+## 🎉 Features
+
+- Estimativa de preços de leilões
+- Sistema de checagem para os <RouteLink href="/bosses/hunting-groups">grupos de caça de bosses</RouteLink>
+- O seu <RouteLink href="/dashboard">painel de usuário</RouteLink> agora conta com novas páginas: **histórico de transações**, **notificações de leilões** e **dispositivos de notificações**
+- Filtros para **skill mínimo**, **skill máximo**, **pontos de charm mínimo** and **pontos de charm máximo**
+
+## 🔧 Refatorações
+
+- Consertamos vários pequenos bugs nos scripts do nosso Boss Tracker. As chances de um boss spawnar agora estão mais precisas 💪
+- O modal de estimativa de skills para personagens de leilões foi movido de dentro do modal de detalhes para o menu de dropdown
+- Melhorias na UI dos anúncios dos nossos parceiros

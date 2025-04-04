@@ -1,0 +1,152 @@
+---
+title: 'We did the math: how much revenue Cipsoft had from the Store?'
+description: How many Tibia Coins were spent on the Store? What were the most popular purchases? Let's have a deep dive and find out!
+date: 06-04-2022
+thumbnail: /blog/thumbnails/goldPouch.png
+author: Ksu
+tags:
+  - article
+---
+
+### Introduction
+
+After we started <SlugLink href="changelog-3">tracking store items</SlugLink>, we had the curiosity to dig deeper into more statistical analysis about the Char Bazaar. This time, we will have a look at **how players spent their Tibia Coins with store purchases 🛍️**.
+
+Like our previous analysis, these statistics were extracted from our own Char Bazaar historical database. Since our database isn't 100% complete (read the <SlugLink href="about-our-data">explanation</SlugLink>) and since it's not possible to track everything, this analysis is a **lower bound estimate**. It means that, in reality, players have spent much more Tibia Coins than we actually managed to track.
+
+A few factors we could **not** account for:
+
+- Store Consumables: runes, potions, gold converters, teleport scrolls, etc
+- Store Utilities: blessings, xp boosts, prey wildcards, name changes, etc
+
+With that being said, let's check out some data! 📚
+
+## Cipsoft revenue from store items
+
+So far, Cipsoft had a revenue of at least <code><TibiaCoin value={148253335} /></code> Tibia Coins from store purchases across all characters from the Char Bazaar.
+
+Compared to their <RouteLink href="/statistics">revenue from bazaar fees</RouteLink>, the Store seems to bring much more cash for Cipsoft. Later in this post we will discuss what are the most popular store purchases.
+
+## Characters with the most Tibia Coins spent
+
+<TopSpenders
+  characterLabel="Character"
+  spentLabel="Spent"
+  soldForLabel="Sold for"
+/>
+<small align="center">
+  Tip: click on any character to expand it's details!
+</small>
+
+## Differences per region
+
+The list of the top 1,000 spenders is equally distributed among SA, NA and EU regions. But if we look at the average Tibia Coins spent by **all characters** for each region, we can then see some differences:
+
+|    Region     |     Average TC spent      |
+| :-----------: | :-----------------------: |
+|    Europe     | <TibiaCoin value={591} /> |
+| South America | <TibiaCoin value={464} /> |
+| North America | <TibiaCoin value={438} /> |
+
+<small align="center">
+  Confirming popular belief, players from Europe indeed seem to spend more on
+  average
+</small>
+
+---
+
+This difference is explained by the fact that approximately `80%` of both NA and SA characters have <code><TibiaCoin value={0} /></code> Tibia Coins spent, while this is a smaller share in EU: `74%` of it's characters.
+
+If we exclude characters that didn't spend at all, then all three regions have the same average of approximately <code><TibiaCoin value={2300} /></code> Tibia Coins spent per character.
+
+### Is Cipsoft trying to target a <em>whale</em> market?
+
+These figures aren't enough to tell if Cipsoft is actually trying to target _whales_. Remember: we are sampling **characters**, not **players**. A player can have multiple characters, so we can't infer the spending profile of a typical Tibia player.
+
+> A "whale" is a player that has a heavy spending habit. Despite being a small proportion of players (around 2%), they can drive the most revenue for a game company.
+
+Still, if compared to other online games, **cosmetics in Tibia are really expensive**. And it gets even worse by the fact that lot of Tibia players are from regions with weak currencies and, consequently, low purchasing power <small>(myself included 😔)</small>. This raises some questions about Tibia store items:
+
+- Should their prices be lowered?
+- Should Cipsoft occasionally offer discounts?
+- Should store purchases be bound to the account, rather than the character?
+
+In terms of generating revenue, Cipsoft seems to be taking some good decisions lately. Hopefully they might consider some of these suggestions that could benefit not only the players but also the company.
+
+<Image
+  src="/blog/images/cipsoftRevenue.png"
+  width={936}
+  height={318}
+  align="center"
+  caption={
+    <>
+      Cipsoft's turnover by the year. A huge spike happened in 2020 with the
+      introduction of the Char Bazaar. <br />
+      Source: <ExternalLink href="https://www.cipsoft.com/en/company">
+        Cipsoft
+      </ExternalLink>.
+    </>
+  }
+  alt="Cipsoft's turnover for each year from 2001 to 2021. Their revenue had a huge spike in 2020"
+  unoptimized
+/>
+
+## Differences per PvP type
+
+This won't be a surprise for anyone: Optional PvP servers tend to attract players that spend more. These players purchase more **cosmetics**, while pvp focused players prefer more **boosts and consumables** instead.
+
+Since it's impossible to track all store purchases, take this data with a grain of salt:
+
+| PvP            |     Average TC spent      |
+| :------------- | :-----------------------: |
+| Optional       | <TibiaCoin value={715} /> |
+| Open           | <TibiaCoin value={414} /> |
+| Retro Open     | <TibiaCoin value={338} /> |
+| Hardcore       | <TibiaCoin value={344} /> |
+| Retro Hardcore | <TibiaCoin value={254} /> |
+
+<small align="center">
+  The more PvP restricted a server is, more <em>charlovers</em> will join it 💅
+</small>
+
+## Most popular store items
+
+Here is the popularity between what we like to call **store utilities**:
+
+<StoreItemDistribution />
+
+<small align="center">
+  Only characters with at least 1 utility purchased were considered
+</small>
+
+---
+
+Again, no surprises here. **Training dummies** and **prey slots** are the most popular store utilities, even while being the most expensive ones (<code><TibiaCoin value={900} /></code> and <code><TibiaCoin value={750} /></code>, respectively), because they bring an actual advantage for characters.
+
+Almost all the other utilities just give you some extra convenience and they can be easily shared in public between players. This is not the case for **Gold pouch**, **Charm expansion** and **Hunting task slot**. Still, it's highly debatable if those store utilities are actually worth it or not.
+
+## Most popular store cosmetics
+
+Across all characters from the Char Bazaar, `14,7%` of them owned at least one mount or outfit from the Store. These players seem to prefer outfits (`78,7%`) more than mounts (`51,7%`).
+
+Here are the top 10 most popular **store outfits**:
+
+<TopCosmetics />
+
+---
+
+...and here are the top 10 most popular **store mounts**:
+
+<TopCosmetics mounts />
+
+---
+
+### Wrapping up
+
+We hope that this article shed some light into some interesting data that the community have never seen before 🔭
+
+If you're still curious for more information about the Char Bazaar, then you might have fun exploring our <RouteLink href="/?history=true&descending=true">Bazaar History</RouteLink>.
+
+Don't forget to subscribe to our **newsletter** so you don't miss our content!
+
+That's it for now and see you next time! 👋

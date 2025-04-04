@@ -1,0 +1,71 @@
+---
+title: 'Exevo Pan update: Boss Tracker 🎯'
+description: 'Estamos animados de anunciar mais uma grande feature: descubra onde e quando bosses irão nascer usando o nosso novo Boss Tracker!'
+date: 03-10-2022
+thumbnail: /blog/thumbnails/bosses.png
+author: Ksu
+tags:
+  - news
+---
+
+## Introdução
+
+Estamos animados de anunciar mais uma grande feature: descubra onde e quando bosses irão nascer usando o nosso novo <RouteLink href="/bosses">Boss Tracker</RouteLink>!
+
+Nossa ferramenta irá te dar todas as informações necessárias para você encontrar qualquer boss: **chance diária de spawn**, **estimativa de próximo spawn**, **localizações**, **mensagens de raids**, e muito mais!
+
+<Image
+  src="/blog/images/bossTracker.png"
+  width={727}
+  height={779}
+  align="center"
+  alt="Exevo Pan Boss Tracker"
+  unoptimized
+/>
+
+## Como ela funciona?
+
+> TL;DR: **Estatística** 📊
+
+---
+
+Toda vez que um boss é morto (ou mata um jogador 😜), esse evento será registrado na página de <ExternalLink href="https://www.tibia.com/community/?subtopic=killstatistics&world=Antica">kill statistics</ExternalLink>. Isso nos diz com **boa confiança** toda vez que um boss appareceu em um server. Depois, usamos esses dados para descobrir quanto tempo geralmente demora para cada boss renascer. Sabendo deste fato, nós então criamos estimativas para o próximo futuro spawn de cada boss baseado na data de sua última aparição.
+
+<Image
+  src="/blog/images/bossDistribution.png"
+  width={942}
+  height={473}
+  align="center"
+  alt="Distribuição de aparição de um boss"
+  caption={
+    <>
+      Distribuição de frequencia de um boss. Fonte:{' '}
+      <ExternalLink href="https://guildstats.eu/">GuildStats</ExternalLink> e{' '}
+      <ExternalLink href="https://tibia.fandom.com/">TibiaWiki</ExternalLink>
+    </>
+  }
+  unoptimized
+/>
+
+Existem vários poréms para este método, como por exemplo:
+
+- Servers menos populosos podem estar faltando dados para bosses menos populares
+- Alguns bosses tem múltiplos locais de spawn
+- Alguns bosses possuem mecânicas de spawn bem específicas (exemplo: <ExternalLink href="https://www.tibiaqa.com/16569/how-trigger-respawn-bosses-from-the-void-burster-and-dreadful-disruptor?show=23257#a23257">Burster</ExternalLink>)
+- A página de kill statistics é atualizada apenas uma vez por dia
+
+Consequentemente, a informação que temos é incompleta. Nossa ferramenta leva isso em consideração, analisando não somente a chance estatística de cada boss aparecer mas também a confiança de sua própria estimativa (baseada no quão completo são os nossos dados).
+
+Se você está interessado em uma explicação mais aprofundada, nós recomendamos <ExternalLink href="https://tibia.fandom.com/wiki/TibiaWiki:Bosses_Spawn_Frequency">este artigo</ExternalLink> do TibiaWiki.
+
+---
+
+Como sempre, todo feedback da comunidade é bem vindo (especialmente de boss hunters veteranos). Desejamos boa sorte a todos e uma boa caça 🕵️
+
+## 🎉 Features
+
+- Boss Tracker
+
+## 🔧 Refactors
+
+- Consertamos um bug que crashava a página <SlugLink href="store-analysis">neste artigo</SlugLink>.

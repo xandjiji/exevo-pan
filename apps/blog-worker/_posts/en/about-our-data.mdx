@@ -1,0 +1,81 @@
+---
+title: About our data
+description: A few disclaimers about how we get our data and what are it's limitations
+date: 21-09-2021
+thumbnail: /blog/thumbnails/dataTome.png
+author: Ksu
+tags:
+  - article
+---
+
+## Where does it come from
+
+Since there is no official Tibia API, almost all of the data about the game actually comes from the official Tibia website. We do a technique called _data scraping_, which means we regularly make `HTTP` requests to the official website and then collect our own data based on the responses.
+
+This is not the most elegant approach to it, but right now it's the only solution available for developers that want to build applications using real Tibia data. And it comes with several **challenges** to it:
+
+- Minor changes to the Tibia website structure can easily break our scripts
+- Requests are often rejected (mostly because of anti-DDOS protections)
+- Detecting and updating stale data
+
+That's too much stuff for us to manage and automate before we even start building an application to consume this data. This heavy burden can easily shy away developers who want to build Tibia apps. If Cipsoft provided developers with an official API, many interesting tools and applications would then bloom in the community 🌱.
+
+## How accurate is our data
+
+We can't guarantee our data is 100% accurate, even if it comes from the official website.
+
+For current auctions, our data might be **up to 10 minutes obsolete**. This means that if you need the most up-to-date information about an auction current **bid price**, you should then check the official auction page instead. Everything else is stable.
+
+---
+
+As for history auctions, things get tricky. Officially, Cipsoft serves their own <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=pastcharactertrades">Auction History</ExternalLink>, but its data **expires after 30 days**. That doesn't mean that older data is completely lost. You can still access individual auction pages using their auction id:
+
+<pre>
+  <code>
+    https://www.tibia.com/charactertrade
+    <br />
+    /?subtopic=currentcharactertrades&page=details<b>{'&auctionid=0'}</b>
+  </code>
+</pre>
+
+Unfortunately, some of the data is broken. For example, very often you'll see characters with no achievement points (which is impossible). In the worst case scenario, some old auctions will be completely unavailable:
+
+> An internal error has occurred. Please try again later!
+
+But these auctions did exist! In fact, <ExternalLink href="https://tibiavip.app/auctions">TibiaVIP</ExternalLink> still has information about some of them:
+
+<Image
+  src="/blog/images/tibiaVip.png"
+  width={508}
+  height={57}
+  align="center"
+  alt="An old auction"
+  caption={
+    <>
+      If you try to access the auction id{' '}
+      <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=3">
+        #3
+      </ExternalLink>
+      , it will be no longer available
+    </>
+  }
+  unoptimized
+/>
+
+Since this happens most often with **older** auctions, we believe that it may be due to the fact that Cipsoft isn't able to retroactively update old entries in the Char Bazaar. As they push more updates (and more data) into the game, some auction entries get corrupted.
+
+We speculate that our history database is missing around `200,000` auction entries. And because our <RouteLink href="/statistics">statistics</RouteLink> are calculated based off our own database, some numbers should actually be **higher** than what we estimate.
+
+If you're curious about our scraping strategy and scripts, feel free to check them out <ExternalLink href="https://github.com/xandjiji/exevo-pan/tree/master/apps/bazaar-scraper">here</ExternalLink>. Everything is well documented and you can even setup your own environment to run these scripts yourself 😄
+
+## Can I use your APIs?
+
+Yes you can. But we can't offer any support or guarantees! ⚠️
+
+Our APIs are frequently changing and that means you shouldn't build any applications that rely on them. If you need a stable API, you can use <ExternalLink href="https://github.com/xandjiji/exevo-pan">our code</ExternalLink> to scrap and serve the data yourself.
+
+If you're doing automated requests to our endpoints, make sure you're not doing them too fast. Any abuse will most likely be automatically detected and denied by our providers (AWS, Cloudflare, etc).
+
+---
+
+If you have any other questions, feel free to <RouteLink href="/about#Contact-Information">contact me</RouteLink>.

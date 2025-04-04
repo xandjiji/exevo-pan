@@ -1,0 +1,81 @@
+---
+title: Sobre nossos dados
+description: Alguns avisos sobre de onde vem nossos dados e quais as suas limitações
+date: 21-09-2021
+thumbnail: /blog/thumbnails/dataTome.png
+author: Ksu
+tags:
+  - article
+---
+
+## De onde eles vem
+
+Como não há uma API oficial do Tibia, quase todos os dados sobre o jogo vem do próprio site oficial do Tibia. Nós usamos uma técnica chamada _data scraping_, que consiste em fazer requisições `HTTP` periódicas para o site oficial e coletar nossos próprios dados com base nas respostas.
+
+Essa não é a abordagem mais elegante, mas atualmente é a única solução existente para desenvolvedores que querem construir aplicações usando dados reais do Tibia. E dessa forma ainda há muitos **desafios**:
+
+- Pequenas mudanças na estrutura do site do Tibia podem quebrar facilmente nossos scripts
+- Requisições são frequentemente rejeitadas (principalmente por proteções anti-DDOS)
+- Detectar e atualizar dados velhos
+
+São muitos problemas para a gente resolver e automatizar antes mesmo de nós começarmos a construir uma aplicação para consumir esses dados. Esses obstáculos desanimam facilmente qualquer desenvolvedor que queira construir aplicativos para o Tibia. Se a Cipsoft providenciasse uma API oficial para os desenvolvedores, muitas ferramentas e aplicações interessantes certamente iriam florescer na comunidade 🌱.
+
+## O quão preciso são os nossos dados
+
+Nós não podemos garantir que nossos dados estejam 100% corretos, mesmo que eles sejam baseados no próprio site oficial.
+
+Para leilões atuais, nossos dados podem estar obsoletos em até **10 minutos**. Isso significa que se você precisa da informação mais atualizada sobre o **preço** de um leilão atual, você deve então conferir a página oficial do leilão. Todos os outros dados são estáveis.
+
+---
+
+O cenário começa a complicar quando se trata do histórico de leilões. Oficialmente, a Cipsoft serve seu próprio <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=pastcharactertrades">Histórico do Bazaar</ExternalLink>, mas os seus dados **expiram após 30 dias**. Isso não significa que dados antigos estejam completamente perdidos. Você ainda pode acessar páginas individuais de leilões usando os seus ids:
+
+<pre>
+  <code>
+    https://www.tibia.com/charactertrade
+    <br />
+    /?subtopic=currentcharactertrades&page=details<b>{'&auctionid=0'}</b>
+  </code>
+</pre>
+
+Infelizmente, alguns dos dados estão quebrados. Por exemplo, frequentemente você encontrará personagens com zero pontos de achievements (o que é impossível). No pior cenário, algumas páginas de leilão estarão completamente indisponíveis:
+
+> An internal error has occurred. Please try again later!
+
+Mas esses leilões existiram! Na verdade, o próprio <ExternalLink href="https://tibiavip.app/auctions">TibiaVIP</ExternalLink> ainda possui informações sobre eles:
+
+<Image
+  src="/blog/images/tibiaVip.png"
+  width={508}
+  height={57}
+  align="center"
+  alt="Um leilão antigo"
+  caption={
+    <>
+      Se você tentar acessar o leilão com id{' '}
+      <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=3">
+        #3
+      </ExternalLink>
+      , ele não estará mais disponível
+    </>
+  }
+  unoptimized
+/>
+
+Como isso acontece mais frequentemente com leilões mais **antigos**, nós acreditamos que isso acontece porque a Cipsoft não está atualizando retroativamente dados dos leilões antigos do Char Bazaar. Conforme eles atualizam o jogo com mais updates (e mais dados), alguns leilões antigos ficam corrompidos.
+
+Nós especulamos que estejam faltando cerca de `200,000` leilões antigos na nossa base de dados do histórico do Char Bazaar. E como as nossas <RouteLink href="/statistics">estatísticas</RouteLink> são calculadas com base na nossa própria base de dados, alguns números na verdade devem ser **maiores** do que as nossas estimativas.
+
+Se você tem curiosidade a respeito dos nossos scripts e da nossa estratégia de scraping, você pode encontrá-los <ExternalLink href="https://github.com/xandjiji/exevo-pan/tree/master/apps/bazaar-scraper">aqui</ExternalLink>. Tudo está bem documentado e você pode até configurar o seu próprio ambiente para rodar esses scripts 😄
+
+## Posso usar suas APIs?
+
+Sim você pode. Mas a gente não pode oferecer nenhum tipo de garantia ou suporte! ⚠️
+
+Nossas APIs mudam frequentemente e isso significa que você não deveria construir aplicações que dependam delas. Se você precisa de uma API estável, você pode usar o <ExternalLink href="https://github.com/xandjiji/exevo-pan">nosso código</ExternalLink> para scrapar e servir os dados você mesmo.
+
+Se você está fazendo requisições automatizadas para os nossos endpoints, certifique-se de que você não está as fazendo rápido demais. Qualquer abuso irá ser automaticamente detectado e recusado pelos nossos provedores (AWS, Cloudflare, etc).
+
+---
+
+Se você tiver mais dúvidas, sinta-se livre para me <RouteLink href="/about#Informaes-de-contato">contactar</RouteLink>.

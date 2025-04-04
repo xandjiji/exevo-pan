@@ -1,0 +1,71 @@
+---
+title: 'Exevo Pan update: Boss Tracker 🎯'
+description: 'We are excited to announce another big feature: find out when and where will bosses spawn using our new Boss Tracker!'
+date: 03-10-2022
+thumbnail: /blog/thumbnails/bosses.png
+author: Ksu
+tags:
+  - news
+---
+
+## Announcement
+
+We are excited to announce another big feature: find out when and where will bosses spawn using our new <RouteLink href="/bosses">Boss Tracker</RouteLink>!
+
+Our tool will provide all the information needed to help you find any boss: **daily spawn chances**, **next spawn estimates**, **locations**, **raid messages** and much more!
+
+<Image
+  src="/blog/images/bossTracker.png"
+  width={727}
+  height={779}
+  align="center"
+  alt="Exevo Pan Boss Tracker"
+  unoptimized
+/>
+
+## How does it work?
+
+> TL;DR: **Statistics** 📊
+
+---
+
+Every time a boss gets killed (or kills a player 😜), this event will be registered on the <ExternalLink href="https://www.tibia.com/community/?subtopic=killstatistics&world=Antica">kill statistics page</ExternalLink>. This tells us with a **fair confidence** every time a boss appeared on a server. Then, we use this data to figure out how long it usually takes for each boss to respawn. Knowing this fact, we can then create estimates for the next future spawn of each boss based on the time it had last appeared.
+
+<Image
+  src="/blog/images/bossDistribution.png"
+  width={942}
+  height={473}
+  align="center"
+  alt="Boss appearance distribution"
+  caption={
+    <>
+      Boss frequency distribution. Source:{' '}
+      <ExternalLink href="https://guildstats.eu/">GuildStats</ExternalLink> and{' '}
+      <ExternalLink href="https://tibia.fandom.com/">TibiaWiki</ExternalLink>
+    </>
+  }
+  unoptimized
+/>
+
+There are several caveats for this method, such as:
+
+- Low populated servers might be lacking data for less popular bosses
+- Some bosses have multiple spawn locations
+- Some bosses have very specific spawn mechanics (e.g <ExternalLink href="https://www.tibiaqa.com/16569/how-trigger-respawn-bosses-from-the-void-burster-and-dreadful-disruptor?show=23257#a23257">Burster</ExternalLink>)
+- The kill statistics page is updated only once per day
+
+Consequently, we can only have incomplete information. Our analysis will account for that, considering not only the statistical chance for a boss to appear but also the confidence in its own prediction (based on how complete our data is).
+
+If you're interested in a more in-depth explanation, we recommend <ExternalLink href="https://tibia.fandom.com/wiki/TibiaWiki:Bosses_Spawn_Frequency">this article</ExternalLink> from TibiaWiki.
+
+---
+
+As always, any feedback from the community is welcome (especially from veteran boss hunters). We wish you good luck and happy boss hunting 🕵️
+
+## 🎉 Features
+
+- Boss Tracker
+
+## 🔧 Refactors
+
+- Fixed a bug that crashed the page on <SlugLink href="store-analysis">this article</SlugLink>.
