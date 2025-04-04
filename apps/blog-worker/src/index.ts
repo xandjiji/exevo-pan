@@ -18,7 +18,7 @@ async function handleRequest(request: Request): Promise<Response> {
   const showHidden = searchParams.get('hidden') === 'true'
 
   const filteredPosts = filterPosts({
-    posts: posts[pathname as keyof typeof posts] ?? posts['/en'],
+    posts: (posts[pathname as keyof typeof posts] ?? posts['/en']) as any,
     filters: filterOptions,
   })
 

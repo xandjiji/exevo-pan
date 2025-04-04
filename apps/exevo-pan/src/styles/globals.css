@@ -234,3 +234,21 @@ textarea {
     background-position: 0% 50%;
   }
 }
+
+#bestiary-battle img {
+  box-shadow: unset;
+  margin-left: -26px;
+}
+
+#bestiary-play button {
+  width: 100%;
+}
+
+#bestiary-play {
+  background: none;
+}
+
+#bestiary-logo img {
+  box-shadow: unset;
+  margin-left: -4px;
+}
