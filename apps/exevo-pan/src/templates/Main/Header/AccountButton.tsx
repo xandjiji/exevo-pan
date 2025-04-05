@@ -11,6 +11,7 @@ import {
 } from 'assets/svgs'
 import { addLocalePrefix } from 'utils'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import useHeaderPopup from './useHeaderPopup'
 
 type AccountButtonProps = {
@@ -31,6 +32,9 @@ const AccountButton = ({
 
   const { locale } = useRouter()
 
+  const loginRoute = useLocalizedHref(routes.LOGIN)
+  const dashboardRoute = useLocalizedHref(routes.DASHBOARD.ROOT)
+
   return (
     <div className="h8 grid h-8 w-8 place-items-center" ref={ref}>
       {
@@ -38,7 +42,7 @@ const AccountButton = ({
           loading: null,
           unauthenticated: (
             <a
-              href={routes.LOGIN}
+              href={loginRoute}
               className={clsx(
                 'animate-fadeIn grid place-items-center gap-0.5 whitespace-nowrap text-xs',
                 variant === 'onPrimary' && 'text-onPrimary',
@@ -76,7 +80,7 @@ const AccountButton = ({
 
                   <a
                     className="hover:bg-primaryVariant"
-                    href={routes.DASHBOARD.ROOT}
+                    href={dashboardRoute}
                     onClick={action.close}
                     role="menuitem"
                   >

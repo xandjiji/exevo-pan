@@ -1,6 +1,7 @@
 import { FadeImage } from 'components/Atoms'
 import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { CardProps } from './types'
 
 const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
@@ -22,7 +23,7 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
       <h4 className="line-clamp-2 text-base font-normal">{title}</h4>
     </div>
     <a
-      href={`${routes.BLOG}/${slug}`}
+      href={useLocalizedHref(`${routes.BLOG}/${slug}`)}
       className="text-none absolute top-0 left-0 h-full w-full"
     >
       {title}
