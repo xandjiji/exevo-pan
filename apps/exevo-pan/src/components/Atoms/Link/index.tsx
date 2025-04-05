@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { LinkProps } from './types'
 
 const Link = ({
@@ -20,10 +21,12 @@ const Link = ({
     }
   }, [scrollOnCurrent, isCurrent])
 
+  const localizedHref = useLocalizedHref(href)
+
   return (
     <a
       ref={aRef as any}
-      href={href}
+      href={localizedHref}
       aria-current={isCurrent ? 'page' : undefined}
       {...props}
     />
