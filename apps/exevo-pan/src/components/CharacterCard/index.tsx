@@ -2,6 +2,7 @@ import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import {
   BossPoints,
   CharacterItems,
@@ -53,6 +54,8 @@ const CharacterCard = ({
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
   const tcState = getTCState(characterData.tcInvested)
+
+  const localizedExevoProHref = useLocalizedHref(routes.EXEVOPRO)
 
   return (
     <S.Wrapper highlighted={highlighted} {...props}>
@@ -123,7 +126,7 @@ const CharacterCard = ({
                 ),
                 HIDDEN: (
                   <a
-                    href={routes.EXEVOPRO}
+                    href={localizedExevoProHref}
                     className="text-onSurface text-tsm mt-auto flex flex-wrap items-center gap-1.5"
                     style={{ height: 'unset' }}
                   >

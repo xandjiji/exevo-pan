@@ -1,7 +1,5 @@
-import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { exevoPro, routes } from 'Constants'
-import { ExevoPanIcon } from 'assets/svgs'
 import { CopyButton, Coupon } from 'components/Atoms'
 
 type CouponPreviewProps = {

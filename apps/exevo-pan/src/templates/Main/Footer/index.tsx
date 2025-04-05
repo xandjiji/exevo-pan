@@ -5,6 +5,7 @@ import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { loadRawSrc } from 'utils'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { FooterProps, RouteItem } from './types'
 
 const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo.png')
@@ -81,7 +82,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
             </a>
 
             <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
-              <a href={routes.EXEVOPRO}>
+              <a href={useLocalizedHref(routes.EXEVOPRO)}>
                 <Card>
                   <ExevoPanIcon width={36} height={36} />
 

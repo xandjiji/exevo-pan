@@ -10,6 +10,7 @@ import { routes } from 'Constants'
 import { InputProps } from 'components/Atoms/Input/types'
 import { ChipProps } from 'components/Atoms/Chip/types'
 import { AutocompleteInputProps } from 'components/Organisms/AutocompleteInput/types'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 
 export const Input = ({
   className,
@@ -66,7 +67,7 @@ export const ExevoProExclusive = () => {
 
   return (
     <a
-      href={routes.EXEVOPRO}
+      href={useLocalizedHref(routes.EXEVOPRO)}
       className="text-onSurface text-xs font-light tracking-wider"
     >
       {templateMessage(homepage.FilterDrawer.exevoProExclusive, {

@@ -20,6 +20,7 @@ import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, getTCState } from 'utils'
 import { routes } from 'Constants'
 import { HorseIcon, InboxIcon, OutfitIcon } from 'assets/svgs'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import SpriteBox from './SpriteBox'
 import { auctionHasEnded, checkStore, tabCounter } from './utils'
 import { resolvers } from './resolvers'
@@ -91,6 +92,8 @@ const CharacterModal = ({
     }
   }, [isDesktop])
 
+  const localizedExevoProHref = useLocalizedHref(routes.EXEVOPRO)
+
   return (
     <Dialog
       isOpen
@@ -154,7 +157,7 @@ const CharacterModal = ({
             <S.Section border className="z-3">
               {tcState === 'HIDDEN' ? (
                 <a
-                  href={routes.EXEVOPRO}
+                  href={localizedExevoProHref}
                   className="text-onSurface text-tsm flex items-center gap-1.5"
                 >
                   <Icons.TibiaCoin />{' '}

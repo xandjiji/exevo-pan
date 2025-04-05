@@ -20,6 +20,7 @@ import { trpc } from 'lib/trpc'
 import { avatar, getGuildPermalink } from 'utils'
 import { routes } from 'Constants'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { RollAvatar } from './components'
 
 type CreateGuildDialogProps = {
@@ -68,6 +69,8 @@ const CreateGuildDialog = ({
   const invalidName = formState.name.length < 2
 
   const disableSubmit = notAuthed || invalidName || isLoading || !!errorMessage
+
+  const localizedExevoProHref = useLocalizedHref(routes.EXEVOPRO)
 
   return (
     <Dialog isOpen onClose={onClose} heading="Create new hunting group">
@@ -119,7 +122,7 @@ const CreateGuildDialog = ({
 
                       {!isPro && (
                         <a
-                          href={routes.EXEVOPRO}
+                          href={localizedExevoProHref}
                           className="text-onSurface mt-4 block"
                         >
                           {templateMessage(i18n.exevoProExclusive, {

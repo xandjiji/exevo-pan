@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 
 const ExevoProLink = ({
   children,
@@ -7,7 +8,7 @@ const ExevoProLink = ({
   ...props
 }: Omit<JSX.IntrinsicElements['a'], 'href' | 'ref'>) => (
   <a
-    href={routes.EXEVOPRO}
+    href={useLocalizedHref(routes.EXEVOPRO)}
     className={clsx(
       className,
       'rare-gradient-text whitespace-nowrap font-bold',

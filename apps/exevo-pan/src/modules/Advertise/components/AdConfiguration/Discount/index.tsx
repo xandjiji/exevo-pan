@@ -3,6 +3,7 @@ import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { OfferIcon } from 'assets/svgs'
 import { Checkbox } from 'components/Atoms'
 import { advertising, routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { calculatePrice, getDiscountTier, readablePrice } from '../../../utils'
 import * as S from './atoms'
 import { DiscountProps } from './types'
@@ -39,7 +40,7 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
       </h2>
 
       <a
-        href={routes.EXEVOPRO}
+        href={useLocalizedHref(routes.EXEVOPRO)}
         className={clsx(
           'text-onSurface',
           isPro ? 'pointer-events-none' : 'child:!cursor-pointer',

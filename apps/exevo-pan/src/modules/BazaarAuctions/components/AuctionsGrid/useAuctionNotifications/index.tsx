@@ -19,6 +19,7 @@ import CharacterMiniCard from 'components/CharacterMiniCard'
 import SetupNotifications from 'components/SetupNotifications'
 import { loadOutfitSrc } from 'utils'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { isNotificationDateValid } from './utils'
 import {
   AuctionConfigProps,
@@ -102,6 +103,8 @@ export const AuctionNotificationsProvider = ({
 
   const enabledNotifications = permission === 'granted' || permissionGranted
 
+  const localizedExevoProHref = useLocalizedHref(routes.EXEVOPRO)
+
   return (
     <NotificationsContext.Provider
       value={{ isSupported, openNotificationsDialog }}
@@ -138,7 +141,10 @@ export const AuctionNotificationsProvider = ({
                             .bidNotification
                         }{' '}
                         {!isPro && (
-                          <a href={routes.EXEVOPRO} className="text-onSurface">
+                          <a
+                            href={localizedExevoProHref}
+                            className="text-onSurface"
+                          >
                             {templateMessage(
                               homepage.AuctionsGrid.useAuctionNotifications
                                 .proExclusive,
