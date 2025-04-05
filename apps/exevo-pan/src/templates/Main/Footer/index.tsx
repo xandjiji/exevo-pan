@@ -3,6 +3,7 @@
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { loadRawSrc } from 'utils'
+import { Shine } from 'components/Atoms'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 import { useLocalizedHref } from 'hooks/useLocalizedHref'
@@ -81,7 +82,24 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
               />
             </a>
 
-            <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
+            <div className="mx-auto flex h-fit w-fit items-center gap-6 md:mx-0">
+              <a
+                href={links.BESTIARY_ARENA}
+                target="_blank"
+                rel="noopener external nofollow"
+                aria-label="Play Bestiary Arena for free now!"
+                className="relative"
+              >
+                <img
+                  alt="Bestiary Arena"
+                  width={283}
+                  height={70}
+                  src="/bestiary-big-widget.png"
+                  style={{ imageRendering: 'pixelated' }}
+                />
+                <Shine animationIterationCount="infinite" width={60} />
+              </a>
+
               <a href={useLocalizedHref(routes.EXEVOPRO)}>
                 <Card>
                   <ExevoPanIcon width={36} height={36} />
@@ -95,22 +113,6 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                       ),
                     })}
                   </span>
-                </Card>
-              </a>
-
-              <a
-                href={common.Ravendawn.link}
-                target="_blank"
-                rel="noopener external nofollow"
-                aria-label="Play Ravendawn for free"
-              >
-                <Card>
-                  <img
-                    src={ravendawnSrc}
-                    alt="Play Ravendawn for free"
-                    loading="lazy"
-                    style={{ filter: 'drop-shadow(0 0 1px black)' }}
-                  />
                 </Card>
               </a>
             </div>
