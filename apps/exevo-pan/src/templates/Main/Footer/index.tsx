@@ -82,7 +82,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
               />
             </a>
 
-            <div className="mx-auto flex h-fit w-fit items-center gap-6 md:mx-0">
+            <div className="mx-auto flex h-fit w-fit flex-wrap items-center justify-center gap-6 md:mx-0">
               <a
                 href={links.BESTIARY_ARENA}
                 target="_blank"
