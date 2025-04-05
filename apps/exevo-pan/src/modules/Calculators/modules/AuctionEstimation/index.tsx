@@ -15,6 +15,7 @@ import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/voc
 import { SearchIcon, TibiaIcons } from 'assets/svgs'
 import { loadOutfitSrc } from 'utils'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import {
   locationOptions,
   pvpOptions,
@@ -92,6 +93,10 @@ const AuctionEstimation = () => {
     minSkill !== undefined && maxSkill !== undefined && minSkill > maxSkill
   const invalidLevel =
     minLevel !== undefined && maxLevel !== undefined && minLevel > maxLevel
+
+  const historyHref = useLocalizedHref(
+    `${routes.HOME}?mode=${historyMode}&${descendingUrlKey}=true`,
+  )
 
   return (
     <div
@@ -345,7 +350,7 @@ const AuctionEstimation = () => {
             {templateMessage(i18n.goToHistory, {
               history: (
                 <a
-                  href={`${routes.HOME}?mode=${historyMode}&${descendingUrlKey}=true`}
+                  href={historyHref}
                   className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
                 >
                   {i18n.history}

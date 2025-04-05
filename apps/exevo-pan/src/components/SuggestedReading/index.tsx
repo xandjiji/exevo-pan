@@ -1,5 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 
 type SuggestedReadingProps = Pick<BlogPost, 'thumbnail' | 'title' | 'slug'> &
   JSX.IntrinsicElements['div']
@@ -17,7 +18,7 @@ const SuggestedReading = ({
         {common.SuggestedReading.miniTitle}
       </p>
 
-      <a className="group" href={`${routes.BLOG}/${slug}`}>
+      <a className="group" href={useLocalizedHref(`${routes.BLOG}/${slug}`)}>
         <div className="card flex items-center gap-2.5 px-2.5 py-2">
           <div className="bg-primaryVariant relative top-0 rounded-md p-1 transition-all group-hover:-top-0.5">
             <img

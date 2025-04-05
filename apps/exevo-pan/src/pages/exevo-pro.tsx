@@ -42,6 +42,10 @@ export default function ExevoPro() {
     referralTracker.checkUrlAndSetLS()
   }, [])
 
+  const ctaHref = locale
+    ? `/${locale}${routes.DASHBOARD.ROOT}`
+    : routes.DASHBOARD.ROOT
+
   return (
     <>
       <Head>
@@ -99,7 +103,7 @@ export default function ExevoPro() {
               })}
             </h2>
 
-            <a href={routes.DASHBOARD.ROOT}>
+            <a href={ctaHref}>
               <Button className="w-fit">{i18n.heroCTA}</Button>
             </a>
           </section>
@@ -259,7 +263,7 @@ export default function ExevoPro() {
               </div>
             </div>
 
-            <a href={routes.DASHBOARD.ROOT}>
+            <a href={ctaHref}>
               <Button className="mx-auto mt-8 block w-fit">
                 {i18n.footerCTA}
               </Button>

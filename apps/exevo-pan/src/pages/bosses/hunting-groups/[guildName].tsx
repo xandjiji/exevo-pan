@@ -44,6 +44,7 @@ import {
 import { exevoPro, jsonld, routes } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
 import { bosses, common, huntingGroups } from 'locales'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 
 const previewImageSrc = loadRawSrc('/huntingGroups.png')
 
@@ -60,6 +61,17 @@ const getMonthNumber = (past: boolean) => {
   }
 
   return currentDate.getMonth()
+}
+
+function EarnTC({ children }: { children: React.ReactNode }) {
+  return (
+    <a
+      href={useLocalizedHref(routes.DASHBOARD.REFERRALS)}
+      className="text-primaryHighlight font-bold underline underline-offset-2"
+    >
+      {children}
+    </a>
+  )
 }
 
 export default function GuildPage({
@@ -270,10 +282,7 @@ export default function GuildPage({
                             </strong>
                           ),
                           earnTc: (
-                            <a
-                              href={routes.DASHBOARD.REFERRALS}
-                              className="text-primaryHighlight font-bold underline underline-offset-2"
-                            >
+                            <EarnTC>
                               {templateMessage(i18n.earnTc, {
                                 commission: (
                                   <Text.TibiaCoin
@@ -281,7 +290,7 @@ export default function GuildPage({
                                   />
                                 ),
                               })}
-                            </a>
+                            </EarnTC>
                           ),
                         })}
                         !

@@ -6,6 +6,7 @@ import { useCallback, useId, useState } from 'react'
 import clsx from 'clsx'
 import { AdvertiseIcon, TagIcon } from 'assets/svgs'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { HoveredState } from './types'
 
 const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
@@ -24,7 +25,7 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const labelId = useId()
 
   return (
-    <a href={routes.ADVERTISE}>
+    <a href={useLocalizedHref(routes.ADVERTISE)}>
       <div
         tabIndex={0}
         onMouseOver={handleHover}

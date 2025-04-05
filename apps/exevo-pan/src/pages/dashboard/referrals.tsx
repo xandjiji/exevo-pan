@@ -186,7 +186,11 @@ export default function Page() {
                   {templateMessage(i18n.Referrals.freeAlert, {
                     exevoPro: (
                       <a
-                        href={routes.DASHBOARD.ROOT}
+                        href={
+                          locale
+                            ? `/${locale}${routes.DASHBOARD.ROOT}`
+                            : routes.DASHBOARD.ROOT
+                        }
                         className="rare-gradient-text font-bold"
                       >
                         Exevo Pro

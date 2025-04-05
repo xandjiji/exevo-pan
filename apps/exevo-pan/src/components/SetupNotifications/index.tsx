@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast'
 import { usePushNotifications } from 'hooks'
 import { Alert } from 'components/Atoms'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 
 const ActionButton = ({
   className,
@@ -47,6 +48,8 @@ const SetupNotifications = ({
     [common, i18n, subscribeDevice],
   )
 
+  const loginHref = useLocalizedHref(routes.LOGIN)
+
   if (!isSupported) {
     return (
       <Alert variant="alert" {...props}>
@@ -60,7 +63,7 @@ const SetupNotifications = ({
       <Alert variant="alert" {...props}>
         {templateMessage(i18n.notAuthed, {
           logIn: (
-            <a href={routes.LOGIN}>
+            <a href={loginHref}>
               <ActionButton className="text-onAlert">{i18n.logIn}</ActionButton>
             </a>
           ),

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { memo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
@@ -6,10 +7,22 @@ import EmptyState from 'components/EmptyState'
 import { Avatar, Tooltip } from 'components/Organisms'
 import { getGuildPermalink } from 'utils'
 import { LockIcon } from 'assets/svgs'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 
 type GuildListProps = {
   list: PublicHuntingGroup[]
   onApply?: (huntingGroup: PublicHuntingGroup) => void
+}
+
+function Link({ guildName }: { guildName: string }) {
+  return (
+    <a
+      className="text-primaryHighlight text-base font-bold"
+      href={useLocalizedHref(getGuildPermalink(guildName))}
+    >
+      {guildName}
+    </a>
+  )
 }
 
 const GuildList = ({ list, onApply }: GuildListProps) => {
@@ -46,12 +59,7 @@ const GuildList = ({ list, onApply }: GuildListProps) => {
               />
 
               <div className="grid gap-1.5">
-                <a
-                  className="text-primaryHighlight text-base font-bold"
-                  href={getGuildPermalink(name)}
-                >
-                  {name}
-                </a>
+                <Link guildName={name} />
                 <span className="text-tsm flex items-center gap-1">
                   {server} - {memberCount}{' '}
                   {memberCount > 1 ? i18n.members : i18n.member}{' '}
