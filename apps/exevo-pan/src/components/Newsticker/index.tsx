@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
 import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { NewstickerProps } from './types'
 
 // const noPingSrc = loadRawSrc('/assets/noping-header.png')
@@ -60,7 +61,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
             </div>
 
             <a
-              href={`${routes.BLOG}/${slug}`}
+              href={useLocalizedHref(`${routes.BLOG}/${slug}`)}
               className="absolute top-0 left-0 h-full w-full text-transparent"
             >
               {title}

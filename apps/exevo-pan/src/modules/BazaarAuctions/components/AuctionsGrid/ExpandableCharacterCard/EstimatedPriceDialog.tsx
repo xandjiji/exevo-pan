@@ -8,6 +8,7 @@ import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import { getSimilarCharacterFilters, loadOutfitSrc } from 'utils'
 import { trpc } from 'lib/trpc'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 
 type EstimatedPriceDialogProps = {
   onClose: () => void
@@ -71,7 +72,7 @@ export const EstimatedPriceDialog = ({
           {templateMessage(i18n.goToCalculator, {
             calculatorPage: (
               <a
-                href={routes.AUCTION_ESTIMATION}
+                href={useLocalizedHref(routes.AUCTION_ESTIMATION)}
                 className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
               >
                 {i18n.calculatorPage}

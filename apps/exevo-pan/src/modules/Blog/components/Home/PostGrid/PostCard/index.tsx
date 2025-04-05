@@ -4,6 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { FadeImage, Tag } from 'components/Atoms'
 import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { extractDate } from './utils'
 import { PostCardProps } from './types'
 
@@ -49,7 +50,7 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
         </div>
       </div>
       <a
-        href={`${routes.BLOG}/${slug}`}
+        href={useLocalizedHref(`${routes.BLOG}/${slug}`)}
         className="absolute top-0 left-0 h-full w-full text-transparent"
       >
         {title}

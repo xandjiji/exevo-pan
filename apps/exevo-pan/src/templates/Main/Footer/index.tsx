@@ -183,7 +183,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   )}
                 >
                   <a
-                    href={href}
+                    href={useLocalizedHref(href)}
                     className={clsx(
                       'text-s cursor-pointer tracking-wider md:text-base',
                       gradient &&

@@ -7,6 +7,7 @@ import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks, skillAfterLoyalty } from 'utils'
 import { routes } from 'Constants'
 import { parameterNames } from 'modules/Calculators/modules/ExerciseWeapons/CharacterConfig/constants'
+import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import {
   calculateMinimumSkillCost,
   getInitialSkill,
@@ -55,6 +56,17 @@ export const EstimatedSkillDialog = ({
 
   const integerSkillWithLoyalty = Math.floor(skillWithLoyalty)
   const percentageLeft = getPercentageLeft(skillWithLoyalty)
+
+  const goToCalculatorHref = useLocalizedHref(
+    `${routes.EXERCISE_WEAPONS}?${[
+      `${parameterNames.vocation}=${vocation}`,
+      `${parameterNames.skill}=${skillType}`,
+      `${parameterNames.currentSkill}=${integerSkillWithLoyalty}`,
+      `${parameterNames.targetSkill}=${integerSkillWithLoyalty}`,
+      `${parameterNames.percentageLeft}=${percentageLeft}`,
+      `${parameterNames.loyalty}=${loyaltyBonus}`,
+    ].join('&')}`,
+  )
 
   return (
     <Dialog className="grid" isOpen heading={i18n.heading} {...dialogProps}>
@@ -128,14 +140,7 @@ export const EstimatedSkillDialog = ({
         {templateMessage(i18n.goToCalculator, {
           calculatorPage: (
             <a
-              href={`${routes.EXERCISE_WEAPONS}?${[
-                `${parameterNames.vocation}=${vocation}`,
-                `${parameterNames.skill}=${skillType}`,
-                `${parameterNames.currentSkill}=${integerSkillWithLoyalty}`,
-                `${parameterNames.targetSkill}=${integerSkillWithLoyalty}`,
-                `${parameterNames.percentageLeft}=${percentageLeft}`,
-                `${parameterNames.loyalty}=${loyaltyBonus}`,
-              ].join('&')}`}
+              href={goToCalculatorHref}
               className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
             >
               {i18n.calculatorPage}
