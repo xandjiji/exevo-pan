@@ -1,8 +1,8 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
+import { FadeImage, Shine, Tag, TibiaBlackjack } from 'components/Atoms'
 import { loadThumbnail } from 'utils'
-import { routes } from 'Constants'
+import { links, routes } from 'Constants'
 import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { NewstickerProps } from './types'
 
@@ -27,7 +27,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
         {common.Newsticker}
       </h2>
 
-      <div className="negative-container custom-scrollbar lgr:gap-6 flex gap-3 overflow-auto pb-3 before:w-2 before:flex-none after:w-2 after:flex-none md:m-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0 md:before:content-[unset] md:after:content-[unset]">
+      <div className="negative-container custom-scrollbar lgr:gap-6 flex gap-3 overflow-auto pb-3 before:w-2 before:flex-none after:w-2 after:flex-none md:m-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:pb-0 md:before:content-[unset] md:after:content-[unset]">
         {blogPosts.map(({ slug, title, tags, thumbnail }) => (
           <article
             key={slug}
@@ -70,8 +70,25 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
         ))}
       </div>
 
-      <div className="ml-auto hidden gap-3 md:flex">
+      <div className="ml-auto hidden items-center gap-3 md:flex">
         <TibiaBlackjack.Banner />
+
+        <a
+          href={links.BESTIARY_ARENA}
+          target="_blank"
+          rel="noopener external nofollow noreferrer"
+          aria-label="Play Bestiary Arena for free now!"
+          className="relative hidden h-[70px] lg:block"
+        >
+          <img
+            alt="Bestiary Arena"
+            width={283}
+            height={70}
+            src="/bestiary-big-widget.png"
+            style={{ imageRendering: 'pixelated' }}
+          />
+          <Shine animationIterationCount="infinite" width={60} />
+        </a>
       </div>
     </aside>
   )
