@@ -2,7 +2,7 @@ import { generateIdentity } from '../utils'
 
 // https://www.tibia.com/community/?subtopic=wheelofdestinyplanner
 //
-// var getOptions = () => {
+// const getOptions = () => {
 //   const names = []
 //   const tokens = {}
 //
@@ -411,8 +411,97 @@ export const tokensByCategory = {
       'Aug. Strong Ethereal Spear (+9.6% Base Damage)',
       'Aug. Strong Ethereal Spear (+12% Base Damage)',
     ],
-    // @ ToDo: add monk gems
-    monk: [],
+    monk: [
+      'Revelation Mastery (+150 Avatar of Balance)',
+      'Revelation Mastery (+165 Avatar of Balance)',
+      'Revelation Mastery (+180 Avatar of Balance)',
+      'Revelation Mastery (+225 Avatar of Balance)',
+
+      'Revelation Mastery (+150 Ascetic)',
+      'Revelation Mastery (+165 Ascetic)',
+      'Revelation Mastery (+180 Ascetic)',
+      'Revelation Mastery (+225 Ascetic)',
+
+      'Revelation Mastery (+150 Spiritual Outburst)',
+      'Revelation Mastery (+165 Spiritual Outburst)',
+      'Revelation Mastery (+180 Spiritual Outburst)',
+      'Revelation Mastery (+225 Spiritual Outburst)',
+
+      'Aug. Avatar of Balance (-900s Cooldown)',
+      'Aug. Avatar of Balance (-900s Cooldown, +0.33% Momentum)',
+      'Aug. Avatar of Balance (-900s Cooldown, +0.66% Momentum)',
+      'Aug. Avatar of Balance (-900s Cooldown, +1% Momentum)',
+
+      'Aug. Flurry of Blows (+8% Critical Extra Damage)',
+      'Aug. Flurry of Blows (+8.8% Critical Extra Damage)',
+      'Aug. Flurry of Blows (+9.6% Critical Extra Damage)',
+      'Aug. Flurry of Blows (+12% Critical Extra Damage)',
+
+      'Aug. Flurry of Blows (+6.5% Base Damage)',
+      'Aug. Flurry of Blows (+7.15% Base Damage)',
+      'Aug. Flurry of Blows (+7.8% Base Damage)',
+      'Aug. Flurry of Blows (+9.75% Base Damage)',
+
+      'Aug. Focus Harmony (-30s Cooldown)',
+      'Aug. Focus Harmony (-30s Cooldown, +0.33% Momentum)',
+      'Aug. Focus Harmony (-30s Cooldown, +0.66% Momentum)',
+      'Aug. Focus Harmony (-30s Cooldown, +1% Momentum)',
+
+      'Aug. Focus Serenity (-150s Cooldown)',
+      'Aug. Focus Serenity (-150s Cooldown, +0.33% Momentum)',
+      'Aug. Focus Serenity (-150s Cooldown, +0.66% Momentum)',
+      'Aug. Focus Serenity (-150s Cooldown, +1% Momentum)',
+
+      'Aug. Forceful Uppercut (+8% Critical Extra Damage)',
+      'Aug. Forceful Uppercut (+8.8% Critical Extra Damage)',
+      'Aug. Forceful Uppercut (+9.6% Critical Extra Damage)',
+      'Aug. Forceful Uppercut (+12% Critical Extra Damage)',
+
+      'Aug. Forceful Uppercut (+10% Base Damage)',
+      'Aug. Forceful Uppercut (+11% Base Damage)',
+      'Aug. Forceful Uppercut (+12% Base Damage)',
+      'Aug. Forceful Uppercut (+15% Base Damage)',
+
+      'Aug. Greater Flurry of Blows (+8% Critical Extra Damage)',
+      'Aug. Greater Flurry of Blows (+8.8% Critical Extra Damage)',
+      'Aug. Greater Flurry of Blows (+9.6% Critical Extra Damage)',
+      'Aug. Greater Flurry of Blows (+12% Critical Extra Damage)',
+
+      'Aug. Greater Flurry of Blows (+5% Base Damage)',
+      'Aug. Greater Flurry of Blows (+5.5% Base Damage)',
+      'Aug. Greater Flurry of Blows (+6% Base Damage)',
+      'Aug. Greater Flurry of Blows (+7.5% Base Damage)',
+
+      'Aug. Mass Spirit Mend (+5% Base Damage)',
+      'Aug. Mass Spirit Mend (+5.5% Base Damage)',
+      'Aug. Mass Spirit Mend (+6% Base Damage)',
+      'Aug. Mass Spirit Mend (+7.5% Base Healing)',
+
+      'Aug. Spirit Mend (+6% Base Healing)',
+      'Aug. Spirit Mend (+6.6% Base Healing)',
+      'Aug. Spirit Mend (+7.2% Base Healing)',
+      'Aug. Spirit Mend (+9% Base Healing)',
+
+      'Aug. Spiritual Outburst (+8% Critical Extra Damage)',
+      'Aug. Spiritual Outburst (+8.8% Critical Extra Damage)',
+      'Aug. Spiritual Outburst (+9.6% Critical Extra Damage)',
+      'Aug. Spiritual Outburst (+12% Critical Extra Damage)',
+
+      'Aug. Spiritual Outburst (+5% Base Damage)',
+      'Aug. Spiritual Outburst (+5.5% Base Damage)',
+      'Aug. Spiritual Outburst (+6% Base Damage)',
+      'Aug. Spiritual Outburst (+7.5% Base Damage)',
+
+      'Aug. Sweeping Takedown (+8% Critical Extra Damage)',
+      'Aug. Sweeping Takedown (+8.8% Critical Extra Damage)',
+      'Aug. Sweeping Takedown (+9.6% Critical Extra Damage)',
+      'Aug. Sweeping Takedown (+12% Critical Extra Damage)',
+
+      'Aug. Sweeping Takedown (+5% Base Damage)',
+      'Aug. Sweeping Takedown (+5.5% Base Damage)',
+      'Aug. Sweeping Takedown (+6% Base Damage)',
+      'Aug. Sweeping Takedown (+7.5% Base Damage)',
+    ],
   },
 } as const
 
