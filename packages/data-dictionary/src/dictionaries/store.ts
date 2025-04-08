@@ -101,7 +101,7 @@ export const ignoreList = new Set<string>([
   'roasted wyvern wings',
   'overcooked noodles',
   'delicatessen salad',
-  'svargrond salmon filet',
+  'Svargrond salmon filet',
   'consecrated beef',
   'chilli con carniphila',
   'carrion casserole',
@@ -1760,6 +1760,106 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Gnome Baby',
     value: 150,
   },
+  'festive fireplace': { name: 'Festive Fireplace', value: 180 },
+  'flowering log': { name: 'Flowering Log', value: 180 },
+  'small fire elemental': { name: 'Small Fire Elemental', value: 180 },
+  'sickbay table': { name: 'Sickbay Table', value: 100 },
+  'sickbay cabinet': { name: 'Sickbay Cabinet', value: 100 },
+  'leech jar': { name: 'Leech Jar', value: 80 },
+  'leech terrarium': { name: 'Leech Terrarium', value: 150 },
+  'several skulls': { name: 'Several Skulls', value: 50 },
+  'anatomical skeleton': { name: 'Anatomical Skeleton', value: 90 },
+  sickbed: { name: 'Sickbed', value: 180 },
+  'brain in a jar': { name: 'Brain in a Jar', value: 50 },
+  'creatures in jars': { name: 'Creatures in Jars', value: 50 },
+  'small creatures in jars': { name: 'Small Creatures in Jars', value: 50 },
+  'overgrown floor lamp': { name: 'Overgrown Floor Lamp', value: 90 },
+  'wicker cabinet': { name: 'Wicker Cabinet', value: 90 },
+  'wicker bed': { name: 'Wicker Bed', value: 120 },
+  'wicker table': { name: 'Wicker Table', value: 70 },
+  'wicker chair': { name: 'Wicker Chair', value: 60 },
+  'large obelisk': { name: 'Large Obelisk', value: 0 },
+  'low cave rampart': { name: 'Low Cave Rampart', value: 60 },
+  'ember veins': { name: 'Ember Veins', value: 60 },
+  'ember floor crack': { name: 'Ember Floor Crack', value: 25 },
+  'small volcano': { name: 'Small Volcano', value: 60 },
+  sloth: {
+    name: 'Sloth',
+    value: 180,
+  },
+  'kapok tree': {
+    name: 'Kapok Tree',
+    value: 50,
+  },
+  'chill nettle shrub': {
+    name: 'Chill Nettle Shrub',
+    value: 50,
+  },
+  'wall growth': {
+    name: 'Wall Growth',
+    value: 50,
+  },
+  'spotted jungle orchid': {
+    name: 'Spotted Jungle Orchid',
+    value: 50,
+  },
+  "blue witches' cauldron flower": {
+    name: 'Blue Witches Cauldron Flower',
+    value: 50,
+  },
+  'ember bench': {
+    name: 'Ember Bench',
+    value: 70,
+  },
+  'ember chair': {
+    name: 'Ember Chair',
+    value: 60,
+  },
+  'ember chest': {
+    name: 'Ember Chest',
+    value: 60,
+  },
+  'ember table': {
+    name: 'Ember Table',
+    value: 70,
+  },
+  'ember cabinet': {
+    name: 'Ember Cabinet',
+    value: 90,
+  },
+  'umbrella fern': {
+    name: 'Umbrella Fern',
+    value: 50,
+  },
+  'ember bed': {
+    name: 'Ember Bed',
+    value: 150,
+  },
+  'water floor in a bucket': {
+    name: 'Water Floor',
+    value: 35,
+  },
+  'Cormayan beech': {
+    name: 'Cormayan Beech',
+    value: 50,
+  },
+  'Vanduran tuft palm': {
+    name: 'Vanduran Tuft Palm',
+    value: 50,
+  },
+  'sycamore tree': {
+    name: 'Sycamore Tree',
+    value: 50,
+  },
+  'ember fissure': {
+    name: 'Ember Fissure',
+    value: 35,
+  },
+  'cave panel': {
+    name: 'Cave Panel',
+    value: 60,
+  },
+
   'cave rampart': {
     name: 'Cave Rampart',
     value: 60,

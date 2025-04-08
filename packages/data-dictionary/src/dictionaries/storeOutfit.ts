@@ -486,6 +486,22 @@ export const outfits: OutfitToken[] = [
     },
     value: 870,
   },
+  {
+    name: 'Field Surgeon',
+    id: {
+      male: 1814,
+      female: 1815,
+    },
+    value: 870,
+  },
+  {
+    name: 'Winged Druid',
+    id: {
+      male: 1831,
+      female: 1832,
+    },
+    value: 870,
+  },
 ]
 
 export const priceMap = cosmeticToPriceMap(outfits)

@@ -37,7 +37,7 @@
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",
     "deploy:static": "netlify deploy --dir=static --prod --site=exevopan-static",
     "scrap:raw": "yarn --cwd apps/bazaar-scraper scrap:raw",
-    "checkup": "yarn --cwd apps/bazaar-scraper checkup",
+    "checkup": "NODE_OPTIONS=--max_old_space_size=10000 yarn --cwd apps/bazaar-scraper checkup",
     "prisma:push": "yarn --cwd packages/db push",
     "prisma:generate": "yarn --cwd packages/db generate",
     "prisma:run": "yarn --cwd packages/db execute",
