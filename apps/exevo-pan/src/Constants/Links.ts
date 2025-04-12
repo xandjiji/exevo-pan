@@ -25,4 +25,5 @@ export const links = {
     'https://github.com/xandjiji/exevo-pan/tree/master/apps/exevo-pan/src/modules/BossHunting/modules/HuntingGroups/webhooks.md',
   TIBIA_TRADE: 'https://tibiatrade.gg',
   BESTIARY_ARENA: 'https://bestiaryarena.com',
+  TIBIA_BOUNTY: 'https://tibiabounty.com/',
 }

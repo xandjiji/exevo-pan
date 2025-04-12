@@ -27,6 +27,9 @@ export default {
       selling: 'Selling',
       buying: 'Buying',
     },
+    TibiaBountyBanner: {
+      heading: 'Bounties at {{link}}:',
+    },
     separators: {
       current: 'Current auctions',
       history: 'Bazaar history',

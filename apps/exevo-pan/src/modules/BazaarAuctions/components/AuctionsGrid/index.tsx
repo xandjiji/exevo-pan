@@ -16,14 +16,19 @@ import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import { TibiaTradeBanner } from './TibiaTradeBanner'
 import * as S from './atoms'
+import { TibiaBountyBanner } from './TibiaBountyBanner'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
 type AuctionsGridProps = {
   tibiaTradeItems: TibiaTradeHighlightedItem[]
+  tibiaBountyItems: TibiaBountyEntry[]
 }
 
-const AuctionsGrid = ({ tibiaTradeItems }: AuctionsGridProps) => {
+const AuctionsGrid = ({
+  tibiaTradeItems,
+  tibiaBountyItems,
+}: AuctionsGridProps) => {
   const { homepage } = useTranslations()
 
   const {
@@ -128,9 +133,14 @@ const AuctionsGrid = ({ tibiaTradeItems }: AuctionsGridProps) => {
       </ClientComponent>
 
       <div className="inner-container grid gap-4 py-4">
-        {tibiaTradeItems.length > 0 && (
-          <TibiaTradeBanner className="mb-2" items={tibiaTradeItems} />
-        )}
+        <div className="grid gap-2 md:grid-cols-2 md:gap-10">
+          {tibiaTradeItems.length > 0 && (
+            <TibiaTradeBanner items={tibiaTradeItems} />
+          )}
+          {tibiaBountyItems.length > 0 && (
+            <TibiaBountyBanner items={tibiaBountyItems} />
+          )}
+        </div>
 
         <FilterControl />
 

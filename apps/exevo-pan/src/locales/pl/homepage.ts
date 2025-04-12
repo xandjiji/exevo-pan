@@ -31,6 +31,9 @@ export default defaultComposer(defaultTranslations, {
       selling: 'Selling',
       buying: 'Buying',
     },
+    TibiaBountyBanner: {
+      heading: 'Bounties at {{link}}:',
+    },
     separators: {},
     noAuctionFound: 'Przepraszam, nie znaleziono aukcji',
     changeFilters: 'Zmień filtry',
