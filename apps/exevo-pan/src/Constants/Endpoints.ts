@@ -14,4 +14,5 @@ export const endpoints = {
   REVALIDATE_PAGE: '/api/revalidate',
   REDIRECT_REVALIDATE: 'https://redirect-revalidate.exevopan.workers.dev/',
   TIBIA_TRADE: 'https://tibiatrade.gg/api/trade/exevopan',
+  TIBIA_BOUNTY: 'https://api.tibiabounty.com/event/list/bounties',
 }
