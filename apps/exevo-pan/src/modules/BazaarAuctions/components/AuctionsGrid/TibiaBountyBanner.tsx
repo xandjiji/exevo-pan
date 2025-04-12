@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import { links } from 'Constants'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { Chip, SpritePortrait, Text } from 'components/Atoms'
+import { ServerIcon } from 'assets/svgs'
 
 const { TIBIA_BOUNTY: TIBIA_BOUNTY_URL } = links
 
@@ -57,7 +58,10 @@ const Item = ({ item }: { item: TibiaBountyEntry }) => (
 
       <div className="flex items-center gap-2">
         <Chip>Lv.{item.target.level}</Chip>
-        <Chip>{item.target.world.name}</Chip>
+        <Chip>
+          <ServerIcon className="fill-onSurface -mr-0.5 h-4 w-4" />{' '}
+          {item.target.world.name}
+        </Chip>
         <Chip>
           <Text.TibiaCoin value={item.value} />
         </Chip>
