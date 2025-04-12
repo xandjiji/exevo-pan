@@ -48,21 +48,31 @@ const AuctionsGrid = ({
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
 
-  const gridHeadOffset = useRef(0)
+  const initiallyLoaded = useRef(false)
   useEffect(() => {
-    let scrollTimer: NodeJS.Timeout
-
-    if (gridHeadOffset.current) {
-      const newScrollY =
-        window.scrollY >= gridHeadOffset.current ? gridHeadOffset.current : 0
-      scrollTimer = setTimeout(
-        () => window.scrollTo({ top: newScrollY, behavior: 'smooth' }),
-        0,
-      )
-    } else {
-      const gridHeader = document.getElementById('grid-header')
-      gridHeadOffset.current = gridHeader?.offsetTop ?? -1
+    if (!initiallyLoaded.current) {
+      initiallyLoaded.current = true
+      return () => {}
     }
+
+    if (window.scrollY === 0) return () => {}
+
+    const scrollTimer = setTimeout(() => {
+      const filterControl = document.getElementById('filter-control')
+      const gridHeader = document.getElementById('grid-header')
+      if (!filterControl || !gridHeader) return
+
+      const filterControlPosition =
+        filterControl.getBoundingClientRect().top + window.pageYOffset
+      const headerHeight = gridHeader.getBoundingClientRect().height
+
+      const offset = headerHeight + 16
+
+      window.scrollTo({
+        top: filterControlPosition - offset,
+        behavior: 'smooth',
+      })
+    }, 0)
 
     return () => clearTimeout(scrollTimer)
   }, [paginatedData])

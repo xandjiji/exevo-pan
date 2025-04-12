@@ -25,6 +25,7 @@ const FilterControl = ({
 
   return (
     <section
+      id="filter-control"
       className={clsx(className, 'flex flex-wrap items-center gap-2')}
       {...props}
     >
