@@ -19,14 +19,38 @@ const Item = ({ item }: { item: TibiaBountyEntry }) => (
     target="_blank"
     rel="noopener external nofollow"
   >
-    <SpritePortrait
-      src={loadOutfitSrc(item.target.look_id)}
-      alt={item.target.name}
-      width={64}
-      height={64}
-      className="relative top-0 transition-all group-hover:-top-0.5"
-      offset
-    />
+    <div className="relative">
+      <SpritePortrait
+        src={loadOutfitSrc(item.target.look_id)}
+        alt={item.target.name}
+        width={64}
+        height={64}
+        className="relative top-0 transition-all group-hover:-top-0.5"
+        offset
+      />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="absolute top-1/2 left-1/2 h-8 w-8 stroke-[#dc2626]"
+        style={{
+          transform: 'translate(-50%,-50%)',
+          filter: 'drop-shadow(0 0 2px #00000080)',
+        }}
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="22" x2="18" y1="12" y2="12" />
+        <line x1="6" x2="2" y1="12" y2="12" />
+        <line x1="12" x2="12" y1="6" y2="2" />
+        <line x1="12" x2="12" y1="22" y2="18" />
+      </svg>
+    </div>
 
     <div className="grid gap-2">
       <strong className="text-tsm tracking-wide">{item.target.name}</strong>
