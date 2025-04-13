@@ -12,6 +12,7 @@ import { BlogClient, PreviewImageClient } from 'services'
 import {
   AuctionsClient,
   DrawerFieldsClient,
+  TibiaBountyClient,
   TibiaTradeClient,
 } from 'services/server'
 import { GetStaticProps } from 'next'
@@ -31,6 +32,7 @@ type HomeStaticProps = {
   blogPosts: BlogPost[]
   tibiaTradeItems: TibiaTradeHighlightedItem[]
   badTibiaTradeIds: string
+  tibiaBountyResponse: TibiaBountyEntry[]
 }
 
 export default function Home({
@@ -42,6 +44,7 @@ export default function Home({
   blogPosts,
   tibiaTradeItems,
   badTibiaTradeIds,
+  tibiaBountyResponse,
 }: HomeStaticProps) {
   const translations = useTranslations()
 
@@ -124,7 +127,10 @@ export default function Home({
             highlightedAuctions={highlightedAuctions}
             initialPaginatedData={initialPaginatedData}
           >
-            <AuctionsGrid tibiaTradeItems={tibiaTradeItems} />
+            <AuctionsGrid
+              tibiaTradeItems={tibiaTradeItems}
+              tibiaBountyItems={tibiaBountyResponse}
+            />
           </AuctionsProvider>
         </DrawerFieldsProvider>
       </Main>
@@ -141,6 +147,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     highlightedAuctions,
     localizedBlogPosts,
     tibiaTradeResponse,
+    tibiaBountyResponse,
   ] = await Promise.all([
     DrawerFieldsClient.fetchActiveServerOptions(),
     DrawerFieldsClient.fetchServerData(),
@@ -149,6 +156,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     AuctionsClient.fetchHighlightedAuctions(),
     await BlogClient.getEveryPostLocale({ pageSize: 2 }),
     await TibiaTradeClient.getHighlightedItems(),
+    await TibiaBountyClient.getHighlightedItems(),
   ])
 
   return {
@@ -165,6 +173,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
       tibiaTradeItems: tibiaTradeResponse.items.slice(0, 4),
       badTibiaTradeIds: tibiaTradeResponse.badIds.join(','),
+      tibiaBountyResponse,
     },
   }
 }

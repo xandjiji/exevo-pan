@@ -74,10 +74,7 @@ export const TibiaTradeBanner = ({
 
   return (
     <section className={clsx('relative grid gap-2', className)} {...props}>
-      <div
-        className="z-1 from-background pointer-events-none absolute top-0 right-0 w-8 bg-gradient-to-l to-transparent"
-        style={{ height: 'calc(100% - 6px)' }}
-      />
+      <div className="z-1 from-background pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
 
       <p className="text-tsm font-light">
         {templateMessage(i18n.heading, {
@@ -94,7 +91,7 @@ export const TibiaTradeBanner = ({
         })}
       </p>
 
-      <div className="custom-scrollbar -mb-2 flex w-full gap-4 overflow-auto pb-2 pr-8">
+      <div className="hidden-scrollbar flex w-full gap-4 overflow-auto pr-8 pb-2">
         {items.map((item, idx) => (
           // eslint-disable-next-line react/no-array-index-key
           <Item key={idx} item={item} />
