@@ -9,7 +9,6 @@ import { links, routes } from 'Constants'
 import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { FooterProps, RouteItem } from './types'
 
-const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo.png')
 const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
 const edgarSrc = loadRawSrc('/edgartc.png')
 const rdcSrc = loadRawSrc('/reidoscoins.png')
@@ -67,17 +66,17 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
         {variant === 'primary' && (
           <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row">
             <a
-              href={common.Ravendawn.link}
+              href="https://ravenquest.io/register?utm_source=exevopan&utm_medium=wiki&utm_campaign=rq_launch&utm_term=mmorpg+ravenquest+nostalgic&utm_content=banner468x60"
               target="_blank"
               rel="noopener external nofollow"
               aria-label="Play Ravendawn for free"
-              className="negative-container w-[320px] overflow-hidden md:mx-0"
+              className="negative-container h-[60px] w-[320px] overflow-hidden rounded shadow md:mx-0"
             >
               <img
-                src="https://i.imgur.com/HKZYzdT.gif"
+                src="https://i.imgur.com/Q1jhEpr.gif"
                 alt="Play ravendawn for free"
-                width={320}
-                height={100}
+                width={468}
+                height={60}
                 loading="lazy"
               />
             </a>

@@ -120,7 +120,7 @@ export default {
     text: 'Play Tibia Blackjack',
   },
   Ravendawn: {
-    link: 'https://ravendawn.online/en/?ref=exevopan',
+    link: 'https://ravenquest.io/register?utm_source=exevopan&utm_medium=wiki&utm_campaign=rq_launch&utm_term=mmorpg+ravenquest+nostalgic&utm_content=banner125x125',
     text: 'Play Ravendawn',
   },
   NoPing: {
