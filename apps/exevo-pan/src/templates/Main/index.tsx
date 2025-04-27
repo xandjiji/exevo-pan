@@ -1,3 +1,5 @@
+import { links } from 'Constants'
+import { Shine } from 'components/Atoms'
 import MobileTopCTA from './MobileTopCTA'
 import Header from './Header'
 import Footer from './Footer'
@@ -20,6 +22,24 @@ export default ({ clean = false, children }: MainProps) => (
         <div className="grid gap-2">
           <ExevoProCTA />
           <RavendawnCTA />
+
+          <a
+            className="clickable animate-fadeIn relative h-[36px] shadow lg:hidden"
+            title="Play Bestiary Arena for free now!"
+            href={links.BESTIARY_ARENA}
+            target="_blank"
+            rel="noopener external nofollow noreferrer"
+          >
+            <Shine animationIterationCount="infinite" width={60} />
+
+            <img
+              alt="Bestiary Arena"
+              width={150}
+              height={36}
+              src="/bestiary-widget.png"
+              style={{ imageRendering: 'pixelated' }}
+            />
+          </a>
         </div>
         <BestiaryArenaCTA />
       </div>
