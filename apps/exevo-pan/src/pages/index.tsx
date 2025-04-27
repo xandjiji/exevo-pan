@@ -154,7 +154,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     DrawerFieldsClient.fetchAuctionedItemOptions(),
     AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
-    await BlogClient.getEveryPostLocale({ pageSize: 2 }),
+    await BlogClient.getEveryPostLocale({ pageSize: 3 }),
     await TibiaTradeClient.getHighlightedItems(),
     await TibiaBountyClient.getHighlightedItems(),
   ])

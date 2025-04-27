@@ -1,24 +1,27 @@
-import { Shine } from 'components/Atoms'
+/* eslint-disable jsx-a11y/anchor-has-content */
 import { links } from 'Constants'
 
 export function BestiaryArenaCTA() {
   return (
-    <a
-      className="clickable animate-fadeIn relative h-[36px] shadow"
-      title="Play Bestiary Arena for free now!"
-      href={links.BESTIARY_ARENA}
-      target="_blank"
-      rel="noopener external nofollow noreferrer"
-    >
-      <Shine animationIterationCount="infinite" width={60} />
-
-      <img
-        alt="Bestiary Arena"
-        width={150}
-        height={36}
-        src="/bestiary-widget.png"
-        style={{ imageRendering: 'pixelated' }}
+    <div className="relative hidden h-[121px] w-[279px] cursor-pointer shadow lg:block">
+      <iframe
+        src={`${links.BESTIARY_ARENA}/iframe`}
+        width="279"
+        height="121"
+        scrolling="no"
+        loading="lazy"
+        frameBorder={0}
+        title="Bestiary Arena"
+        className="absolute bottom-0 right-0"
       />
-    </a>
+
+      <a
+        href={links.BESTIARY_ARENA}
+        target="_blank"
+        rel="noopener external nofollow noreferrer"
+        aria-label="Play Bestiary Arena for free now!"
+        className="z-1 absolute bottom-0 right-0 block h-full w-full"
+      />
+    </div>
   )
 }
