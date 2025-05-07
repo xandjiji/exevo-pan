@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { loadRawSrc } from 'utils'
 
-const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo-2.png')
+const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo-3.png')
 
 export const RavendawnCTA = () => {
   const { common } = useTranslations()
@@ -16,7 +16,7 @@ export const RavendawnCTA = () => {
       <img
         src={ravendawnSrc}
         alt="Play Ravendawn"
-        style={{ filter: 'drop-shadow(0 0 1px black)', translate: '2px 0px' }}
+        style={{ filter: 'drop-shadow(0 0 1px black)', translate: '1px 0px' }}
         className="pointer-events-none -mt-4 -mb-3"
       />
     </a>
