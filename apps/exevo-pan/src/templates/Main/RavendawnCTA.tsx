@@ -8,7 +8,7 @@ export const RavendawnCTA = () => {
 
   return (
     <a
-      className="bg-surface clickable animate-fadeIn border-1 border-separator/50 text-s rounded-md border-solid px-3 py-1 shadow"
+      className="bg-surface clickable animate-fadeIn border-1 border-separator/50 text-s rounded-md border-solid px-3 py-1 shadow lg:my-1"
       href={common.Ravendawn.link}
       target="_blank"
       rel="noopener external nofollow noreferrer"
@@ -16,7 +16,8 @@ export const RavendawnCTA = () => {
       <img
         src={ravendawnSrc}
         alt="Play Ravendawn"
-        style={{ filter: 'drop-shadow(0 0 1px black)', translate: '0px 1px' }}
+        style={{ filter: 'drop-shadow(0 0 1px black)', translate: '2px 0px' }}
+        className="pointer-events-none -mt-4 -mb-3"
       />
     </a>
   )
