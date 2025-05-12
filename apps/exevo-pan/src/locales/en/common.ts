@@ -234,7 +234,7 @@ export default {
   },
   genericError: 'Oops! Something went wrong',
   genericLoading: 'Loading...',
-  exevoProCTA: 'Become {{exevoPro}}',
+  exevoProCTA: 'Get {{exevoPro}}',
   play: 'Play',
   SetupNotifications: {
     notAuthed: 'You must {{logIn}} to set up auction notifications',

@@ -224,7 +224,7 @@ export default defaultComposer(defaultTranslations, {
   },
   genericError: 'Ups! Coś poszło nie tak',
   genericLoading: 'Wczytuję...',
-  exevoProCTA: 'Become {{exevoPro}}',
+  exevoProCTA: 'Get {{exevoPro}}',
   play: 'Grać',
   SetupNotifications: {},
   AuctionEstimationAlerts: {},
