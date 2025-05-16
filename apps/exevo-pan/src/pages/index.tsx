@@ -32,7 +32,7 @@ type HomeStaticProps = {
   blogPosts: BlogPost[]
   tibiaTradeItems: TibiaTradeHighlightedItem[]
   badTibiaTradeIds: string
-  tibiaBountyResponse: TibiaBountyEntry[]
+  // tibiaBountyResponse: TibiaBountyEntry[]
 }
 
 export default function Home({
@@ -44,8 +44,8 @@ export default function Home({
   blogPosts,
   tibiaTradeItems,
   badTibiaTradeIds,
-  tibiaBountyResponse,
-}: HomeStaticProps) {
+}: // tibiaBountyResponse,
+HomeStaticProps) {
   const translations = useTranslations()
 
   const pageName = translations.homepage.Meta.title
@@ -127,10 +127,7 @@ export default function Home({
             highlightedAuctions={highlightedAuctions}
             initialPaginatedData={initialPaginatedData}
           >
-            <AuctionsGrid
-              tibiaTradeItems={tibiaTradeItems}
-              tibiaBountyItems={tibiaBountyResponse}
-            />
+            <AuctionsGrid tibiaTradeItems={tibiaTradeItems} />
           </AuctionsProvider>
         </DrawerFieldsProvider>
       </Main>
@@ -147,7 +144,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     highlightedAuctions,
     localizedBlogPosts,
     tibiaTradeResponse,
-    tibiaBountyResponse,
+    // tibiaBountyResponse,
   ] = await Promise.all([
     DrawerFieldsClient.fetchActiveServerOptions(),
     DrawerFieldsClient.fetchServerData(),
@@ -156,7 +153,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     AuctionsClient.fetchHighlightedAuctions(),
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
     await TibiaTradeClient.getHighlightedItems(),
-    await TibiaBountyClient.getHighlightedItems(),
+    // await TibiaBountyClient.getHighlightedItems(),
   ])
 
   return {
@@ -173,7 +170,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
       tibiaTradeItems: tibiaTradeResponse.items.slice(0, 4),
       badTibiaTradeIds: tibiaTradeResponse.badIds.join(','),
-      tibiaBountyResponse,
+      // tibiaBountyResponse,
     },
   }
 }
