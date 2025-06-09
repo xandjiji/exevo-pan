@@ -15,6 +15,14 @@ const trackedBossTokens = Object.keys(bossDictionary) as Array<
   keyof typeof bossDictionary
 >
 
+const multinameBosses = new Map<BossToken, string[]>()
+multinameBosses.set('Rotrender', [
+  'Rotrender',
+  'Rotrender Hexed Scourge',
+  'Rotrender Hexed Horror',
+  'Rotrender Scourge Of Azzilon',
+])
+
 export default class BossStatisticsData {
   public bossStatistics: BossStatistics = {
     server: '',
@@ -120,11 +128,23 @@ export default class BossStatisticsData {
     bossKillsData: Record<string, BossKills>,
   ): Record<string, BossKills> {
     const trackedBosses: typeof bossKillsData = {}
+
     trackedBossTokens.forEach((bossName) => {
-      trackedBosses[bossName] = bossKillsData[bossName] ?? {
-        playersKilled: 0,
-        killedByPlayers: 0,
-      }
+      const entryNames = multinameBosses.get(bossName) ?? [bossName]
+
+      entryNames.forEach((name) => {
+        const killData = bossKillsData[name] ?? {
+          playersKilled: 0,
+          killedByPlayers: 0,
+        }
+
+        if (!trackedBosses[bossName]) {
+          trackedBosses[bossName] = killData
+        } else {
+          trackedBosses[bossName].playersKilled += killData.playersKilled
+          trackedBosses[bossName].killedByPlayers += killData.killedByPlayers
+        }
+      })
     })
 
     return trackedBosses
