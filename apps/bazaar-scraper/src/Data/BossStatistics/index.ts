@@ -22,6 +22,11 @@ multinameBosses.set('Rotrender', [
   'Rotrender Hexed Horror',
   'Rotrender Scourge Of Azzilon',
 ])
+multinameBosses.set('Morshabaal', [
+  'Morshabaal',
+  'Enraged Morshabaal',
+  'Furious Morshabaal',
+])
 
 export default class BossStatisticsData {
   public bossStatistics: BossStatistics = {
