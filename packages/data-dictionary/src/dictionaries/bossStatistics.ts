@@ -320,6 +320,13 @@ bossStatistics.set('Orshabaal', {
   },
 })
 
+bossStatistics.set('Rotrender', {
+  fixedDaysFrequency: {
+    min: 162,
+    max: 174,
+  },
+})
+
 bossStatistics.set('Rottie the Rotworm', {
   fixedDaysFrequency: {
     min: 2,
