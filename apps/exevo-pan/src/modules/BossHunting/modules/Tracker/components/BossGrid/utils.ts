@@ -1,4 +1,4 @@
-import { sortBossesBy, getFromLocalStorage } from 'utils'
+import { getFromLocalStorage, sortBossesBy } from 'utils'
 import { constTokens as bosses } from 'data-dictionary/dist/dictionaries/bosses'
 import { premiumBosses } from 'Constants'
 import { BossLister, PINNED_BOSS_KEY } from './types'
@@ -30,6 +30,7 @@ const archdemonsSet = new Set<string>([
   bosses.Omrafir,
   bosses.Orshabaal,
   bosses['The Abomination'],
+  bosses.Rotrender,
 ])
 
 const rookSet = new Set<string>([

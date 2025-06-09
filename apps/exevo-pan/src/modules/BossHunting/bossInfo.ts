@@ -970,6 +970,22 @@ bossInfo.set('Robby the Reckless', {
   ],
 })
 
+bossInfo.set('Rotrender', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33925,32337,8:1',
+      description: 'Azzilon Castle (Edron)',
+    },
+  ],
+  loot: [
+    "Rotrender's Sceptre",
+    'Mighty Demonic Core Essence',
+    'Rotrender Scalp',
+    'Rotrender Claw',
+    'Demon in a Golden Box',
+  ],
+})
+
 bossInfo.set('Rotspit', {
   locations: [
     {
