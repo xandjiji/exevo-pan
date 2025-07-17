@@ -105,7 +105,7 @@
   },
   "engines": {
     "npm": ">=7.0.0",
-    "node": "22.x"
+    "node": "20.x"
   },
   "dependencies": {
     "prettier-plugin-tailwindcss": "^0.1.8"
