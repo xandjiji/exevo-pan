@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Table } from 'components/Atoms'
 import { LockIcon } from 'assets/svgs'
-import type { GuildMember } from '@prisma/client'
+import type { GuildMember } from 'db/prisma/generated/client'
 import { ManageUser } from './ManageUser'
 
 type MemberListProps = {

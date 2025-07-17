@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { PageRevalidationClient } from 'services/server'
 import { routes } from 'Constants'
-import type { HighlightedAuction } from '@prisma/client'
+import type { HighlightedAuction } from 'db/prisma/generated/client'
 import { prisma } from 'lib/prisma'
 import { oneMonthAgo } from './utils'
 

@@ -1,6 +1,6 @@
 import webpush, { WebPushError } from 'web-push'
 import { prisma } from 'lib/prisma'
-import type { NotificationDevice } from '@prisma/client'
+import type { NotificationDevice } from 'db/prisma/generated/client'
 
 type Notification = {
   title: string

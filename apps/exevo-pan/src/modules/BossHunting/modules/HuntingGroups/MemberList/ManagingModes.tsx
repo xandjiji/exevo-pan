@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { guildValidationRules, routes } from 'Constants'
-import type { GUILD_MEMBER_ROLE, GuildMember } from '@prisma/client'
+import type { GUILD_MEMBER_ROLE, GuildMember } from 'db/prisma/generated/client'
 import { useGuildData } from '../contexts/useGuildData'
 
 type ModeProps = {

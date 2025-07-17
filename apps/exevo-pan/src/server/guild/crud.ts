@@ -23,7 +23,7 @@ import type {
   GuildApplication,
   GuildMember,
   LOG_ENTRY_TYPE,
-} from '@prisma/client'
+} from 'db/prisma/generated/client'
 import { multipleSpawnLocationBosses } from '../../modules/BossHunting/bossInfo'
 import {
   bossSet,

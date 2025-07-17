@@ -3,7 +3,7 @@ import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
 import { calculateDiscountedExevoProPrice } from 'utils'
 import { exevoPro } from 'Constants'
-import type { PaymentData, User } from '@prisma/client'
+import type { PaymentData, User } from 'db/prisma/generated/client'
 
 export const listProOrders = adminProcedure
   .input(
