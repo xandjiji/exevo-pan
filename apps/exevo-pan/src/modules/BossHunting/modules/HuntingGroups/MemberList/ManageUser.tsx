@@ -1,15 +1,15 @@
 /* eslint-disable react/destructuring-assignment */
-import { useCallback, useState } from 'react'
+import { useState, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Menu, useMenuItems } from 'components/Organisms'
 import {
-  EditIcon,
   MoreHorizontalIcon,
-  OutlineAddIcon,
   TrashIcon,
+  EditIcon,
+  OutlineAddIcon,
 } from 'assets/svgs'
-import type { GuildMember } from 'db/prisma/generated/client'
+import type { GuildMember } from '@prisma/client'
 import { can } from 'server/guild/permissions'
 import { useGuildData } from '../contexts/useGuildData'
 import * as ManagingMode from './ManagingModes'

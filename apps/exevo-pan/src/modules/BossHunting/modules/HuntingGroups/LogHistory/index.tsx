@@ -11,7 +11,7 @@ import {
   PersonAddAltIcon,
   PersonRemoveIcon,
 } from 'assets/svgs'
-import type { LOG_ENTRY_TYPE } from 'db/prisma/generated/client'
+import type { LOG_ENTRY_TYPE } from '@prisma/client'
 import { pageSize, queryReducer } from './reducer'
 import { EventTimestamp, ListButton, TableIconWrapper } from '../components'
 

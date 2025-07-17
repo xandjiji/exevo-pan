@@ -3,7 +3,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Hero } from 'templates'
 import { avatar } from 'utils'
 import { avatar as AVATAR } from 'Constants'
-import type { Guild } from 'db/prisma/generated/client'
+import type { Guild } from '@prisma/client'
 
 type GuildHeroProps = {
   guild: Guild

@@ -1,8 +1,4 @@
-import type {
-  Guild,
-  GuildApplication,
-  GuildMember,
-} from 'db/prisma/generated/client'
+import type { Guild, GuildApplication, GuildMember } from '@prisma/client'
 import type { JWT } from 'next-auth/jwt'
 
 export type HuntingGroupStatistics = {

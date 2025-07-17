@@ -1,6 +1,6 @@
-import type { ClientSafeProvider, LiteralUnion } from 'next-auth/react'
+import type { LiteralUnion, ClientSafeProvider } from 'next-auth/react'
 import type { BuiltInProviderType } from 'next-auth/providers'
-import type { PaymentData, Role } from 'db/prisma/generated/client'
+import type { PaymentData, Role } from '@prisma/client'
 
 declare type AuthProviders = Record<
   LiteralUnion<BuiltInProviderType, string>,

@@ -1,12 +1,12 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Chip, Table } from 'components/Atoms'
+import { Table, Chip } from 'components/Atoms'
 import { Menu } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
-import { CheckIcon, CrossIcon, MoreHorizontalIcon } from 'assets/svgs'
-import type { GuildApplication, GuildMember } from 'db/prisma/generated/client'
+import { MoreHorizontalIcon, CheckIcon, CrossIcon } from 'assets/svgs'
+import type { GuildApplication, GuildMember } from '@prisma/client'
 
 type ApplyListProps = {
   list: GuildApplication[]

@@ -1,4 +1,4 @@
-import type { GUILD_MEMBER_ROLE } from 'db/prisma/generated/client'
+import type { GUILD_MEMBER_ROLE } from '@prisma/client'
 
 type PermissionSet = {
   exclude: (role: GUILD_MEMBER_ROLE) => boolean

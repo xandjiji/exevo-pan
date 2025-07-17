@@ -1,6 +1,6 @@
 import { initTRPC, TRPCError } from '@trpc/server'
 import { ZodError } from 'zod'
-import { PrismaClientKnownRequestError } from 'db/prisma/generated/client/runtime'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
 import { Context } from './context'
 import { transformer } from './utils'
 

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Button, Checkbox, Dialog, Switch } from 'components/Atoms'
+import { Dialog, Button, Switch, Checkbox } from 'components/Atoms'
 import SetupNotifications from 'components/SetupNotifications'
 import { usePushNotifications } from 'hooks'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
-import type { GuildMember } from 'db/prisma/generated/client'
-import { bossNames, useBlacklist } from './useBlacklist'
+import type { GuildMember } from '@prisma/client'
+import { useBlacklist, bossNames } from './useBlacklist'
 
 type SettingsDialogProps = {
   onClose: () => void

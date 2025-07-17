@@ -1,6 +1,6 @@
 /* eslint-disable no-var */
 /* eslint-disable vars-on-top */
-import { PrismaClient } from 'db/prisma/generated/client'
+import { PrismaClient } from '@prisma/client'
 
 declare global {
   var prisma: PrismaClient | undefined
