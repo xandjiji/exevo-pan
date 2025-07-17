@@ -11,7 +11,7 @@ export default NextAuth({
   session: {
     strategy: 'jwt',
   },
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma as any),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
