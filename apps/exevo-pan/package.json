@@ -34,7 +34,7 @@
     "devalue": "^4.3.0",
     "gray-matter": "^4.0.3",
     "next": "13.0.2",
-    "next-auth": "^4.16.4",
+    "next-auth": "^4.24.11",
     "next-mdx-remote": "^3.0.8",
     "nextjs-progressbar": "^0.0.16",
     "nodemailer": "^6.6.5",
