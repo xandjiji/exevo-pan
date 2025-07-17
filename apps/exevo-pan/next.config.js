@@ -1,7 +1,6 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
-const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin')
 const { i18n } = require('./next-i18next.config')
 
 const withPreact = (next = {}) =>
@@ -55,11 +54,7 @@ module.exports = withBundleAnalyzer(
         },
       ]
     },
-    webpack(config, { isServer }) {
-      if (isServer) {
-        config.plugins = [...config.plugins, new PrismaPlugin()]
-      }
-
+    webpack(config) {
       return config
     },
   }),

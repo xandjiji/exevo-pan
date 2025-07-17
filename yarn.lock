@@ -2030,11 +2030,6 @@
     tmp "0.2.1"
     ts-pattern "4.3.0"
 
-"@prisma/nextjs-monorepo-workaround-plugin@^6.12.0":
-  version "6.12.0"
-  resolved "https://registry.yarnpkg.com/@prisma/nextjs-monorepo-workaround-plugin/-/nextjs-monorepo-workaround-plugin-6.12.0.tgz#947800c6a45cc79bcabe10d41f5e385e4babad3b"
-  integrity sha512-fAquBdU+3nabAE7t7I/VPtFTMDNwElk2Tb7l9YoY3+YHtmM7cC97jZRZ6ZGgM4GaRgEQ4ze4nm1ynsFc4CYoog==
-
 "@prisma/prisma-schema-wasm@5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59":
   version "5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59"
   resolved "https://registry.yarnpkg.com/@prisma/prisma-schema-wasm/-/prisma-schema-wasm-5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59.tgz#1f4bf75d74ddb89970eeef8a8d043f541d5e3489"
