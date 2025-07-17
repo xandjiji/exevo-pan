@@ -15,6 +15,7 @@ export const raidBossesNames: TrackedBossName[] = [
   'Morgaroth',
   'Morshabaal',
   'Orshabaal',
+  'Rotrender',
   'The Abomination',
   'The Blightfather',
   'The Pale Count',
