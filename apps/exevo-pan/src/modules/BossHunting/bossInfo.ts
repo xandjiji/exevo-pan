@@ -1057,6 +1057,38 @@ bossInfo.set('Shlorg', {
   loot: ['Glass of Goo', 'Goo Shell'],
 })
 
+bossInfo.set('Sir Leopold', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32538,32512,10:1',
+      description: 'Book World (Edron)',
+    },
+  ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'Once more, the sinister Sir Leopold leads his henchmen out of the book pages to wreak havoc.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:10:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:20:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:30:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
+    },
+  ],
+})
+
 bossInfo.set('Sir Valorcrest', {
   locations: [
     {

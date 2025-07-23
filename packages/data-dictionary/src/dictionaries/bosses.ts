@@ -63,6 +63,7 @@ export const constTokens = {
   'Rukor Zad': 'Rukor Zad',
   Shadowstalker: 'Shadowstalker',
   Shlorg: 'Shlorg',
+  'Sir Leopold': 'Sir Leopold',
   'Sir Valorcrest': 'Sir Valorcrest',
   'Smuggler Baron Silvertoe': 'Smuggler Baron Silvertoe',
   Teleskor: 'Teleskor',

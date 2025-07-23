@@ -364,6 +364,13 @@ bossStatistics.set('Shlorg', {
   },
 })
 
+bossStatistics.set('Sir Leopold', {
+  fixedDaysFrequency: {
+    min: 999,
+    max: 999,
+  },
+})
+
 bossStatistics.set('Sir Valorcrest', {
   fixedDaysFrequency: {
     min: 5,
