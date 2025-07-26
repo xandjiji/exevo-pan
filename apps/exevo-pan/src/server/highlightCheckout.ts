@@ -106,8 +106,8 @@ export const highlightCheckout = publicProcedure
     }
 
     await Promise.all([
-      mailer.sendMail(customerEmail),
-      mailer.sendMail(myEmail),
+      // mailer.sendMail(customerEmail),
+      // mailer.sendMail(myEmail),
       caller.notifyAdmin({
         title: 'Auction highlight',
         body: input.selectedCharacter.nickname,
