@@ -1,3 +1,4 @@
+@reboot ~/exevo-pan/automations/tmux.sh
 0 4 1 * * ~/exevo-pan/automations/maintenance/flushLogs.sh
 0 0 * * 3 ~/exevo-pan/automations/maintenance/backupHistory.sh
 0 4 * * 3 ~/exevo-pan/automations/maintenance/backupBosses.sh
