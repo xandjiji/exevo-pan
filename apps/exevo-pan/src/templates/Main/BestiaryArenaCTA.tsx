@@ -6,7 +6,7 @@ export const BestiaryArenaCTA = memo(() => {
   const [loaded, setLoaded] = useState(false)
   return (
     <div
-      className={`relative hidden h-[144px] w-[276px] cursor-pointer shadow transition-opacity lg:block ${
+      className={`relative hidden h-[144px] w-[276px] shadow transition-opacity lg:block ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -20,14 +20,6 @@ export const BestiaryArenaCTA = memo(() => {
         title="Bestiary Arena"
         className="absolute bottom-0 right-0"
         onLoad={() => setLoaded(true)}
-      />
-
-      <a
-        href={links.BESTIARY_ARENA}
-        target="_blank"
-        rel="noopener external nofollow noreferrer"
-        aria-label="Play Bestiary Arena on your browser!"
-        className="z-1 absolute bottom-0 right-0 block h-full w-full"
       />
     </div>
   )
