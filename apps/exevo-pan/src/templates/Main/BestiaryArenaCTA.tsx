@@ -16,13 +16,13 @@ export const BestiaryArenaCTA = memo(() => {
         <div
           className="animate-in animate-rollIn pointer-events-none absolute left-0 top-0"
           style={{
-            animationDuration: '1000ms',
+            animationDuration: '300ms',
           }}
           onAnimationEnd={() => setVisible(true)}
         />
       )}
       <iframe
-        src="http://localhost:3001/iframe-obs-3?totalDuration=13&timeBeforeFadeIn=9"
+        src={`${links.BESTIARY_ARENA}/iframe-obs-3?totalDuration=13&timeBeforeFadeIn=9`}
         width="276"
         height="144"
         scrolling="no"
