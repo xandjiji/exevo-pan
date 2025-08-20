@@ -4,14 +4,25 @@ import { memo, useState } from 'react'
 
 export const BestiaryArenaCTA = memo(() => {
   const [loaded, setLoaded] = useState(false)
+  const [visible, setVisible] = useState(false)
+
   return (
     <div
       className={`relative hidden h-[144px] w-[276px] shadow transition-opacity lg:block ${
-        loaded ? 'opacity-100' : 'opacity-0'
+        visible ? 'opacity-100' : 'opacity-0'
       }`}
     >
+      {loaded && (
+        <div
+          className="animate-in animate-rollIn pointer-events-none absolute left-0 top-0"
+          style={{
+            animationDuration: '1000ms',
+          }}
+          onAnimationEnd={() => setVisible(true)}
+        />
+      )}
       <iframe
-        src={`${links.BESTIARY_ARENA}/iframe-obs-3?totalDuration=13&timeBeforeFadeIn=9`}
+        src="http://localhost:3001/iframe-obs-3?totalDuration=13&timeBeforeFadeIn=9"
         width="276"
         height="144"
         scrolling="no"
