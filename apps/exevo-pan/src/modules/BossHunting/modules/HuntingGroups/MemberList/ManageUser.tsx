@@ -39,7 +39,7 @@ export const ManageUser = (managedUser: GuildMember) => {
   )
 
   const menuItems = useMenuItems([
-    (isSelfManaging || EXEVO_PAN_ADMIN) && {
+    (isSelfManaging || EXEVO_PAN_ADMIN || canExclude) && {
       label: i18n.changeName,
       icon: EditIcon,
       onSelect: () => setManagingMode('CHANGE_NAME'),

@@ -206,8 +206,9 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
     manage.mutate({ guildMemberId: managedUser.id, name })
   }
 
+  const updateHeading = i18n.heading + ":  " + managedUser.name
   return (
-    <Dialog heading={i18n.heading} isOpen onClose={onClose}>
+    <Dialog heading={updateHeading} isOpen onClose={onClose}>
       <Input
         label={i18n.nameInput}
         placeholder={managedUser.name}
