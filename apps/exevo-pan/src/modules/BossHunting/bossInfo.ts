@@ -322,6 +322,51 @@ bossInfo.set('Diblis the Fair', {
   loot: ['Vampire Lord Token'],
 })
 
+bossInfo.set('Dire Penguin', {
+ locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#31983,31184,7:1',
+      description: 'Bittermor',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32072,31083,7:1',
+      description: 'Chyllfroest',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32135,31103,2:1 ',
+      description: 'Formorgar Glacier (North)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32170,31141,2:1',
+      description: 'Formorgar Glacier (Mid)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32142,31179,2:1',
+      description: 'Formorgar Glacier (South)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32479,31160,7:1',
+      description: 'Helheim',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32182,31163,7:1',
+      description: 'Svargrond West',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32204,31216,7:1',
+      description: 'Svargrond West',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32189,31245,7:1',
+      description: 'Svargrond West',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32342,31212,7:1',
+      description: 'Tyrsung',
+    },
+  ],
+})
+
 bossInfo.set('Dracola', {
   locations: [
     {
@@ -516,6 +561,15 @@ bossInfo.set('Fleabringer', {
     {
       src: 'https://tibiamaps.io/map/embed#33251,31423,7:1',
       description: 'Zao Steppe (Farmine)',
+    },
+  ],
+})
+
+bossInfo.set('Fleshslicer', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33428,31270,8:1',
+      description: 'The Hive (Gray Beach)',
     },
   ],
 })
@@ -783,6 +837,15 @@ bossInfo.set('Maw', {
   ],
 })
 
+bossInfo.set('Mawhawk', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33693,32462,7:1',
+      description: 'Mawhawk Lair (Guzzlemaw Valley - Roshamuul)',
+    },
+  ],
+})
+
 bossInfo.set('Midnight Panther', {
   locations: [
     {
@@ -894,6 +957,38 @@ bossInfo.set('Munster', {
     },
   ],
   loot: ['Cookie', 'Die'],
+})
+
+bossInfo.set('Nimmersatt', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32250,31588,7:1',
+      description: "Nimmersatt's Lair (Carlin Ice Islands)",
+    },
+  ],
+  loot: [
+    'Bottled Dragon Breath',
+  ],
+  raidMessages: [
+    {
+      time: 'Started',
+      message:
+        "The dragon Nimmersatt is distracted! Help to breach its lair! Join the heist at the coast north of Carlin!",
+      style: 'HIGHLIGHT',
+    },
+    {
+      time: 'x 15 minutes',
+      message:
+        "The dragon Nimmersatt is distracted! Help to breach its lair! Join the heist at the coast north of Carlin!",
+      style: 'REGULAR',
+    },
+    {
+      time: 'Ended',
+      message:
+        'Nimmersatts lair is opened! The heist has ended!',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Ocyakao', {
@@ -1060,7 +1155,7 @@ bossInfo.set('Shlorg', {
 bossInfo.set('Sir Leopold', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32538,32512,10:1',
+      src: 'https://tibiamaps.io/map/embed#32536,32520,10:1',
       description: 'Book World (Edron)',
     },
   ],
@@ -1570,7 +1665,18 @@ const spawnLocations: { name: string; locations: string[] }[] = [
     name: bossTokens['albino dragons'],
     locations: ['Ankrahmun', 'Farmine', 'Fenrock', 'Goroma', 'PoI'],
   },
-  { name: bossTokens['Battlemaster Zunzu'], locations: ['West', 'East'] },
+  { 
+    name: bossTokens['Battlemaster Zunzu'], 
+    locations: ['West', 'East'] ,
+  },
+  {
+    name: bossTokens['crustaceae giganticae'],
+    locations: ['Calassa', 'Seacrest Grounds', 'Treasure Island'],
+  },
+  {
+    name: bossTokens['dire penguins'],
+    locations: ['Bittermor', 'Chyllfroest', 'Formorgar Glacier', 'Helheim', 'Svargrond', 'Tyrsung'],
+  },
   {
     name: bossTokens.Dreadmaw,
     locations: ['West', 'East'],
