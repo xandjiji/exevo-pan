@@ -3,7 +3,7 @@ import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bos
 import { Hero } from 'templates'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { debounce, getFeroxaStats, loadRawSrc, MILLISECONDS_IN } from 'utils'
+import { debounce, getFeroxaStats, getLeopoldStats ,loadRawSrc, MILLISECONDS_IN } from 'utils'
 import { Select } from 'components/Organisms'
 import { routes } from 'Constants'
 import { BossGrid, RecentlyAppeared } from './components'
@@ -31,7 +31,9 @@ const Tracker = ({
       bosses: initialBossChances.bosses.map((boss) =>
         boss.name === bossTokens.Feroxa
           ? { ...boss, ...getFeroxaStats() }
-          : boss,
+          : boss.name === bossTokens['Sir Leopold']
+            ? { ...boss, ...getLeopoldStats() }
+            : boss,
       ),
     }),
     [initialBossChances],

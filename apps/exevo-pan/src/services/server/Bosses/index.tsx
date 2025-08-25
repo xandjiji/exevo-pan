@@ -2,7 +2,7 @@ import { db } from 'db'
 import { prisma } from 'lib/prisma'
 import { MILLISECONDS_IN } from 'shared-utils/dist/time'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
-import { getFeroxaStats, pluckPremiumBossData, sortBossesBy } from 'utils'
+import { getFeroxaStats, getLeopoldStats, pluckPremiumBossData, sortBossesBy } from 'utils'
 import { endpoints, paths } from 'Constants'
 import { multipleSpawnLocationBosses } from '../../../modules/BossHunting/bossInfo'
 
@@ -15,10 +15,12 @@ export default class BossesClient {
     server,
     isPro,
     getNextDayFeroxa = false,
+    getNextDayLeopold = false,
   }: {
     server: string
     isPro: boolean
     getNextDayFeroxa?: boolean
+    getNextDayLeopold?: boolean
   }): Promise<BossChances> {
     const response = await fetch(`${this.bossChancesUrl}/${server}.json`)
     const bossChances: BossChances = await response.json()
@@ -26,7 +28,9 @@ export default class BossesClient {
     bossChances.bosses = bossChances.bosses.map((chance) =>
       chance.name === bossTokens.Feroxa
         ? { ...chance, ...getFeroxaStats(getNextDayFeroxa) }
-        : chance,
+        : chance.name === bossTokens['Sir Leopold']
+          ? { ...chance, ...getLeopoldStats(getNextDayLeopold) }
+          : chance,
     )
 
     return isPro ? bossChances : pluckPremiumBossData(bossChances)
