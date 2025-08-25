@@ -364,14 +364,6 @@ bossStatistics.set('Shlorg', {
   },
 })
 
-// @ ToDo: update sir leopold
-// bossStatistics.set('Sir Leopold', {
-//   fixedDaysFrequency: {
-//     min: 999,
-//     max: 999,
-//   },
-// })
-
 bossStatistics.set('Sir Valorcrest', {
   fixedDaysFrequency: {
     min: 5,
