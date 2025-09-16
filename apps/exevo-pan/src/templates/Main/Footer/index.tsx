@@ -65,22 +65,6 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       <div className="mx-auto grid w-fit gap-8">
         {variant === 'primary' && (
           <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row">
-            <a
-              href="https://ravenquest.io/register?utm_source=exevopan&utm_medium=wiki&utm_campaign=rq_launch&utm_term=mmorpg+ravenquest+nostalgic&utm_content=banner468x60"
-              target="_blank"
-              rel="noopener external nofollow"
-              aria-label="Play Ravendawn for free"
-              className="negative-container h-[60px] w-[320px] overflow-hidden rounded shadow md:mx-0"
-            >
-              <img
-                src="https://i.imgur.com/Q1jhEpr.gif"
-                alt="Play ravendawn for free"
-                width={468}
-                height={60}
-                loading="lazy"
-              />
-            </a>
-
             <div className="mx-auto flex h-fit w-fit flex-wrap items-center justify-center gap-6 md:mx-0">
               <a
                 href={links.BESTIARY_ARENA}

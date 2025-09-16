@@ -39,26 +39,6 @@ const MobileTopCTA = () => {
           </span>
         </a>
       </li>
-
-      <li className="col-span-full h-8">
-        <a
-          className="bg-darkerPrimary flex h-full w-full items-center justify-center gap-2 px-2 font-bold text-[#fbc321]"
-          target="_blank"
-          rel="noopener external nofollow noreferrer"
-          href={common.Ravendawn.link}
-        >
-          <img
-            src={ravenSrc}
-            alt="Ravendawn"
-            width={16}
-            height={16}
-            style={{ filter: 'drop-shadow(0 0 1px black)' }}
-          />
-          <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
-            {common.Ravendawn.text}
-          </span>
-        </a>
-      </li>
     </ul>
   )
 }
