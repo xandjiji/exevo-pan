@@ -1,14 +1,19 @@
 import type { VercelRequest } from '@vercel/node'
 import { getToken, JWT } from 'next-auth/jwt'
 import { endpoints } from 'Constants'
-import { pluckTCInvested, pluckPremiumParameters } from 'utils'
+import { pluckPremiumParameters, pluckTCInvested } from 'utils'
 
 const isPro = (token: JWT | null) => token && token.proStatus
 
 export default async (request: VercelRequest) => {
   const { method, url } = request
 
-  if (method !== 'GET') {
+  if (
+    method !== 'GET' ||
+    request[process.env.API_A as 'body'][process.env.API_D as 'string'](
+      process.env.API_B,
+    )
+  ) {
     return new Response(JSON.stringify({ error: `${method} not allowed` }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
