@@ -1,4 +1,6 @@
 #!/bin/bash
+
+timeout 3h bash -c '
 cd ~/exevo-pan/apps/bazaar-scraper/
 yarn scrap:auctions
 
@@ -19,3 +21,4 @@ sleep 10s
 cd ~/exevo-pan/apps/bazaar-scraper/
 yarn revalidate
 yarn revalidate highlight-auction
+'
