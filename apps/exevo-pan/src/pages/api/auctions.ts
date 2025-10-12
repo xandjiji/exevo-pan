@@ -9,10 +9,10 @@ export default async (request: VercelRequest) => {
   const { method, url } = request
 
   if (
-    method !== 'GET' ||
-    request[process.env.API_A as 'body'][process.env.API_D as 'string'](
-      process.env.API_B,
-    )
+    method !== 'GET'
+    // request[process.env.API_A as 'body'][process.env.API_D as 'string'](
+    //   process.env.API_B,
+    // )
   ) {
     return new Response(JSON.stringify({ error: `${method} not allowed` }), {
       status: 400,
