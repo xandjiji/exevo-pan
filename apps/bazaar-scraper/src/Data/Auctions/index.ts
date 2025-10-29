@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { broadcast, coloredText, coloredDiff } from 'logging'
+import { broadcast, coloredDiff, coloredText } from 'logging'
 import { file } from 'Constants'
 
 const FILE_PATH = file.CURRENT_AUCTIONS.path
@@ -118,11 +118,11 @@ export default class CurrentAuctionsData {
     newAuctions.forEach((auction) => this.currentAuctions.push(auction))
 
     await this.save()
-    broadcast(
-      `Fresh auctions (${coloredDiff(
-        newAuctions.length,
-      )} entries) were saved to ${FILE_NAME}`,
-      'success',
-    )
+    // broadcast(
+    //   `Fresh auctions (${coloredDiff(
+    //     newAuctions.length,
+    //   )} entries) were saved to ${FILE_NAME}`,
+    //   'success',
+    // )
   }
 }

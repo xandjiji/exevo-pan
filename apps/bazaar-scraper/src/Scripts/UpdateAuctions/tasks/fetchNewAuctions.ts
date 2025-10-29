@@ -1,7 +1,8 @@
+import { Auctions } from 'Data'
 import { AuctionPage } from 'Helpers'
 import { HttpClient } from 'services'
 import { broadcast, coloredText, TrackETA } from 'logging'
-import { retryWrapper, batchPromises } from 'utils'
+import { batchPromises, retryWrapper } from 'utils'
 
 const AUCTION_PAGE_URL =
   'https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details'
@@ -12,6 +13,7 @@ const fetchAuctionPage = retryWrapper(async (auctionId: number) =>
 
 export const fetchNewAuctions = async (
   newAuctionIds: number[],
+  auctionData: Auctions,
 ): Promise<PartialCharacterObject[]> => {
   const batchSize = newAuctionIds.length
   const taskTracking = new TrackETA(
@@ -34,6 +36,8 @@ export const fetchNewAuctions = async (
 
     const newAuctionHtml = await fetchAuctionPage(auctionId)
     const auction = await helper.partialCharacterObject(newAuctionHtml)
+    await auctionData.appendAuctions([auction])
+
     return auction
   })
 

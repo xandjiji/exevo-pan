@@ -24,8 +24,7 @@ const main = async (): Promise<void> => {
   const newAuctionIds = auctionData.newAuctionIds(auctionBlocks)
 
   if (newAuctionIds.length) {
-    const newAuctions = await task.fetchNewAuctions(newAuctionIds)
-    await auctionData.appendAuctions(newAuctions)
+    await task.fetchNewAuctions(newAuctionIds, auctionData)
     await ScrapRareItems()
   }
 
