@@ -1,4 +1,4 @@
-import { Timer, coloredText, broadcast } from 'logging'
+import { broadcast, coloredText, Timer } from 'logging'
 import ScrapServers from 'Scripts/ScrapServers'
 import { executeShell } from 'utils'
 import * as task from './tasks'
@@ -16,7 +16,7 @@ const main = async (): Promise<void> => {
   await task.calculateBossChances({
     activeServers,
     bossDistributions,
-    wasUpdated: false,
+    wasUpdated: true,
     isTomorrow: false,
   })
 
