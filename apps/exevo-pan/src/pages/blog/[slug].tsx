@@ -51,6 +51,9 @@ const components = {
   ),
   Pro: dynamic(() => import('modules/Blog/components/Post/custom/Pro')),
   Coupon: dynamic(() => import('components/Atoms/Coupon')),
+  BestiaryArenaBlogIframe: dynamic(
+    () => import('modules/Blog/components/Post/custom/BestiaryArenaBlogIframe'),
+  ),
 }
 
 type Props = {
