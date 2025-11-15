@@ -25,7 +25,7 @@ export default ({ clean = false, children }: MainProps) => (
           <a
             className="clickable animate-fadeIn relative h-[36px] shadow lg:hidden"
             title="Play Bestiary Arena on your browser!"
-            href={links.BESTIARY_ARENA}
+            href={`${links.BESTIARY_ARENA}?tag=exevomini`}
             target="_blank"
             rel="noopener external nofollow noreferrer"
           >

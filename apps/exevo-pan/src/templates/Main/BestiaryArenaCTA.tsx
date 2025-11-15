@@ -22,7 +22,7 @@ export const BestiaryArenaCTA = memo(() => {
         />
       )}
       <iframe
-        src={`${links.BESTIARY_ARENA}/iframe-obs-3?totalDuration=13&timeBeforeFadeIn=9`}
+        src={`${links.BESTIARY_ARENA}/iframe-obs-3?totalDuration=13&timeBeforeFadeIn=9&tag=exevoiframe`}
         width="276"
         height="144"
         scrolling="no"

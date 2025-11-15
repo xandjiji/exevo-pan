@@ -67,7 +67,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
           <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row">
             <div className="mx-auto flex h-fit w-fit flex-wrap items-center justify-center gap-6 md:mx-0">
               <a
-                href={links.BESTIARY_ARENA}
+                href={`${links.BESTIARY_ARENA}?tag=exevofooter`}
                 target="_blank"
                 rel="noopener external nofollow"
                 aria-label="Play Bestiary Arena for free now!"
