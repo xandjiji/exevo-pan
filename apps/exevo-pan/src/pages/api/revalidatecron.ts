@@ -6,23 +6,17 @@ const { ALL_LOCALES, DEFAULT_LOCALE } = locales
 const addLocalePrefix = (locale: RegisteredLocale): string =>
   locale === DEFAULT_LOCALE ? '' : `/${locale}`
 
-export default async (
+export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse,
-): Promise<void> => {
-  const { secret } = request.query
-  const auth = [process.env.REVALIDATION_AUTH]
-
-  if (!auth.find((key) => key === secret)) {
+) {
+  const authHeader = request.headers.authorization
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     response.status(401).json({ message: 'Invalid token' })
     return
   }
 
-  // @ ToDo: temporarily disabled?
-  response.json({ revalidated: true })
-  return
-
-  const route = request.query.route ?? '/'
+  const route = '/'
   const revalidateRoute = async (locale: RegisteredLocale): Promise<void> => {
     let routeToRevalidate = decodeURIComponent(
       `${addLocalePrefix(locale)}/${route}`.replaceAll('//', '/'),
