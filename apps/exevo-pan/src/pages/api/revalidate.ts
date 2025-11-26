@@ -18,10 +18,6 @@ export default async (
     return
   }
 
-  // @ ToDo: temporarily disabled?
-  response.json({ revalidated: true })
-  return
-
   const route = request.query.route ?? '/'
   const revalidateRoute = async (locale: RegisteredLocale): Promise<void> => {
     let routeToRevalidate = decodeURIComponent(
