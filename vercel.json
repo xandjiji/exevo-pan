@@ -1,4 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "crons": []
+  "crons": [
+    {
+      "path": "/api/revalidatecron",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/cache-guild-stats-cron",
+      "schedule": "*/5 * * * *"
+    }
+  ]
 }
