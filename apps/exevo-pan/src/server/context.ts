@@ -5,7 +5,7 @@ import { getToken } from 'next-auth/jwt'
 export const createContext = async ({ req }: CreateNextContextOptions) => {
   const token = await getToken({ req })
 
-  return { token }
+  return { token, cookies: req.cookies, headers: req.headers }
 }
 
 export type Context = inferAsyncReturnType<typeof createContext>

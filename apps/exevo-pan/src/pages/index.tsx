@@ -157,7 +157,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   ])
 
   return {
-    revalidate: 60 * 15,
     props: {
       translations: {
         common: common[locale as RegisteredLocale],
