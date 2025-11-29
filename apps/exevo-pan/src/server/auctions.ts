@@ -21,9 +21,8 @@ const estimateAuctionPriceInput: z.ZodType<EstimateAuctionPriceArgs> = z
 
 export const estimateAuctionPrice = publicProcedure
   .input(estimateAuctionPriceInput)
-  .query(async ({ ctx: { token, cookies, headers }, input }) => {
+  .query(async ({ ctx: { token }, input }) => {
     const isPro = !!token?.proStatus
-    console.warn({ token, cookies, headers })
 
     const result = await AuctionsClient.estimateAuctionPrice(
       isPro
