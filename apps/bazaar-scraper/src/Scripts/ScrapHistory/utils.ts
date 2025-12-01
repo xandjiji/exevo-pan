@@ -4,7 +4,7 @@ import { retryWrapper } from 'utils'
 export const BUFFER_SIZE = 1500
 
 export const requestConfig: Partial<RequestsConfig> = {
-  DELAY: 1250,
+  DELAY: 5000,
   MAX_CONCURRENT_REQUESTS: 1,
 }
 
