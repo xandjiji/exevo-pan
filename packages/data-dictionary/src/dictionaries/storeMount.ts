@@ -822,6 +822,11 @@ const mounts: MountToken[] = [
     value: 750,
   },
   {
+    name: 'Satin Moth',
+    id: 1836,
+    value: 870,
+  },
+  {
     name: 'Battle Werewolf',
     id: 1873,
     value: 870,
