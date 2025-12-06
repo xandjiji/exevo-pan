@@ -4,6 +4,7 @@ import { stripTime } from 'shared-utils/dist/time'
 import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
+import { db } from 'db'
 import { prisma } from 'lib/prisma'
 import {
   BossesClient,
@@ -250,39 +251,55 @@ export const listGuilds = publicProcedure
   )
   .query(
     async ({ ctx, input: { pageIndex, pageSize, server, name, myGuilds } }) => {
-      const where = {
-        name: myGuilds ? undefined : { contains: name },
-        server: myGuilds ? undefined : { contains: server },
-        guildMembers:
-          myGuilds && ctx.token
-            ? { some: { userId: ctx.token.id } }
-            : undefined,
+      let baseQuery = db.selectFrom('Guild')
+
+      if (!myGuilds) {
+        if (name) {
+          baseQuery = baseQuery.where('name', 'like', `%${name}%`)
+        }
+        if (server) {
+          baseQuery = baseQuery.where('server', 'like', `%${server}%`)
+        }
       }
 
-      const [page, count] = await Promise.all([
-        prisma.guild.findMany({
-          where,
-          include: {
-            _count: {
-              select: { guildMembers: true },
-            },
-          },
-          orderBy: { createdAt: 'desc' },
-          take: pageSize,
-          skip: pageIndex * pageSize,
-        }),
-        prisma.guild.count({
-          where,
-        }),
+      const tokenId = ctx.token?.id
+
+      if (myGuilds && tokenId) {
+        baseQuery = baseQuery.where((eb) =>
+          eb.exists(
+            eb
+              .selectFrom('GuildMember')
+              .select('id')
+              .whereRef('GuildMember.guildId', '=', 'Guild.id')
+              .where('GuildMember.userId', '=', tokenId),
+          ),
+        )
+      }
+
+      const [page, countResult] = await Promise.all([
+        baseQuery
+          .selectAll()
+          .select((eb) =>
+            eb
+              .selectFrom('GuildMember')
+              .select(db.fn.count<string>('id').as('memberCount'))
+              .whereRef('GuildMember.guildId', '=', 'Guild.id')
+              .as('memberCount'),
+          )
+          .orderBy('createdAt', 'desc')
+          .offset(pageIndex * pageSize)
+          .limit(pageSize)
+          .execute(),
+        baseQuery.select(db.fn.count('id').as('totalCount')).executeTakeFirst(),
       ])
 
+      const count = Number(countResult?.totalCount || 0)
+
       return {
-        page: page.map(
-          ({ _count: { guildMembers }, messageBoard, ...data }) => ({
-            ...data,
-            memberCount: guildMembers,
-          }),
-        ),
+        page: page.map(({ messageBoard, memberCount, ...data }) => ({
+          ...data,
+          memberCount: Number(memberCount),
+        })),
         count,
       }
     },
