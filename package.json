@@ -28,7 +28,7 @@
     "postinstall": "turbo run build:packages --include-dependencies --no-deps",
     "build": "turbo run build",
     "build:front": "NODE_ENV=production turbo run build --scope=exevo-pan --include-dependencies --no-deps",
-    "build:exevo-pan": "yarn && turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
+    "build:exevo-pan": "turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
     "build:history-server": "turbo run build --scope=history-server --include-dependencies --no-deps",
     "build:bazaar-scraper": "turbo run build --scope=bazaar-scraper --include-dependencies --no-deps",
     "analyze": "ANALYZE=true turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
