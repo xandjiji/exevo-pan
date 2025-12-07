@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { db } from 'db'
 import NextAuth from 'next-auth/next'
 import type { BuiltInProviderType } from 'next-auth/providers'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
@@ -44,9 +45,11 @@ export default NextAuth({
         return session
       }
 
-      const paymentData = await prisma.paymentData.findFirst({
-        where: { userId: token.id },
-      })
+      const paymentData = await db
+        .selectFrom('PaymentData')
+        .selectAll()
+        .where('userId', '=', token.id)
+        .executeTakeFirst()
 
       session.user = { ...token, paymentData }
 
