@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { db } from 'db'
 import { adminProcedure } from 'server/trpc'
 import { PageRevalidationClient } from 'services/server'
 import { routes } from 'Constants'
@@ -10,10 +11,12 @@ const revalidateHomepage = () =>
   PageRevalidationClient.revalidatePage(routes.HOME).catch(console.log)
 
 export const listAuctionHighlights = adminProcedure.query(async () => {
-  const result = await prisma.highlightedAuction.findMany({
-    where: { lastUpdated: { gt: oneMonthAgo() } },
-    orderBy: { lastUpdated: 'desc' },
-  })
+  const result = await db
+    .selectFrom('HighlightedAuction')
+    .selectAll()
+    .where('lastUpdated', '>', new Date(oneMonthAgo()))
+    .orderBy('lastUpdated', 'desc')
+    .execute()
 
   return result
 })
