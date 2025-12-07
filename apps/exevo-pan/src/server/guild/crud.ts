@@ -305,6 +305,7 @@ export const listGuilds = publicProcedure
       return {
         page: page.map(({ messageBoard, memberCount, ...data }) => ({
           ...data,
+          private: !!data.private,
           memberCount: Number(memberCount),
         })),
         count,
