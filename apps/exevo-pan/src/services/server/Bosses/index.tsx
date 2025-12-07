@@ -42,10 +42,13 @@ export default class BossesClient {
     server: string
   }): Promise<CheckedBoss[]> {
     const [bossChecks, allBossChances] = await Promise.all([
-      prisma.bossCheck.findMany({
-        where: { guildId },
-        include: { checkedBy: { select: { name: true } } },
-      }),
+      db
+        .selectFrom('BossCheck as bc')
+        .selectAll('bc')
+        .innerJoin('GuildMember as gm', 'gm.id', 'bc.memberId')
+        .select(['gm.name as checkedBy'])
+        .where('bc.guildId', '=', guildId)
+        .execute(),
       this.fetchServerBossChances({ server, isPro }),
     ])
 
@@ -78,7 +81,7 @@ export default class BossesClient {
           ? {
               ...boss,
               checkedAt: lastCheck.checkedAt,
-              checkedBy: lastCheck.checkedBy.name,
+              checkedBy: lastCheck.checkedBy,
               lastSpawned: lastCheck.lastSpawned ?? undefined,
             }
           : boss
