@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { db } from 'db'
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
 import { useCallback, useState } from 'react'
@@ -33,7 +34,6 @@ import { caller } from 'pages/api/trpc/[trpc]'
 import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { prisma } from 'lib/prisma'
 import {
   buildPageTitle,
   buildUrl,
@@ -118,7 +118,7 @@ export default function GuildPage({
   const absolutePageUrl = getGuildPermalink(guildDataProps.guild.name, true)
   const pagePath = getGuildPermalink(guildDataProps.guild.name)
 
-  const isPro = !!session.data?.user.proStatus
+  // const isPro = !!session.data?.user.proStatus
 
   return (
     <>
@@ -560,19 +560,28 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (typeof guildName !== 'string') return redirect
 
-  const guild = await prisma.guild.findUnique({
-    where: { name: guildName },
-    include: {
-      guildMembers: { orderBy: { joinedAt: 'asc' } },
-      guildApplications: {
-        orderBy: { createdAt: 'desc' },
-      },
-    },
-  })
+  const guild = await db
+    .selectFrom('Guild')
+    .selectAll()
+    .where('name', '=', guildName)
+    .executeTakeFirst()
 
   if (!guild) return redirect
 
-  const { guildMembers, guildApplications, messageBoard, ...rest } = guild
+  const [guildMembers, guildApplications] = await Promise.all([
+    db
+      .selectFrom('GuildMember')
+      .selectAll()
+      .where('guildId', '=', guild.id)
+      .orderBy('joinedAt', 'asc')
+      .execute(),
+    db
+      .selectFrom('GuildApplication')
+      .selectAll()
+      .where('guildId', '=', guild.id)
+      .orderBy('createdAt', 'desc')
+      .execute(),
+  ])
 
   const isMember = guildMembers.some(({ userId }) => userId === token?.id)
   const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
@@ -595,8 +604,16 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const guildData: GuildData = {
     guild: {
-      ...rest,
-      messageBoard: hasMemberPrivilege ? messageBoard : null,
+      id: guild.id,
+      private: guild.private,
+      name: guild.name,
+      server: guild.server,
+      avatarId: guild.avatarId,
+      createdAt: guild.createdAt,
+      description: guild.description,
+      avatarDegree: guild.avatarDegree,
+      eventEndpoint: guild.eventEndpoint,
+      messageBoard: hasMemberPrivilege ? guild.messageBoard : null,
     },
     members:
       guild.private && !hasMemberPrivilege
