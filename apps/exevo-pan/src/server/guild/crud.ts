@@ -69,10 +69,11 @@ const throwIfForbiddenGuildRequest = async ({
   requesterId: string
   EXEVO_PAN_ADMIN?: boolean
 }) => {
-  const guild = await prisma.guild.findUnique({
-    where: { id: guildId },
-    include: { guildMembers: { include: { user: true } } },
-  })
+  const guild = await db
+    .selectFrom('Guild')
+    .selectAll()
+    .where('id', '=', guildId)
+    .executeTakeFirst()
 
   if (!guild) {
     throw new TRPCError({
@@ -81,7 +82,15 @@ const throwIfForbiddenGuildRequest = async ({
     })
   }
 
-  const requesterMember = guild.guildMembers.find(
+  const guildMembers = await db
+    .selectFrom('GuildMember')
+    .selectAll()
+    .leftJoin('User', 'User.id', 'GuildMember.userId')
+    .select('User.proStatus as proStatus')
+    .where('guildId', '=', guildId)
+    .execute()
+
+  const requesterMember = guildMembers.find(
     ({ userId }) => userId === requesterId,
   )
 
@@ -92,9 +101,7 @@ const throwIfForbiddenGuildRequest = async ({
     })
   }
 
-  const hasProMember = guild.guildMembers.some(
-    ({ user: { proStatus } }) => proStatus,
-  )
+  const hasProMember = guildMembers.some(({ proStatus }) => !!proStatus)
 
   return {
     guild,
