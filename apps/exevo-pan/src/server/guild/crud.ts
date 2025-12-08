@@ -84,7 +84,12 @@ const throwIfForbiddenGuildRequest = async ({
 
   const guildMembers = await db
     .selectFrom('GuildMember')
-    .selectAll()
+    .select([
+      'GuildMember.id',
+      'GuildMember.name',
+      'GuildMember.role',
+      'GuildMember.userId',
+    ])
     .leftJoin('User', 'User.id', 'GuildMember.userId')
     .select('User.proStatus as proStatus')
     .where('guildId', '=', guildId)
