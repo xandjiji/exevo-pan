@@ -4,9 +4,9 @@ import { Template, useRoutes } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { PreviewImageClient } from 'services'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
-import { routes, jsonld } from 'Constants'
-import { common, calculators } from 'locales'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
+import { calculators, common } from 'locales'
 
 const pageRoute = routes.CALCULATORS
 const pageUrl = buildUrl(pageRoute)
@@ -24,7 +24,7 @@ export default function Calculators() {
 
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
-    imgSrc: routeData ? loadRawSrc(routeData.hero) : undefined,
+    imgSrc: routeData?.hero,
   })
 
   return (
