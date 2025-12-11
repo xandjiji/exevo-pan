@@ -1,7 +1,7 @@
 import { AuctionList } from 'Helpers'
 import { HttpClient } from 'services'
-import { broadcast, TrackETA, coloredText } from 'logging'
-import { retryWrapper, batchPromises } from 'utils'
+import { broadcast, coloredText, TrackETA } from 'logging'
+import { batchPromises, retryWrapper } from 'utils'
 
 const AUCTION_LIST_URL = 'https://www.tibia.com/charactertrade'
 
@@ -30,7 +30,9 @@ export const fetchAllAuctionBlocks = async (
     return auctionBlock
   })
 
-  const auctionBlocks = await batchPromises(auctionBlocksRequests)
+  const auctionBlocks = await batchPromises(auctionBlocksRequests, {
+    DELAY: 1000,
+  })
   taskTracking.finish()
   return auctionBlocks.flat()
 }

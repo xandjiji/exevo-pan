@@ -41,7 +41,7 @@ export const fetchNewAuctions = async (
     return auction
   })
 
-  const auctions = await batchPromises(auctionPageRequests)
+  const auctions = await batchPromises(auctionPageRequests, { DELAY: 1500 })
   taskTracking.finish()
   return auctions
 }
