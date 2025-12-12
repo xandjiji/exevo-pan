@@ -11,7 +11,7 @@
     "format": "prettier --write 'src/**/*.{js,tsx}'",
     "test": "jest --watch --silent --coverage",
     "test:all": "jest --silent --coverage",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --incremental false",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
   },
   "dependencies": {

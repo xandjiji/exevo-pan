@@ -11,7 +11,7 @@
   "scripts": {
     "build": "rm -rf dist/ && prisma generate && tsc",
     "build:packages": "rm -rf dist/ && prisma generate && tsc",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --incremental false",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "generate": "prisma generate",
     "push": "prisma db push",

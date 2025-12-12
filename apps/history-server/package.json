@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --incremental false",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "dev": "PORT=4000 NODE_OPTIONS=--max_old_space_size=10000 sucrase-node src",
     "build": "rm -rf dist && sucrase ./src -d ./dist --transforms typescript,imports && cp ./src/Data/*.json ./dist/Data && cp ./src/Data/*.jsonl ./dist/Data",

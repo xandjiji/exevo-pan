@@ -192,6 +192,14 @@ export default class AuctionPage {
     return charmExpansionText === 'yes'
   }
 
+  animusMasteries($: CheerioAPI): number {
+    const text = $('.LabelV:contains("Animus Masteries unlocked:")')
+      .next()
+      .text()
+
+    return +text
+  }
+
   huntingSlot($: CheerioAPI): boolean {
     const huntingSlotText = $(
       '.LabelV:contains("Permanent Weekly Task Expansion:")',
@@ -476,6 +484,7 @@ export default class AuctionPage {
       },
       gems: this.gemCount($),
       greaterGems: this.greaterGems($),
+      animusMasteries: this.animusMasteries($),
     }
 
     characterObject.tcInvested = totalCharacterInvestment(characterObject)
