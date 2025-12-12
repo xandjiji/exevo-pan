@@ -13,6 +13,7 @@
     "format": "prettier --write 'src/**/*.{js,ts}'",
     "build": "rm -rf dist/ && tsc",
     "build:packages": "rm -rf dist/ && tsc",
+    "typecheck": "tsc --noEmit",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {

@@ -9,6 +9,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "build": "wrangler deploy --dry-run --outdir dist",
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "typecheck": "tsc --noEmit",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   },

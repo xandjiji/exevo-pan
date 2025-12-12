@@ -10,6 +10,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
+    "typecheck": "tsc --noEmit",
     "setup:data": "NODE_PATH=./src sucrase-node src/setupData.ts",
     "dev:static": "serve -l 4444 _posts",
     "dev:worker": "yarn setup:data && wrangler dev --port 3132",
