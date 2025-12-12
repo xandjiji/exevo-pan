@@ -5,6 +5,7 @@ import { Dialog, Tabs } from 'components/Atoms'
 import { Checkbox, Icons, InfoGrid } from 'components/CharacterCard/atoms'
 import {
   Achievements,
+  AnimusMasteries,
   BossPoints,
   CharacterItems,
   CharacterSkills,
@@ -70,6 +71,7 @@ const CharacterModal = ({
     bossPoints,
     gems,
     greaterGems,
+    animusMasteries,
   } = characterData
 
   const { common } = useTranslations()
@@ -148,6 +150,7 @@ const CharacterModal = ({
                 greaterGems={greaterGems}
               />
               <BossPoints bossPoints={bossPoints} />
+              <AnimusMasteries animusMasteries={animusMasteries} />
               <Hirelings hirelingsInfo={hirelings} />
               <Achievements achievementPoints={achievementPoints} />
             </S.TooltipSection>
