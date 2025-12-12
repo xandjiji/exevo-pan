@@ -194,12 +194,12 @@ export default class AuctionPage {
 
   huntingSlot($: CheerioAPI): boolean {
     const huntingSlotText = $(
-      '.LabelV:contains("Permanent Hunting Task Slots:")',
+      '.LabelV:contains("Permanent Weekly Task Expansion:")',
     )
       .next()
       .text()
 
-    return huntingSlotText === '1'
+    return huntingSlotText.includes('yes')
   }
 
   preySlot($: CheerioAPI): boolean {
