@@ -4,7 +4,7 @@ import { History } from 'Data'
 import { AuctionPage } from 'Helpers'
 import { broadcast, coloredText, TrackETA } from 'logging'
 import { file } from 'Constants'
-import { writeJsonl, readJsonl } from 'shared-utils/dist/jsonl'
+import { readJsonl, writeJsonl } from 'shared-utils/dist/jsonl'
 import { fetchAuctionPage } from '../ScrapHistory/utils'
 
 const SCRIPT_NAME = coloredText('RecompileHistory', 'highlight')
@@ -50,6 +50,7 @@ const main = async (): Promise<void> => {
     )
     const newAuction = await helper.partialCharacterObject(
       await fetchAuctionPage(id),
+      { requestDelay: 0 },
     )
 
     taskTracking.incTask()

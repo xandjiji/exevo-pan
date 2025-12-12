@@ -448,6 +448,7 @@ export default class AuctionPage {
 
   async partialCharacterObject(
     content: CheerioAPI | string,
+    config: { requestDelay: number },
   ): Promise<PartialCharacterObject> {
     const $ = loadCheerio(content)
 
@@ -473,7 +474,7 @@ export default class AuctionPage {
       transfer: this.transfer($),
       imbuements: this.imbuements($),
       quests: this.quests($),
-      ...(await getPagedData($)),
+      ...(await getPagedData($, config)),
       rareAchievements: this.rareAchievements($),
       hirelings: this.hirelings($),
       huntingSlot: this.huntingSlot($),
@@ -500,7 +501,10 @@ export default class AuctionPage {
     return characterObject
   }
 
-  async checkHistoryAuction(content: string): Promise<HistoryCheck> {
+  async checkHistoryAuction(
+    content: string,
+    config: { requestDelay: number },
+  ): Promise<HistoryCheck> {
     const $ = cheerio.load(content)
 
     exitIfMaintenance(() => this.maintenanceCheck($))
@@ -524,11 +528,14 @@ export default class AuctionPage {
 
     return {
       result: 'IS_FINISHED',
-      data: await this.partialCharacterObject($),
+      data: await this.partialCharacterObject($, config),
     }
   }
 
-  async getPageableData(content: string): Promise<RawAuction> {
+  async getPageableData(
+    content: string,
+    config: { requestDelay: number },
+  ): Promise<RawAuction> {
     const $ = cheerio.load(content)
 
     const auctionId = this.id($)
@@ -536,11 +543,14 @@ export default class AuctionPage {
     return {
       id: this.id($),
       html: content,
-      pageableData: await getPageableAuctionData(auctionId, $),
+      pageableData: await getPageableAuctionData(auctionId, $, config),
     }
   }
 
-  async checkRawAuction(content: string): Promise<RawCheck> {
+  async checkRawAuction(
+    content: string,
+    config: { requestDelay: number },
+  ): Promise<RawCheck> {
     const $ = cheerio.load(content)
 
     exitIfMaintenance(() => this.maintenanceCheck($))
@@ -564,7 +574,7 @@ export default class AuctionPage {
 
     return {
       result: 'IS_FINISHED',
-      data: await this.getPageableData(content),
+      data: await this.getPageableData(content, config),
     }
   }
 }

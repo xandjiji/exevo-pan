@@ -3,8 +3,8 @@
 import { RawBazaar } from 'Data'
 import { AuctionPage } from 'Helpers'
 import { broadcast, coloredText, TrackETA } from 'logging'
-import { batchPromises, arrayPartitions } from 'utils'
-import { BUFFER_SIZE, requestConfig, fetchAuctionPage } from '../utils'
+import { arrayPartitions, batchPromises } from 'utils'
+import { BUFFER_SIZE, fetchAuctionPage, requestConfig } from '../utils'
 
 export const fetchMaturedAuctions = async (
   maturedIds: number[],
@@ -25,7 +25,7 @@ export const fetchMaturedAuctions = async (
     taskTracking.incTask()
     const readableProgress = taskTracking.getProgress()
 
-    const checkResult = await helper.checkRawAuction(html)
+    const checkResult = await helper.checkRawAuction(html, { requestDelay: 0 })
 
     if (checkResult.result === 'NOT_FOUND') {
       broadcast(

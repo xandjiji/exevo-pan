@@ -35,7 +35,9 @@ export const fetchNewAuctions = async (
     )
 
     const newAuctionHtml = await fetchAuctionPage(auctionId)
-    const auction = await helper.partialCharacterObject(newAuctionHtml)
+    const auction = await helper.partialCharacterObject(newAuctionHtml, {
+      requestDelay: 1500,
+    })
     await auctionData.appendAuctions([auction])
 
     return auction

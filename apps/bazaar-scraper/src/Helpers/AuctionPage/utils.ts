@@ -2,8 +2,8 @@
 import cheerio, { CheerioAPI } from 'cheerio/lib/index'
 import { AuctionPage, PostData } from 'Helpers'
 import { HttpClient } from 'services'
-import { tabBroadcast, coloredText } from 'logging'
-import { retryWrapper } from 'utils'
+import { coloredText, tabBroadcast } from 'logging'
+import { retryWrapper, sleep } from 'utils'
 import { PostHtmlProps } from 'services/httpClient/types'
 import { CharacterPostData, readableTypes } from './types'
 
@@ -26,6 +26,7 @@ const getPostData = retryWrapper((args: PostHtmlProps) => {
 
 export const getPagedData = async (
   $: CheerioAPI,
+  { requestDelay }: { requestDelay: number },
 ): Promise<CharacterPostData> => {
   const helper = new AuctionPage()
   const postHelper = new PostData()
@@ -40,8 +41,11 @@ export const getPagedData = async (
     storeOutfits: helper.boxSectionLastIndex('StoreOutfits', $),
   }
 
+  if (requestDelay) await sleep(requestDelay)
+
   let storeItems: CharacterItem[] = helper.storeFirstPage($)
   for (let pageIndex = 2; pageIndex <= lastIndexes.storeItems; pageIndex += 1) {
+    if (requestDelay) await sleep(requestDelay)
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -52,6 +56,7 @@ export const getPagedData = async (
 
   let outfits: Outfit[] = helper.outfitFirstPage($)
   for (let pageIndex = 2; pageIndex <= lastIndexes.outfits; pageIndex += 1) {
+    if (requestDelay) await sleep(requestDelay)
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -66,6 +71,7 @@ export const getPagedData = async (
     pageIndex <= lastIndexes.storeOutfits;
     pageIndex += 1
   ) {
+    if (requestDelay) await sleep(requestDelay)
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -76,6 +82,7 @@ export const getPagedData = async (
 
   let mounts: string[] = helper.mountFirstPage($)
   for (let pageIndex = 2; pageIndex <= lastIndexes.mounts; pageIndex += 1) {
+    if (requestDelay) await sleep(requestDelay)
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -90,6 +97,7 @@ export const getPagedData = async (
     pageIndex <= lastIndexes.storeMounts;
     pageIndex += 1
   ) {
+    if (requestDelay) await sleep(requestDelay)
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -110,6 +118,7 @@ export const getPagedData = async (
 export const getPageableAuctionData = async (
   auctionId: number,
   $: CheerioAPI,
+  { requestDelay }: { requestDelay: number },
 ): Promise<PageableAuctionData> => {
   const helper = new AuctionPage()
 
@@ -129,7 +138,10 @@ export const getPageableAuctionData = async (
     storeOutfits: [],
   }
 
+  if (requestDelay) await sleep(requestDelay)
+
   for (let pageIndex = 2; pageIndex <= lastIndexes.storeItems; pageIndex += 1) {
+    if (requestDelay) await sleep(requestDelay)
     pageableAuctionData.storeItems.push(
       await getPostData({
         auctionId,
@@ -140,6 +152,7 @@ export const getPageableAuctionData = async (
   }
 
   for (let pageIndex = 2; pageIndex <= lastIndexes.outfits; pageIndex += 1) {
+    if (requestDelay) await sleep(requestDelay)
     pageableAuctionData.outfits.push(
       await getPostData({
         auctionId,
@@ -154,6 +167,7 @@ export const getPageableAuctionData = async (
     pageIndex <= lastIndexes.storeOutfits;
     pageIndex += 1
   ) {
+    if (requestDelay) await sleep(requestDelay)
     pageableAuctionData.storeOutfits.push(
       await getPostData({
         auctionId,
@@ -164,6 +178,7 @@ export const getPageableAuctionData = async (
   }
 
   for (let pageIndex = 2; pageIndex <= lastIndexes.mounts; pageIndex += 1) {
+    if (requestDelay) await sleep(requestDelay)
     pageableAuctionData.mounts.push(
       await getPostData({
         auctionId,
@@ -178,6 +193,7 @@ export const getPageableAuctionData = async (
     pageIndex <= lastIndexes.storeMounts;
     pageIndex += 1
   ) {
+    if (requestDelay) await sleep(requestDelay)
     pageableAuctionData.storeMounts.push(
       await getPostData({
         auctionId,
