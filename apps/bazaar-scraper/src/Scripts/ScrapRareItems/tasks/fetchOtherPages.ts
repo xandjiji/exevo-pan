@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-import { broadcast, TrackETA, coloredText } from 'logging'
+import { broadcast, coloredText, TrackETA } from 'logging'
 import { batchPromises } from 'utils'
 import { fetchItemPage } from '../utils'
 
@@ -46,7 +46,7 @@ export const fetchOtherPages = async (
         },
     )
 
-    await batchPromises(incompleteItemRequests)
+    await batchPromises(incompleteItemRequests, { DELAY: 1500 })
     taskTracking.finish()
   }
 

@@ -1,6 +1,6 @@
-import { broadcast, TrackETA, coloredText } from 'logging'
+import { broadcast, coloredText, TrackETA } from 'logging'
 import { batchPromises } from 'utils'
-import { fetchItemPage, buildRareItemCollection } from '../utils'
+import { buildRareItemCollection, fetchItemPage } from '../utils'
 import { itemList } from '../items'
 
 export const fetchAllFirstPages =
@@ -22,7 +22,9 @@ export const fetchAllFirstPages =
       return rareItemBlock
     })
 
-    const rareItemBlocks = await batchPromises(rareItemBlockRequests)
+    const rareItemBlocks = await batchPromises(rareItemBlockRequests, {
+      DELAY: 1500,
+    })
     taskTracking.finish()
 
     return buildRareItemCollection(rareItemBlocks)
