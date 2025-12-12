@@ -1,4 +1,5 @@
 import fs from 'fs/promises'
+import { SS_UTC_HOUR } from 'shared-utils/dist/time'
 import { broadcast, coloredDiff, coloredText } from 'logging'
 import { file } from 'Constants'
 
@@ -53,13 +54,17 @@ export default class CurrentAuctionsData {
   ): Promise<BiddedAuctions[]> {
     const auctionBlockIds = new Set(auctionBlocks.map(({ id }) => id))
     let removedCount = 0
+    let cancelledAuctions = 0
 
     const updatedAuctions: BiddedAuctions[] = []
 
+    const now = Date.now()
+
     const newCurrentAuctions = this.currentAuctions
-      .filter(({ id }) => {
+      .filter(({ id, auctionEnd }) => {
         const finished = !auctionBlockIds.has(id)
         if (finished) removedCount += 1
+        if (now < auctionEnd * 1000) cancelledAuctions += 1
         return !finished
       })
       .map((auction) => {
@@ -86,6 +91,15 @@ export default class CurrentAuctionsData {
           hasBeenBidded: freshAuctionBlock.hasBeenBidded,
         }
       })
+
+    if (cancelledAuctions > 100 && new Date().getUTCHours() === SS_UTC_HOUR) {
+      broadcast(
+        `High cancelled auctions found (${cancelledAuctions}) near SS time. Tibia website is probably partially updated`,
+        'fail',
+      )
+      broadcast('exiting gracefully...', 'control')
+      process.exit()
+    }
 
     if (this.currentAuctions.length > 0 && newCurrentAuctions.length === 0) {
       broadcast(`WARNING! Writing empty values to ${FILE_NAME}`, 'fail')
