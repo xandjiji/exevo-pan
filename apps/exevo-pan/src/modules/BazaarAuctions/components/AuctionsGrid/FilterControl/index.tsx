@@ -207,7 +207,7 @@ const FilterControl = ({
                 dispatch({ type: 'SET_DEFAULT', key: 'huntingSlot' })
               }
             >
-              🏹 Hunting Task Slot
+              🏹 Weekly Task Expansion
             </S.Chip>
           )}
 

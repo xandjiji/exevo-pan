@@ -547,7 +547,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               }
             />
             <Checkbox
-              label="Hunting Task Slot"
+              label="Weekly Task Expansion"
               checked={filterState.huntingSlot}
               onClick={() =>
                 dispatch({ type: 'TOGGLE_FILTER', key: 'huntingSlot' })

@@ -209,7 +209,7 @@ const CharacterModal = ({
                   checked={charmInfo.expansion}
                 />
                 <Checkbox label="Prey Slot" checked={preySlot} />
-                <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
+                <Checkbox label="Weekly Task Expansion" checked={huntingSlot} />
                 <Checkbox
                   label="Imbuement Shrine"
                   checked={checkboxRecords.imbuementShrine}
