@@ -68,7 +68,7 @@ declare interface CharacterObject {
   charmInfo: CharmInfo
   gems: { lesser: number; regular: number; greater: number }
   greaterGems: string[]
-  animusMasteries: number
+  animusMasteries?: number
 }
 
 declare type PartialCharacterObject = Omit<CharacterObject, 'serverData'>

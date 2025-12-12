@@ -120,4 +120,5 @@ export const CharacterObjectSchema: z.ZodType<CharacterObject> = z.object({
     greater: z.number(),
   }),
   greaterGems: z.array(z.string()),
+  animusMasteries: z.number().optional(),
 })

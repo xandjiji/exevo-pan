@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders, setup } from 'utils/test'
 import userEvent from '@testing-library/user-event'
-import { premiumYeti, bossesMock } from './mock'
+import { bossesMock, premiumYeti } from './mock'
 import BossGrid from '..'
 
 describe.skip('<BossGrid />', () => {
@@ -11,9 +11,9 @@ describe.skip('<BossGrid />', () => {
         user: {
           proStatus: false,
         },
-      } as any,
+      },
       status: 'unauthenticated',
-    })
+    } as any)
 
     setup.fetch().mockResolvedValue({
       json: async () => [premiumYeti],
@@ -34,9 +34,9 @@ describe.skip('<BossGrid />', () => {
         user: {
           proStatus: true,
         },
-      } as any,
+      },
       status: 'unauthenticated',
-    })
+    } as any)
 
     renderWithProviders(<BossGrid bosses={bossesMock} server="Antica" />)
 

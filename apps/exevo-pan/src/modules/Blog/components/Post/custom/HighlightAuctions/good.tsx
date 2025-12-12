@@ -138,6 +138,7 @@ const GoodAuction = () => (
         battleye: true,
         experimental: false,
       },
+      animusMasteries: 0,
     }}
   />
 )

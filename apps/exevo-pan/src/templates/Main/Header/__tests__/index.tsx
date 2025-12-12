@@ -5,7 +5,7 @@ import Header from '..'
 setup.useSession().mockReturnValue({
   data: null,
   status: 'unauthenticated',
-})
+} as any)
 
 describe('<Header />', () => {
   test('aria-current should highlight the current page', () => {

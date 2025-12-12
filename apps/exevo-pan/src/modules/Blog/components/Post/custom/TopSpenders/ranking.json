@@ -265,7 +265,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 956125,
@@ -589,7 +590,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 856649,
@@ -849,7 +851,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 723270,
@@ -1038,7 +1041,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 792822,
@@ -1366,7 +1370,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 957293,
@@ -1642,7 +1647,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 652727,
@@ -1871,7 +1877,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 374330,
@@ -2093,7 +2100,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 604833,
@@ -2357,7 +2365,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 723899,
@@ -2559,7 +2568,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 189098,
@@ -2819,7 +2829,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 660879,
@@ -3113,7 +3124,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 37110,
@@ -3400,7 +3412,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 829473,
@@ -3686,7 +3699,8 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   },
   {
     "id": 590837,
@@ -3907,6 +3921,7 @@
       "regular": 0,
       "greater": 0
     },
-    "greaterGems": []
+    "greaterGems": [],
+    "animusMasteries": 0
   }
 ]
