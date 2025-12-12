@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { renderHook } from '@testing-library/react-hooks'
-import { wrapWithProviders, setup } from 'utils/test'
+import { setup, wrapWithProviders } from 'utils/test'
 import { ManageDataClient } from 'services/client'
 import { routes } from 'Constants'
 import { DatabaseProvider, useDatabase } from '../index'
@@ -13,7 +13,7 @@ const ComponentWrapper = ({
 }: {
   children: React.ReactNode
 }): React.ReactElement =>
-  wrapWithProviders(<DatabaseProvider>{children}</DatabaseProvider>)
+  wrapWithProviders(<DatabaseProvider>{children as any}</DatabaseProvider>)
 
 const initialDatabaseValue = {
   loading: false,

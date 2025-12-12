@@ -4,7 +4,9 @@ import FillDates from '../FillDates'
 
 describe('<FillDates />', () => {
   test('should fill with days forwards', () => {
-    renderWithProviders(<FillDates firstDay="12/24/2021" amount={8} step={1} />)
+    renderWithProviders(
+      <FillDates firstDay={new Date('12/24/2021')} amount={8} step={1} />,
+    )
 
     const days = ['25', '26', '27', '28', '29', '30', '31', '1']
     days.forEach((day) => expect(screen.getByText(day)).toBeInTheDocument())
@@ -12,7 +14,7 @@ describe('<FillDates />', () => {
 
   test('should fill with days backwards', () => {
     renderWithProviders(
-      <FillDates firstDay="01/03/2021" amount={5} step={-1} />,
+      <FillDates firstDay={new Date('01/03/2021')} amount={5} step={-1} />,
     )
 
     const days = ['2', '1', '31', '30', '29']

@@ -118,5 +118,6 @@ export const randomCharacter = (): PartialCharacterObject => {
     hirelings: randomHirelingsInfo(),
     gems: gemCount,
     greaterGems: samplesFrom(gems, gemCount.greater),
+    animusMasteries: faker.datatype.number({ min: 0, max: 300 }),
   }
 }

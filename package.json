@@ -21,7 +21,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "test": "turbo run test",
     "test:all": "turbo run test:all",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "turbo run typecheck --continue",
     "dev": "scripts/setupDev.sh && turbo run dev --parallel",
     "dev:scraper": "NODE_OPTIONS=--max_old_space_size=10000 yarn --cwd apps/bazaar-scraper dev:scraper",
     "dev:mock": "yarn --cwd packages/mock-maker dev:mock",

@@ -12,9 +12,9 @@ setup.useSession().mockReturnValue({
     user: {
       proStatus: true,
     },
-  } as any,
+  },
   status: 'unauthenticated',
-})
+} as any)
 setup.fetch().mockResolvedValue({
   json: async () => null,
 } as Response)
@@ -363,9 +363,9 @@ describe('<FilterDrawer />', () => {
           user: {
             proStatus: false,
           },
-        } as any,
+        },
         status: 'unauthenticated',
-      })
+      } as any)
 
     renderWithProviders(<WrappedFilterDrawer />)
     resetFilters()

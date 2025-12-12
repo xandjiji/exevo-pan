@@ -13,7 +13,7 @@ jest.mock('../../../../contexts/Form', () => ({
 
 describe('<PixPayment />', () => {
   test('should render qr code correctly', async () => {
-    renderWithProviders(<PixPayment />)
+    renderWithProviders(<PixPayment isPro={false} />)
 
     await waitFor(() => {
       expect(screen.getByRole('img')).toHaveAttribute('src')

@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { CopyButton } from 'components/Atoms'
 import { useForm } from '../../../contexts/Form'
 import { generateQrCode } from './utils'

@@ -14,6 +14,7 @@ export const mockedPixPurchaseData: EmailTemplateProps = {
   paymentMethod: 'PIX',
   paymentCharacter: 'Bubble',
   locale: 'en',
+  timezoneOffsetMinutes: 0,
 }
 
 export const mockedTCPurchaseData: EmailTemplateProps = {
@@ -24,4 +25,5 @@ export const mockedTCPurchaseData: EmailTemplateProps = {
   paymentMethod: 'TIBIA_COINS',
   paymentCharacter: 'Bubble',
   locale: 'en',
+  timezoneOffsetMinutes: 0,
 }

@@ -23,7 +23,10 @@ const defaultState: FormValues = {
 
 const FormContext = createContext<FormValues & { isPro: boolean }>(defaultState)
 
-export const FormProvider = ({ isPro, children }: FormProviderProps) => {
+export const FormProvider = ({
+  isPro = false,
+  children,
+}: FormProviderProps) => {
   const [formValues, dispatch] = useReducer(FormReducer, {
     uuid: defaultState.uuid,
     currentStep: defaultState.currentStep,

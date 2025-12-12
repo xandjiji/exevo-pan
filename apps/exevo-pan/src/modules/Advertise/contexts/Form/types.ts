@@ -61,6 +61,6 @@ export interface FormValues extends FormContextState {
 }
 
 export interface FormProviderProps {
-  isPro: boolean
+  isPro?: boolean
   children?: ReactNode
 }

@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, setup } from 'utils/test'
 import { useAuctions } from '../../../contexts/useAuctions'
-import { mockedPaginatedData, DEFAULT_AUCTIONS_STATE } from './mock'
+import { DEFAULT_AUCTIONS_STATE, mockedPaginatedData } from './mock'
 import AuctionsGrid from '..'
 
 window.HTMLElement.prototype.scrollTo = jest.fn()
@@ -27,7 +27,7 @@ describe.skip('<AuctionsGrid />', () => {
         },
       } as any,
       status: 'unauthenticated',
-    })
+    } as any)
   })
 
   test('should display empty state if there are no characters', () => {
@@ -141,7 +141,7 @@ describe.skip('<AuctionsGrid />', () => {
         },
       } as any,
       status: 'unauthenticated',
-    })
+    } as any)
 
     const highlightedAuction: CharacterObject = {
       ...DEFAULT_AUCTIONS_STATE.paginatedData.page[2],

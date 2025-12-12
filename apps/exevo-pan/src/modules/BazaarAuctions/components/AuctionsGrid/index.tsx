@@ -19,9 +19,9 @@ import * as S from './atoms'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-type AuctionsGridProps = { tibiaTradeItems: TibiaTradeHighlightedItem[] }
+type AuctionsGridProps = { tibiaTradeItems?: TibiaTradeHighlightedItem[] }
 
-const AuctionsGrid = ({ tibiaTradeItems }: AuctionsGridProps) => {
+const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
   const { homepage } = useTranslations()
 
   const {
