@@ -2,6 +2,7 @@
 import { cloneElement } from 'react'
 import clsx from 'clsx'
 import {
+  AnimusIcon,
   BookIcon,
   CharmsIcon,
   DiamondIcon,
@@ -42,4 +43,5 @@ export const Icons: Record<string, React.FC<JSX.IntrinsicElements['svg']>> = {
   Achievements: (args) => <Icon icon={<StarIcon />} {...args} />,
   Boss: (args) => <Icon icon={<GoblinIcon />} {...args} />,
   Gem: (args) => <Icon icon={<DiamondIcon />} {...args} />,
+  AnimusMasteries: (args) => <Icon icon={<AnimusIcon />} {...args} />,
 }

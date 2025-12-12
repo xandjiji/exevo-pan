@@ -19,6 +19,7 @@ import {
 import * as S from './atoms'
 import { getTCState } from './utils'
 import { CharacterCardProps } from './types'
+import { AnimusMasteries } from './Parts/Tooltips/AnimusMasteries'
 
 const CharacterCard = ({
   characterData,
@@ -47,9 +48,11 @@ const CharacterCard = ({
     quests,
     charmInfo,
     preySlot,
+    huntingSlot,
     bossPoints,
     gems,
     greaterGems,
+    animusMasteries,
   } = characterData
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
@@ -94,13 +97,16 @@ const CharacterCard = ({
 
         <S.FlexFooter>
           <S.FlexColumn>
-            <ImbuementsTooltip items={imbuements} />
+            <AnimusMasteries animusMasteries={animusMasteries} />
             <CharmsTooltip charmPoints={charmInfo.total} />
-            <QuestsTooltip items={quests} />
+            <ImbuementsTooltip items={imbuements} />
             <BossPoints bossPoints={bossPoints} />
+            <QuestsTooltip items={quests} />
           </S.FlexColumn>
 
           <S.FlexColumn storeColumn>
+            <S.Checkbox label="Weekly Task Expansion" checked={huntingSlot} />
+
             <S.Checkbox label="Charm Expansion" checked={charmInfo.expansion} />
 
             <S.Checkbox label="Prey Slot" checked={preySlot} />
