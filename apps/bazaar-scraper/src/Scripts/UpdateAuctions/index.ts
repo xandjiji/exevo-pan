@@ -20,24 +20,29 @@ const main = async (): Promise<void> => {
 
   const pageIndexes = await task.fetchAuctionPageIndexes()
 
-  if (new Date().getUTCHours() === SS_UTC_HOUR) {
-    const estimatedAuctionFoundCount = pageIndexes.length * pageSize
-    const cancelled =
-      auctionData.getAllAuctions().length - estimatedAuctionFoundCount
+  const exitIfNearSS = (nextAuctionCount: number) => {
+    if (new Date().getUTCHours() === SS_UTC_HOUR) {
+      const cancelled = auctionData.getAllAuctions().length - nextAuctionCount
 
-    if (cancelled > 100) {
-      broadcast(
-        `High cancelled auctions found (${cancelled}) near SS time. Tibia website is probably partially updated`,
-        'fail',
-      )
-      broadcast('exiting gracefully...', 'control')
-      process.exit()
+      if (cancelled > 100) {
+        broadcast(
+          `High cancelled auctions found (${cancelled}) near SS time. Tibia website is probably partially updated`,
+          'fail',
+        )
+        broadcast('exiting gracefully...', 'control')
+        process.exit()
+      }
     }
   }
 
+  exitIfNearSS(pageIndexes.length * pageSize)
+
   const auctionBlocks = await task.fetchAllAuctionBlocks(pageIndexes)
 
-  const biddedAuctions = await auctionData.updatePreviousAuctions(auctionBlocks)
+  const biddedAuctions = await auctionData.updatePreviousAuctions(
+    auctionBlocks,
+    exitIfNearSS,
+  )
   await task.notifyBiddedAuctions(biddedAuctions)
 
   const newAuctionIds = auctionData.newAuctionIds(auctionBlocks)
