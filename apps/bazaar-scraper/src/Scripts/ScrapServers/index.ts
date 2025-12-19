@@ -3,10 +3,7 @@ import { ServerData } from 'Data'
 import { broadcast, coloredText } from 'logging'
 import { fetchServerPage } from './utils'
 
-const main = async (): Promise<{
-  serverList: ServerObject[]
-  activeServers: ServerObject[]
-}> => {
+const main = async () => {
   const helper = new ServerList()
   const serverData = new ServerData()
 
@@ -16,6 +13,7 @@ const main = async (): Promise<{
   const serverPageHtml = await fetchServerPage()
 
   const freshServerData = helper.servers(serverPageHtml)
+  const onlineCount = helper.serverOnlineCount(serverPageHtml)
   const savedServerNames = new Set(
     serverData.getAllServers().map(({ serverName }) => serverName),
   )
@@ -44,6 +42,7 @@ const main = async (): Promise<{
     activeServers: serverList.filter(({ serverName }) =>
       activeServerSet.has(serverName),
     ),
+    onlineCount,
   }
 }
 

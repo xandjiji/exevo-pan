@@ -57,7 +57,6 @@ export default class CurrentAuctionsData {
 
   async updatePreviousAuctions(
     auctionBlocks: AuctionBlock[],
-    exitCallback: (nextAuctionCount: number) => void,
   ): Promise<BiddedAuctions[]> {
     const auctionBlockIds = new Set(auctionBlocks.map(({ id }) => id))
     let removedCount = 0
@@ -94,8 +93,6 @@ export default class CurrentAuctionsData {
           hasBeenBidded: freshAuctionBlock.hasBeenBidded,
         }
       })
-
-    exitCallback(newCurrentAuctions.length)
 
     if (this.currentAuctions.length > 0 && newCurrentAuctions.length === 0) {
       broadcast(`WARNING! Writing empty values to ${FILE_NAME}`, 'fail')

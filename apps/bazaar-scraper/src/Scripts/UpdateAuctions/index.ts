@@ -13,36 +13,21 @@ const main = async (): Promise<void> => {
   const timer = new Timer()
   broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
 
-  await ScrapServers()
+  const { onlineCount } = await ScrapServers()
+  if (onlineCount.find((data) => data.onlineCount === null)) {
+    broadcast(`Offline servers found`, 'fail')
+    broadcast('exiting gracefully...', 'control')
+    process.exit()
+  }
 
   const auctionData = new Auctions()
   await auctionData.load()
 
   const pageIndexes = await task.fetchAuctionPageIndexes()
 
-  const exitIfNearSS = (nextAuctionCount: number) => {
-    if (new Date().getUTCHours() === SS_UTC_HOUR) {
-      const cancelled = auctionData.getAllAuctions().length - nextAuctionCount
-
-      if (cancelled > 100) {
-        broadcast(
-          `High cancelled auctions found (${cancelled}) near SS time. Tibia website is probably partially updated`,
-          'fail',
-        )
-        broadcast('exiting gracefully...', 'control')
-        process.exit()
-      }
-    }
-  }
-
-  exitIfNearSS(pageIndexes.length * pageSize)
-
   const auctionBlocks = await task.fetchAllAuctionBlocks(pageIndexes)
 
-  const biddedAuctions = await auctionData.updatePreviousAuctions(
-    auctionBlocks,
-    exitIfNearSS,
-  )
+  const biddedAuctions = await auctionData.updatePreviousAuctions(auctionBlocks)
   await task.notifyBiddedAuctions(biddedAuctions)
 
   const newAuctionIds = auctionData.newAuctionIds(auctionBlocks)
