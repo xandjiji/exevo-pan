@@ -13,12 +13,18 @@ const main = async (): Promise<void> => {
 
   const { onlineCount } = await ScrapServers()
 
-  const currentUTC = new Date().getUTCHours()
-  const approxUTC = new Date(
-    Date.now() + MILLISECONDS_IN.MINUTE * 15,
-  ).getUTCHours()
+  const ssTimestamp = new Date(
+    new Date().getUTCFullYear(),
+    new Date().getUTCMonth(),
+    new Date().getUTCDate(),
+  )
+  ssTimestamp.setUTCHours(SS_UTC_HOUR)
 
-  if (currentUTC === SS_UTC_HOUR || approxUTC === SS_UTC_HOUR) {
+  const ssMinRange = +ssTimestamp - MILLISECONDS_IN.MINUTE * 15
+  const ssMaxRange = +ssTimestamp + MILLISECONDS_IN.MINUTE * 5
+  const now = Date.now()
+
+  if (now > ssMinRange && now < ssMaxRange) {
     broadcast(`Server save update`, 'fail')
     broadcast('exiting gracefully...', 'control')
     process.exit()
