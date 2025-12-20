@@ -172,5 +172,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       badTibiaTradeIds: tibiaTradeResponse.badIds.join(','),
       // tibiaBountyResponse,
     },
+    revalidate: 60,
   }
 }
