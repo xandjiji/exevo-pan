@@ -1,4 +1,4 @@
-import { SS_UTC_HOUR } from 'shared-utils/dist/time'
+import { MILLISECONDS_IN, SS_UTC_HOUR } from 'shared-utils/dist/time'
 import { Auctions, RareItems } from 'Data'
 import { broadcast, coloredText, Timer } from 'logging'
 import ScrapServers from 'Scripts/ScrapServers'
@@ -7,13 +7,23 @@ import * as task from './tasks'
 
 const SCRIPT_NAME = coloredText('UpdateAuctions', 'highlight')
 
-const pageSize = 25
-
 const main = async (): Promise<void> => {
   const timer = new Timer()
   broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
 
   const { onlineCount } = await ScrapServers()
+
+  const currentUTC = new Date().getUTCHours()
+  const approxUTC = new Date(
+    Date.now() + MILLISECONDS_IN.MINUTE * 15,
+  ).getUTCHours()
+
+  if (currentUTC === SS_UTC_HOUR || approxUTC === SS_UTC_HOUR) {
+    broadcast(`Server save update`, 'fail')
+    broadcast('exiting gracefully...', 'control')
+    process.exit()
+  }
+
   if (onlineCount.find((data) => data.onlineCount === null)) {
     broadcast(`Offline servers found`, 'fail')
     broadcast('exiting gracefully...', 'control')
