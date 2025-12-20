@@ -41,7 +41,9 @@ const main = async (): Promise<void> => {
 
   const pageIndexes = await task.fetchAuctionPageIndexes()
 
-  const auctionBlocks = await task.fetchAllAuctionBlocks(pageIndexes)
+  const fast = new Date().getUTCHours() === SS_UTC_HOUR
+
+  const auctionBlocks = await task.fetchAllAuctionBlocks(pageIndexes, fast)
 
   const biddedAuctions = await auctionData.updatePreviousAuctions(auctionBlocks)
   await task.notifyBiddedAuctions(biddedAuctions)
@@ -49,11 +51,7 @@ const main = async (): Promise<void> => {
   const newAuctionIds = auctionData.newAuctionIds(auctionBlocks)
 
   if (newAuctionIds.length) {
-    await task.fetchNewAuctions(
-      newAuctionIds,
-      auctionData,
-      new Date().getUTCHours() === SS_UTC_HOUR,
-    )
+    await task.fetchNewAuctions(newAuctionIds, auctionData, fast)
     await ScrapRareItems()
   }
 

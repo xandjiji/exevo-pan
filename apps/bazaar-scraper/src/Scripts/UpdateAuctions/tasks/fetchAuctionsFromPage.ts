@@ -15,6 +15,7 @@ const fetchAuctionsFromPage = retryWrapper(async (pageIndex) => {
 
 export const fetchAllAuctionBlocks = async (
   pageIndexes: number[],
+  fast: boolean,
 ): Promise<AuctionBlock[]> => {
   const lastIndex = pageIndexes[pageIndexes.length - 1]
   const taskTracking = new TrackETA(
@@ -31,7 +32,7 @@ export const fetchAllAuctionBlocks = async (
   })
 
   const auctionBlocks = await batchPromises(auctionBlocksRequests, {
-    DELAY: 1000,
+    DELAY: fast ? 500 : 1000,
   })
   taskTracking.finish()
   return auctionBlocks.flat()
