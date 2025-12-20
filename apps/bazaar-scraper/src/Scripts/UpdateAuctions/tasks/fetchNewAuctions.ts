@@ -14,6 +14,7 @@ const fetchAuctionPage = retryWrapper(async (auctionId: number) =>
 export const fetchNewAuctions = async (
   newAuctionIds: number[],
   auctionData: Auctions,
+  fast: boolean,
 ): Promise<PartialCharacterObject[]> => {
   const batchSize = newAuctionIds.length
   const taskTracking = new TrackETA(
@@ -36,14 +37,16 @@ export const fetchNewAuctions = async (
 
     const newAuctionHtml = await fetchAuctionPage(auctionId)
     const auction = await helper.partialCharacterObject(newAuctionHtml, {
-      requestDelay: 1500,
+      requestDelay: fast ? 500 : 1500,
     })
     await auctionData.appendAuctions([auction])
 
     return auction
   })
 
-  const auctions = await batchPromises(auctionPageRequests, { DELAY: 1500 })
+  const auctions = await batchPromises(auctionPageRequests, {
+    DELAY: fast ? 500 : 1500,
+  })
   taskTracking.finish()
   return auctions
 }

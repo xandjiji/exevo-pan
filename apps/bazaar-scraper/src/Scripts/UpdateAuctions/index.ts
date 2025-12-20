@@ -49,7 +49,11 @@ const main = async (): Promise<void> => {
   const newAuctionIds = auctionData.newAuctionIds(auctionBlocks)
 
   if (newAuctionIds.length) {
-    await task.fetchNewAuctions(newAuctionIds, auctionData)
+    await task.fetchNewAuctions(
+      newAuctionIds,
+      auctionData,
+      new Date().getUTCHours() === SS_UTC_HOUR,
+    )
     await ScrapRareItems()
   }
 
