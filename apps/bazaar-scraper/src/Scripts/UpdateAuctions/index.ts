@@ -11,8 +11,6 @@ const main = async (): Promise<void> => {
   const timer = new Timer()
   broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
 
-  const { onlineCount } = await ScrapServers()
-
   const ssTimestamp = new Date(
     new Date().getUTCFullYear(),
     new Date().getUTCMonth(),
@@ -29,6 +27,8 @@ const main = async (): Promise<void> => {
     broadcast('exiting gracefully...', 'control')
     process.exit()
   }
+
+  const { onlineCount } = await ScrapServers()
 
   if (onlineCount.find((data) => data.onlineCount === null)) {
     broadcast(`Offline servers found`, 'fail')
