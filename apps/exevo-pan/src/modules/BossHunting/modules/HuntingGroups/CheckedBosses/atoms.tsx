@@ -4,6 +4,12 @@ export const BossTooltipContent = () => (
   </span>
 )
 
+export const CreatureTooltipContent = () => (
+  <span className="decoration-primary underline decoration-dashed underline-offset-4">
+    creatures
+  </span>
+)
+
 export const TooltipList = ({ list }: { list: string[] }) => (
   <ul className="marker:text-primaryHighlight grid list-inside list-disc gap-1.5 text-left">
     {list.map((item) => (
