@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
@@ -47,9 +47,11 @@ const PurchaseForm = ({
   const translations = useTranslations()
   const i18n = translations.dashboard.PurchaseForm
 
-  const [pixMode, setPixMode] = useState(
-    initialTxId ? !initialCharacter : false,
-  )
+  const [mode, setMode] = useState<'PIX' | 'TIBIA_COINS' | 'STRIPE'>(() => {
+    if (!initialTxId) return 'STRIPE'
+    if (initialCharacter) return 'TIBIA_COINS'
+    return 'PIX'
+  })
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',
@@ -73,11 +75,11 @@ const PurchaseForm = ({
 
   const calculatedPrice = calculateDiscountedExevoProPrice(
     formState.discountPercent,
-    pixMode ? 'PIX' : 'TIBIA_COINS',
+    mode === 'PIX' ? 'PIX' : 'TIBIA_COINS',
   )
 
   useLayoutEffect(() => {
-    if (!pixMode) return
+    if (mode !== 'PIX') return
     generateQrCode(email, calculatedPrice).then(({ qrCode, payload }) => {
       setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
     })
@@ -150,7 +152,8 @@ const PurchaseForm = ({
 
   const { current: randomNickname } = useRef(randomCharacter())
 
-  const basePrice = pixMode ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS
+  const basePrice =
+    mode === 'PIX' ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS
   const priceDiscount = basePrice - calculatedPrice
 
   const DiscountElement =
@@ -159,6 +162,11 @@ const PurchaseForm = ({
         -{Math.round((priceDiscount / basePrice) * 100)}%
       </span>
     ) : null
+
+  const disabledSubmit = useMemo(() => {
+    if (mode !== 'TIBIA_COINS') return false
+    return !formState.character || formState.character.length < 2
+  }, [mode, formState.character])
 
   return (
     <div className="grid w-full max-w-[360px] gap-8">
@@ -180,9 +188,31 @@ const PurchaseForm = ({
             <div>
               <div className="-mx-3">
                 <OptionButton
-                  active={!pixMode}
+                  active={mode === 'STRIPE'}
+                  aria-label="Credit Card"
+                  onClick={() => setMode('STRIPE')}
+                  icon={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="text-onSurface"
+                    >
+                      <rect width="20" height="14" x="2" y="5" rx="2" />
+                      <line x1="2" x2="22" y1="10" y2="10" />
+                    </svg>
+                  }
+                >
+                  Credit Card
+                </OptionButton>
+                <OptionButton
+                  active={mode === 'TIBIA_COINS'}
                   aria-label="Tibia Coins"
-                  onClick={() => setPixMode(false)}
+                  onClick={() => setMode('TIBIA_COINS')}
                   icon={
                     <Image
                       alt="Tibia Coin"
@@ -196,9 +226,9 @@ const PurchaseForm = ({
                   Tibia Coins
                 </OptionButton>
                 <OptionButton
-                  active={!!pixMode}
+                  active={mode === 'PIX'}
                   aria-label="Pix"
-                  onClick={() => setPixMode(true)}
+                  onClick={() => setMode('PIX')}
                   icon={
                     <Image
                       alt="Pix"
@@ -218,29 +248,31 @@ const PurchaseForm = ({
                 className="bg-separator mt-1 mb-3 h-[1px] w-full opacity-50"
               />
 
-              <Input
-                label={i18n.couponLabel}
-                placeholder={i18n.couponPlaceholder}
-                value={formState.coupon.toUpperCase()}
-                onChange={(e) =>
-                  setFormState((prev) => ({
-                    ...prev,
-                    coupon: e.target.value,
-                    discountPercent:
-                      e.target.value.length < 3 ? 0 : prev.discountPercent,
-                  }))
-                }
-                stateIcon={
-                  validCoupon && checkCouponAction.isLoading
-                    ? 'loading'
-                    : formState.discountPercent > 0
-                    ? 'valid'
-                    : 'neutral'
-                }
-                className="mb-2 w-48"
-              />
+              {mode !== 'STRIPE' && (
+                <Input
+                  label={i18n.couponLabel}
+                  placeholder={i18n.couponPlaceholder}
+                  value={formState.coupon.toUpperCase()}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      coupon: e.target.value,
+                      discountPercent:
+                        e.target.value.length < 3 ? 0 : prev.discountPercent,
+                    }))
+                  }
+                  stateIcon={
+                    validCoupon && checkCouponAction.isLoading
+                      ? 'loading'
+                      : formState.discountPercent > 0
+                      ? 'valid'
+                      : 'neutral'
+                  }
+                  className="mb-2 w-48"
+                />
+              )}
 
-              {formState.discountPercent > 0 && (
+              {formState.discountPercent > 0 && mode !== 'STRIPE' && (
                 <Checkbox
                   checked
                   disabled
@@ -248,7 +280,7 @@ const PurchaseForm = ({
                     <p>
                       <strong className="text-greenHighlight">
                         -
-                        {pixMode
+                        {mode === 'PIX'
                           ? `R$ ${priceDiscount},00`
                           : `${priceDiscount} TC`}
                       </strong>{' '}
@@ -258,9 +290,9 @@ const PurchaseForm = ({
                 />
               )}
 
-              {!pixMode && <div role="none" className="mb-6" />}
+              {mode === 'TIBIA_COINS' && <div role="none" className="mb-4" />}
 
-              {!pixMode && (
+              {mode === 'TIBIA_COINS' && (
                 <FromTo
                   from={formState.character ?? ''}
                   to={BANK_CHARACTER}
@@ -271,7 +303,7 @@ const PurchaseForm = ({
               )}
 
               <div className="mt-1 flex items-end gap-4">
-                {pixMode ? (
+                {mode === 'PIX' && (
                   <p className="self-center text-base font-bold">
                     <span className="text-tsm font-light tracking-wide">
                       {i18n.total}
@@ -286,7 +318,9 @@ const PurchaseForm = ({
                       {DiscountElement}
                     </span>
                   </p>
-                ) : (
+                )}
+
+                {mode === 'TIBIA_COINS' && (
                   <Input
                     className="w-full"
                     name="character"
@@ -311,20 +345,19 @@ const PurchaseForm = ({
                   pill
                   className="ml-auto mb-[1px] !py-3"
                   loading={isLoading}
-                  disabled={
-                    !pixMode &&
-                    (!formState.character || formState.character.length < 2)
-                  }
-                  onClick={() =>
-                    orderAction.mutate(
-                      pixMode
-                        ? { coupon: formState.coupon }
-                        : {
-                            character: formState.character as string,
-                            coupon: formState.coupon,
-                          },
-                    )
-                  }
+                  disabled={disabledSubmit}
+                  onClick={() => {
+                    if (mode === 'PIX') {
+                      orderAction.mutate({ coupon: formState.coupon })
+                    } else if (mode === 'TIBIA_COINS') {
+                      orderAction.mutate({
+                        character: formState.character as string,
+                        coupon: formState.coupon,
+                      })
+                    } else if (mode === 'STRIPE') {
+                      // @ ToDo
+                    }
+                  }}
                 >
                   {i18n.confirm}
                 </Button>
@@ -352,7 +385,7 @@ const PurchaseForm = ({
 
               <p>{i18n.notice}</p>
 
-              {pixMode ? (
+              {mode === 'PIX' && (
                 <div>
                   <span className="code flex items-center gap-1.5 break-all text-xs">
                     {formState.pixUrl}
@@ -371,7 +404,9 @@ const PurchaseForm = ({
                     style={{ zoom: 1 / 2, imageRendering: 'pixelated' }}
                   />
                 </div>
-              ) : (
+              )}
+
+              {mode === 'TIBIA_COINS' && (
                 <FromTo
                   className="mx-auto"
                   from={formState.character ?? ''}
