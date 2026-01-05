@@ -82,6 +82,7 @@ export default function Dashboard() {
               <Root.Pitch proStatus={session.user.proStatus} />
               {!session.user.proStatus && (
                 <Root.PurchaseForm
+                  userId={session.user.id}
                   email={session.user.email}
                   initialTxId={session.user.paymentData?.id}
                   initialCharacter={session.user.paymentData?.character}

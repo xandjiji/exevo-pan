@@ -27,7 +27,21 @@ import { generateQrCode } from './utils'
 
 const { BANK_CHARACTER } = advertising
 
+function generateStripeLink({
+  userId,
+  email,
+}: {
+  userId: string
+  email?: string
+}) {
+  return (
+    'https://buy.stripe.com/fZu3cxboe8Ru16F90R2880d' +
+    `?client_reference_id=${userId}${email ? `&prefilled_email=${email}` : ''}`
+  )
+}
+
 type PurchaseFormProps = {
+  userId: string
   email: string
   initialTxId?: string | null
   initialCharacter?: string | null
@@ -37,6 +51,7 @@ type PurchaseFormProps = {
 }
 
 const PurchaseForm = ({
+  userId,
   email,
   initialTxId,
   initialCharacter,
@@ -340,27 +355,38 @@ const PurchaseForm = ({
                   />
                 )}
 
-                <Button
-                  type="submit"
-                  pill
-                  className="ml-auto mb-[1px] !py-3"
-                  loading={isLoading}
-                  disabled={disabledSubmit}
-                  onClick={() => {
-                    if (mode === 'PIX') {
-                      orderAction.mutate({ coupon: formState.coupon })
-                    } else if (mode === 'TIBIA_COINS') {
-                      orderAction.mutate({
-                        character: formState.character as string,
-                        coupon: formState.coupon,
-                      })
-                    } else if (mode === 'STRIPE') {
-                      // @ ToDo
-                    }
-                  }}
-                >
-                  {i18n.confirm}
-                </Button>
+                {mode === 'STRIPE' ? (
+                  <a
+                    target="_blank"
+                    href={generateStripeLink({ userId, email })}
+                    className="ml-auto mb-[1px]"
+                    rel="noreferrer"
+                  >
+                    <Button type="submit" pill className="!py-3">
+                      {i18n.confirm}
+                    </Button>
+                  </a>
+                ) : (
+                  <Button
+                    type="submit"
+                    pill
+                    className="ml-auto mb-[1px] !py-3"
+                    loading={isLoading}
+                    disabled={disabledSubmit}
+                    onClick={() => {
+                      if (mode === 'PIX') {
+                        orderAction.mutate({ coupon: formState.coupon })
+                      } else if (mode === 'TIBIA_COINS') {
+                        orderAction.mutate({
+                          character: formState.character as string,
+                          coupon: formState.coupon,
+                        })
+                      }
+                    }}
+                  >
+                    {i18n.confirm}
+                  </Button>
+                )}
               </div>
             </div>
           )}
