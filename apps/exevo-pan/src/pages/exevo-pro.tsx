@@ -236,17 +236,28 @@ export default function ExevoPro() {
 
                   <p className="text-tsm flex flex-nowrap items-center justify-center opacity-75 md:justify-start">
                     ({i18n.or}
-                    <Image
-                      src={pixSrc}
-                      alt="Pix"
-                      unoptimized
-                      width={16}
-                      height={16}
-                      className="mx-1 select-none"
-                    />
-                    <strong className="whitespace-nowrap text-base">
-                      R$ {exevoPro.price.PIX},00
-                    </strong>
+                    {locale !== 'pt' && (
+                      <>
+                        <strong className="ml-1 whitespace-nowrap text-base">
+                          $8,99
+                        </strong>
+                      </>
+                    )}
+                    {locale === 'pt' && (
+                      <>
+                        <Image
+                          src={pixSrc}
+                          alt="Pix"
+                          unoptimized
+                          width={16}
+                          height={16}
+                          className="mx-1 select-none"
+                        />
+                        <strong className="whitespace-nowrap text-base">
+                          R$ {exevoPro.price.PIX},00
+                        </strong>
+                      </>
+                    )}
                     )
                   </p>
                 </div>
