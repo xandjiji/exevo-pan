@@ -219,7 +219,7 @@ const PurchaseForm = ({
                     </svg>
                   }
                 >
-                  Credit Card
+                  {i18n.creditCard}
                 </OptionButton>
                 <OptionButton
                   active={mode === 'TIBIA_COINS'}
