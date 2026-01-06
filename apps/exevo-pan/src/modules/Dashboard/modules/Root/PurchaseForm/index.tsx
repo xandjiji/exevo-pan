@@ -35,7 +35,7 @@ function generateStripeLink({
   email?: string
 }) {
   return (
-    'https://buy.stripe.com/bJedRb0KMec80Ub52I4gg00' +
+    'https://buy.stripe.com/dRmeVfctugkgfP5fHm4gg01' +
     `?client_reference_id=${userId}${email ? `&prefilled_email=${email}` : ''}`
   )
 }
