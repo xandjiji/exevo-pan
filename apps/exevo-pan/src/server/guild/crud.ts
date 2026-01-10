@@ -43,12 +43,15 @@ const findGuildMember = async ({
   guildId,
   userId,
 }: UniqueMemberArgs): Promise<GuildMember> => {
-  const member = await prisma.guildMember.findUnique({
-    where: {
-      id,
-      guildId_userId: guildId ? { guildId, userId } : undefined,
-    },
-  })
+  let query = db.selectFrom('GuildMember').selectAll()
+
+  if (id) {
+    query = query.where('id', '=', id)
+  } else if (guildId && userId) {
+    query = query.where('guildId', '=', guildId).where('userId', '=', userId)
+  }
+
+  const member = await query.executeTakeFirst()
 
   if (!member) {
     throw new TRPCError({
@@ -562,9 +565,12 @@ export const applyToGuild = authedProcedure
     const userId = token.id
     const guildId_userId = { guildId, userId }
 
-    const isMemberAlready = !!(await prisma.guildMember.findUnique({
-      where: { guildId_userId },
-    }))
+    const isMemberAlready = !!(await db
+      .selectFrom('GuildMember')
+      .selectAll()
+      .where('guildId', '=', guildId)
+      .where('userId', '=', userId)
+      .executeTakeFirst())
 
     if (isMemberAlready) {
       throw new TRPCError({
@@ -899,10 +905,12 @@ export const markCheckedBoss = authedProcedure
         })
       }
 
-      const requesterMember = await prisma.guildMember.findUnique({
-        where: { guildId_userId: { guildId, userId } },
-        select: { id: true },
-      })
+      const requesterMember = await db
+        .selectFrom('GuildMember')
+        .select('id')
+        .where('guildId', '=', guildId)
+        .where('userId', '=', userId)
+        .executeTakeFirst()
 
       if (!requesterMember) {
         throw new TRPCError({
@@ -972,10 +980,12 @@ export const markBossAsNoChance = authedProcedure
         })
       }
 
-      const requesterMember = await prisma.guildMember.findUnique({
-        where: { guildId_userId: { guildId, userId } },
-        select: { id: true, role: true },
-      })
+      const requesterMember = await db
+        .selectFrom('GuildMember')
+        .select(['id', 'role'])
+        .where('guildId', '=', guildId)
+        .where('userId', '=', userId)
+        .executeTakeFirst()
 
       if (!requesterMember) {
         throw new TRPCError({
