@@ -1183,9 +1183,11 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
   })
 
   if (shouldBeCached) {
-    const cachedData = await prisma.pastCachedBossCheckStatistics.findUnique({
-      where: { date_guildId },
-    })
+    const cachedData = await db
+      .selectFrom('PastCachedBossCheckStatistics')
+      .selectAll()
+      .where('date_guildId', '=', date_guildId)
+      .executeTakeFirst()
 
     if (
       cachedData &&
@@ -1275,9 +1277,11 @@ export const getCheckStats = authedProcedure
         EXEVO_PAN_ADMIN,
       })
 
-      const cachedData = await prisma.cachedBossCheckStatistics.findUnique({
-        where: { guildId },
-      })
+      const cachedData = await db
+        .selectFrom('CachedBossCheckStatistics')
+        .selectAll()
+        .where('guildId', '=', guildId)
+        .executeTakeFirst()
 
       const { version, MAX_AGE, MINIMUM_CACHE_ENTRIES } =
         BOSS_CHECK_STATISTICS_CACHE

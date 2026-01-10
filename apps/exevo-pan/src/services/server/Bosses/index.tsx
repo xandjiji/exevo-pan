@@ -122,11 +122,12 @@ export default class BossesClient {
   }): Promise<{ id: string; frozenAt: Date }[]> {
     if (!hasMemberPrivilege) return []
 
-    const entries = await prisma.frozenBossCheckLog.findMany({
-      where: { guildId },
-      select: { id: true, frozenAt: true },
-      orderBy: { frozenAt: 'desc' },
-    })
+    const entries = await db
+      .selectFrom('FrozenBossCheckLog')
+      .select(['id', 'frozenAt'])
+      .where('guildId', '=', guildId)
+      .orderBy('frozenAt', 'desc')
+      .execute()
 
     return entries
   }
