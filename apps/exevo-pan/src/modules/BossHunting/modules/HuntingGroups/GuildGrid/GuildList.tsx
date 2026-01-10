@@ -47,7 +47,7 @@ const GuildList = ({ list, onApply }: GuildListProps) => {
           <li
             key={id}
             className={clsx(
-              'card flex flex-col',
+              'card flex flex-col overflow-hidden',
               description ? 'gap-4' : 'gap-2',
             )}
           >
