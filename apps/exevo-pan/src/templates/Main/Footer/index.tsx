@@ -65,40 +65,21 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       <div className="mx-auto grid w-fit gap-8">
         {variant === 'primary' && (
           <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row">
-            <div className="mx-auto flex h-fit w-fit flex-wrap items-center justify-center gap-6 md:mx-0">
-              <a
-                href={`${links.BESTIARY_ARENA}?tag=exevofooter`}
-                target="_blank"
-                rel="noopener external nofollow"
-                aria-label="Play Bestiary Arena for free now!"
-                className="relative"
-              >
-                <img
-                  alt="Bestiary Arena"
-                  width={283}
-                  height={70}
-                  src="/bestiary-big-widget.png"
-                  style={{ imageRendering: 'pixelated' }}
-                />
-                <Shine animationIterationCount="infinite" width={60} />
-              </a>
+            <a href={useLocalizedHref(routes.EXEVOPRO)}>
+              <Card>
+                <ExevoPanIcon width={36} height={36} />
 
-              <a href={useLocalizedHref(routes.EXEVOPRO)}>
-                <Card>
-                  <ExevoPanIcon width={36} height={36} />
-
-                  <span>
-                    {templateMessage(common.exevoProCTA, {
-                      exevoPro: (
-                        <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
-                          Exevo Pro
-                        </strong>
-                      ),
-                    })}
-                  </span>
-                </Card>
-              </a>
-            </div>
+                <span>
+                  {templateMessage(common.exevoProCTA, {
+                    exevoPro: (
+                      <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
+                        Exevo Pro
+                      </strong>
+                    ),
+                  })}
+                </span>
+              </Card>
+            </a>
 
             <div>
               <div className="flex flex-wrap items-center justify-center gap-6">
