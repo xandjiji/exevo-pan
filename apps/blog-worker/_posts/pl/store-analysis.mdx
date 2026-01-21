@@ -1,103 +1,99 @@
 ---
-title: 'We did the math: how much revenue Cipsoft had from the Store?'
-description: How many Tibia Coins were spent on the Store? What were the most popular purchases? Let's have a deep dive and find out!
+title: 'Policzyliśmy to: ile Cipsoft zarobił na Sklepie?'
+description:   Ile Tibia Coins zostało wydanych w Sklepie? Jakie zakupy były najpopularniejsze? Zróbmy głęboką analizę i sprawdźmy!
 date: 06-04-2022
 thumbnail: /blog/thumbnails/goldPouch.png
 author: Ksu
+translator: Odbyczon
 tags:
   - article
 ---
 
-<TranslationAlert />
+### Wprowadzenie
 
-### Introduction
+Po tym jak zaczęliśmy <SlugLink href="changelog-3">śledzić przedmioty ze sklepu</SlugLink>, pojawiła się ciekawość, aby głębiej wejść w analizę statystyczną Char Bazaar. Tym razem przyjrzymy się, **jak gracze wydawali swoje Tibia Coins na zakupy w sklepie 🛍️**.
 
-After we started <SlugLink href="changelog-3">tracking store items</SlugLink>, we had the curiosity to dig deeper into more statistical analysis about the Char Bazaar. This time, we will have a look at **how players spent their Tibia Coins with store purchases 🛍️**.
+Podobnie jak w poprzednich analizach, te statystyki zostały wyciągnięte z naszej własnej historycznej bazy danych Char Bazaar. Ponieważ nasza baza danych nie jest w 100% kompletna (przeczytaj <SlugLink href="changelog-3">wyjaśnienie</SlugLink>) i ponieważ nie da się śledzić wszystkiego, ta analiza jest **oszacowaniem dolnej granicy**. Oznacza to, że w rzeczywistości gracze wydali znacznie więcej Tibia Coins, niż udało nam się zarejestrować.
 
-Like our previous analysis, these statistics were extracted from our own Char Bazaar historical database. Since our database isn't 100% complete (read the <SlugLink href="about-our-data">explanation</SlugLink>) and since it's not possible to track everything, this analysis is a **lower bound estimate**. It means that, in reality, players have spent much more Tibia Coins than we actually managed to track.
+Kilka czynników, których **nie mogliśmy** uwzględnić:
 
-A few factors we could **not** account for:
+- Store Consumables: runy, potiony, gold konwertery, teleport scrolls, itd.
+- Store Utilities: blessingi, boosty XP, prey wildcards, zmiany nicku, itd.
 
-- Store Consumables: runes, potions, gold converters, teleport scrolls, etc
-- Store Utilities: blessings, xp boosts, prey wildcards, name changes, etc
+Mając to na uwadze, sprawdźmy dane! 📚
 
-With that being said, let's check out some data! 📚
+## Przychody CipSoft ze sklepu
 
-## Cipsoft revenue from store items
+Do tej pory CipSoft osiągnął przychód na poziomie co najmniej <code><TibiaCoin value={148253335} /></code> Tibia Coins z zakupów w sklepie od wszystkich postaci z Bazaru Postaci.
 
-So far, Cipsoft had a revenue of at least <code><TibiaCoin value={148253335} /></code> Tibia Coins from store purchases across all characters from the Char Bazaar.
+W porównaniu do ich <RouteLink href="/statistics">przychodów z opłat bazarowych</RouteLink>, sklep wydaje się przynosić CipSoft znacznie więcej gotówki. Później w tym artykule omówimy, jakie zakupy w sklepie są najpopularniejsze.
 
-Compared to their <RouteLink href="/statistics">revenue from bazaar fees</RouteLink>, the Store seems to bring much more cash for Cipsoft. Later in this post we will discuss what are the most popular store purchases.
-
-## Characters with the most Tibia Coins spent
+## Postacie z największą ilością wydanych Tibia Coins
 
 <TopSpenders
-  characterLabel="Character"
-  spentLabel="Spent"
-  soldForLabel="Sold for"
+  characterLabel="Postać"
+  spentLabel="Wydano"
+  soldForLabel="Sprzedana za"
 />
-<small align="center">
-  Tip: click on any character to expand it's details!
-</small>
+<small align="center">Wskazówka: kliknij dowolną postać, aby rozwinąć jej szczegóły!</small>
 
-## Differences per region
+## Różnice regionalne
 
-The list of the top 1,000 spenders is equally distributed among SA, NA and EU regions. But if we look at the average Tibia Coins spent by **all characters** for each region, we can then see some differences:
+Lista top 1000 największych spenderów jest równomiernie rozłożona pomiędzy regionami SA, NA i EU. Ale jeśli spojrzymy na średnią liczbę wydanych Tibia Coins przez **wszystkie postacie** w danym regionie, zobaczymy pewne różnice:
 
-|    Region     |     Average TC spent      |
-| :-----------: | :-----------------------: |
-|    Europe     | <TibiaCoin value={591} /> |
-| South America | <TibiaCoin value={464} /> |
-| North America | <TibiaCoin value={438} /> |
+| Region            | Średnia wydanych TC       |
+| :---------------: | :-----------------------: |
+| Europe            | <TibiaCoin value={591} /> |
+| Ameryka Południowa | <TibiaCoin value={464} /> |
+| Ameryka Północna  | <TibiaCoin value={438} /> |
 
 <small align="center">
-  Confirming popular belief, players from Europe indeed seem to spend more on
-  average
+  Potwierdzając powszechne przekonanie, gracze z Europy faktycznie wydają średnio więcej
 </small>
 
 ---
 
-This difference is explained by the fact that approximately `80%` of both NA and SA characters have <code><TibiaCoin value={0} /></code> Tibia Coins spent, while this is a smaller share in EU: `74%` of it's characters.
+Ta różnica wynika z faktu, że około `80%` postaci z NA i SA ma wydane <code><TibiaCoin value={0} /></code> Tibia Coins, podczas gdy w EU ten udział jest mniejszy: `74%` postaci.
 
-If we exclude characters that didn't spend at all, then all three regions have the same average of approximately <code><TibiaCoin value={2300} /></code> Tibia Coins spent per character.
+Jeśli wykluczymy postacie, które w ogóle nic nie wydały, wszystkie trzy regiony mają tę samą średnią wynoszącą około <code><TibiaCoin value={2300} /></code> Tibia Coins na postać.
 
-### Is Cipsoft trying to target a <em>whale</em> market?
+### Czy CipSoft próbuje trafić na jakiś <em>whale</em> market?
 
-These figures aren't enough to tell if Cipsoft is actually trying to target _whales_. Remember: we are sampling **characters**, not **players**. A player can have multiple characters, so we can't infer the spending profile of a typical Tibia player.
+Te liczby nie wystarczą, aby stwierdzić, czy CipSoft faktycznie próbuje targetować _whales_. Pamiętaj: analizujemy **postacie**, a nie **graczy**. Jeden gracz może mieć wiele postaci, więc nie możemy wnioskować o profilu wydatków przeciętnego gracza Tibii.
 
-> A "whale" is a player that has a heavy spending habit. Despite being a small proportion of players (around 2%), they can drive the most revenue for a game company.
+> A „whale” to gracz, który ma nawyk intensywnego wydawania pieniędzy. Mimo że stanowią niewielki procent graczy (około 2%), potrafią generować największe przychody dla firmy.
 
-Still, if compared to other online games, **cosmetics in Tibia are really expensive**. And it gets even worse by the fact that lot of Tibia players are from regions with weak currencies and, consequently, low purchasing power <small>(myself included 😔)</small>. This raises some questions about Tibia store items:
+Mimo wszystko, w porównaniu do innych gier online **rzeczy kosmetyczne są naprawdę drogie**. A pogarsza to fakt, że wielu graczy Tibii pochodzi z regionów o słabych walutach, a co za tym idzie, niskiej sile nabywczej <small>(myself included 😔)</small>. Rodzi to kilka pytań dotyczących sklepu Tibii:
 
-- Should their prices be lowered?
-- Should Cipsoft occasionally offer discounts?
-- Should store purchases be bound to the account, rather than the character?
+- Czy ceny powinny zostać obniżone?  
+- Czy CipSoft powinien okazjonalnie oferować promocje?  
+- Czy zakupy w sklepie powinny być przypisane do konta, a nie do postaci?
 
-In terms of generating revenue, Cipsoft seems to be taking some good decisions lately. Hopefully they might consider some of these suggestions that could benefit not only the players but also the company.
+Pod względem generowania przychodów CipSoft wydaje się ostatnio podejmować dobre decyzje. Miejmy nadzieję, że rozważą część tych sugestii, które mogą przynieść korzyści nie tylko graczom, ale również firmie.
 
 <Image
-  src="/blog/images/cipsoftRevenue.png"
+  src="https://i.imgur.com/YN4auwg.png"
   width={936}
   height={318}
   align="center"
   caption={
     <>
-      Cipsoft's turnover by the year. A huge spike happened in 2020 with the
-      introduction of the Char Bazaar. <br />
-      Source: <ExternalLink href="https://www.cipsoft.com/en/company">
-        Cipsoft
+      Obroty CipSoft w kolejnych latach. Ogromny skok nastąpił w 2020 roku wraz z
+      wprowadzeniem Char Bazaar. <br />
+      Źródło: <ExternalLink href="https://www.cipsoft.com/en/company">
+        CipSoft
       </ExternalLink>.
     </>
   }
-  alt="Cipsoft's turnover for each year from 2001 to 2021. Their revenue had a huge spike in 2020"
+  alt="Obroty CipSoft w latach 2001–2021. Ogromny wzrost przychodów w 2020 roku"
   unoptimized
 />
 
-## Differences per PvP type
+## Różnice tryb PvP
 
-This won't be a surprise for anyone: Optional PvP servers tend to attract players that spend more. These players purchase more **cosmetics**, while pvp focused players prefer more **boosts and consumables** instead.
+To nie będzie zaskoczeniem dla nikogo: serwery Optional PvP przyciągają graczy, którzy wydają więcej. Ci gracze kupują więcej **rzeczy kosmetycznych**, while PvP-focused players prefer more **wzmocnienia i materiały eksploatacyjne**.
 
-Since it's impossible to track all store purchases, take this data with a grain of salt:
+Ponieważ nie da się śledzić wszystkich zakupów w sklepie, potraktuj te dane z dystansem:
 
 | PvP            |     Average TC spent      |
 | :------------- | :-----------------------: |
@@ -108,47 +104,47 @@ Since it's impossible to track all store purchases, take this data with a grain 
 | Retro Hardcore | <TibiaCoin value={254} /> |
 
 <small align="center">
-  The more PvP restricted a server is, more <em>charlovers</em> will join it 💅
+  Im bardziej ograniczone PvP na serwerze, tym więcej <em>charlovers</em> na nim gra 💅
 </small>
 
-## Most popular store items
+## Najpopularniejsze przedmioty ze sklepu
 
-Here is the popularity between what we like to call **store utilities**:
+Oto najbardziej popularne **przedmioty ze sklepu**:
 
 <StoreItemDistribution />
 
 <small align="center">
-  Only characters with at least 1 utility purchased were considered
+  Uwzględniono tylko postacie, które kupiły przynajmniej 1 przedmiot ze sklepu.
 </small>
 
 ---
 
-Again, no surprises here. **Training dummies** and **prey slots** are the most popular store utilities, even while being the most expensive ones (<code><TibiaCoin value={900} /></code> and <code><TibiaCoin value={750} /></code>, respectively), because they bring an actual advantage for characters.
+Ponownie, bez zaskoczeń. **Training dummies** i **prey slots** są najpopularniejszymi sklepowymi utility, mimo że są jednymi z najdroższych (<code><TibiaCoin value={900} /></code> oraz <code><TibiaCoin value={750} /></code>, przydatne), ponieważ dają realną przewagę postaciom.
 
-Almost all the other utilities just give you some extra convenience and they can be easily shared in public between players. This is not the case for **Gold pouch**, **Charm expansion** and **Hunting task slot**. Still, it's highly debatable if those store utilities are actually worth it or not.
+Prawie wszystkie pozostałe utility dają tylko dodatkową wygodę i mogą być łatwo współdzielone publicznie między graczami. Inaczej jest w przypadku **gold pouch**, **charm expansion** oraz **hunting task slot**. Nadal jednak mocno dyskusyjne jest, czy te utility faktycznie są warte swojej ceny.
 
-## Most popular store cosmetics
+## Najpopularniejsze rzeczy ze sklepu
 
-Across all characters from the Char Bazaar, `14,7%` of them owned at least one mount or outfit from the Store. These players seem to prefer outfits (`78,7%`) more than mounts (`51,7%`).
+Wśród wszystkich postaci z Char Bazaar, `14,7%` posiadało przynajmniej jednego mounta lub outfit ze sklepu. Ci gracze zdają się preferować outfity (`78,7%`) bardziej niż mounty (`51,7%`).
 
-Here are the top 10 most popular **store outfits**:
+Oto top 10 najpopularniejszych **outfitów ze sklepu**:
 
 <TopCosmetics />
 
 ---
 
-...and here are the top 10 most popular **store mounts**:
+...a tutaj top 10 najpopularniejszych **sklepowych mountów**:
 
 <TopCosmetics mounts />
 
 ---
 
-### Wrapping up
+### Podsumowanie
 
-We hope that this article shed some light into some interesting data that the community have never seen before 🔭
+Mamy nadzieję, że ten artykuł rzucił nowe światło na ciekawe dane, których społeczność wcześniej nie widziała 🔭
 
-If you're still curious for more information about the Char Bazaar, then you might have fun exploring our <RouteLink href="/?history=true&descending=true">Bazaar History</RouteLink>.
+Jeśli nadal jesteś ciekawy informacji o Char Bazaar, możesz mieć frajdę, eksplorując naszą <RouteLink href="/bazaar-history">Historię Bazaru</RouteLink>.
 
-Don't forget to subscribe to our **newsletter** so you don't miss our content!
+Nie zapomnij zapisać się do naszego **newslettera**, aby nie przegapić nowych treści!
 
-That's it for now and see you next time! 👋
+To tyle na teraz i do zobaczenia następnym razem! 👋
