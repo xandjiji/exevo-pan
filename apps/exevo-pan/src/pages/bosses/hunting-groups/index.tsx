@@ -4,6 +4,7 @@ import { stringify, parse } from 'devalue'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { Hero } from 'templates'
 import { Template, CreateGuildDialog, GuildGrid } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
@@ -21,13 +22,13 @@ type HuntingGroupsProps = {
 
 const heroSrc = loadRawSrc('/huntingGroups.png')
 const pagePath = routes.BOSSES.HUNTING_GROUPS
-const pageUrl = buildUrl(pagePath)
 
 export default function HuntingGroupsPage({
   serializedData,
   baseServerOptions,
 }: HuntingGroupsProps) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const serverOptions: typeof baseServerOptions = useMemo(
     () => [
@@ -48,6 +49,8 @@ export default function HuntingGroupsPage({
     imgSrc: heroSrc,
   })
 
+  const pageUrl = buildUrl(pagePath, locale)
+  const defaultPageUrl = buildUrl(pagePath)
   const pageTitle = buildPageTitle(pageName)
 
   const [openCreateGuild, setOpenCreateGuild] = useState(false)
@@ -81,11 +84,11 @@ export default function HuntingGroupsPage({
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

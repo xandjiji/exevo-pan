@@ -1,6 +1,7 @@
 import { Home } from 'modules/Blog'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import Head from 'next/head'
@@ -9,14 +10,13 @@ import { Main, Hero } from 'templates'
 import { routes, jsonld } from 'Constants'
 import { common, blog } from 'locales'
 
-const pageUrl = buildUrl(routes.BLOG)
-
 type Props = {
   initialPosts: BlogPost[]
 }
 
 export default function PostPage({ initialPosts }: Props) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const pageTitle = buildPageTitle(translations.blog.Meta.title)
 
@@ -25,6 +25,8 @@ export default function PostPage({ initialPosts }: Props) {
     title: 'Blog',
     imgSrc: loadRawSrc(heroSrc),
   })
+  const pageUrl = buildUrl(routes.BLOG, locale)
+  const defaultPageUrl = buildUrl(routes.BLOG)
 
   return (
     <>
@@ -52,7 +54,7 @@ export default function PostPage({ initialPosts }: Props) {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -68,7 +70,7 @@ export default function PostPage({ initialPosts }: Props) {
           hrefLang="pl"
           href={buildUrl(routes.BLOG, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

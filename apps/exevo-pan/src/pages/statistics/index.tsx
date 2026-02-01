@@ -5,12 +5,11 @@ import { OverallData } from 'modules/Statistics/components/OverallGrid/types'
 import { PreviewImageClient } from 'services'
 import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, statistics } from 'locales'
-
-const pageUrl = buildUrl(routes.STATISTICS)
 
 export default function Statistics({
   overallData,
@@ -18,12 +17,15 @@ export default function Statistics({
   overallData: OverallData
 }) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const pageName = translations.statistics.Meta.Statistics.title
   const previewSrc = PreviewImageClient.getSrc({
     title: `${pageName} 📊`,
   })
 
+  const pageUrl = buildUrl(routes.STATISTICS, locale)
+  const defaultPageUrl = buildUrl(routes.STATISTICS)
   const pageTitle = buildPageTitle(pageName)
 
   return (
@@ -55,7 +57,7 @@ export default function Statistics({
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -71,7 +73,7 @@ export default function Statistics({
           hrefLang="pl"
           href={buildUrl(routes.STATISTICS, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

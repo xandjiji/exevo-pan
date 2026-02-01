@@ -26,8 +26,6 @@ import {
 import { exevoPro, jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
-
 function randomInfluencer(br: boolean) {
   const brazillians = [
     'MP3PLAYER',
@@ -115,6 +113,8 @@ export default function Page() {
 
   const { locale } = useRouter()
 
+  const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS, locale)
+  const defaultPageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
   const isBr = locale === 'pt'
   const influencer = useRef(randomInfluencer(isBr))
   const placeholderCharacter = useRef(randomCharacter())
@@ -139,6 +139,7 @@ export default function Page() {
         />
         <meta property="og:type" content="website" />
 
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
@@ -146,23 +147,23 @@ export default function Page() {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.LOGIN, 'pt')}
+          href={buildUrl(routes.DASHBOARD.REFERRALS, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.LOGIN, 'es')}
+          href={buildUrl(routes.DASHBOARD.REFERRALS, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.LOGIN, 'pl')}
+          href={buildUrl(routes.DASHBOARD.REFERRALS, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

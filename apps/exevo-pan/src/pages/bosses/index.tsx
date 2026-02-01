@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { PreviewImageClient } from 'services'
 import { BossesClient, DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { Template, Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildPageTitle, buildUrl, sortBossesBy } from 'utils'
@@ -19,7 +20,9 @@ const { heroSrc } = Tracker
 export default function BossTrackerPage(args: BossTrackerProps) {
   const { bossChances } = args
   const pagePath = `${routes.BOSSES.TRACKER}/${bossChances.server}`
-  const pageUrl = buildUrl(pagePath)
+  const { locale } = useRouter()
+  const pageUrl = buildUrl(pagePath, locale)
+  const defaultPageUrl = buildUrl(pagePath)
 
   const translations = useTranslations()
 
@@ -60,11 +63,11 @@ export default function BossTrackerPage(args: BossTrackerProps) {
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

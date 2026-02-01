@@ -80,7 +80,8 @@ export default function PostPage({
   const translations = useTranslations()
 
   const postRoute = `${routes.BLOG}/${metaData.slug}`
-  const pageUrl = buildUrl(postRoute)
+  const pageUrl = buildUrl(postRoute, locale)
+  const defaultPageUrl = buildUrl(postRoute)
 
   const src = JSON.stringify(mdxSource)
 
@@ -131,11 +132,11 @@ export default function PostPage({
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(postRoute, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(postRoute, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(postRoute, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { CharmDamage, Template, useRoutes } from 'modules/Calculators'
 import SuggestedReading from 'components/SuggestedReading'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
 import { BlogClient, PreviewImageClient } from 'services'
 import { buildPageTitle, buildUrl } from 'utils'
@@ -9,7 +10,6 @@ import { jsonld, routes } from 'Constants'
 import { calculators, common } from 'locales'
 
 const pageRoute = routes.CHARM_DAMAGE
-const pageUrl = buildUrl(pageRoute)
 
 type CalculatorProps = {
   suggestedPost: BlogPost
@@ -17,6 +17,7 @@ type CalculatorProps = {
 
 export default function Calculator({ suggestedPost }: CalculatorProps) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const pageName = translations.calculators.Meta.CharmDamage.title
 
@@ -29,6 +30,8 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
     title: pageName,
     imgSrc: routeData?.hero,
   })
+  const pageUrl = buildUrl(pageRoute, locale)
+  const defaultPageUrl = buildUrl(pageRoute)
 
   return (
     <>
@@ -59,11 +62,11 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pageRoute, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pageRoute, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pageRoute, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

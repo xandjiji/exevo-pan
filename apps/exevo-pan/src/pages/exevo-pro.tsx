@@ -28,8 +28,6 @@ import { buildPageTitle, buildUrl, loadRawSrc, referralTracker } from 'utils'
 import { exevoPro, jsonld, routes } from 'Constants'
 import { common, exevopro } from 'locales'
 
-const pageUrl = buildUrl(routes.EXEVOPRO)
-
 export default function ExevoPro() {
   const translations = useTranslations()
   const i18n = translations.exevopro
@@ -37,6 +35,8 @@ export default function ExevoPro() {
   const pageTitle = buildPageTitle(i18n.Meta.title)
   const { locale } = useRouter()
   const previewSrc = loadRawSrc(`/pro-${locale}.png`)
+  const pageUrl = buildUrl(routes.EXEVOPRO, locale)
+  const defaultPageUrl = buildUrl(routes.EXEVOPRO)
 
   useEffect(() => {
     referralTracker.checkUrlAndSetLS()
@@ -66,7 +66,7 @@ export default function ExevoPro() {
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -82,7 +82,7 @@ export default function ExevoPro() {
           hrefLang="pl"
           href={buildUrl(routes.EXEVOPRO, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

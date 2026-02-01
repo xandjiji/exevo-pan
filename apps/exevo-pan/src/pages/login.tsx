@@ -12,8 +12,6 @@ import { jsonld, routes } from 'Constants'
 import { AuthProviders } from 'types/next-auth'
 import { common, login } from 'locales'
 
-const pageUrl = buildUrl(routes.LOGIN)
-
 type LoginStaticProps = {
   providers: AuthProviders
 }
@@ -22,6 +20,8 @@ export default function Login({ providers }: LoginStaticProps) {
   const translations = useTranslations()
   const { locale, push } = useRouter()
 
+  const pageUrl = buildUrl(routes.LOGIN, locale)
+  const defaultPageUrl = buildUrl(routes.LOGIN)
   const pageTitle = buildPageTitle(translations.login.Meta.title)
 
   const { data: session } = useSession()
@@ -54,11 +54,12 @@ export default function Login({ providers }: LoginStaticProps) {
         />
         <meta property="og:type" content="website" />
 
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -74,7 +75,7 @@ export default function Login({ providers }: LoginStaticProps) {
           hrefLang="pl"
           href={buildUrl(routes.LOGIN, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

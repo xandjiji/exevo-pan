@@ -37,7 +37,6 @@ import { useRouter } from 'next/router'
 import {
   buildPageTitle,
   buildUrl,
-  getGuildPermalink,
   loadDisplayNameBossSrc,
   loadRawSrc,
 } from 'utils'
@@ -115,8 +114,11 @@ export default function GuildPage({
     ? guildDataProps.guild.description
     : translations.huntingGroups.Meta.description
 
-  const absolutePageUrl = getGuildPermalink(guildDataProps.guild.name, true)
-  const pagePath = getGuildPermalink(guildDataProps.guild.name)
+  const pagePath = `${routes.BOSSES.HUNTING_GROUPS}/${encodeURIComponent(
+    guildDataProps.guild.name,
+  )}`
+  const pageUrl = buildUrl(pagePath, router.locale)
+  const defaultPageUrl = buildUrl(pagePath)
 
   // const isPro = !!session.data?.user.proStatus
 
@@ -136,15 +138,15 @@ export default function GuildPage({
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="canonical" href={absolutePageUrl} />
-        <meta property="og:url" content={absolutePageUrl} />
-        <meta property="twitter:url" content={absolutePageUrl} />
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={absolutePageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={absolutePageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"

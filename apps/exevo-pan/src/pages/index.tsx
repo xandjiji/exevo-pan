@@ -12,16 +12,14 @@ import { BlogClient, PreviewImageClient } from 'services'
 import {
   AuctionsClient,
   DrawerFieldsClient,
-  TibiaBountyClient,
   TibiaTradeClient,
 } from 'services/server'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
 import { jsonld, routes } from 'Constants'
 import { common, homepage } from 'locales'
-
-const pageUrl = buildUrl(routes.HOME)
 
 type HomeStaticProps = {
   activeServers: string[]
@@ -32,7 +30,6 @@ type HomeStaticProps = {
   blogPosts: BlogPost[]
   tibiaTradeItems: TibiaTradeHighlightedItem[]
   badTibiaTradeIds: string
-  // tibiaBountyResponse: TibiaBountyEntry[]
 }
 
 export default function Home({
@@ -44,9 +41,9 @@ export default function Home({
   blogPosts,
   tibiaTradeItems,
   badTibiaTradeIds,
-}: // tibiaBountyResponse,
-HomeStaticProps) {
+}: HomeStaticProps) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const pageName = translations.homepage.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
@@ -54,6 +51,8 @@ HomeStaticProps) {
     imgSrc: loadRawSrc('/default-preview.png'),
   })
 
+  const pageUrl = buildUrl(routes.HOME, locale)
+  const defaultPageUrl = buildUrl(routes.HOME)
   const pageTitle = buildPageTitle(pageName)
 
   const { current: activeServersSet } = useRef(new Set(activeServers))
@@ -88,7 +87,7 @@ HomeStaticProps) {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -104,7 +103,7 @@ HomeStaticProps) {
           hrefLang="pl"
           href={buildUrl(routes.HOME, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
