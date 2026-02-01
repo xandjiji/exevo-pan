@@ -15,6 +15,7 @@ export default function Custom404() {
     <>
       <Head>
         <title>{pageTitle}</title>
+        <meta name="robots" content="noindex, nofollow" />
         <meta name="title" content={pageTitle} />
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />

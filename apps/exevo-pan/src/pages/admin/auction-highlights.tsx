@@ -12,6 +12,7 @@ export default function AuctionHighlights() {
     <>
       <Head>
         <title>{pageTitle}</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
 
       <Template>
