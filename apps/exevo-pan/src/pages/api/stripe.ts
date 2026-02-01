@@ -109,6 +109,11 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       }
 
       if (foundUser.proStatus) {
+        await DiscordAdmin.shout({
+          title: `Double payment: ${paymentIntentId}`,
+          color,
+          description: `userId: ${userId}`,
+        })
         response.status(208).send('')
         return
       }

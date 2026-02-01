@@ -10,10 +10,14 @@ export class DiscordAdmin {
       content,
     })
 
-    return fetch(process.env.ADMIN_DISCORD_WEBHOOK_URL!, {
-      body,
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    })
+    try {
+      fetch(process.env.ADMIN_DISCORD_WEBHOOK_URL!, {
+        body,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 }

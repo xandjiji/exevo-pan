@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { premiumProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
 import { exevoPro } from 'Constants'
+import { DiscordAdmin } from 'services/DiscordAdmin'
 
 export const editReferralTag = premiumProcedure
   .input(
@@ -21,9 +22,15 @@ export const editReferralTag = premiumProcedure
       update: { ...input },
     })
 
-    return { success: true, ...input }
+    if (input.withdrawCharacter) {
+      await DiscordAdmin.shout({
+        title: 'New withdraw',
+        color: 13017599,
+        description: `Character: ${result.withdrawCharacter} (${result.coupon})`,
+      })
+    }
 
-    return result
+    return { success: true, ...input }
   })
 
 export const getReferralTag = premiumProcedure.query(
