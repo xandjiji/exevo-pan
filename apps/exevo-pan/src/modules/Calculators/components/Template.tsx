@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import clsx from 'clsx'
-import { Main, SubHeader, Hero } from 'templates'
+import { Hero, Main, SubHeader } from 'templates'
 import { useRoutes } from '../routes'
 
 type ComponentProps = {

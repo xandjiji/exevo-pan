@@ -43,7 +43,7 @@ export default function Home({
   badTibiaTradeIds,
 }: HomeStaticProps) {
   const translations = useTranslations()
-  const { locale } = useRouter()
+  const { locale, asPath } = useRouter()
 
   const pageName = translations.homepage.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
@@ -54,6 +54,7 @@ export default function Home({
   const pageUrl = buildUrl(routes.HOME, locale)
   const defaultPageUrl = buildUrl(routes.HOME)
   const pageTitle = buildPageTitle(pageName)
+  const hasQueryParams = asPath.includes('?')
 
   const { current: activeServersSet } = useRef(new Set(activeServers))
 
@@ -65,6 +66,8 @@ export default function Home({
         <meta name="title" content={pageTitle} />
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
+
+        {hasQueryParams && <meta name="robots" content="noindex, follow" />}
 
         <meta
           name="description"

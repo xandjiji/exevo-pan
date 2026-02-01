@@ -1,14 +1,14 @@
 export default {
   Meta: {
     Statistics: {
-      title: 'Overall Statistics',
+      title: 'Tibia Char Bazaar Statistics',
       description:
-        'Statistics, trends and data analytics about daily and historic Tibia Char Bazaar information!',
+        'Daily and historical analytics for Tibia Char Bazaar auctions and prices.',
     },
     Highscores: {
-      title: 'Highscores',
+      title: 'Tibia Char Bazaar Highscores',
       description:
-        'See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!',
+        'Rankings for highest bids, top levels, and best skills on Tibia Char Bazaar.',
     },
   },
   Header: {

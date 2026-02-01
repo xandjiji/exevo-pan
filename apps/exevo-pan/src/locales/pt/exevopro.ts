@@ -5,7 +5,7 @@ export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Exevo PRO',
     description:
-      'Faça agora seu upgrade para Exevo PRO e tenha acesso a conteúdo exclusivo!',
+      'Desbloqueie o Exevo PRO para boss tracker do Tibia, análises do Char Bazaar e ferramentas premium.',
   },
   heading: 'Seja {{exevopro}}',
   heroCTA: 'Começar',

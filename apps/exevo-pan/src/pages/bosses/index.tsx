@@ -32,7 +32,7 @@ export default function BossTrackerPage(args: BossTrackerProps) {
     imgSrc: heroSrc,
   })
 
-  const pageTitle = buildPageTitle(pageName)
+  const pageTitle = buildPageTitle(`${pageName} - ${bossChances.server}`)
 
   return (
     <>
@@ -74,6 +74,17 @@ export default function BossTrackerPage(args: BossTrackerProps) {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: jsonld.standard,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: `${pageName} - ${bossChances.server}`,
+              url: pageUrl,
+              description: translations.bossTracker.Meta.description,
+            }),
           }}
         />
       </Head>

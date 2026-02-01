@@ -75,6 +75,18 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: pageName,
+              url: pageUrl,
+              description:
+                translations.calculators.Meta.CharmDamage.description,
+            }),
+          }}
+        />
       </Head>
 
       <Template

@@ -3,8 +3,9 @@ import defaultTranslations from '../en/bossTracker'
 
 export default defaultComposer(defaultTranslations, {
   Meta: {
-    title: 'Bosses',
-    description: 'Descubra onde e quando bosses irão nascer!',
+    title: 'Tibia Boss Tracker',
+    description:
+      'Rastreie bosses do Tibia por servidor, timers e chances de spawn.',
   },
   updated: {
     recently: 'Atualizado alguns minutos atrás',

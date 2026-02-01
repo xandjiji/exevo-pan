@@ -1,7 +1,8 @@
 export default {
   Meta: {
-    title: 'Advertise',
-    description: 'Highlight your own auction and get higher bids!',
+    title: 'Highlight Tibia Auction',
+    description:
+      'Highlight your Tibia Char Bazaar auction and get higher bids.',
   },
   StepItems: {
     Select: 'Select',

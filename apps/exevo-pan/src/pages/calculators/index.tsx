@@ -72,6 +72,17 @@ export default function Calculators() {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: pageName,
+              url: pageUrl,
+              description: translations.calculators.Meta.Main.description,
+            }),
+          }}
+        />
       </Head>
 
       <Template mainPage currentRoute={pageRoute}>

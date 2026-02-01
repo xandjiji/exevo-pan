@@ -91,6 +91,18 @@ export default function ExevoPro() {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: i18n.Meta.title,
+              url: pageUrl,
+              description: i18n.Meta.description,
+              applicationCategory: 'BusinessApplication',
+            }),
+          }}
+        />
       </Head>
 
       <Main clean>

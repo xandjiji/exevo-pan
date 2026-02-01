@@ -1,36 +1,39 @@
 export default {
   Meta: {
     Main: {
-      title: 'Calculators',
-      description: 'All sorts of Tibia tools and calculators to help you out!',
+      title: 'Tibia Calculators',
+      description:
+        'Tibia calculators and tools for Char Bazaar, skills, loot split, imbuements, and stamina.',
     },
     ExerciseWeapons: {
-      title: 'Exercise weapons',
+      title: 'Tibia Exercise Weapons Calculator',
       description:
-        'Find out how many exercise weapons, time and money would cost to achieve your desired skill',
+        'Calculate skill training cost, time, and exercise weapons needed in Tibia.',
     },
     Stamina: {
-      title: 'Stamina',
+      title: 'Tibia Stamina Calculator',
       description:
-        'Calculate and track how much time it takes to restore your stamina',
+        'Track Tibia stamina recovery time and offline training progress.',
     },
     CharmDamage: {
-      title: 'Charm Damage',
+      title: 'Tibia Charm Damage Calculator',
       description:
-        'Compare the average damage between different charms to see which one is best',
+        'Compare Tibia charm damage and average procs to choose the best charm.',
     },
     ImbuementsCost: {
-      title: 'Imbuements Cost',
+      title: 'Tibia Imbuement Calculator',
       description:
-        'Calculate the cheapest way to buy materials for your imbuements',
+        'Calculate the cheapest Tibia imbuement materials and gold token costs.',
     },
     LootSplit: {
-      title: 'Loot Split',
-      description: 'Manage and split your party hunt loots',
+      title: 'Tibia Loot Split Calculator',
+      description:
+        'Split party hunt loot in Tibia and calculate profit per member.',
     },
     AuctionEstimation: {
-      title: 'Auction price estimations',
-      description: 'Estimate the price of any character on the Char Bazaar',
+      title: 'Tibia Character Bazaar Price Estimator',
+      description:
+        'Estimate Tibia Character Bazaar auction prices using recent sales.',
     },
   },
   none: 'None',

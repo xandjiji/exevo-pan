@@ -4,14 +4,14 @@ import defaultTranslations from '../en/statistics'
 export default defaultComposer(defaultTranslations, {
   Meta: {
     Statistics: {
-      title: 'Estadísticas generales',
+      title: 'Estadísticas del Char Bazaar de Tibia',
       description:
-        '¡Estadísticas, tendencias, análisis de datos diários y informaciones históricas del Char Bazaar de Tibia!',
+        'Analítica diaria e histórica de subastas y precios del Char Bazaar de Tibia.',
     },
     Highscores: {
-      title: 'Rankings',
+      title: 'Rankings del Char Bazaar de Tibia',
       description:
-        'Vea rankings de los charss más caros, top levels y mayores skills del Char Bazaar de Tibia!',
+        'Rankings con mayores ofertas, top levels y mejores skills del Char Bazaar de Tibia.',
     },
   },
   Header: {

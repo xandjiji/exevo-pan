@@ -70,6 +70,17 @@ export default function Calculator() {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: pageName,
+              url: pageUrl,
+              description: translations.calculators.Meta.LootSplit.description,
+            }),
+          }}
+        />
       </Head>
 
       <Template currentRoute={pageRoute} className="!flex">

@@ -1,7 +1,7 @@
 export default {
   Meta: {
-    title: 'Bosses',
-    description: 'Find out where and when bosses will spawn!',
+    title: 'Tibia Boss Tracker',
+    description: 'Track Tibia boss spawns by server, timers, and chances.',
   },
   updated: {
     recently: 'Updated a few minutes ago',

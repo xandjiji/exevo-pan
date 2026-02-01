@@ -3,8 +3,9 @@ import defaultTranslations from '../en/advertise'
 
 export default defaultComposer(defaultTranslations, {
   Meta: {
-    title: 'Anunciar',
-    description: 'Destaque seu leilão e alcance lances mais altos!',
+    title: 'Destaque Leilão Tibia',
+    description:
+      'Destaque seu leilão no Char Bazaar Tibia e receba lances mais altos.',
   },
   StepItems: {
     Select: 'Selecionar',

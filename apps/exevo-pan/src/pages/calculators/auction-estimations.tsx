@@ -3,14 +3,19 @@ import { AuctionEstimation, Template, useRoutes } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { PreviewImageClient } from 'services'
+import SuggestedReading from 'components/SuggestedReading'
+import { BlogClient, PreviewImageClient } from 'services'
 import { buildPageTitle, buildUrl } from 'utils'
 import { jsonld, routes } from 'Constants'
 import { calculators, common } from 'locales'
 
 const pageRoute = routes.AUCTION_ESTIMATION
 
-export default function Calculator() {
+type CalculatorProps = {
+  suggestedPost?: BlogPost
+}
+
+export default function Calculator({ suggestedPost }: CalculatorProps) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -70,20 +75,48 @@ export default function Calculator() {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: pageName,
+              url: pageUrl,
+              description:
+                translations.calculators.Meta.AuctionEstimation.description,
+            }),
+          }}
+        />
       </Head>
 
       <Template currentRoute={pageRoute}>
         <AuctionEstimation />
+        {suggestedPost && (
+          <SuggestedReading
+            className="mt-6"
+            thumbnail={suggestedPost.thumbnail}
+            title={suggestedPost.title}
+            slug={suggestedPost.slug}
+          />
+        )}
       </Template>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    translations: {
-      common: common[locale as RegisteredLocale],
-      calculators: calculators[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const suggestedPost = await BlogClient.getPostBySlug(
+    '3-mistakes-bazaar',
+    locale,
+  )
+
+  return {
+    props: {
+      translations: {
+        common: common[locale as RegisteredLocale],
+        calculators: calculators[locale as RegisteredLocale],
+      },
+      suggestedPost,
     },
-  },
-})
+  }
+}
