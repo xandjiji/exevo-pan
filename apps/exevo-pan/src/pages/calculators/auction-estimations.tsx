@@ -93,7 +93,7 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
         <AuctionEstimation />
         {suggestedPost && (
           <SuggestedReading
-            className="mt-6"
+            className="mx-auto mt-6 md:w-min md:whitespace-nowrap"
             thumbnail={suggestedPost.thumbnail}
             title={suggestedPost.title}
             slug={suggestedPost.slug}
