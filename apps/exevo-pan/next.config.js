@@ -33,28 +33,6 @@ module.exports = withBundleAnalyzer(
     async redirects() {
       return [
         {
-          source: '/:path*',
-          has: [
-            {
-              type: 'host',
-              value: 'www.exevopan.com',
-            },
-          ],
-          destination: 'https://exevopan.com/:path*',
-          permanent: true,
-        },
-        {
-          source: '/:path*',
-          has: [
-            {
-              type: 'host',
-              value: 'history.exevopan.com',
-            },
-          ],
-          destination: 'https://exevopan.com/:path*',
-          permanent: true,
-        },
-        {
           source: '/bazaar-history',
           destination: '/',
           permanent: true,
