@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
     <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -5,129 +6,143 @@
         
   <url>
         <loc>https://exevopan.com/</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>always</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/"/>
     </url>
   <url>
         <loc>https://exevopan.com/statistics</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/statistics"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/statistics"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/statistics"/>
     </url>
   <url>
         <loc>https://exevopan.com/statistics/highscores</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics/highscores"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/statistics/highscores"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/statistics/highscores"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/statistics/highscores"/>
     </url>
   <url>
         <loc>https://exevopan.com/blog</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog"/>
     </url>
   <url>
         <loc>https://exevopan.com/highlight-auction</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>always</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/highlight-auction"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/highlight-auction"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/highlight-auction"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/highlight-auction"/>
     </url>
   <url>
         <loc>https://exevopan.com/calculators</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/calculators"/>
     </url>
   <url>
         <loc>https://exevopan.com/calculators/exercise-weapons</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/exercise-weapons"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/exercise-weapons"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/exercise-weapons"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/calculators/exercise-weapons"/>
     </url>
   <url>
         <loc>https://exevopan.com/calculators/stamina</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/stamina"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/stamina"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/stamina"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/calculators/stamina"/>
     </url>
   <url>
         <loc>https://exevopan.com/calculators/charm-damage</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/charm-damage"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/charm-damage"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/charm-damage"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/calculators/charm-damage"/>
     </url>
   <url>
         <loc>https://exevopan.com/calculators/imbuements-cost</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/imbuements-cost"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/imbuements-cost"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/imbuements-cost"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/calculators/imbuements-cost"/>
     </url>
   <url>
         <loc>https://exevopan.com/calculators/loot-split</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/loot-split"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/loot-split"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/loot-split"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/calculators/loot-split"/>
     </url>
   <url>
         <loc>https://exevopan.com/bosses</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/bosses"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/bosses"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/bosses"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/bosses"/>
     </url>
   <url>
         <loc>https://exevopan.com/bosses/hunting-groups</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/bosses/hunting-groups"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/bosses/hunting-groups"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/bosses/hunting-groups"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/bosses/hunting-groups"/>
     </url>
   <url>
         <loc>https://exevopan.com/exevo-pro</loc>
-        <lastmod>2026-02-01</lastmod>
+        <lastmod>2026-02-02</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/exevo-pro"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/exevo-pro"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/exevo-pro"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/exevo-pro"/>
     </url>
   
   <url>
@@ -138,6 +153,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/bestiary-arena"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/bestiary-arena"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/bestiary-arena"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/bestiary-arena"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-12</loc>
@@ -147,6 +163,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-12"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-12"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-12"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-12"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-11</loc>
@@ -156,6 +173,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-11"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-11"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-11"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-11"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-10</loc>
@@ -165,6 +183,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-10"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-10"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-10"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-10"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-9</loc>
@@ -174,6 +193,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-9"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-9"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-9"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-9"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-8</loc>
@@ -183,6 +203,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-8"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-8"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-8"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-8"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/battleye-servers</loc>
@@ -192,6 +213,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/battleye-servers"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/battleye-servers"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/battleye-servers"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/battleye-servers"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-7</loc>
@@ -201,6 +223,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-7"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-7"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-7"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-7"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-6</loc>
@@ -210,6 +233,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-6"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-6"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-6"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-6"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-5</loc>
@@ -219,6 +243,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-5"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-5"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-5"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-5"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-4</loc>
@@ -228,6 +253,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-4"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-4"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-4"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-4"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/store-analysis</loc>
@@ -237,6 +263,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/store-analysis"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/store-analysis"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/store-analysis"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/store-analysis"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-3</loc>
@@ -246,6 +273,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-3"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-3"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-3"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-3"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-2</loc>
@@ -255,6 +283,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-2"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-2"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-2"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-2"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/best-charms</loc>
@@ -264,6 +293,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/best-charms"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/best-charms"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/best-charms"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/best-charms"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/3-mistakes-bazaar</loc>
@@ -273,6 +303,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/3-mistakes-bazaar"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/3-mistakes-bazaar"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/3-mistakes-bazaar"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/3-mistakes-bazaar"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/changelog-1</loc>
@@ -282,6 +313,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-1"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-1"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-1"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/changelog-1"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/how-highlighting-works</loc>
@@ -291,6 +323,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/how-highlighting-works"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/how-highlighting-works"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/how-highlighting-works"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/how-highlighting-works"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/about-our-data</loc>
@@ -300,6 +333,7 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/about-our-data"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/about-our-data"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/about-our-data"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/about-our-data"/>
     </url>
 <url>
         <loc>https://exevopan.com/blog/about</loc>
@@ -309,5 +343,6 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/about"/>
 <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/about"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/about"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/about"/>
     </url>
 </urlset>
