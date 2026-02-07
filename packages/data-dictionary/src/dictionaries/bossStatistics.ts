@@ -152,10 +152,10 @@ bossStatistics.set('Flamecaller Zazrak', {
 
 bossStatistics.set('Fleabringer', {
   fixedDaysFrequency: {
-    min: 1,
-    max: 3,
+    min: 5,
+    max: 10,
   },
-  spawnCount: 3,
+  spawnCount: 4,
 })
 
 bossStatistics.set('Foreman Kneebiter', {
@@ -363,14 +363,6 @@ bossStatistics.set('Shlorg', {
     max: 28,
   },
 })
-
-// @ ToDo: update sir leopold
-// bossStatistics.set('Sir Leopold', {
-//   fixedDaysFrequency: {
-//     min: 999,
-//     max: 999,
-//   },
-// })
 
 bossStatistics.set('Sir Valorcrest', {
   fixedDaysFrequency: {

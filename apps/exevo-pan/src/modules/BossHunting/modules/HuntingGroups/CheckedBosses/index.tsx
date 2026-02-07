@@ -28,12 +28,18 @@ import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
 import { can } from '../../../../../server/guild/permissions'
-import { BossTooltipContent, TooltipList } from './atoms'
+import { BossTooltipContent, TooltipList, CreatureTooltipContent } from './atoms'
 import {
   checkIfBoss,
   isFromSameServerSave,
   raidBossesNames,
   sharedSpawnBossesNames,
+  rookBossesNames,
+  creatureNames,
+  hiveStage3BossesNames,
+  vampireBossesNames,
+  bankBossesNames,
+  infernoPitsBossesNames
 } from './utils'
 
 const INITIAL_DISPLAYED_COUNT = 6
@@ -86,6 +92,41 @@ const CheckedBosses = ({
   )
   const [hideForcedBosses, setHideForcedBosses] = useStoredState(
     prefixedLSKey('forced-bosses'),
+    false,
+    isMember ? undefined : false,
+  )
+  const [hideRookBosses, setHideRookBosses] = useStoredState(
+    prefixedLSKey('rook-bosses'),
+    false,
+    isMember ? undefined : false,
+  )
+
+  const [hideCreatures, setHideCreatures] = useStoredState(
+    prefixedLSKey('creature-bosses'),
+    false,
+    isMember ? undefined : false,
+  )
+
+  const [hideHiveStage3Bosses, setHideHiveStage3Bosses] = useStoredState(
+    prefixedLSKey('hive-stage3-bosses'),
+    false,
+    isMember ? undefined : false,
+  )
+
+  const [hideVampireBosses, setHideVampireBosses] = useStoredState(
+    prefixedLSKey('vampire-lord-bosses'),
+    false,
+    isMember ? undefined : false,
+  )
+
+  const [hideBankBosses, setHideBankBosses] = useStoredState(
+    prefixedLSKey('bank-robbery-bosses'),
+    false,
+    isMember ? undefined : false,
+  )
+
+  const [hideInfernoPitsBosses, setHideInfernoPitsBosses] = useStoredState(
+    prefixedLSKey('pits-of-inferno-bosses'),
     false,
     isMember ? undefined : false,
   )
@@ -147,6 +188,30 @@ const CheckedBosses = ({
             return false
           }
 
+          if (hideRookBosses && checkIfBoss.isRook(boss)) {
+            return false
+          }
+
+          if (hideHiveStage3Bosses && checkIfBoss.isHiveStage3(boss)) {
+            return false
+          }
+
+          if (hideCreatures && checkIfBoss.isCreature(boss)) {
+            return false
+          }
+
+          if (hideVampireBosses && checkIfBoss.isVampire(boss)) {
+            return false
+          }
+
+          if (hideBankBosses && checkIfBoss.isBank(boss)) {
+            return false
+          }
+
+          if (hideInfernoPitsBosses && checkIfBoss.isInfernoPits(boss)) {
+            return false
+          }
+
           if (hideRecentlyChecked && boss.lastChecked?.recent) {
             return false
           }
@@ -154,7 +219,7 @@ const CheckedBosses = ({
           if (hideBlacklisted && blacklist.has(boss.name)) {
             return false
           }
-
+          
           return true
         })
         .sort(sortBossesBy.chance)
@@ -168,6 +233,12 @@ const CheckedBosses = ({
       hideForcedBosses,
       hideRaidBosses,
       blacklist,
+      hideRookBosses,
+      hideCreatures,
+      hideHiveStage3Bosses,
+      hideVampireBosses,
+      hideBankBosses,
+      hideInfernoPitsBosses,
       expanded,
     ],
   )
@@ -252,7 +323,7 @@ const CheckedBosses = ({
           disabled={!isMember}
         />
 
-        <div className="flex flex-col gap-2 md:grid md:grid-cols-2 md:gap-x-3 lg:grid-cols-3 lg:gap-x-4">
+        <div className="flex flex-col gap-2 md:grid md:grid-cols-2 md:gap-x-3 lg:grid-cols-4 lg:gap-x-4">
           <Checkbox
             label={i18n.hideNoChance}
             checked={hideNoChance}
@@ -276,6 +347,120 @@ const CheckedBosses = ({
             }
             checked={hideRaidBosses}
             onClick={() => setHideRaidBosses((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={
+              <div>
+                {templateMessage(i18n.hideHiveStage3, {
+                  bosses: (
+                    <Tooltip
+                      content={<TooltipList list={hiveStage3BossesNames} />}
+                      offset={[0, 8]}
+                    >
+                      <BossTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
+            checked={hideHiveStage3Bosses}
+            onClick={() => setHideHiveStage3Bosses((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={
+              <div>
+                {templateMessage(i18n.hideRook, {
+                  bosses: (
+                    <Tooltip
+                      content={<TooltipList list={rookBossesNames} />}
+                      offset={[0, 8]}
+                    >
+                      <BossTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
+            checked={hideRookBosses}
+            onClick={() => setHideRookBosses((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={
+              <div>
+                {templateMessage(i18n.hideInfernoPits, {
+                  bosses: (
+                    <Tooltip
+                      content={<TooltipList list={infernoPitsBossesNames} />}
+                      offset={[0, 8]}
+                    >
+                      <BossTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
+            checked={hideInfernoPitsBosses}
+            onClick={() => setHideInfernoPitsBosses((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={
+              <div>
+                {templateMessage(i18n.hideBank, {
+                  bosses: (
+                    <Tooltip
+                      content={<TooltipList list={bankBossesNames} />}
+                      offset={[0, 8]}
+                    >
+                      <BossTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
+            checked={hideBankBosses}
+            onClick={() => setHideBankBosses((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={
+              <div>
+                {templateMessage(i18n.hideVampire, {
+                  bosses: (
+                    <Tooltip
+                      content={<TooltipList list={vampireBossesNames} />}
+                      offset={[0, 8]}
+                    >
+                      <BossTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
+            checked={hideVampireBosses}
+            onClick={() => setHideVampireBosses((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={
+              <div>
+                {templateMessage(i18n.hideCreature, {
+                  creatures: (
+                    <Tooltip
+                      content={<TooltipList list={creatureNames} />}
+                      offset={[0, 8]}
+                    >
+                      <CreatureTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
+            checked={hideCreatures}
+            onClick={() => setHideCreatures((prev) => !prev)}
             disabled={!isMember}
           />
           <Checkbox
@@ -311,6 +496,7 @@ const CheckedBosses = ({
           />
         </div>
       </div>
+
 
       <div className="lgr:grid-cols-3 relative grid gap-3 md:grid-cols-2">
         {bossList.map((boss, idx) => {

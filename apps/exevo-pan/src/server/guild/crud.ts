@@ -491,8 +491,15 @@ export const changeGuildMemberName = authedProcedure
   .mutation(async ({ ctx: { token }, input: { guildMemberId, name } }) => {
     const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const managedGuildMember = await findGuildMember({ id: guildMemberId })
+    const guildId = managedGuildMember.guildId
+    const updaterGuildMember = await findGuildMember({ guildId: guildId, userId: token.id })
 
-    if (managedGuildMember.userId !== token.id && !EXEVO_PAN_ADMIN) {
+    let canUpdateMembers = false
+    if (updaterGuildMember.role === 'ADMIN' || updaterGuildMember.role === 'MODERATOR'){
+       canUpdateMembers = true
+    }
+
+    if (managedGuildMember.userId !== token.id && !EXEVO_PAN_ADMIN && !canUpdateMembers) {
       throw new TRPCError({
         code: 'FORBIDDEN',
         message:
@@ -504,6 +511,18 @@ export const changeGuildMemberName = authedProcedure
       where: { id: guildMemberId },
       data: { name },
     })
+
+    // future TODO:  Create log event in GuildLogEntry for member rename
+    // prisma.guildLogEntry.create({
+    //         data: {
+    //           guildId,
+    //           type: 'RENAME_MEMBER',
+    //           actionGuildMemberId: updaterGuildMember.id,
+    //           targetGuildMemberId: managedGuildMember.id,
+    //           metadata: managedGuildMember.name + "~~~" + name,
+    //         },
+    //         select: { type: true },
+    //       })
 
     return result
   })
