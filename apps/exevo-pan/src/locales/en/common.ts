@@ -271,4 +271,7 @@ export default {
   Menu: {
     buttonLabel: 'Toggle menu',
   },
+  BestiaryBanner: {
+    heading: 'PC/Mobile Idle Tibia: {{link}}',
+  },
 }

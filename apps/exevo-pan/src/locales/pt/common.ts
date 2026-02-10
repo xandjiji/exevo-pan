@@ -275,4 +275,7 @@ export default defaultComposer(defaultTranslations, {
   Menu: {
     buttonLabel: 'Alternar menu',
   },
+  BestiaryBanner: {
+    heading: 'PC/Mobile Idle Tibia: {{link}}',
+  },
 })

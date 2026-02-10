@@ -23,7 +23,7 @@ export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 type AuctionsGridProps = { tibiaTradeItems?: TibiaTradeHighlightedItem[] }
 
 const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
-  const { homepage } = useTranslations()
+  const { homepage, common } = useTranslations()
 
   const {
     loading,
@@ -140,7 +140,7 @@ const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
         <div className="z-1 from-background absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
 
         <p className="text-tsm mb-2 font-light">
-          {templateMessage(homepage.AuctionsGrid.BestiaryBanner.heading, {
+          {templateMessage(common.BestiaryBanner.heading, {
             link: (
               <a
                 href={`${links.BESTIARY_ARENA}/?t=exevoscrolla`}
@@ -158,7 +158,7 @@ const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
           href={`${links.BESTIARY_ARENA}/?t=exevoscrollb`}
           target="_blank"
           rel="noopener external nofollow noreferrer"
-          className="h-[60px] md:hidden"
+          className="block h-[60px]"
         >
           <img
             alt="Open Summon Scroll"

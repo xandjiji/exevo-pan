@@ -60,7 +60,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       )}
     >
       <div className="mx-auto grid w-fit gap-8">
-        {variant === 'primary' && (
+        <div className="lgr:flex lgr:items-center lgr:gap-8 grid flex-row-reverse gap-6">
           <div className="flex flex-col flex-wrap items-center justify-center gap-6 sm:flex-row">
             <a href={useLocalizedHref(routes.EXEVOPRO)}>
               <Card>
@@ -115,7 +115,24 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
               </div>
             </div>
           </div>
-        )}
+
+          <div className="relative overflow-hidden">
+            <div className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+
+            <a
+              href={`${links.BESTIARY_ARENA}/?t=exevoscrollc`}
+              target="_blank"
+              rel="noopener external nofollow noreferrer"
+              className="grid h-[60px] place-items-center"
+            >
+              <img
+                alt="Open Summon Scroll"
+                className="pixelated h-[60px] w-[468px] shadow-lg"
+                src="https://i.imgur.com/tZ7ba1h.png"
+              />
+            </a>
+          </div>
+        </div>
 
         <div className="grid gap-5">
           <nav>

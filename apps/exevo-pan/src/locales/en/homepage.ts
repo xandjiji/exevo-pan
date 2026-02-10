@@ -22,9 +22,6 @@ export default {
       price: 'Price',
       priceBidded: 'Price (bidded only)',
     },
-    BestiaryBanner: {
-      heading: 'Play Idle Tibia: {{link}} (PC/Mobile)',
-    },
     TibiaTradeBanner: {
       heading: 'Featured on {{link}}:',
       selling: 'Selling',
