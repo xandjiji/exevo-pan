@@ -61,7 +61,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
     >
       <div className="mx-auto grid w-fit gap-8">
         {variant === 'primary' && (
-          <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row">
+          <div className="flex flex-col flex-wrap items-center justify-center gap-6 sm:flex-row">
             <a href={useLocalizedHref(routes.EXEVOPRO)}>
               <Card>
                 <ExevoPanIcon width={36} height={36} />

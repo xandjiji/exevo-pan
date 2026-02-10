@@ -1,11 +1,12 @@
 import clsx from 'clsx'
-import { useTranslations } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
+import { links } from 'Constants'
 import { AuctionNotificationsProvider } from './useAuctionNotifications'
 import FilterControl from './FilterControl'
 import ExpandableCharacterCard from './ExpandableCharacterCard'
@@ -134,6 +135,38 @@ const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
           onClose={closeDrawer}
         />
       </ClientComponent>
+
+      <section className="inner-container relative mt-4 overflow-hidden sm:hidden">
+        <div className="z-1 from-background absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+
+        <p className="text-tsm mb-2 font-light">
+          {templateMessage(homepage.AuctionsGrid.BestiaryBanner.heading, {
+            link: (
+              <a
+                href={`${links.BESTIARY_ARENA}/?t=exevoscrolla`}
+                target="_blank"
+                rel="noopener external nofollow noreferrer"
+                className="text-primaryHighlight font-bold tracking-wide"
+              >
+                Bestiary Arena
+              </a>
+            ),
+          })}
+        </p>
+
+        <a
+          href={`${links.BESTIARY_ARENA}/?t=exevoscrollb`}
+          target="_blank"
+          rel="noopener external nofollow noreferrer"
+          className="h-[60px] md:hidden"
+        >
+          <img
+            alt="Open Summon Scroll"
+            className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+            src="https://i.imgur.com/tZ7ba1h.png"
+          />
+        </a>
+      </section>
 
       <div className="inner-container grid gap-4 py-4">
         <div className="grid gap-2 md:gap-10">

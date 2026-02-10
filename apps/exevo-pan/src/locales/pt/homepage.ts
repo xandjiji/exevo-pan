@@ -28,6 +28,9 @@ export default defaultComposer(defaultTranslations, {
       current: 'Leilões atuais',
       history: 'Histórico do Bazaar',
     },
+    BestiaryBanner: {
+      heading: 'PC/Mobile Idle Tibia: {{link}}',
+    },
     TibiaTradeBanner: {
       heading: 'Encontre no {{link}}:',
       selling: 'Vendendo',
