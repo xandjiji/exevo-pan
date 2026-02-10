@@ -3,16 +3,13 @@
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { loadRawSrc } from 'utils'
-import { Shine } from 'components/Atoms'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 import { useLocalizedHref } from 'hooks/useLocalizedHref'
 import { FooterProps, RouteItem } from './types'
 
 const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
-const edgarSrc = loadRawSrc('/edgartc.png')
 const rdcSrc = loadRawSrc('/reidoscoins.png')
-// const noPingSrc = loadRawSrc('/assets/noping-footer.png')
 
 const listItems: RouteItem[] = [
   { href: routes.HOME, content: 'charBazaar' },
@@ -96,22 +93,6 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                       alt="Tibia Blackjack"
                       loading="lazy"
                       style={{ filter: 'drop-shadow(0 0 1px black)' }}
-                    />
-                  </Card>
-                </a>
-
-                <a
-                  href={links.EDGAR_TC}
-                  target="_blank"
-                  rel="noopener external nofollow"
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={edgarSrc}
-                      width={117}
-                      height={61}
-                      alt="Edgar Tc"
-                      loading="lazy"
                     />
                   </Card>
                 </a>
