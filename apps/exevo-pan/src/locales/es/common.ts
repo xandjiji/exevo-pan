@@ -117,7 +117,7 @@ export default defaultComposer(defaultTranslations, {
   RemoveItem: 'Eliminar el artículo',
   TibiaCoinsCta: {
     text: 'Compra Tibia Coins',
-    link: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
+    link: 'https://edgartc.mx',
   },
   TibiaBlackjackCta: {
     text: 'Jugar Tibia Blackjack',
