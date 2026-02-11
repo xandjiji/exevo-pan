@@ -21,7 +21,7 @@ const CtaButton = ({ ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
       href={isCoins ? common.TibiaCoinsCta.link : localizedHref}
       target="_blank"
       rel="noopener external nofollow"
-      className="clickable text-tsm text-onSurface md:z-1 hover:highlight-10 animated-background relative z-10 ml-2 hidden items-end whitespace-nowrap rounded-2xl py-2 pr-4 pl-10 tracking-wider shadow-md transition-all md:flex"
+      className="clickable text-tsm text-onSurface md:z-1 hover:highlight-10 animated-background relative z-10 ml-2 hidden items-end overflow-hidden whitespace-nowrap rounded-2xl py-2 pr-4 pl-10 tracking-wider shadow-md transition-all md:flex"
       {...props}
     >
       <Shine animationIterationCount="infinite" width={60} />
