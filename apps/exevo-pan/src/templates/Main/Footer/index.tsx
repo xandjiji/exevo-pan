@@ -61,7 +61,10 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       )}
     >
       <div className="mx-auto grid w-fit gap-8">
-        <div id="footer-wrapper" className="flex flex-col gap-6">
+        <div
+          id="footer-wrapper"
+          className="flex flex-col gap-6 overflow-hidden"
+        >
           <div className="flex flex-col flex-wrap items-center justify-center gap-6 sm:flex-row">
             <a href={useLocalizedHref(routes.EXEVOPRO)}>
               <Card>
