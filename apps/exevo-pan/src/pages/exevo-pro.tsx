@@ -28,7 +28,11 @@ import { buildPageTitle, buildUrl, loadRawSrc, referralTracker } from 'utils'
 import { exevoPro, jsonld, routes } from 'Constants'
 import { common, exevopro } from 'locales'
 
-export default function ExevoPro() {
+export default function ExevoPro({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const i18n = translations.exevopro
 
@@ -105,7 +109,7 @@ export default function ExevoPro() {
         />
       </Head>
 
-      <Main clean>
+      <Main clean bestiaryBannerVariant={bestiaryBannerVariant}>
         <main className="inner-container grid gap-24 overflow-x-hidden py-20">
           <section className="relative mb-28 flex flex-col items-center gap-10">
             <ThreeDimensionalMiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
@@ -304,5 +308,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       exevopro: exevopro[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

@@ -8,14 +8,25 @@ import { RavendawnCTA } from './RavendawnCTA'
 import { BestiaryArenaCTA } from './BestiaryArenaCTA'
 // import { NoPingCTA } from './NoPingCTA'
 
-type MainProps = { clean?: boolean; children: React.ReactNode }
+type MainProps = {
+  clean?: boolean
+  children: React.ReactNode
+  bestiaryBannerVariant: number
+}
 
-export default ({ clean = false, children }: MainProps) => (
+export default ({
+  clean = false,
+  children,
+  bestiaryBannerVariant,
+}: MainProps) => (
   <div className="flex min-h-screen flex-col">
     {!clean && <MobileTopCTA />}
     <Header clean={clean} />
     {children}
-    <Footer variant={clean ? 'surface' : 'primary'} />
+    <Footer
+      variant={clean ? 'surface' : 'primary'}
+      bestiaryBannerVariant={bestiaryBannerVariant}
+    />
 
     {!clean && (
       <div className="z-71 fixed bottom-3 left-[calc(100vw-162px)] flex flex-col items-end gap-2 md:bottom-5 md:left-[calc(100vw-174px)] lg:left-[calc(100vw-319px)]">

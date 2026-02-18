@@ -3,16 +3,20 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { Layout, Devices } from 'modules/Dashboard'
+import { Devices, Layout } from 'modules/Dashboard'
 import SetupNotifications from 'components/SetupNotifications'
 import { PreviewImageClient } from 'services'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
-export default function Page() {
+export default function Page({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -93,7 +97,7 @@ export default function Page() {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <Layout isLoading={list.isLoading}>
           <div className="mx-auto grid w-fit gap-4">
             <SetupNotifications onRegister={list.refetch} />
@@ -111,5 +115,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       dashboard: dashboard[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

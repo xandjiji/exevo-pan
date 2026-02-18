@@ -3,18 +3,22 @@ import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/BlogFilt
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
+import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
 import Head from 'next/head'
 import { BlogClient, PreviewImageClient } from 'services'
-import { Main, Hero } from 'templates'
-import { routes, jsonld } from 'Constants'
-import { common, blog } from 'locales'
+import { Hero, Main } from 'templates'
+import { jsonld, routes } from 'Constants'
+import { blog, common } from 'locales'
 
 type Props = {
   initialPosts: BlogPost[]
+  bestiaryBannerVariant: number
 }
 
-export default function PostPage({ initialPosts }: Props) {
+export default function PostPage({
+  initialPosts,
+  bestiaryBannerVariant,
+}: Props) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -81,7 +85,7 @@ export default function PostPage({ initialPosts }: Props) {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <Hero title={translations.blog.Meta.title} src={heroSrc} offset />
         <Home
           initialIndex={DEFAULT_PAGINATION_OPTIONS.pageIndex + 1}
@@ -104,6 +108,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         blog: blog[locale as RegisteredLocale],
       },
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

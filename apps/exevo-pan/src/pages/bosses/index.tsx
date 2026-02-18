@@ -13,12 +13,13 @@ type BossTrackerProps = {
   serverOptions: Option[]
   bossChances: BossChances
   recentlyAppeared: BossStats[]
+  bestiaryBannerVariant: number
 }
 
 const { heroSrc } = Tracker
 
 export default function BossTrackerPage(args: BossTrackerProps) {
-  const { bossChances } = args
+  const { bossChances, bestiaryBannerVariant } = args
   const pagePath = `${routes.BOSSES.TRACKER}/${bossChances.server}`
   const { locale } = useRouter()
   const pageUrl = buildUrl(pagePath, locale)
@@ -89,7 +90,7 @@ export default function BossTrackerPage(args: BossTrackerProps) {
         />
       </Head>
 
-      <Template>
+      <Template bestiaryBannerVariant={bestiaryBannerVariant}>
         <Tracker {...args} />
       </Template>
     </>
@@ -122,6 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         bossTracker: bossTracker[locale as RegisteredLocale],
       },
       locale,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

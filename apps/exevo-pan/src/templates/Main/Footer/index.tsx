@@ -6,7 +6,6 @@ import { loadRawSrc } from 'utils'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 import { useLocalizedHref } from 'hooks/useLocalizedHref'
-import { useState } from 'react'
 import { FooterProps, RouteItem } from './types'
 
 const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
@@ -50,7 +49,10 @@ const Card = ({
   />
 )
 
-const Footer = ({ variant = 'primary' }: FooterProps) => {
+const Footer = ({
+  variant = 'primary',
+  bestiaryBannerVariant,
+}: FooterProps) => {
   const { common } = useTranslations()
 
   const bestiaryJsxList = [
@@ -80,9 +82,8 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
     </a>,
   ]
 
-  const [bestiaryJsx] = useState(
-    () => bestiaryJsxList[Math.floor(Math.random() * bestiaryJsxList.length)],
-  )
+  const bestiaryJsx =
+    bestiaryJsxList[Math.floor(bestiaryBannerVariant * bestiaryJsxList.length)]
 
   return (
     <footer
@@ -93,87 +94,89 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       )}
     >
       <div className="mx-auto grid w-fit gap-8">
-        <div
-          id="footer-wrapper"
-          className="flex flex-col gap-6 overflow-hidden"
-        >
-          <div className="flex flex-col flex-wrap items-center justify-center gap-6 sm:flex-row">
-            <a href={useLocalizedHref(routes.EXEVOPRO)}>
-              <Card>
-                <ExevoPanIcon width={36} height={36} />
+        {variant === 'primary' && (
+          <div
+            id="footer-wrapper"
+            className="flex flex-col gap-6 overflow-hidden"
+          >
+            <div className="flex flex-col flex-wrap items-center justify-center gap-6 sm:flex-row">
+              <a href={useLocalizedHref(routes.EXEVOPRO)}>
+                <Card>
+                  <ExevoPanIcon width={36} height={36} />
 
-                <span>
-                  {templateMessage(common.exevoProCTA, {
-                    exevoPro: (
-                      <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
-                        Exevo Pro
-                      </strong>
-                    ),
-                  })}
-                </span>
-              </Card>
-            </a>
+                  <span>
+                    {templateMessage(common.exevoProCTA, {
+                      exevoPro: (
+                        <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
+                          Exevo Pro
+                        </strong>
+                      ),
+                    })}
+                  </span>
+                </Card>
+              </a>
 
-            <div>
-              <div className="flex flex-wrap items-center justify-center gap-6">
-                <a
-                  target="_blank"
-                  rel="noopener external nofollow"
-                  href={links.TIBIA_BLACKJACK}
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={tbjSrc}
-                      width={97}
-                      height={61}
-                      alt="Tibia Blackjack"
-                      loading="lazy"
-                      style={{ filter: 'drop-shadow(0 0 1px black)' }}
-                    />
-                  </Card>
-                </a>
+              <div>
+                <div className="flex flex-wrap items-center justify-center gap-6">
+                  <a
+                    target="_blank"
+                    rel="noopener external nofollow"
+                    href={links.TIBIA_BLACKJACK}
+                  >
+                    <Card variant="secondary">
+                      <img
+                        src={tbjSrc}
+                        width={97}
+                        height={61}
+                        alt="Tibia Blackjack"
+                        loading="lazy"
+                        style={{ filter: 'drop-shadow(0 0 1px black)' }}
+                      />
+                    </Card>
+                  </a>
 
-                <a
-                  href={links.EDGAR_TC}
-                  target="_blank"
-                  rel="noopener external nofollow"
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={edgarSrc}
-                      width={117}
-                      height={61}
-                      alt="Edgar Tc"
-                      loading="lazy"
-                    />
-                  </Card>
-                </a>
+                  <a
+                    href={links.EDGAR_TC}
+                    target="_blank"
+                    rel="noopener external nofollow"
+                  >
+                    <Card variant="secondary">
+                      <img
+                        src={edgarSrc}
+                        width={117}
+                        height={61}
+                        alt="Edgar Tc"
+                        loading="lazy"
+                      />
+                    </Card>
+                  </a>
 
-                <a
-                  href={links.REI_DOS_COINS}
-                  target="_blank"
-                  rel="noopener external nofollow"
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={rdcSrc}
-                      width={51}
-                      height={61}
-                      alt="Rei dos Coins"
-                      loading="lazy"
-                    />
-                  </Card>
-                </a>
+                  <a
+                    href={links.REI_DOS_COINS}
+                    target="_blank"
+                    rel="noopener external nofollow"
+                  >
+                    <Card variant="secondary">
+                      <img
+                        src={rdcSrc}
+                        width={51}
+                        height={61}
+                        alt="Rei dos Coins"
+                        loading="lazy"
+                      />
+                    </Card>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="relative overflow-hidden">
-            <div className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+            <div className="relative overflow-hidden">
+              <div className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
 
-            {bestiaryJsx}
+              {bestiaryJsx}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="grid gap-5">
           <nav>

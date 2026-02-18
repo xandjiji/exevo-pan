@@ -20,9 +20,15 @@ import * as S from './atoms'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-type AuctionsGridProps = { tibiaTradeItems?: TibiaTradeHighlightedItem[] }
+type AuctionsGridProps = {
+  tibiaTradeItems?: TibiaTradeHighlightedItem[]
+  bestiaryBannerVariant: number
+}
 
-const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
+const AuctionsGrid = ({
+  tibiaTradeItems = [],
+  bestiaryBannerVariant,
+}: AuctionsGridProps) => {
   const { homepage, common } = useTranslations()
 
   const bestiaryJsxList = [
@@ -69,9 +75,8 @@ const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
     </a>,
   ]
 
-  const [bestiaryJsx] = useState(
-    () => bestiaryJsxList[Math.floor(Math.random() * bestiaryJsxList.length)],
-  )
+  const bestiaryJsx =
+    bestiaryJsxList[Math.floor(bestiaryBannerVariant * bestiaryJsxList.length)]
 
   const {
     loading,

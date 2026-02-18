@@ -10,7 +10,11 @@ import { calculators, common } from 'locales'
 
 const pageRoute = routes.LOOT_SPLIT
 
-export default function Calculator() {
+export default function Calculator({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -83,7 +87,11 @@ export default function Calculator() {
         />
       </Head>
 
-      <Template currentRoute={pageRoute} className="!flex">
+      <Template
+        currentRoute={pageRoute}
+        className="!flex"
+        bestiaryBannerVariant={bestiaryBannerVariant}
+      >
         <LootSplit />
       </Template>
     </>
@@ -96,5 +104,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       calculators: calculators[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

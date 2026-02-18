@@ -62,6 +62,7 @@ type Props = {
   recentPosts: BlogPost[]
   translations: any
   locale: RegisteredLocale
+  bestiaryBannerVariant: number
 }
 
 type PathItem = {
@@ -76,6 +77,7 @@ export default function PostPage({
   metaData,
   recentPosts,
   locale,
+  bestiaryBannerVariant,
 }: Props) {
   const translations = useTranslations()
 
@@ -195,7 +197,7 @@ export default function PostPage({
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <article>
           <Post.Hero
             title={metaData.title}
@@ -281,6 +283,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         blog: blog[locale as RegisteredLocale],
       },
       locale: locale as RegisteredLocale,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

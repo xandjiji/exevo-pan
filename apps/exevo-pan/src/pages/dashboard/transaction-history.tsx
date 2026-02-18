@@ -6,11 +6,15 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Layout, TransactionHistory } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
-export default function Page() {
+export default function Page({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -81,7 +85,7 @@ export default function Page() {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <Layout isLoading={list.isLoading}>
           {list.data && <TransactionHistory.List list={list.data} />}
         </Layout>
@@ -96,5 +100,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       dashboard: dashboard[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

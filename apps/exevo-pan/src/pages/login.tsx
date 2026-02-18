@@ -14,9 +14,13 @@ import { common, login } from 'locales'
 
 type LoginStaticProps = {
   providers: AuthProviders
+  bestiaryBannerVariant: number
 }
 
-export default function Login({ providers }: LoginStaticProps) {
+export default function Login({
+  providers,
+  bestiaryBannerVariant,
+}: LoginStaticProps) {
   const translations = useTranslations()
   const { locale, push } = useRouter()
 
@@ -86,7 +90,7 @@ export default function Login({ providers }: LoginStaticProps) {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <main className="inner-container flex justify-center py-4">
           <div className="flex flex-col items-center justify-center gap-10">
             <ExevoPanIcon width={120} height={120} />
@@ -112,6 +116,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         login: login[locale as RegisteredLocale],
       },
       providers,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

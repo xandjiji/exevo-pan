@@ -13,9 +13,13 @@ const pageRoute = routes.CHARM_DAMAGE
 
 type CalculatorProps = {
   suggestedPost: BlogPost
+  bestiaryBannerVariant: number
 }
 
-export default function Calculator({ suggestedPost }: CalculatorProps) {
+export default function Calculator({
+  suggestedPost,
+  bestiaryBannerVariant,
+}: CalculatorProps) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -92,6 +96,7 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
       <Template
         currentRoute={pageRoute}
         className="child:max-w-fit child:mx-auto grid gap-8"
+        bestiaryBannerVariant={bestiaryBannerVariant}
       >
         <CharmDamage />
 
@@ -115,6 +120,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         calculators: calculators[locale as RegisteredLocale],
       },
       suggestedPost,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

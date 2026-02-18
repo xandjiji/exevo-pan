@@ -10,7 +10,11 @@ import { calculators, common } from 'locales'
 
 const pageRoute = routes.IMBUEMENTS_COST
 
-export default function Calculator() {
+export default function Calculator({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -99,6 +103,7 @@ export default function Calculator() {
       <Template
         currentRoute={pageRoute}
         className="grid items-start justify-center"
+        bestiaryBannerVariant={bestiaryBannerVariant}
       >
         <ImbuementsCost />
       </Template>
@@ -112,5 +117,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       calculators: calculators[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

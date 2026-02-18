@@ -7,11 +7,17 @@ import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, statistics } from 'locales'
 
-export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
+export default function Highscores({
+  top10Data,
+  bestiaryBannerVariant,
+}: {
+  top10Data: Top10Data
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -80,7 +86,7 @@ export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <main>
           <Header />
           <HighscoresGrid top10Data={top10Data} />
@@ -122,6 +128,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         top10Shielding,
         top10Sword,
       },
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

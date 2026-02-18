@@ -6,7 +6,11 @@ import { useTranslations } from 'contexts/useTranslation'
 import { buildPageTitle } from 'utils'
 import { common, error } from 'locales'
 
-export default function Custom404() {
+export default function Custom404({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
 
   const pageTitle = buildPageTitle(translations.error.Meta.title)
@@ -35,7 +39,7 @@ export default function Custom404() {
         <meta property="og:type" content="website" />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <ErrorPage />
       </Main>
     </>
@@ -48,5 +52,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       error: error[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

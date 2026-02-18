@@ -8,6 +8,7 @@ type ComponentProps = {
   currentRoute: string
   mainPage?: boolean
   className?: string
+  bestiaryBannerVariant: number
 }
 
 const Template = ({
@@ -15,12 +16,13 @@ const Template = ({
   mainPage = false,
   children,
   className,
+  bestiaryBannerVariant,
 }: ComponentProps) => {
   const { list, getRoute } = useRoutes()
   const foundRoute = getRoute(currentRoute)
 
   return (
-    <Main>
+    <Main bestiaryBannerVariant={bestiaryBannerVariant}>
       <SubHeader navItems={list} />
       {!!foundRoute && (
         <Hero offset title={foundRoute.title} src={foundRoute.hero} />

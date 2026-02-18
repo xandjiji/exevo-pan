@@ -11,7 +11,11 @@ import { calculators, common } from 'locales'
 
 const pageRoute = routes.CALCULATORS
 
-export default function Calculators() {
+export default function Calculators({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -85,7 +89,11 @@ export default function Calculators() {
         />
       </Head>
 
-      <Template mainPage currentRoute={pageRoute}>
+      <Template
+        mainPage
+        currentRoute={pageRoute}
+        bestiaryBannerVariant={bestiaryBannerVariant}
+      >
         <NavGrid navItems={navItens} />
       </Template>
     </>
@@ -98,5 +106,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       calculators: calculators[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

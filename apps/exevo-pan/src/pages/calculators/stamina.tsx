@@ -10,7 +10,11 @@ import { calculators, common } from 'locales'
 
 const pageRoute = routes.STAMINA
 
-export default function Calculator() {
+export default function Calculator({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -86,6 +90,7 @@ export default function Calculator() {
       <Template
         currentRoute={pageRoute}
         className="md:child:shrink-0 grid items-start justify-center gap-6 md:flex"
+        bestiaryBannerVariant={bestiaryBannerVariant}
       >
         <Stamina />
       </Template>
@@ -99,5 +104,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       calculators: calculators[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

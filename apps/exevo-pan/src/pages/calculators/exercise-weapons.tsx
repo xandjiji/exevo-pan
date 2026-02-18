@@ -10,7 +10,11 @@ import { calculators, common } from 'locales'
 
 const pageRoute = routes.EXERCISE_WEAPONS
 
-export default function Calculator() {
+export default function Calculator({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -87,6 +91,7 @@ export default function Calculator() {
       <Template
         currentRoute={pageRoute}
         className="grid items-start justify-center"
+        bestiaryBannerVariant={bestiaryBannerVariant}
       >
         <ExerciseWeapons />
       </Template>
@@ -100,5 +105,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       calculators: calculators[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

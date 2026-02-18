@@ -10,7 +10,11 @@ import { buildPageTitle, buildUrl } from 'utils'
 import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
-export default function Dashboard() {
+export default function Dashboard({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -78,7 +82,7 @@ export default function Dashboard() {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <Layout>
           {session && (
             <section className="grid place-items-center gap-8 lg:flex lg:items-start lg:justify-center lg:gap-16">
@@ -110,5 +114,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       dashboard: dashboard[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

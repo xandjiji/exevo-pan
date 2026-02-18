@@ -55,7 +55,11 @@ function randomInfluencer(br: boolean) {
   return samples[Math.floor(Math.random() * samples.length)]
 }
 
-export default function Page() {
+export default function Page({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
 
   const i18n = translations.dashboard
@@ -174,7 +178,7 @@ export default function Page() {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <Layout
           isLoading={
             isPro ? referralTag.isLoading && historyFirstPage.isLoading : false
@@ -373,5 +377,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       dashboard: dashboard[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

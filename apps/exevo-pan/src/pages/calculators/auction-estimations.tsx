@@ -13,9 +13,13 @@ const pageRoute = routes.AUCTION_ESTIMATION
 
 type CalculatorProps = {
   suggestedPost?: BlogPost
+  bestiaryBannerVariant: number
 }
 
-export default function Calculator({ suggestedPost }: CalculatorProps) {
+export default function Calculator({
+  suggestedPost,
+  bestiaryBannerVariant,
+}: CalculatorProps) {
   const translations = useTranslations()
   const { locale } = useRouter()
 
@@ -89,7 +93,10 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
         />
       </Head>
 
-      <Template currentRoute={pageRoute}>
+      <Template
+        currentRoute={pageRoute}
+        bestiaryBannerVariant={bestiaryBannerVariant}
+      >
         <AuctionEstimation />
         {suggestedPost && (
           <SuggestedReading
@@ -117,6 +124,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         calculators: calculators[locale as RegisteredLocale],
       },
       suggestedPost,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

@@ -7,14 +7,16 @@ import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, statistics } from 'locales'
 
 export default function Statistics({
   overallData,
+  bestiaryBannerVariant,
 }: {
   overallData: OverallData
+  bestiaryBannerVariant: number
 }) {
   const translations = useTranslations()
   const { locale } = useRouter()
@@ -84,7 +86,7 @@ export default function Statistics({
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <main>
           <Header />
           <OverallGrid overallData={overallData} />
@@ -110,6 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         successRate,
         vocationPercentage,
       },
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

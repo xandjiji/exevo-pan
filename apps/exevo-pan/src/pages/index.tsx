@@ -30,6 +30,7 @@ type HomeStaticProps = {
   blogPosts: BlogPost[]
   tibiaTradeItems: TibiaTradeHighlightedItem[]
   badTibiaTradeIds: string
+  bestiaryBannerVariant: number
 }
 
 export default function Home({
@@ -41,6 +42,7 @@ export default function Home({
   blogPosts,
   tibiaTradeItems,
   badTibiaTradeIds,
+  bestiaryBannerVariant,
 }: HomeStaticProps) {
   const translations = useTranslations()
   const { locale, asPath } = useRouter()
@@ -117,7 +119,7 @@ export default function Home({
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <UrlAuction highlightedAuctions={highlightedAuctions} />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
@@ -129,7 +131,10 @@ export default function Home({
             highlightedAuctions={highlightedAuctions}
             initialPaginatedData={initialPaginatedData}
           >
-            <AuctionsGrid tibiaTradeItems={tibiaTradeItems} />
+            <AuctionsGrid
+              tibiaTradeItems={tibiaTradeItems}
+              bestiaryBannerVariant={bestiaryBannerVariant}
+            />
           </AuctionsProvider>
         </DrawerFieldsProvider>
       </Main>
@@ -172,6 +177,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
       tibiaTradeItems: tibiaTradeResponse.items.slice(0, 4),
       badTibiaTradeIds: tibiaTradeResponse.badIds.join(','),
+      bestiaryBannerVariant: Math.random(),
       // tibiaBountyResponse,
     },
   }

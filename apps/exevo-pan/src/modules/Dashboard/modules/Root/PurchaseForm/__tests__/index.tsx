@@ -5,7 +5,7 @@ import PurchaseForm from '..'
 
 describe.skip('<PurchaseForm />', () => {
   test('form should work correctly', async () => {
-    renderWithProviders(<PurchaseForm email="" />)
+    renderWithProviders(<PurchaseForm userId="" email="" />)
 
     const submitButton = screen.getByRole('button', { name: 'Confirm' })
     expect(submitButton).toBeDisabled()

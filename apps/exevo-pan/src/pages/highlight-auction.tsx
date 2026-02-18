@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { FormProvider, Form } from 'modules/Advertise'
+import { Form, FormProvider } from 'modules/Advertise'
 import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
 import SuggestedReading from 'components/SuggestedReading'
 import { BlogClient, PreviewImageClient } from 'services'
@@ -9,18 +9,20 @@ import { useSession } from 'next-auth/react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle, pluckTCInvested } from 'utils'
-import { routes, jsonld } from 'Constants'
-import { common, advertise } from 'locales'
+import { buildPageTitle, buildUrl, pluckTCInvested } from 'utils'
+import { jsonld, routes } from 'Constants'
+import { advertise, common } from 'locales'
 
 type AdvertiseStaticProps = {
   initialAuctionData: PaginatedData<CharacterObject>
   suggestedPost: BlogPost
+  bestiaryBannerVariant: number
 }
 
 export default function Advertise({
   initialAuctionData,
   suggestedPost,
+  bestiaryBannerVariant,
 }: AdvertiseStaticProps) {
   const translations = useTranslations()
   const { locale } = useRouter()
@@ -95,7 +97,7 @@ export default function Advertise({
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <AuctionsProvider initialPage={page} initialPageData={pageData}>
           <FormProvider isPro={isPro}>
             <main className="inner-container py-4">
@@ -135,6 +137,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
       initialAuctionData: pluckedInitialAuctionData,
       suggestedPost,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

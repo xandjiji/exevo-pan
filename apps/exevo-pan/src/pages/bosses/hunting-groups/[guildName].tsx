@@ -50,6 +50,7 @@ const previewImageSrc = loadRawSrc('/huntingGroups.png')
 type GuildPageProps = {
   serializedGuildData: string
   serializedToken: string
+  bestiaryBannerVariant: number
 }
 
 const getMonthNumber = (past: boolean) => {
@@ -76,6 +77,7 @@ function EarnTC({ children }: { children: React.ReactNode }) {
 export default function GuildPage({
   serializedGuildData,
   serializedToken,
+  bestiaryBannerVariant,
 }: GuildPageProps) {
   const translations = useTranslations()
   const i18n = translations.huntingGroups
@@ -158,7 +160,7 @@ export default function GuildPage({
       </Head>
 
       <GuildDataProvider {...guildDataProps} token={token}>
-        <Template>
+        <Template bestiaryBannerVariant={bestiaryBannerVariant}>
           <GuildDataConsumer>
             {({
               EXEVO_PAN_ADMIN,
@@ -646,6 +648,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         huntingGroups: huntingGroups[locale as RegisteredLocale],
       },
       locale,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }
