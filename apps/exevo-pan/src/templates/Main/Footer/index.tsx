@@ -6,6 +6,7 @@ import { loadRawSrc } from 'utils'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 import { useLocalizedHref } from 'hooks/useLocalizedHref'
+import { useState } from 'react'
 import { FooterProps, RouteItem } from './types'
 
 const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
@@ -51,6 +52,37 @@ const Card = ({
 
 const Footer = ({ variant = 'primary' }: FooterProps) => {
   const { common } = useTranslations()
+
+  const bestiaryJsxList = [
+    <a
+      href={`${links.BESTIARY_ARENA}/?t=exevoscrollfootera`}
+      target="_blank"
+      rel="noopener external nofollow noreferrer"
+      className="grid h-[60px] place-items-center"
+    >
+      <img
+        alt="Open Summon Scroll"
+        className="pixelated h-[60px] w-[468px] shadow-lg"
+        src="https://i.imgur.com/tZ7ba1h.png"
+      />
+    </a>,
+    <a
+      href={`${links.BESTIARY_ARENA}/?t=exevoscrollfooterb`}
+      target="_blank"
+      rel="noopener external nofollow noreferrer"
+      className="grid h-[60px] place-items-center"
+    >
+      <img
+        alt="Bestiary Arena"
+        className="pixelated clickable h-[60px] w-[468px] rounded-lg shadow-lg"
+        src="https://i.imgur.com/kcHD5Nb.png"
+      />
+    </a>,
+  ]
+
+  const [bestiaryJsx] = useState(
+    () => bestiaryJsxList[Math.floor(Math.random() * bestiaryJsxList.length)],
+  )
 
   return (
     <footer
@@ -139,18 +171,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
           <div className="relative overflow-hidden">
             <div className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
 
-            <a
-              href={`${links.BESTIARY_ARENA}/?t=exevoscrollc`}
-              target="_blank"
-              rel="noopener external nofollow noreferrer"
-              className="grid h-[60px] place-items-center"
-            >
-              <img
-                alt="Open Summon Scroll"
-                className="pixelated h-[60px] w-[468px] shadow-lg"
-                src="https://i.imgur.com/tZ7ba1h.png"
-              />
-            </a>
+            {bestiaryJsx}
           </div>
         </div>
 

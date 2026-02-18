@@ -25,6 +25,54 @@ type AuctionsGridProps = { tibiaTradeItems?: TibiaTradeHighlightedItem[] }
 const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
   const { homepage, common } = useTranslations()
 
+  const bestiaryJsxList = [
+    <div>
+      <p className="text-tsm mb-2 font-light">
+        {templateMessage(common.BestiaryBanner.heading, {
+          link: (
+            <a
+              href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopa`}
+              target="_blank"
+              rel="noopener external nofollow noreferrer"
+              className="text-primaryHighlight font-bold tracking-wide"
+            >
+              Bestiary Arena
+            </a>
+          ),
+        })}
+      </p>
+
+      <a
+        href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopa`}
+        target="_blank"
+        rel="noopener external nofollow noreferrer"
+        className="block h-[60px]"
+      >
+        <img
+          alt="Open Summon Scroll"
+          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+          src="https://i.imgur.com/tZ7ba1h.png"
+        />
+      </a>
+    </div>,
+    <a
+      href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopb`}
+      target="_blank"
+      rel="noopener external nofollow noreferrer"
+      className="grid h-[60px] place-items-center"
+    >
+      <img
+        alt="Bestiary Arena"
+        className="pixelated clickable h-[60px] w-[468px] rounded-lg shadow-lg"
+        src="https://i.imgur.com/kcHD5Nb.png"
+      />
+    </a>,
+  ]
+
+  const [bestiaryJsx] = useState(
+    () => bestiaryJsxList[Math.floor(Math.random() * bestiaryJsxList.length)],
+  )
+
   const {
     loading,
     mode: unsettledMode,
@@ -139,33 +187,7 @@ const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
       <section className="inner-container relative mt-4 overflow-hidden sm:hidden">
         <div className="z-1 from-background absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
 
-        <p className="text-tsm mb-2 font-light">
-          {templateMessage(common.BestiaryBanner.heading, {
-            link: (
-              <a
-                href={`${links.BESTIARY_ARENA}/?t=exevoscrolla`}
-                target="_blank"
-                rel="noopener external nofollow noreferrer"
-                className="text-primaryHighlight font-bold tracking-wide"
-              >
-                Bestiary Arena
-              </a>
-            ),
-          })}
-        </p>
-
-        <a
-          href={`${links.BESTIARY_ARENA}/?t=exevoscrollb`}
-          target="_blank"
-          rel="noopener external nofollow noreferrer"
-          className="block h-[60px]"
-        >
-          <img
-            alt="Open Summon Scroll"
-            className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
-            src="https://i.imgur.com/tZ7ba1h.png"
-          />
-        </a>
+        {bestiaryJsx}
       </section>
 
       <div className="inner-container grid gap-4 py-4">
