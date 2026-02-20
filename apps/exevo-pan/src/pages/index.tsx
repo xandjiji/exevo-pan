@@ -12,16 +12,14 @@ import { BlogClient, PreviewImageClient } from 'services'
 import {
   AuctionsClient,
   DrawerFieldsClient,
-  TibiaBountyClient,
   TibiaTradeClient,
 } from 'services/server'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
 import { jsonld, routes } from 'Constants'
 import { common, homepage } from 'locales'
-
-const pageUrl = buildUrl(routes.HOME)
 
 type HomeStaticProps = {
   activeServers: string[]
@@ -32,7 +30,7 @@ type HomeStaticProps = {
   blogPosts: BlogPost[]
   tibiaTradeItems: TibiaTradeHighlightedItem[]
   badTibiaTradeIds: string
-  // tibiaBountyResponse: TibiaBountyEntry[]
+  bestiaryBannerVariant: number
 }
 
 export default function Home({
@@ -44,9 +42,10 @@ export default function Home({
   blogPosts,
   tibiaTradeItems,
   badTibiaTradeIds,
-}: // tibiaBountyResponse,
-HomeStaticProps) {
+  bestiaryBannerVariant,
+}: HomeStaticProps) {
   const translations = useTranslations()
+  const { locale, asPath } = useRouter()
 
   const pageName = translations.homepage.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
@@ -54,7 +53,10 @@ HomeStaticProps) {
     imgSrc: loadRawSrc('/default-preview.png'),
   })
 
+  const pageUrl = buildUrl(routes.HOME, locale)
+  const defaultPageUrl = buildUrl(routes.HOME)
   const pageTitle = buildPageTitle(pageName)
+  const hasQueryParams = asPath.includes('?')
 
   const { current: activeServersSet } = useRef(new Set(activeServers))
 
@@ -66,6 +68,8 @@ HomeStaticProps) {
         <meta name="title" content={pageTitle} />
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
+
+        {hasQueryParams && <meta name="robots" content="noindex, follow" />}
 
         <meta
           name="description"
@@ -88,7 +92,7 @@ HomeStaticProps) {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -104,7 +108,7 @@ HomeStaticProps) {
           hrefLang="pl"
           href={buildUrl(routes.HOME, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -115,7 +119,7 @@ HomeStaticProps) {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <UrlAuction highlightedAuctions={highlightedAuctions} />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
@@ -127,7 +131,10 @@ HomeStaticProps) {
             highlightedAuctions={highlightedAuctions}
             initialPaginatedData={initialPaginatedData}
           >
-            <AuctionsGrid tibiaTradeItems={tibiaTradeItems} />
+            <AuctionsGrid
+              tibiaTradeItems={tibiaTradeItems}
+              bestiaryBannerVariant={bestiaryBannerVariant}
+            />
           </AuctionsProvider>
         </DrawerFieldsProvider>
       </Main>
@@ -170,6 +177,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
       tibiaTradeItems: tibiaTradeResponse.items.slice(0, 4),
       badTibiaTradeIds: tibiaTradeResponse.badIds.join(','),
+      bestiaryBannerVariant: Math.random(),
       // tibiaBountyResponse,
     },
   }

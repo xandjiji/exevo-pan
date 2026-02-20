@@ -1,5 +1,7 @@
 import { links, locales } from 'Constants'
-import { UrlConfig, TemplateConfig } from './types'
+import { TemplateConfig, UrlConfig } from './types'
+
+const X_DEFAULT = 'x-default'
 
 const ALTERNATIVE_LOCALES = locales.ALL_LOCALES.filter(
   (locale) => locale !== locales.DEFAULT_LOCALE,
@@ -8,7 +10,9 @@ const ALTERNATIVE_LOCALES = locales.ALL_LOCALES.filter(
 const NEWLINE = '\n'
 
 const buildUrl = ({ locale, route }: UrlConfig): string =>
-  `${links.CANONICAL}${locale ? `/${locale}` : ''}${route}`
+  `${links.CANONICAL}${
+    locale && locale !== X_DEFAULT ? `/${locale}` : ''
+  }${route}`
 
 const formatDate = (date: Date): string => {
   const year = date.getFullYear()
@@ -36,6 +40,7 @@ export const XmlTemplate = ({
         ${ALTERNATIVE_LOCALES.map((locale) =>
           AlternateTemplate({ locale, route }),
         ).join(NEWLINE)}
+        ${AlternateTemplate({ locale: X_DEFAULT, route })}
     </url>`
 
 export const XmlWrapper = (content: string): string =>

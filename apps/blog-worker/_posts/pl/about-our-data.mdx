@@ -1,83 +1,82 @@
 ---
-title: About our data
-description: A few disclaimers about how we get our data and what are it's limitations
+title: O danych
+description: Kilka zastrzeżeń dotyczących tego, skąd pochodzą nasze dane i jakie są ich ograniczenia.
 date: 21-09-2021
 thumbnail: /blog/thumbnails/dataTome.png
 author: Ksu
+translator: Longer Star
 tags:
   - article
 ---
 
-<TranslationAlert />
+## Skąd pochodzą dane
 
-## Where does it come from
+Ponieważ nie istnieje oficjalne API Tibii, prawie wszystkie dane o grze pochodzą bezpośrednio z oficjalnej strony Tibii. Stosujemy technikę zwaną _data scraping_, co oznacza, że regularnie wysyłamy zapytania `HTTP` do oficjalnej strony, a następnie zbieramy własne dane na podstawie odpowiedzi.
 
-Since there is no official Tibia API, almost all of the data about the game actually comes from the official Tibia website. We do a technique called _data scraping_, which means we regularly make `HTTP` requests to the official website and then collect our own data based on the responses.
+Nie jest to najbardziej eleganckie rozwiązanie, ale obecnie jest to jedyna dostępna opcja dla deweloperów, którzy chcą budować aplikacje wykorzystujące prawdziwe dane z Tibii. I wiąże się to z kilkoma **wyzwaniami**:
 
-This is not the most elegant approach to it, but right now it's the only solution available for developers that want to build applications using real Tibia data. And it comes with several **challenges** to it:
+- Drobne zmiany w strukturze strony Tibii mogą łatwo zepsuć nasze skrypty.
+- Zapytania są często odrzucane (głównie z powodu zabezpieczeń anti-DDoS).
+- Wykrywanie i aktualizowanie nieaktualnych danych.
 
-- Minor changes to the Tibia website structure can easily break our scripts
-- Requests are often rejected (mostly because of anti-DDOS protections)
-- Detecting and updating stale data
+To zbyt dużo rzeczy do zarządzania i automatyzowania, zanim w ogóle zaczniemy budować aplikację korzystającą z tych danych. To duże obciążenie może łatwo zniechęcić deweloperów, którzy chcą tworzyć aplikacje do Tibii. Gdyby CipSoft udostępnił deweloperom oficjalne API, wiele ciekawych narzędzi i aplikacji rozkwitłoby w społeczności 🌱.
 
-That's too much stuff for us to manage and automate before we even start building an application to consume this data. This heavy burden can easily shy away developers who want to build Tibia apps. If Cipsoft provided developers with an official API, many interesting tools and applications would then bloom in the community 🌱.
+## Jak dokładne są?
 
-## How accurate is our data
+Nie możemy zagwarantować, że nasze dane są w 100% dokładne, nawet jeśli pochodzą z oficjalnej strony.
 
-We can't guarantee our data is 100% accurate, even if it comes from the official website.
-
-For current auctions, our data might be **up to 10 minutes obsolete**. This means that if you need the most up-to-date information about an auction current **bid price**, you should then check the official auction page instead. Everything else is stable.
+W przypadku aktualnych aukcji nasze dane mogą być **opóźnione nawet o 10 minut**. Oznacza to, że jeśli potrzebujesz najbardziej aktualnych informacji o bieżącej **cenie**, powinieneś sprawdzić oficjalną stronę aukcji. Wszystko inne jest stabilne.
 
 ---
 
-As for history auctions, things get tricky. Officially, Cipsoft serves their own <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=pastcharactertrades">Auction History</ExternalLink>, but its data **expires after 30 days**. That doesn't mean that older data is completely lost. You can still access individual auction pages using their auction id:
+Jeśli chodzi o aukcje historyczne, sprawa się komplikuje. Oficjalnie CipSoft udostępnia własną <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=pastcharactertrades">Historię Aukcji</ExternalLink>, ale dane **wygasają po 30 dniach**. Nie oznacza to jednak, że starsze dane są całkowicie utracone. Nadal możesz uzyskać dostęp do pojedynczych stron aukcji, używając ich ID:
 
 <pre>
-  <code>
-    https://www.tibia.com/charactertrade
-    <br />
-    /?subtopic=currentcharactertrades&page=details<b>{'&auctionid=0'}</b>
-  </code>
+ <code>
+   https://www.tibia.com/charactertrade
+   <br />
+   /?subtopic=currentcharactertrades&page=details<b>{'&auctionid=0'}</b>
+ </code>
 </pre>
 
-Unfortunately, some of the data is broken. For example, very often you'll see characters with no achievement points (which is impossible). In the worst case scenario, some old auctions will be completely unavailable:
+Niestety część danych jest uszkodzona. Na przykład bardzo często zobaczysz postacie bez punktów achievement (co jest niemożliwe). W najgorszym przypadku niektóre stare aukcje są całkowicie niedostępne:
 
 > An internal error has occurred. Please try again later!
 
-But these auctions did exist! In fact, <ExternalLink href="https://tibiavip.app/auctions">TibiaVIP</ExternalLink> still has information about some of them:
+Ale te aukcje istniały! W rzeczywistości <ExternalLink href="https://tibiavip.app/auctions">TibiaVIP</ExternalLink> nadal posiada informacje o niektórych z nich:
 
 <Image
-  src="/blog/images/tibiaVip.png"
+  src="https://i.imgur.com/37WKx88.png"
   width={508}
   height={57}
   align="center"
-  alt="An old auction"
+  alt="Stara aukcja"
   caption={
     <>
-      If you try to access the auction id{' '}
+      Jeśli spróbujesz wejść na aukcję o ID{' '}
       <ExternalLink href="https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=3">
         #3
       </ExternalLink>
-      , it will be no longer available
+      , nie będzie już dostępna
     </>
   }
   unoptimized
 />
 
-Since this happens most often with **older** auctions, we believe that it may be due to the fact that Cipsoft isn't able to retroactively update old entries in the Char Bazaar. As they push more updates (and more data) into the game, some auction entries get corrupted.
+Ponieważ dzieje się to najczęściej w przypadku **starszych** aukcji, wierzymy, że może to wynikać z faktu, iż CipSoft nie jest w stanie wstecznie aktualizować starych wpisów w Char Bazaar. W miarę wprowadzania kolejnych aktualizacji (i kolejnych danych) do gry, część wpisów aukcyjnych ulega uszkodzeniu.
 
-We speculate that our history database is missing around `200,000` auction entries. And because our <RouteLink href="/statistics">statistics</RouteLink> are calculated based off our own database, some numbers should actually be **higher** than what we estimate.
+Szacujemy, że w naszej bazie historycznej brakuje około `200,000` wpisów aukcyjnych. A ponieważ nasze <RouteLink href="/statistics">statystyki</RouteLink> są obliczane na podstawie własnej bazy danych, niektóre liczby powinny być w rzeczywistości **wyższe** niż te, które podajemy.
 
-If you're curious about our scraping strategy and scripts, feel free to check them out <ExternalLink href="https://github.com/xandjiji/exevo-pan/tree/master/apps/bazaar-scraper">here</ExternalLink>. Everything is well documented and you can even setup your own environment to run these scripts yourself 😄
+Jeśli jesteś ciekaw naszej strategii scrapowania i skryptów, możesz je sprawdzić <ExternalLink href="https://github.com/xandjiji/exevo-pan/tree/master/apps/bazaar-scraper">tutaj</ExternalLink>. Wszystko jest dobrze udokumentowane i możesz nawet skonfigurować własne środowisko, aby uruchamiać te skrypty samodzielnie 😄
 
-## Can I use your APIs?
+## Czy mogę używać waszych API?
 
-Yes you can. But we can't offer any support or guarantees! ⚠️
+Tak, możesz. Ale nie oferujemy żadnego wsparcia ani gwarancji! ⚠️
 
-Our APIs are frequently changing and that means you shouldn't build any applications that rely on them. If you need a stable API, you can use <ExternalLink href="https://github.com/xandjiji/exevo-pan">our code</ExternalLink> to scrap and serve the data yourself.
+Nasze API często się zmienia, co oznacza, że nie powinieneś budować aplikacji, które na nim polegają. Jeśli potrzebujesz stabilnego API, możesz użyć <ExternalLink href="https://github.com/xandjiji/exevo-pan">naszego kodu</ExternalLink>, aby samodzielnie scrapować i serwować dane.
 
-If you're doing automated requests to our endpoints, make sure you're not doing them too fast. Any abuse will most likely be automatically detected and denied by our providers (AWS, Cloudflare, etc).
+Jeśli wykonujesz automatyczne zapytania do naszych endpointów, upewnij się, że nie robisz tego zbyt często. Nadużycia najprawdopodobniej zostaną automatycznie wykryte i zablokowane przez naszych dostawców (AWS, Cloudflare itp.).
 
 ---
 
-If you have any other questions, feel free to <RouteLink href="/about#Contact-Information">contact me</RouteLink>.
+Jeśli masz inne pytania, śmiało <RouteLink href="/about#Contact-Information">skontaktuj się ze mną</RouteLink>.

@@ -1,34 +1,38 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { FormProvider, Form } from 'modules/Advertise'
+import { Form, FormProvider } from 'modules/Advertise'
 import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
 import SuggestedReading from 'components/SuggestedReading'
 import { BlogClient, PreviewImageClient } from 'services'
 import { AuctionsClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle, pluckTCInvested } from 'utils'
-import { routes, jsonld } from 'Constants'
-import { common, advertise } from 'locales'
-
-const pageUrl = buildUrl(routes.ADVERTISE)
+import { buildPageTitle, buildUrl, pluckTCInvested } from 'utils'
+import { jsonld, routes } from 'Constants'
+import { advertise, common } from 'locales'
 
 type AdvertiseStaticProps = {
   initialAuctionData: PaginatedData<CharacterObject>
   suggestedPost: BlogPost
+  bestiaryBannerVariant: number
 }
 
 export default function Advertise({
   initialAuctionData,
   suggestedPost,
+  bestiaryBannerVariant,
 }: AdvertiseStaticProps) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const pageName = translations.advertise.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
     title: `${pageName} ✨`,
   })
+  const pageUrl = buildUrl(routes.ADVERTISE, locale)
+  const defaultPageUrl = buildUrl(routes.ADVERTISE)
 
   const pageTitle = buildPageTitle(pageName)
 
@@ -66,7 +70,7 @@ export default function Advertise({
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -82,7 +86,7 @@ export default function Advertise({
           hrefLang="pl"
           href={buildUrl(routes.ADVERTISE, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -93,7 +97,7 @@ export default function Advertise({
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <AuctionsProvider initialPage={page} initialPageData={pageData}>
           <FormProvider isPro={isPro}>
             <main className="inner-container py-4">
@@ -133,6 +137,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
       initialAuctionData: pluckedInitialAuctionData,
       suggestedPost,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

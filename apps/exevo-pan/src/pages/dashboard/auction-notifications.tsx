@@ -1,19 +1,23 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { Layout, AuctionNotifications } from 'modules/Dashboard'
+import { AuctionNotifications, Layout } from 'modules/Dashboard'
 import { toast } from 'react-hot-toast'
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS)
-
-export default function Page() {
+export default function Page({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const i18n = translations.dashboard
 
@@ -22,6 +26,8 @@ export default function Page() {
     title: pageName,
   })
 
+  const pageUrl = buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS, locale)
+  const defaultPageUrl = buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS)
   const pageTitle = buildPageTitle(pageName)
 
   const list = trpc.listMyAuctionNotifications.useQuery(undefined, {
@@ -60,6 +66,7 @@ export default function Page() {
         />
         <meta property="og:type" content="website" />
 
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
@@ -67,23 +74,23 @@ export default function Page() {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.LOGIN, 'pt')}
+          href={buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.LOGIN, 'es')}
+          href={buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.LOGIN, 'pl')}
+          href={buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -94,7 +101,7 @@ export default function Page() {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <Layout isLoading={list.isLoading}>
           {list.data && (
             <AuctionNotifications.List list={list.data} onDelete={onDelete} />
@@ -111,5 +118,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       dashboard: dashboard[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

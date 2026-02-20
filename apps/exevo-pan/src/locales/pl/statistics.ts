@@ -6,14 +6,14 @@ import defaultTranslations from '../en/statistics'
 export default defaultComposer(defaultTranslations, {
   Meta: {
     Statistics: {
-      title: 'Ogólne statystyki',
+      title: 'Statystyki Char Bazaar Tibia',
       description:
-        'Statystyki, trendy i codzienna analiza danych z Tibijskiego Bazaru Postaci!',
+        'Codzienna i historyczna analiza aukcji oraz cen z Char Bazaar Tibia.',
     },
     Highscores: {
-      title: 'Najlepsze wyniki',
+      title: 'Rankingi Char Bazaar Tibia',
       description:
-        'Zobacz rankingi z największymi ofertami, najwyższymi levelami i najlepszymi skillami z Tibijskiego Bazaru Postaci!',
+        'Rankingi najwyższych ofert, top leveli i skilli z Char Bazaar Tibia.',
     },
   },
   Header: {

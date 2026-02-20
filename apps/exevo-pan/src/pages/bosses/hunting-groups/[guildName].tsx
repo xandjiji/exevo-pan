@@ -37,7 +37,6 @@ import { useRouter } from 'next/router'
 import {
   buildPageTitle,
   buildUrl,
-  getGuildPermalink,
   loadDisplayNameBossSrc,
   loadRawSrc,
 } from 'utils'
@@ -51,6 +50,7 @@ const previewImageSrc = loadRawSrc('/huntingGroups.png')
 type GuildPageProps = {
   serializedGuildData: string
   serializedToken: string
+  bestiaryBannerVariant: number
 }
 
 const getMonthNumber = (past: boolean) => {
@@ -77,6 +77,7 @@ function EarnTC({ children }: { children: React.ReactNode }) {
 export default function GuildPage({
   serializedGuildData,
   serializedToken,
+  bestiaryBannerVariant,
 }: GuildPageProps) {
   const translations = useTranslations()
   const i18n = translations.huntingGroups
@@ -115,8 +116,11 @@ export default function GuildPage({
     ? guildDataProps.guild.description
     : translations.huntingGroups.Meta.description
 
-  const absolutePageUrl = getGuildPermalink(guildDataProps.guild.name, true)
-  const pagePath = getGuildPermalink(guildDataProps.guild.name)
+  const pagePath = `${routes.BOSSES.HUNTING_GROUPS}/${encodeURIComponent(
+    guildDataProps.guild.name,
+  )}`
+  const pageUrl = buildUrl(pagePath, router.locale)
+  const defaultPageUrl = buildUrl(pagePath)
 
   // const isPro = !!session.data?.user.proStatus
 
@@ -136,15 +140,15 @@ export default function GuildPage({
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="canonical" href={absolutePageUrl} />
-        <meta property="og:url" content={absolutePageUrl} />
-        <meta property="twitter:url" content={absolutePageUrl} />
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={absolutePageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={absolutePageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -156,7 +160,7 @@ export default function GuildPage({
       </Head>
 
       <GuildDataProvider {...guildDataProps} token={token}>
-        <Template>
+        <Template bestiaryBannerVariant={bestiaryBannerVariant}>
           <GuildDataConsumer>
             {({
               EXEVO_PAN_ADMIN,
@@ -644,6 +648,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         huntingGroups: huntingGroups[locale as RegisteredLocale],
       },
       locale,
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

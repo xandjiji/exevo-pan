@@ -1,33 +1,36 @@
 import Head from 'next/head'
-import { useState, useMemo } from 'react'
-import { stringify, parse } from 'devalue'
+import { useMemo, useState } from 'react'
+import { parse, stringify } from 'devalue'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { Hero } from 'templates'
-import { Template, CreateGuildDialog, GuildGrid } from 'modules/BossHunting'
+import { CreateGuildDialog, GuildGrid, Template } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import { AddIcon } from 'assets/svgs'
 import { caller } from 'pages/api/trpc/[trpc]'
-import { buildUrl, buildPageTitle, loadRawSrc, SECONDS_IN } from 'utils'
-import { routes, jsonld } from 'Constants'
-import { common, bosses, huntingGroups } from 'locales'
+import { buildPageTitle, buildUrl, loadRawSrc, SECONDS_IN } from 'utils'
+import { jsonld, routes } from 'Constants'
+import { bosses, common, huntingGroups } from 'locales'
 
 type HuntingGroupsProps = {
   serializedData: string
   baseServerOptions: Option[]
+  bestiaryBannerVariant: number
 }
 
 const heroSrc = loadRawSrc('/huntingGroups.png')
 const pagePath = routes.BOSSES.HUNTING_GROUPS
-const pageUrl = buildUrl(pagePath)
 
 export default function HuntingGroupsPage({
   serializedData,
   baseServerOptions,
+  bestiaryBannerVariant,
 }: HuntingGroupsProps) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const serverOptions: typeof baseServerOptions = useMemo(
     () => [
@@ -48,6 +51,8 @@ export default function HuntingGroupsPage({
     imgSrc: heroSrc,
   })
 
+  const pageUrl = buildUrl(pagePath, locale)
+  const defaultPageUrl = buildUrl(pagePath)
   const pageTitle = buildPageTitle(pageName)
 
   const [openCreateGuild, setOpenCreateGuild] = useState(false)
@@ -81,11 +86,11 @@ export default function HuntingGroupsPage({
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -96,7 +101,7 @@ export default function HuntingGroupsPage({
         />
       </Head>
 
-      <Template>
+      <Template bestiaryBannerVariant={bestiaryBannerVariant}>
         <Hero offset src={heroSrc} title={pageName} />
 
         <div className="inner-container grid gap-8 md:-mt-12">
@@ -140,6 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         huntingGroups: huntingGroups[locale as RegisteredLocale],
       },
       locale,
+      bestiaryBannerVariant: Math.random(),
     },
     revalidate: SECONDS_IN.MINUTE,
   }

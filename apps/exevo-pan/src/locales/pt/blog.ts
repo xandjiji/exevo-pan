@@ -5,7 +5,7 @@ export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Blog',
     description:
-      'Aqui você encontra tutoriais, artigos e notícias sobre Tibia e o Exevo Pan',
+      'Guias de Tibia, artigos e dicas do Exevo Pan sobre Char Bazaar, bosses e calculadoras.',
     breadcrumbRoot: 'Home',
   },
   recentPosts: 'Posts recentes',

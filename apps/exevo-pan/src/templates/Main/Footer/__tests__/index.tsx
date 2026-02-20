@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear().toString()
 
 describe('<Footer />', () => {
   test('should render year correctly', () => {
-    renderWithProviders(<Footer />)
+    renderWithProviders(<Footer bestiaryBannerVariant={0.5} />)
 
     expect(screen.getByText(new RegExp(currentYear))).toBeInTheDocument()
   })

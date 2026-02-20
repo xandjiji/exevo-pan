@@ -4,37 +4,39 @@ import defaultTranslations from '../en/calculators'
 export default defaultComposer(defaultTranslations, {
   Meta: {
     Main: {
-      title: 'Calculadoras',
+      title: 'Calculadoras Tibia',
       description:
-        'Diversas ferramentas e calculadoras de Tibia para de ajudar!',
+        'Calculadoras e ferramentas de Tibia para Char Bazaar, skills, loot split, imbuements e stamina.',
     },
     ExerciseWeapons: {
-      title: 'Exercise weapons',
+      title: 'Calculadora de Exercise Weapons Tibia',
       description:
-        'Descubra quantas exercise weapons, tempo e dinheiro você precisa para alcançar o seu skill desejado',
+        'Calcule custo, tempo e quantidade de exercise weapons para treinar skills no Tibia.',
     },
     Stamina: {
-      title: 'Stamina',
+      title: 'Calculadora de Stamina Tibia',
       description:
-        'Calcule e acompanhe quanto tempo falta para restaurar sua stamina',
+        'Acompanhe o tempo de recuperação da stamina e treino offline no Tibia.',
     },
     CharmDamage: {
-      title: 'Charm Damage',
+      title: 'Calculadora de Dano de Charm Tibia',
       description:
-        'Compare a média de dano entre diferentes charms para descobrir qual é a melhor',
+        'Compare o dano médio dos charms no Tibia e escolha a melhor opção.',
     },
     ImbuementsCost: {
-      title: 'Custo de Imbuements',
+      title: 'Calculadora de Imbuements Tibia',
       description:
-        'Calcule qual a forma mais barata de se comprar materiais para imbuements',
+        'Calcule a forma mais barata de comprar materiais e gold tokens para imbuements.',
     },
     LootSplit: {
-      title: 'Dividir Loot',
-      description: 'Gerencie e divida o loot das suas hunts em party',
+      title: 'Calculadora de Dividir Loot Tibia',
+      description:
+        'Divida o loot da party no Tibia e calcule o lucro por membro.',
     },
     AuctionEstimation: {
-      title: 'Estimar preço de leilões',
-      description: 'Estime o preço de qualquer personagem no Char Bazaar',
+      title: 'Estimador de Preço do Char Bazaar Tibia',
+      description:
+        'Estime preços de leilões do Char Bazaar com base em vendas recentes.',
     },
   },
   none: 'Nenhum',

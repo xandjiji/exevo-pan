@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout, Root } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
@@ -9,10 +10,13 @@ import { buildPageTitle, buildUrl } from 'utils'
 import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.DASHBOARD.ROOT)
-
-export default function Dashboard() {
+export default function Dashboard({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const i18n = translations.dashboard
 
@@ -21,6 +25,8 @@ export default function Dashboard() {
     title: pageName,
   })
 
+  const pageUrl = buildUrl(routes.DASHBOARD.ROOT, locale)
+  const defaultPageUrl = buildUrl(routes.DASHBOARD.ROOT)
   const pageTitle = buildPageTitle(pageName)
 
   const { data: session } = useSession()
@@ -41,6 +47,7 @@ export default function Dashboard() {
         <meta property="og:description" content={i18n.Meta.root.description} />
         <meta property="og:type" content="website" />
 
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
@@ -48,23 +55,23 @@ export default function Dashboard() {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.LOGIN, 'pt')}
+          href={buildUrl(routes.DASHBOARD.ROOT, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.LOGIN, 'es')}
+          href={buildUrl(routes.DASHBOARD.ROOT, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.LOGIN, 'pl')}
+          href={buildUrl(routes.DASHBOARD.ROOT, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -75,13 +82,14 @@ export default function Dashboard() {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <Layout>
           {session && (
             <section className="grid place-items-center gap-8 lg:flex lg:items-start lg:justify-center lg:gap-16">
               <Root.Pitch proStatus={session.user.proStatus} />
               {!session.user.proStatus && (
                 <Root.PurchaseForm
+                  userId={session.user.id}
                   email={session.user.email}
                   initialTxId={session.user.paymentData?.id}
                   initialCharacter={session.user.paymentData?.character}
@@ -106,5 +114,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       dashboard: dashboard[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

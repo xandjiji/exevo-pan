@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { PreviewImageClient } from 'services'
 import { BossesClient, DrawerFieldsClient } from 'services/server'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { Template, Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildPageTitle, buildUrl, SECONDS_IN, sortBossesBy } from 'utils'
@@ -12,14 +13,17 @@ type BossTrackerProps = {
   serverOptions: Option[]
   bossChances: BossChances
   recentlyAppeared: BossStats[]
+  bestiaryBannerVariant: number
 }
 
 const { heroSrc } = Tracker
 
 export default function BossTrackerPage(args: BossTrackerProps) {
-  const { bossChances } = args
+  const { bossChances, bestiaryBannerVariant } = args
   const pagePath = `${routes.BOSSES.TRACKER}/${bossChances.server}`
-  const pageUrl = buildUrl(pagePath)
+  const { locale } = useRouter()
+  const pageUrl = buildUrl(pagePath, locale)
+  const defaultPageUrl = buildUrl(pagePath)
 
   const translations = useTranslations()
 
@@ -29,7 +33,7 @@ export default function BossTrackerPage(args: BossTrackerProps) {
     imgSrc: heroSrc,
   })
 
-  const pageTitle = buildPageTitle(pageName)
+  const pageTitle = buildPageTitle(`${pageName} - ${bossChances.server}`)
 
   return (
     <>
@@ -60,11 +64,11 @@ export default function BossTrackerPage(args: BossTrackerProps) {
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -73,9 +77,20 @@ export default function BossTrackerPage(args: BossTrackerProps) {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: `${pageName} - ${bossChances.server}`,
+              url: pageUrl,
+              description: translations.bossTracker.Meta.description,
+            }),
+          }}
+        />
       </Head>
 
-      <Template>
+      <Template bestiaryBannerVariant={bestiaryBannerVariant}>
         <Tracker {...args} />
       </Template>
     </>
@@ -108,6 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         bossTracker: bossTracker[locale as RegisteredLocale],
       },
       locale,
+      bestiaryBannerVariant: Math.random(),
     },
     revalidate: SECONDS_IN.HOUR,
   }

@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, cloneElement, memo } from 'react'
+import { formatNumberWithCommas, clampValue, debounce } from 'utils'
+import { cloneElement, memo, useMemo, useState } from 'react'
 import clsx from 'clsx'
-import { clampValue, debounce } from 'utils'
 import { ChevronRightIcon, LastIcon } from 'assets/svgs'
 import usePagination from './usePagination'
 import { IconProps, PaginatorProps } from './types'
@@ -50,7 +50,9 @@ const Paginator = ({
 
   const trackerDisplay =
     totalItems > 0
-      ? `${startOffset} - ${endOffset} ${common.Of} ${totalItems}`
+      ? `${formatNumberWithCommas(startOffset)} - ${formatNumberWithCommas(
+          endOffset,
+        )} ${common.Of} ${formatNumberWithCommas(totalItems)}`
       : noItemsMessage
 
   const changePage = debounce((newPage: number) => {

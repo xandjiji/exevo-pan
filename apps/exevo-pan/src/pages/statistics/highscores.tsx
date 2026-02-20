@@ -5,21 +5,29 @@ import { Top10Data } from 'modules/Statistics/components/HighscoresGrid/types'
 import { PreviewImageClient } from 'services'
 import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, statistics } from 'locales'
 
-const pageUrl = buildUrl(routes.HIGHSCORES)
-
-export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
+export default function Highscores({
+  top10Data,
+  bestiaryBannerVariant,
+}: {
+  top10Data: Top10Data
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const pageName = translations.statistics.Meta.Highscores.title
   const previewSrc = PreviewImageClient.getSrc({
     title: `${pageName} 📊`,
   })
 
+  const pageUrl = buildUrl(routes.HIGHSCORES, locale)
+  const defaultPageUrl = buildUrl(routes.HIGHSCORES)
   const pageTitle = buildPageTitle(pageName)
 
   return (
@@ -51,7 +59,7 @@ export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -67,7 +75,7 @@ export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
           hrefLang="pl"
           href={buildUrl(routes.HIGHSCORES, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -78,7 +86,7 @@ export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
         />
       </Head>
 
-      <Main>
+      <Main bestiaryBannerVariant={bestiaryBannerVariant}>
         <main>
           <Header />
           <HighscoresGrid top10Data={top10Data} />
@@ -120,6 +128,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         top10Shielding,
         top10Sword,
       },
+      bestiaryBannerVariant: Math.random(),
     },
   }
 }

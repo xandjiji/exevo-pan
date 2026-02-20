@@ -1,5 +1,6 @@
 export type FooterProps = {
   variant?: 'primary' | 'surface'
+  bestiaryBannerVariant: number
 }
 
 export type RouteItem = {

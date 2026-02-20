@@ -72,6 +72,7 @@ export default defaultComposer(defaultTranslations, {
     forever: 'para sempre',
   },
   PurchaseForm: {
+    creditCard: 'Cartão de Crédito',
     order: 'Pedido',
     payment: 'Pagamento',
     paymentCharacterLabel: 'Personagem que enviará as coins',

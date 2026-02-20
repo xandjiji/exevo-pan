@@ -2,21 +2,22 @@
 import { endpoints, locales } from 'Constants'
 import { serializeBody } from 'shared-utils/dist/contracts/BlogFilters/utils'
 import {
+  DEFAULT_FILTER_OPTIONS,
   DEFAULT_PAGINATION_OPTIONS,
   DEFAULT_SORT_OPTIONS,
-  DEFAULT_FILTER_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import {
-  CacheObject,
-  GetStaticContentProps,
-  GetEveryPostLocaleProps,
   AllBlogPosts,
+  CacheObject,
+  GetEveryPostLocaleProps,
+  GetStaticContentProps,
 } from './types'
 
 const { DEFAULT_LOCALE } = locales
 const CACHE_MAX_AGE = 180000
 const MDX_EXTENSION = '.mdx'
 const POST_DATA_FILE = 'PostData.json'
+const DEV_POSTS_PATH = '/home/xand/exevo-pan/apps/blog-worker/_posts'
 
 export default class BlogClient {
   private static cache: CacheObject = {}
@@ -79,6 +80,23 @@ export default class BlogClient {
     locale = DEFAULT_LOCALE as string,
     slug,
   }: GetStaticContentProps): Promise<string> {
+    if (
+      process.env.NODE_ENV === 'development' &&
+      typeof window === 'undefined'
+    ) {
+      try {
+        const { promises: fs } = await import('fs')
+        const { join } = await import('path')
+        const filePath = join(DEV_POSTS_PATH, locale, `${slug}${MDX_EXTENSION}`)
+        return await fs.readFile(filePath, 'utf-8')
+      } catch (error) {
+        console.warn(
+          `Failed to read post from filesystem: ${slug} (${locale}). Falling back to fetch.`,
+          error,
+        )
+      }
+    }
+
     const response = await fetch(
       `${this.blogStaticUrl}/${locale}/${slug}${MDX_EXTENSION}`,
     )

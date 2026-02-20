@@ -5,8 +5,8 @@ import defaultTranslations from '../en/advertise'
 
 export default defaultComposer(defaultTranslations, {
   Meta: {
-    title: 'Reklama',
-    description: 'Podświetl swoją aukcję, aby uzyskać lepszą cenę!',
+    title: 'Wyróżnij Aukcję Tibia',
+    description: 'Wyróżnij aukcję Char Bazaar Tibia i uzyskaj lepsze oferty.',
   },
   StepItems: {
     Select: 'Wybierz',

@@ -7,7 +7,7 @@ export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Blog',
     description:
-      'Tutaj możesz znaleźć poradniki, artykuły oraz najnowsze informacji dotyczące Tibii, jak i naszej strony - Exevo Pan',
+      'Poradniki Tibia i Exevo Pan o Char Bazaar, bossach i kalkulatorach.',
     breadcrumbRoot: 'Home',
   },
   recentPosts: 'Ostatnie posty',

@@ -13,7 +13,7 @@ jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 
 const mockedUseAuctions = useAuctions as jest.MockedFunction<typeof useAuctions>
 
-describe.skip('<AuctionsGrid />', () => {
+describe.skip('<AuctionsGrid bestiaryBannerVariant={0.5} />', () => {
   beforeEach(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -31,7 +31,9 @@ describe.skip('<AuctionsGrid />', () => {
   })
 
   test('should display empty state if there are no characters', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(
+      <AuctionsGrid bestiaryBannerVariant={0.5} />,
+    )
 
     expect(
       screen.queryByText('Sorry, no auction was found'),
@@ -45,7 +47,7 @@ describe.skip('<AuctionsGrid />', () => {
       },
     }))
 
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(
       screen.queryByText('Sorry, no auction was found'),
@@ -56,7 +58,9 @@ describe.skip('<AuctionsGrid />', () => {
   })
 
   test('should display highlighted characters', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(
+      <AuctionsGrid bestiaryBannerVariant={0.5} />,
+    )
 
     DEFAULT_AUCTIONS_STATE.highlightedAuctions.forEach(({ nickname }) => {
       expect(screen.queryByText(nickname)).not.toBeInTheDocument()
@@ -67,7 +71,7 @@ describe.skip('<AuctionsGrid />', () => {
       shouldDisplayHighlightedAuctions: true,
     }))
 
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     DEFAULT_AUCTIONS_STATE.highlightedAuctions.forEach(({ nickname }) => {
       expect(screen.queryByText(nickname)).toBeInTheDocument()
@@ -75,7 +79,9 @@ describe.skip('<AuctionsGrid />', () => {
   })
 
   test('should display active filter count', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(
+      <AuctionsGrid bestiaryBannerVariant={0.5} />,
+    )
 
     expect(screen.getByLabelText('0 filters are active')).toBeInTheDocument()
 
@@ -83,7 +89,7 @@ describe.skip('<AuctionsGrid />', () => {
       ...DEFAULT_AUCTIONS_STATE,
       activeFilterCount: 1,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(screen.getByLabelText('1 filter is active')).toBeInTheDocument()
 
@@ -91,13 +97,15 @@ describe.skip('<AuctionsGrid />', () => {
       ...DEFAULT_AUCTIONS_STATE,
       activeFilterCount: 5,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(screen.getByLabelText('5 filters are active')).toBeInTheDocument()
   })
 
   test('paginator should display the correct data', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(
+      <AuctionsGrid bestiaryBannerVariant={0.5} />,
+    )
 
     expect(
       screen.getByText(
@@ -115,7 +123,7 @@ describe.skip('<AuctionsGrid />', () => {
       ...DEFAULT_AUCTIONS_STATE,
       paginatedData: newPaginatedData,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(
       screen.getByText(
@@ -127,7 +135,7 @@ describe.skip('<AuctionsGrid />', () => {
   })
 
   test('should open the filter drawer', () => {
-    renderWithProviders(<AuctionsGrid />)
+    renderWithProviders(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     userEvent.click(screen.getByRole('button', { name: 'Open filter drawer' }))
     expect(screen.getByText('Filters')).toBeInTheDocument()
@@ -151,7 +159,7 @@ describe.skip('<AuctionsGrid />', () => {
       ...DEFAULT_AUCTIONS_STATE,
       highlightedAuctions: [highlightedAuction],
     }))
-    renderWithProviders(<AuctionsGrid />)
+    renderWithProviders(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(screen.getByText(/123,456 invested/gi)).toBeInTheDocument()
   })
@@ -169,7 +177,7 @@ describe.skip('<AuctionsGrid />', () => {
       },
     }))
 
-    renderWithProviders(<AuctionsGrid />)
+    renderWithProviders(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(screen.getByText(/training dummy/i)).toBeInTheDocument()
     expect(screen.getByText(/max level:/i)).toBeInTheDocument()
@@ -182,7 +190,9 @@ describe.skip('<AuctionsGrid />', () => {
   })
 
   test('grid mode should be updated', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(
+      <AuctionsGrid bestiaryBannerVariant={0.5} />,
+    )
 
     expect(
       screen.getByRole('button', { name: 'Current auctions' }),
@@ -193,7 +203,7 @@ describe.skip('<AuctionsGrid />', () => {
       mode: 'favorites',
       loading: true,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(
       screen.getByRole('button', { name: 'Favorites' }),
@@ -201,7 +211,9 @@ describe.skip('<AuctionsGrid />', () => {
   })
 
   test('filter button should be disabled if in favorites mode', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(
+      <AuctionsGrid bestiaryBannerVariant={0.5} />,
+    )
 
     expect(
       screen.getByRole('button', { name: 'Open filter drawer' }),
@@ -213,7 +225,7 @@ describe.skip('<AuctionsGrid />', () => {
       loading: false,
     }))
 
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(
       screen.getByRole('button', { name: 'Open filter drawer' }),
@@ -230,7 +242,7 @@ describe.skip('<AuctionsGrid />', () => {
       },
     }))
 
-    renderWithProviders(<AuctionsGrid />)
+    renderWithProviders(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(screen.getByRole('alert')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /123/g })).toBeInTheDocument()
@@ -251,7 +263,7 @@ describe.skip('<AuctionsGrid />', () => {
       },
     }))
 
-    renderWithProviders(<AuctionsGrid />)
+    renderWithProviders(<AuctionsGrid bestiaryBannerVariant={0.5} />)
 
     expect(screen.getByText(/current auctions/i).textContent).toEqual(
       'Current auctions (3)',

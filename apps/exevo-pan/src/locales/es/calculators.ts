@@ -6,23 +6,39 @@ import defaultTranslations from '../en/calculators'
 export default defaultComposer(defaultTranslations, {
   Meta: {
     Main: {
-      title: 'Calculadoras',
+      title: 'Calculadoras de Tibia',
       description:
-        'Todo tipo de calculadoras y herramientas de Tibia para ayudarte!',
+        'Calculadoras y herramientas de Tibia para Char Bazaar, skills, loot split, imbuements y stamina.',
     },
     ExerciseWeapons: {
-      title: 'Exercise weapons',
+      title: 'Calculadora de Exercise Weapons de Tibia',
       description:
-        'Averigua cuantas exercise weapons, tiempo y dinero necesitas para llegar a tu skill deseado',
+        'Calcula costo, tiempo y cantidad de exercise weapons para entrenar skills en Tibia.',
     },
     Stamina: {
-      title: 'Stamina',
-      description: 'Calcula cuánto tiempo hace falta para recuperar tu stamina',
+      title: 'Calculadora de Stamina de Tibia',
+      description:
+        'Calcula el tiempo de recuperación de stamina y entrenamiento offline en Tibia.',
     },
     CharmDamage: {
-      title: 'Charm Damage',
+      title: 'Calculadora de Daño de Charms de Tibia',
       description:
-        'Compara el daño medio entre diferentes charms para ver cual es mejor',
+        'Compara el daño medio de charms en Tibia para elegir el mejor.',
+    },
+    ImbuementsCost: {
+      title: 'Calculadora de Imbuements de Tibia',
+      description:
+        'Calcula la forma más barata de comprar materiales y gold tokens para imbuements.',
+    },
+    LootSplit: {
+      title: 'Calculadora de Reparto de Loot en Tibia',
+      description:
+        'Divide el loot de la party en Tibia y calcula la ganancia por miembro.',
+    },
+    AuctionEstimation: {
+      title: 'Estimador de Precio del Char Bazaar de Tibia',
+      description:
+        'Estima precios de subastas del Char Bazaar con ventas recientes.',
     },
   },
   none: 'Nada',

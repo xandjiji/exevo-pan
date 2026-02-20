@@ -2,7 +2,7 @@ export default {
   Meta: {
     title: 'Blog',
     description:
-      'Here you can find tutorials, articles and news about Tibia and Exevo Pan',
+      'Tibia guides, tutorials, and Exevo Pan tips for Char Bazaar, bosses, and calculators.',
     breadcrumbRoot: 'Home',
   },
   recentPosts: 'Recent posts',

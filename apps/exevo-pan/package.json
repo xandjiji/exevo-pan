@@ -49,6 +49,7 @@
     "react-hot-toast": "^2.4.0",
     "react-popper": "^2.2.5",
     "shared-utils": "*",
+    "stripe": "^16.10.0",
     "superjson": "^1.12.2",
     "uuid": "^8.3.2",
     "web-push": "^3.5.0",

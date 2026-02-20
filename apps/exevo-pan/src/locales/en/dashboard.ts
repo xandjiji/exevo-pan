@@ -68,6 +68,7 @@ export default {
     forever: 'forever',
   },
   PurchaseForm: {
+    creditCard: 'Credit Card',
     order: 'Order',
     payment: 'Payment',
     paymentCharacterLabel: 'Sending coins character',

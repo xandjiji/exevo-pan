@@ -28,15 +28,19 @@ import { buildPageTitle, buildUrl, loadRawSrc, referralTracker } from 'utils'
 import { exevoPro, jsonld, routes } from 'Constants'
 import { common, exevopro } from 'locales'
 
-const pageUrl = buildUrl(routes.EXEVOPRO)
-
-export default function ExevoPro() {
+export default function ExevoPro({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
   const i18n = translations.exevopro
 
   const pageTitle = buildPageTitle(i18n.Meta.title)
   const { locale } = useRouter()
   const previewSrc = loadRawSrc(`/pro-${locale}.png`)
+  const pageUrl = buildUrl(routes.EXEVOPRO, locale)
+  const defaultPageUrl = buildUrl(routes.EXEVOPRO)
 
   useEffect(() => {
     referralTracker.checkUrlAndSetLS()
@@ -66,7 +70,7 @@ export default function ExevoPro() {
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -82,7 +86,7 @@ export default function ExevoPro() {
           hrefLang="pl"
           href={buildUrl(routes.EXEVOPRO, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -91,9 +95,21 @@ export default function ExevoPro() {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: i18n.Meta.title,
+              url: pageUrl,
+              description: i18n.Meta.description,
+              applicationCategory: 'BusinessApplication',
+            }),
+          }}
+        />
       </Head>
 
-      <Main clean>
+      <Main clean bestiaryBannerVariant={bestiaryBannerVariant}>
         <main className="inner-container grid gap-24 overflow-x-hidden py-20">
           <section className="relative mb-28 flex flex-col items-center gap-10">
             <ThreeDimensionalMiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
@@ -236,17 +252,28 @@ export default function ExevoPro() {
 
                   <p className="text-tsm flex flex-nowrap items-center justify-center opacity-75 md:justify-start">
                     ({i18n.or}
-                    <Image
-                      src={pixSrc}
-                      alt="Pix"
-                      unoptimized
-                      width={16}
-                      height={16}
-                      className="mx-1 select-none"
-                    />
-                    <strong className="whitespace-nowrap text-base">
-                      R$ {exevoPro.price.PIX},00
-                    </strong>
+                    {locale !== 'pt' && (
+                      <>
+                        <strong className="ml-1 whitespace-nowrap text-base">
+                          $8,99
+                        </strong>
+                      </>
+                    )}
+                    {locale === 'pt' && (
+                      <>
+                        <Image
+                          src={pixSrc}
+                          alt="Pix"
+                          unoptimized
+                          width={16}
+                          height={16}
+                          className="mx-1 select-none"
+                        />
+                        <strong className="whitespace-nowrap text-base">
+                          R$ {exevoPro.price.PIX},00
+                        </strong>
+                      </>
+                    )}
                     )
                   </p>
                 </div>
@@ -281,5 +308,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       exevopro: exevopro[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

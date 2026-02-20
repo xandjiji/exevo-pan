@@ -2,7 +2,7 @@ export default {
   Meta: {
     title: 'Exevo PRO',
     description:
-      'Upgrade now to Exevo PRO and have full access to all exclusive features!',
+      'Unlock Exevo PRO for Tibia boss tracker, Char Bazaar analytics, and premium auction tools.',
   },
   heading: 'Become {{exevopro}}',
   heroCTA: 'Start now',

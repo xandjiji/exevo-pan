@@ -5,16 +5,21 @@ import { GetStaticProps } from 'next'
 import { buildPageTitle } from 'utils'
 import { common } from 'locales'
 
-export default function Admin() {
+export default function Admin({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const pageTitle = buildPageTitle('Admin')
 
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Head>
 
-      <Template>
+      <Template bestiaryBannerVariant={bestiaryBannerVariant}>
         <div className="mx-auto grid max-w-3xl gap-4">
           <RevenueSummary />
           <PaymentList />
@@ -29,5 +34,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
     translations: {
       common: common[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

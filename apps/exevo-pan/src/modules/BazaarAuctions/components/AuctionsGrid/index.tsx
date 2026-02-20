@@ -1,11 +1,12 @@
 import clsx from 'clsx'
-import { useTranslations } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
+import { links } from 'Constants'
 import { AuctionNotificationsProvider } from './useAuctionNotifications'
 import FilterControl from './FilterControl'
 import ExpandableCharacterCard from './ExpandableCharacterCard'
@@ -19,10 +20,63 @@ import * as S from './atoms'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-type AuctionsGridProps = { tibiaTradeItems?: TibiaTradeHighlightedItem[] }
+type AuctionsGridProps = {
+  tibiaTradeItems?: TibiaTradeHighlightedItem[]
+  bestiaryBannerVariant: number
+}
 
-const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
-  const { homepage } = useTranslations()
+const AuctionsGrid = ({
+  tibiaTradeItems = [],
+  bestiaryBannerVariant,
+}: AuctionsGridProps) => {
+  const { homepage, common } = useTranslations()
+
+  const bestiaryJsxList = [
+    <div>
+      <p className="text-tsm mb-2 font-light">
+        {templateMessage(common.BestiaryBanner.heading, {
+          link: (
+            <a
+              href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopa`}
+              target="_blank"
+              rel="noopener external nofollow noreferrer"
+              className="text-primaryHighlight font-bold tracking-wide"
+            >
+              Bestiary Arena
+            </a>
+          ),
+        })}
+      </p>
+
+      <a
+        href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopa`}
+        target="_blank"
+        rel="noopener external nofollow noreferrer"
+        className="block h-[60px]"
+      >
+        <img
+          alt="Open Summon Scroll"
+          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+          src="https://i.imgur.com/tZ7ba1h.png"
+        />
+      </a>
+    </div>,
+    <a
+      href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopb`}
+      target="_blank"
+      rel="noopener external nofollow noreferrer"
+      className="grid h-[60px] place-items-center"
+    >
+      <img
+        alt="Bestiary Arena"
+        className="pixelated clickable h-[60px] w-[468px] rounded-lg shadow-lg"
+        src="https://i.imgur.com/kcHD5Nb.png"
+      />
+    </a>,
+  ]
+
+  const bestiaryJsx =
+    bestiaryJsxList[Math.floor(bestiaryBannerVariant * bestiaryJsxList.length)]
 
   const {
     loading,
@@ -134,6 +188,12 @@ const AuctionsGrid = ({ tibiaTradeItems = [] }: AuctionsGridProps) => {
           onClose={closeDrawer}
         />
       </ClientComponent>
+
+      <section className="inner-container relative mt-4 overflow-hidden sm:hidden">
+        <div className="z-1 from-background absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+
+        {bestiaryJsx}
+      </section>
 
       <div className="inner-container grid gap-4 py-4">
         <div className="grid gap-2 md:gap-10">

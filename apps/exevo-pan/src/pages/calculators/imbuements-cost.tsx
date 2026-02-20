@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { ImbuementsCost, Template, useRoutes } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
 import { PreviewImageClient } from 'services'
 import { buildPageTitle, buildUrl } from 'utils'
@@ -8,10 +9,14 @@ import { jsonld, routes } from 'Constants'
 import { calculators, common } from 'locales'
 
 const pageRoute = routes.IMBUEMENTS_COST
-const pageUrl = buildUrl(pageRoute)
 
-export default function Calculator() {
+export default function Calculator({
+  bestiaryBannerVariant,
+}: {
+  bestiaryBannerVariant: number
+}) {
   const translations = useTranslations()
+  const { locale } = useRouter()
 
   const pageName = translations.calculators.Meta.ImbuementsCost.title
 
@@ -24,6 +29,8 @@ export default function Calculator() {
     title: pageName,
     imgSrc: routeData?.hero,
   })
+  const pageUrl = buildUrl(pageRoute, locale)
+  const defaultPageUrl = buildUrl(pageRoute)
 
   return (
     <>
@@ -54,7 +61,7 @@ export default function Calculator() {
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={defaultPageUrl} />
         <link
           rel="alternate"
           hrefLang="pt"
@@ -70,7 +77,7 @@ export default function Calculator() {
           hrefLang="pl"
           href={buildUrl(routes.IMBUEMENTS_COST, 'pl')}
         />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={defaultPageUrl} />
 
         <script
           type="application/ld+json"
@@ -79,11 +86,24 @@ export default function Calculator() {
             __html: jsonld.standard,
           }}
         />
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.webApplication({
+              name: pageName,
+              url: pageUrl,
+              description:
+                translations.calculators.Meta.ImbuementsCost.description,
+            }),
+          }}
+        />
       </Head>
 
       <Template
         currentRoute={pageRoute}
         className="grid items-start justify-center"
+        bestiaryBannerVariant={bestiaryBannerVariant}
       >
         <ImbuementsCost />
       </Template>
@@ -97,5 +117,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
       common: common[locale as RegisteredLocale],
       calculators: calculators[locale as RegisteredLocale],
     },
+    bestiaryBannerVariant: Math.random(),
   },
 })

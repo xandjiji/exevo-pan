@@ -5,8 +5,9 @@ import defaultTranslations from '../en/advertise'
 
 export default defaultComposer(defaultTranslations, {
   Meta: {
-    title: 'Anunciar',
-    description: '¡Destaque su propia subasta y obtenga ofertas más altas!',
+    title: 'Destacar Subasta Tibia',
+    description:
+      'Destaca tu subasta del Char Bazaar de Tibia y consigue mejores ofertas.',
   },
   StepItems: {
     Select: 'Seleccionar',

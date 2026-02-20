@@ -3,7 +3,6 @@
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { loadRawSrc } from 'utils'
-import { Shine } from 'components/Atoms'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 import { useLocalizedHref } from 'hooks/useLocalizedHref'
@@ -12,7 +11,6 @@ import { FooterProps, RouteItem } from './types'
 const tbjSrc = loadRawSrc('/assets/tibiablackjack.png')
 const edgarSrc = loadRawSrc('/edgartc.png')
 const rdcSrc = loadRawSrc('/reidoscoins.png')
-// const noPingSrc = loadRawSrc('/assets/noping-footer.png')
 
 const listItems: RouteItem[] = [
   { href: routes.HOME, content: 'charBazaar' },
@@ -51,8 +49,41 @@ const Card = ({
   />
 )
 
-const Footer = ({ variant = 'primary' }: FooterProps) => {
+const Footer = ({
+  variant = 'primary',
+  bestiaryBannerVariant,
+}: FooterProps) => {
   const { common } = useTranslations()
+
+  const bestiaryJsxList = [
+    <a
+      href={`${links.BESTIARY_ARENA}/?t=exevoscrollfootera`}
+      target="_blank"
+      rel="noopener external nofollow noreferrer"
+      className="grid h-[60px] place-items-center"
+    >
+      <img
+        alt="Open Summon Scroll"
+        className="pixelated h-[60px] w-[468px] shadow-lg"
+        src="https://i.imgur.com/tZ7ba1h.png"
+      />
+    </a>,
+    <a
+      href={`${links.BESTIARY_ARENA}/?t=exevoscrollfooterb`}
+      target="_blank"
+      rel="noopener external nofollow noreferrer"
+      className="grid h-[60px] place-items-center"
+    >
+      <img
+        alt="Bestiary Arena"
+        className="pixelated clickable h-[60px] w-[468px] rounded-lg shadow-lg"
+        src="https://i.imgur.com/kcHD5Nb.png"
+      />
+    </a>,
+  ]
+
+  const bestiaryJsx =
+    bestiaryJsxList[Math.floor(bestiaryBannerVariant * bestiaryJsxList.length)]
 
   return (
     <footer
@@ -64,25 +95,11 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
     >
       <div className="mx-auto grid w-fit gap-8">
         {variant === 'primary' && (
-          <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row">
-            <div className="mx-auto flex h-fit w-fit flex-wrap items-center justify-center gap-6 md:mx-0">
-              <a
-                href={`${links.BESTIARY_ARENA}?tag=exevofooter`}
-                target="_blank"
-                rel="noopener external nofollow"
-                aria-label="Play Bestiary Arena for free now!"
-                className="relative"
-              >
-                <img
-                  alt="Bestiary Arena"
-                  width={283}
-                  height={70}
-                  src="/bestiary-big-widget.png"
-                  style={{ imageRendering: 'pixelated' }}
-                />
-                <Shine animationIterationCount="infinite" width={60} />
-              </a>
-
+          <div
+            id="footer-wrapper"
+            className="flex flex-col gap-6 overflow-hidden"
+          >
+            <div className="flex flex-col flex-wrap items-center justify-center gap-6 sm:flex-row">
               <a href={useLocalizedHref(routes.EXEVOPRO)}>
                 <Card>
                   <ExevoPanIcon width={36} height={36} />
@@ -98,59 +115,65 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   </span>
                 </Card>
               </a>
+
+              <div>
+                <div className="flex flex-wrap items-center justify-center gap-6">
+                  <a
+                    target="_blank"
+                    rel="noopener external nofollow"
+                    href={links.TIBIA_BLACKJACK}
+                  >
+                    <Card variant="secondary">
+                      <img
+                        src={tbjSrc}
+                        width={97}
+                        height={61}
+                        alt="Tibia Blackjack"
+                        loading="lazy"
+                        style={{ filter: 'drop-shadow(0 0 1px black)' }}
+                      />
+                    </Card>
+                  </a>
+
+                  <a
+                    href={links.EDGAR_TC}
+                    target="_blank"
+                    rel="noopener external nofollow"
+                  >
+                    <Card variant="secondary">
+                      <img
+                        src={edgarSrc}
+                        width={117}
+                        height={61}
+                        alt="Edgar Tc"
+                        loading="lazy"
+                      />
+                    </Card>
+                  </a>
+
+                  <a
+                    href={links.REI_DOS_COINS}
+                    target="_blank"
+                    rel="noopener external nofollow"
+                  >
+                    <Card variant="secondary">
+                      <img
+                        src={rdcSrc}
+                        width={51}
+                        height={61}
+                        alt="Rei dos Coins"
+                        loading="lazy"
+                      />
+                    </Card>
+                  </a>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <div className="flex flex-wrap items-center justify-center gap-6">
-                <a
-                  target="_blank"
-                  rel="noopener external nofollow"
-                  href={links.TIBIA_BLACKJACK}
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={tbjSrc}
-                      width={97}
-                      height={61}
-                      alt="Tibia Blackjack"
-                      loading="lazy"
-                      style={{ filter: 'drop-shadow(0 0 1px black)' }}
-                    />
-                  </Card>
-                </a>
+            <div className="relative overflow-hidden">
+              <div className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
 
-                <a
-                  href={links.EDGAR_TC}
-                  target="_blank"
-                  rel="noopener external nofollow"
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={edgarSrc}
-                      width={117}
-                      height={61}
-                      alt="Edgar Tc"
-                      loading="lazy"
-                    />
-                  </Card>
-                </a>
-
-                <a
-                  href={links.REI_DOS_COINS}
-                  target="_blank"
-                  rel="noopener external nofollow"
-                >
-                  <Card variant="secondary">
-                    <img
-                      src={rdcSrc}
-                      width={51}
-                      height={61}
-                      alt="Rei dos Coins"
-                      loading="lazy"
-                    />
-                  </Card>
-                </a>
-              </div>
+              {bestiaryJsx}
             </div>
           </div>
         )}

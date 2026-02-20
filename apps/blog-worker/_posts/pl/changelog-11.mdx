@@ -1,28 +1,27 @@
 ---
-title: 'Exevo Pan update: Auction price estimations'
-description: 'Are you not sure about how much to bid on a certain auction? Our new Auction Price Calculator now got you covered!'
+title: 'Exevo Pan update: Szacunkowa wartość aukcji'
+description: 'Masz wątpliwości, jaką kwotę zaoferować w konkretnej aukcji? Nasz nowy Kalkulator Cen Aukcyjnych pomoże Ci podjąć decyzję.'
 date: 28-04-2023
 thumbnail: /blog/thumbnails/abacus.png
 author: Ksu
+translator: Longer Star
 tags:
   - news
 ---
 
-<TranslationAlert />
+## Informacja
 
-## Announcement
+Nie jesteś pewien, ile zaoferować w danej aukcji? A może jesteś ciekaw, jaka jest wartość Twojej własnej postaci? Nasz nowy **Kalkulator Cen Aukcyjnych** 📊 Teraz przychodzi z pomocą!
 
-Are you not sure about how much to bid on a certain auction? Or perhaps you're curious about your own character value? Our new **Auction Price Calculator** 📊 now got you covered!
-
-Our algorithm will compare any character auction (or even an hypothetical character) to all similar characters from our auction history database and calculate its average price!
+Nasz algorytm porówna dowolną aukcję postaci (a nawet postać hipotetyczną) ze wszystkimi podobnymi postaciami z naszej historycznej bazy danych aukcji i obliczy jej średnią cenę!
 
 <Image
   src="/blog/images/price-estimation-menu.png"
   width={374}
   height={320}
   align="center"
-  alt="Accessing the Char Bazaar auction price calculator"
-  caption="Accessing the price calculator for a specific auction"
+  alt="Uzyskiwanie dostępu do kalkulatora cen aukcyjnych Char Bazaar"
+  caption="Kalkulator cen dla konkretnej aukcji"
   unoptimized
 />
 
@@ -31,53 +30,53 @@ Our algorithm will compare any character auction (or even an hypothetical charac
   width={332}
   height={301}
   align="center"
-  alt="The estimated price for a Char Bazaar auction"
-  caption="Calculating the estimated price"
+  alt="Przewidywana cena aukcji w Char Bazaar"
+  caption="Obliczanie szacunkowej ceny"
   unoptimized
 />
 
 ---
 
-Additionally, you will be able to estimate the auction price for a hypothetical character as well! Just go to our <RouteLink href="/calculators/auction-estimations">Auction Price Estimator</RouteLink> in our calculators section:
+Ponadto masz możliwość oszacowania ceny aukcji dla postaci hipotetycznej. Aby to zrobić, przejdź do naszego <RouteLink href="/calculators/auction-estimations">Szacowanie Ceny Aukcji</RouteLink> w zakładce Kalkulatory:
 
 <Image
   src="/blog/images/estimation-calculator.png"
   width={1016}
   height={508}
   align="center"
-  alt="Calculating the estimated price for an hypothetical character"
-  caption="Estimating the value of my own character 😛"
+  alt="Wyliczanie ceny hipotetycznej postaci"
+  caption="Obliczanie wartości mojej postaci"
   unoptimized
 />
 
-## About the calculator
+## Szczegóły kalkulatora
 
-We experimented with several different statistical algorithms and backtested them against our own database to see which one outputted the best results. The overall conclusion was that the price of an auction was strongly correlated with the combination of **server type** and character **level** + **skills**.
+Przeprowadziliśmy testy kilku różnych algorytmów statystycznych, sprawdzając je na naszej własnej bazie danych, aby określić, który z nich daje najbardziej wiarygodne wyniki. Wnioski jednoznacznie pokazują, że cena aukcji jest w dużym stopniu uzależniona od **rodzaju serwera**, **profesji**, **poziomu** + **skilli**.
 
-Our calculator won't be considering some other valuable aspects, such as:
+Nasz kalkulator nie bierze pod uwagę niektórych czynników, takich jak:
 
-- Items and equipments
-- Mounts and outfits
-- Tibia Coin invested
-- Charms
+- Przedmioty i ekwipunek  
+- Mounty i outfity  
+- Zainwestowane Tibia Coins  
+- Charmy  
 
-Since these characteristics are very **variable** and **subjective**, they end up adding too much noise to our calculations.
+Ponieważ te cechy są bardzo **zmienne** i **indywidualne**, w efekcie obliczenia stają się mniej precyzyjne.
 
-Every character is very unique, but our algorithm will perform better when these singularities are ignored. This means that our calculator will point you to an overall baseline value for your character, but it can still vary a lot.
+Każda postać jest w pewien sposób unikalna, jednak nasz algorytm działa lepiej, gdy te indywidualne różnice są pomijane. Oznacza to, że kalkulator wskazuje ogólną, bazową wartość Twojej postaci. W praktyce jednak wynik może się jeszcze różnić.
 
 ---
 
-We also silently shipped (🥷) some other features and improvements since our last changelog! Here is the complete set of changes:
+Równolegle, bez oficjalnego ogłoszenia, wprowadziliśmy (🥷) kilka dodatkowych funkcji i usprawnień od czasu ostatniego changeloga. Poniżej znajdziesz pełną listę zmian:
 
 ## 🎉 Features
 
-- Auction price estimations
-- Checking boss system for <RouteLink href="/bosses/hunting-groups">boss hunting groups</RouteLink>
-- Your <RouteLink href="/dashboard">user dashboard</RouteLink> now nas several new pages: **transaction history**, **auction notifications** and **notification devices**
-- Auction filters for **minimum skill**, **maximum skill**, **minimum charm points** and **maximum charm points**
+- Szacunkowe ceny postaci  
+- Sprawdzanie systemu bossów <RouteLink href="/bosses/hunting-groups">boss hunting groups</RouteLink>  
+- Twój <RouteLink href="/dashboard">Panel Użytkownika</RouteLink> został rozbudowany o kilka nowych podstron: **Historia Transakcji**, **Alerty aukcyjne** i **Metody powiadomień**  
+- Filtry aukcji: **minimalna wartość skilla**, **maksymalna wartość skilla**, **minimalna wartość Charm’ów** i **maksymalna wartość Charm’ów**
 
-## 🔧 Refactors
+## 🔧 Refaktoryzacja
 
-- Fixed several minor bugs in our Boss Tracker scripts. Boss spawn chances are now more precise 💪
-- The skill estimation dialog for auction characters was moved from the details dialog to the dropdown menu
-- Improvements to our partners advertisement UI
+- Naprawiono kilka drobnych błędów w skryptach Boss Trackera — szanse spawnu bossów są teraz bardziej precyzyjne 💪  
+- Okno szacowania skilli dla postaci z aukcji zostało przeniesione z panelu szczegółów do menu rozwijanego  
+- Usprawnienia w interfejsie reklam partnerów

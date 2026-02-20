@@ -7,6 +7,9 @@ const dialect = new MysqlDialect({
     uri: process.env.DATABASE_URL,
     connectionLimit: 30,
     timezone: 'Z',
+    connectTimeout: 10000, // 10 seconds connection timeout
+    enableKeepAlive: true,
+    keepAliveInitialDelay: 0,
   }),
 })
 
