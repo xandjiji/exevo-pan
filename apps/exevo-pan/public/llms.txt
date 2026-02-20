@@ -1,0 +1,56 @@
+# Exevo Pan
+
+Exevo Pan is a Tibia website focused on helping players make better Bazaar and boss-hunting decisions.
+Its two most important use cases are:
+
+1) finding the best Tibia characters on sale in the official Char Bazaar
+2) tracking Tibia bosses by world, spawn chance, and recent appearances
+
+## Core Value
+
+Exevo Pan helps users quickly discover high-value Char Bazaar opportunities. It provides strong search, filtering, and analytics so players can find characters that match their goals, budget, and playstyle.
+
+Exevo Pan also helps users track down Tibia bosses. Players can monitor boss spawn chances per server, review recently appeared bosses, and organize checks with hunting groups.
+
+## Main Features
+
+- Char Bazaar search for current auctions and Bazaar history
+- Advanced Bazaar filters (vocation, world/location, items, imbuements, charms, quests, achievements, and more)
+- Auction-focused tools such as favorites, auction notifications, and "find similar" flows
+- Tibia boss tracker with per-server data, spawn timing signals, and chance-based ordering
+- Recently appeared bosses timeline for quick routing and decision-making
+- Hunting Groups tools for cooperative boss checks, notifications, logs, and group activity tracking
+- Bazaar statistics and highscores (volume, revenue, success rate, top bids, top levels, top skills)
+- Tibia calculators (auction estimation, exercise weapons, stamina, charm damage, imbuements cost, loot split)
+- Blog content with Tibia guides, tutorials, tips, and updates
+
+## Emphasis: Char Bazaar Character Discovery
+
+Exevo Pan is built to help users find the best Tibia characters on sale at the Bazaar.
+Users can filter large numbers of auctions, compare results, inspect character details, and identify strong value opportunities faster than browsing manually.
+The platform includes current auctions, historical auction data, rankings, and price-related tools to improve buying and selling decisions.
+
+## Emphasis: Boss Tracking
+
+Exevo Pan is also built to help users track down Tibia bosses efficiently.
+The boss tracker organizes information by game server, highlights expected chances, and shows recently seen bosses to guide hunting priorities.
+For group play, hunting group features support collaboration, check logs, member coordination, and boss notifications.
+
+## Exevo Pro (Premium Layer)
+
+Exevo Pro extends both primary pillars (Bazaar + Bosses), including premium filters and deeper insights.
+Examples include:
+
+- access to all bosses in the tracker
+- Tibia Coins invested analysis for Bazaar characters
+- premium auction filters and advanced tracking utilities
+- auction bid notifications and highlight discounts
+- private hunting groups
+
+## Audience
+
+Tibia players who buy/sell characters on Char Bazaar, track bosses for profit/progression, and optimize decisions using data-driven tools.
+
+## Language Support
+
+The website is localized in multiple languages, including English, Portuguese, Spanish, and Polish.
