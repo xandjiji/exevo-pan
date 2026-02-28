@@ -19,6 +19,7 @@ export default defaultComposer(defaultTranslations, {
   },
   RecentlyAppeared: {
     title: 'Vistos recentemente',
+    showMore: 'Mostrar mais',
     /* 'hours ago' */
     ago: 'atrás',
   },

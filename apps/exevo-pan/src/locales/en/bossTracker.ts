@@ -15,6 +15,7 @@ export default {
   },
   RecentlyAppeared: {
     title: 'Recently appeared',
+    showMore: 'Show more',
     /* 'hours ago' */
     ago: 'ago',
   },
