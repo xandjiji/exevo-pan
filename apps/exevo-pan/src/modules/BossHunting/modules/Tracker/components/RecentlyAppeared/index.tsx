@@ -65,7 +65,7 @@ const RecentlyAppeared = ({
         {!showAllMobileBosses && (
           <div
             role="none"
-            className="to-background z-1 absolute -bottom-2 -left-1 h-24 w-[calc(100%+16px)] bg-gradient-to-b from-transparent md:hidden"
+            className="to-background z-1 absolute -bottom-2 -left-1 h-24 w-full bg-gradient-to-b from-transparent md:hidden"
           />
         )}
       </div>

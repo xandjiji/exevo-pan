@@ -2,10 +2,10 @@ import { useMemo } from 'react'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
 import { Hero } from 'templates'
 import { useRouter } from 'next/router'
-import { useTranslations } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { debounce, getFeroxaStats, loadRawSrc, MILLISECONDS_IN } from 'utils'
 import { Select } from 'components/Organisms'
-import { routes } from 'Constants'
+import { links, routes } from 'Constants'
 import { BossGrid, RecentlyAppeared } from './components'
 
 const heroSrc = loadRawSrc('/bosses.png')
@@ -14,6 +14,7 @@ type BossTrackerProps = {
   serverOptions: Option[]
   bossChances: BossChances
   recentlyAppeared: BossStats[]
+  bestiaryBannerVariant: number
 }
 
 const DEBOUNCE_DELAY = 250
@@ -22,6 +23,7 @@ const Tracker = ({
   serverOptions,
   bossChances: initialBossChances,
   recentlyAppeared,
+  bestiaryBannerVariant,
 }: BossTrackerProps) => {
   const { common, bossTracker } = useTranslations()
 
@@ -60,6 +62,53 @@ const Tracker = ({
     [],
   )
 
+  const bestiaryJsxList = [
+    <div>
+      <p className="text-tsm mb-2 font-light">
+        {templateMessage(common.BestiaryBanner.heading, {
+          link: (
+            <a
+              href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopa`}
+              target="_blank"
+              rel="noopener external nofollow noreferrer"
+              className="text-primaryHighlight font-bold tracking-wide"
+            >
+              Bestiary Arena
+            </a>
+          ),
+        })}
+      </p>
+
+      <a
+        href={`${links.BESTIARY_ARENA}/?t=exevobossa`}
+        target="_blank"
+        rel="noopener external nofollow noreferrer"
+        className="block h-[60px]"
+      >
+        <img
+          alt="Open Summon Scroll"
+          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+          src="https://i.imgur.com/tZ7ba1h.png"
+        />
+      </a>
+    </div>,
+    <a
+      href={`${links.BESTIARY_ARENA}/?t=exevobossb`}
+      target="_blank"
+      rel="noopener external nofollow noreferrer"
+      className="grid h-[60px] place-items-center"
+    >
+      <img
+        alt="Bestiary Arena"
+        className="pixelated clickable h-[60px] w-[468px] rounded-lg shadow-lg"
+        src="https://i.imgur.com/kcHD5Nb.png"
+      />
+    </a>,
+  ]
+
+  const bestiaryJsx =
+    bestiaryJsxList[Math.floor(bestiaryBannerVariant * bestiaryJsxList.length)]
+
   return (
     <div className="inner-container pb-8">
       <Hero
@@ -79,7 +128,12 @@ const Tracker = ({
       />
 
       <div className="grid items-start gap-8 md:relative md:flex md:flex-row-reverse md:gap-16 lg:gap-8">
-        <div className="shrink-0 pt-4 md:sticky md:top-[104px] md:w-[320px]">
+        <div className="w-full min-w-0 shrink-0 pt-4 md:sticky md:top-[104px] md:w-[320px]">
+          <div className="relative mt-2 mb-6 w-full overflow-hidden md:mb-4 md:mt-0">
+            <div className="z-1 from-background absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+            {bestiaryJsx}
+          </div>
+
           <RecentlyAppeared bosses={recentlyAppeared} />
         </div>
 
