@@ -64,11 +64,11 @@ const Tracker = ({
 
   const bestiaryJsxList = [
     <div>
-      <p className="text-tsm mb-2 font-light">
+      <p className="text-tsm mb-1 font-light">
         {templateMessage(common.BestiaryBanner.heading, {
           link: (
             <a
-              href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopa`}
+              href={`${links.BESTIARY_ARENA}/?t=exevobossa`}
               target="_blank"
               rel="noopener external nofollow noreferrer"
               className="text-primaryHighlight font-bold tracking-wide"
