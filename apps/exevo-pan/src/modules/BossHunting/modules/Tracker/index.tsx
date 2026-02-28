@@ -64,7 +64,7 @@ const Tracker = ({
 
   const bestiaryJsxList = [
     <div>
-      <p className="text-tsm mb-1 font-light">
+      <p className="text-tsm mb-1.5 font-light">
         {templateMessage(common.BestiaryBanner.heading, {
           link: (
             <a
