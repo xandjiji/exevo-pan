@@ -28,7 +28,7 @@ function TibiaChroniclesCTA() {
         style={{
           margin: '0px 0px -5px -8px',
           filter: 'drop-shadow(0 0 3px #000000bb)',
-          transform: 'translateX(4px)',
+          transform: 'translateX(3px)',
         }}
       />
     </a>
