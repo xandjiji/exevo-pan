@@ -22,7 +22,7 @@ function TibiaChroniclesCTA() {
     >
       <img
         alt="Tibia Chronicles"
-        src="https://i.imgur.com/yxvdED7.png"
+        src="https://i.imgur.com/y3LVenn.png"
         width="160"
         height="47"
         style={{
