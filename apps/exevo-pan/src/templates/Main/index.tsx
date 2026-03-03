@@ -1,5 +1,8 @@
 import { links } from 'Constants'
+import { useEffect, useRef } from 'react'
+import { useOnImageLoad } from 'hooks'
 import { Shine } from 'components/Atoms'
+import { useSession } from 'next-auth/react'
 import MobileTopCTA from './MobileTopCTA'
 import Header from './Header'
 import Footer from './Footer'
@@ -13,6 +16,16 @@ type MainProps = {
 }
 
 function TibiaChroniclesCTA() {
+  const ref = useRef<HTMLImageElement>(null)
+  const session = useSession()
+  const [loaded, onLoadingComplete] = useOnImageLoad()
+
+  useEffect(() => {
+    if (ref.current?.complete) onLoadingComplete()
+  }, [])
+
+  if (session.status === 'loading') return null
+
   return (
     <a
       className="animate-fadeIn lg:order-last"
@@ -21,7 +34,11 @@ function TibiaChroniclesCTA() {
       rel="noopener external nofollow noreferrer"
     >
       <img
+        ref={ref}
+        onLoad={onLoadingComplete}
+        loading="lazy"
         alt="Tibia Chronicles"
+        className={loaded ? 'animate-fadeIn' : ''}
         src="https://i.imgur.com/y3LVenn.png"
         width="160"
         height="47"
