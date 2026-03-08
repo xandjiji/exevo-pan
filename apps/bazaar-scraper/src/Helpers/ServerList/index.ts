@@ -14,7 +14,9 @@ export default class ServerList {
   }
 
   onlineCount(element: Element) {
-    const raw = Number(cheerio('td:nth-child(2)', element).text())
+    const raw = Number(
+      cheerio('td:nth-child(2)', element).text().replaceAll(',', ''),
+    )
     return Number.isNaN(raw) ? null : raw
   }
 
