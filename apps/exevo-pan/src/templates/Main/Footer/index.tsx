@@ -49,6 +49,11 @@ const Card = ({
   />
 )
 
+const linkStyle = {
+  color: 'oklch(79.5% 0.184 86.047)',
+  filter: `drop-shadow(0 0 1px #00000080)`,
+}
+
 const Footer = ({
   variant = 'primary',
   bestiaryBannerVariant,
@@ -56,30 +61,66 @@ const Footer = ({
   const { common } = useTranslations()
 
   const bestiaryJsxList = [
-    <a
-      href={`${links.BESTIARY_ARENA}/?t=exevoscrollfootera`}
-      target="_blank"
-      rel="noopener external nofollow noreferrer"
-      className="grid h-[60px] place-items-center"
-    >
-      <img
-        alt="Open Summon Scroll"
-        className="pixelated h-[60px] w-[468px] shadow-lg"
-        src="https://i.imgur.com/tZ7ba1h.png"
-      />
-    </a>,
-    <a
-      href={`${links.BESTIARY_ARENA}/?t=exevoscrollfooterb`}
-      target="_blank"
-      rel="noopener external nofollow noreferrer"
-      className="grid h-[60px] place-items-center"
-    >
-      <img
-        alt="Bestiary Arena"
-        className="pixelated clickable h-[60px] w-[468px] rounded-lg shadow-lg"
-        src="https://i.imgur.com/kcHD5Nb.png"
-      />
-    </a>,
+    <div className="lgr:mb-[20px] mx-auto w-min">
+      <p className="text-tsm mb-1.5 font-light">
+        {templateMessage(common.BestiaryBanner.heading, {
+          link: (
+            <a
+              href={`${links.BESTIARY_ARENA}/?t=exevofooteraa`}
+              target="_blank"
+              rel="noopener external nofollow noreferrer"
+              className="font-bold tracking-wide"
+              style={linkStyle}
+            >
+              Bestiary Arena
+            </a>
+          ),
+        })}
+      </p>
+
+      <a
+        href={`${links.BESTIARY_ARENA}/?t=exevofooteraa`}
+        target="_blank"
+        rel="noopener external nofollow noreferrer"
+        className="block h-[60px]"
+      >
+        <img
+          alt="Open Summon Scroll"
+          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+          src="https://i.imgur.com/tZ7ba1h.png"
+        />
+      </a>
+    </div>,
+    <div className="lgr:mb-[20px] mx-auto w-min">
+      <p className="text-tsm mb-1.5 font-light">
+        {templateMessage(common.BestiaryBanner.heading, {
+          link: (
+            <a
+              href={`${links.BESTIARY_ARENA}/?t=exevofooterbb`}
+              target="_blank"
+              rel="noopener external nofollow noreferrer"
+              className="font-bold tracking-wide"
+              style={linkStyle}
+            >
+              Bestiary Arena
+            </a>
+          ),
+        })}
+      </p>
+
+      <a
+        href={`${links.BESTIARY_ARENA}/?t=exevofooterbb`}
+        target="_blank"
+        rel="noopener external nofollow noreferrer"
+        className="block h-[60px]"
+      >
+        <img
+          alt="Open Exaltation Chest"
+          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+          src="https://i.imgur.com/wJigmCt.png"
+        />
+      </a>
+    </div>,
   ]
 
   const bestiaryJsx =

@@ -68,7 +68,7 @@ const Tracker = ({
         {templateMessage(common.BestiaryBanner.heading, {
           link: (
             <a
-              href={`${links.BESTIARY_ARENA}/?t=exevobossa`}
+              href={`${links.BESTIARY_ARENA}/?t=exevobossaa`}
               target="_blank"
               rel="noopener external nofollow noreferrer"
               className="text-primaryHighlight font-bold tracking-wide"
@@ -80,7 +80,7 @@ const Tracker = ({
       </p>
 
       <a
-        href={`${links.BESTIARY_ARENA}/?t=exevobossa`}
+        href={`${links.BESTIARY_ARENA}/?t=exevobossaa`}
         target="_blank"
         rel="noopener external nofollow noreferrer"
         className="block h-[60px]"
@@ -92,18 +92,35 @@ const Tracker = ({
         />
       </a>
     </div>,
-    <a
-      href={`${links.BESTIARY_ARENA}/?t=exevobossb`}
-      target="_blank"
-      rel="noopener external nofollow noreferrer"
-      className="grid h-[60px] place-items-center"
-    >
-      <img
-        alt="Bestiary Arena"
-        className="pixelated clickable h-[60px] w-[468px] rounded-lg shadow-lg"
-        src="https://i.imgur.com/kcHD5Nb.png"
-      />
-    </a>,
+    <div>
+      <p className="text-tsm mb-1.5 font-light">
+        {templateMessage(common.BestiaryBanner.heading, {
+          link: (
+            <a
+              href={`${links.BESTIARY_ARENA}/?t=exevobossbb`}
+              target="_blank"
+              rel="noopener external nofollow noreferrer"
+              className="text-primaryHighlight font-bold tracking-wide"
+            >
+              Bestiary Arena
+            </a>
+          ),
+        })}
+      </p>
+
+      <a
+        href={`${links.BESTIARY_ARENA}/?t=exevobossbb`}
+        target="_blank"
+        rel="noopener external nofollow noreferrer"
+        className="block h-[60px]"
+      >
+        <img
+          alt="Open Exaltation Chest"
+          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+          src="https://i.imgur.com/wJigmCt.png"
+        />
+      </a>
+    </div>,
   ]
 
   const bestiaryJsx =
