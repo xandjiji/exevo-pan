@@ -91,36 +91,36 @@ const Footer = ({
         />
       </a>
     </div>,
-    <div className="lgr:mb-[20px] mx-auto w-min">
-      <p className="text-tsm mb-1.5 font-light">
-        {templateMessage(common.BestiaryBanner.heading, {
-          link: (
-            <a
-              href={`${links.BESTIARY_ARENA}/?t=exevofooteraa`}
-              target="_blank"
-              rel="noopener external nofollow noreferrer"
-              className="font-bold tracking-wide"
-              style={linkStyle}
-            >
-              Bestiary Arena
-            </a>
-          ),
-        })}
-      </p>
-
-      <a
-        href={`${links.BESTIARY_ARENA}/?t=exevofooteraa`}
-        target="_blank"
-        rel="noopener external nofollow noreferrer"
-        className="block h-[60px]"
-      >
-        <img
-          alt="Open Summon Scroll"
-          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
-          src="https://i.imgur.com/tZ7ba1h.png"
-        />
-      </a>
-    </div>,
+    // <div className="lgr:mb-[20px] mx-auto w-min">
+    //   <p className="text-tsm mb-1.5 font-light">
+    //     {templateMessage(common.BestiaryBanner.heading, {
+    //       link: (
+    //         <a
+    //           href={`${links.BESTIARY_ARENA}/?t=exevofooteraa`}
+    //           target="_blank"
+    //           rel="noopener external nofollow noreferrer"
+    //           className="font-bold tracking-wide"
+    //           style={linkStyle}
+    //         >
+    //           Bestiary Arena
+    //         </a>
+    //       ),
+    //     })}
+    //   </p>
+    //
+    //   <a
+    //     href={`${links.BESTIARY_ARENA}/?t=exevofooteraa`}
+    //     target="_blank"
+    //     rel="noopener external nofollow noreferrer"
+    //     className="block h-[60px]"
+    //   >
+    //     <img
+    //       alt="Open Summon Scroll"
+    //       className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+    //       src="https://i.imgur.com/tZ7ba1h.png"
+    //     />
+    //   </a>
+    // </div>,
   ]
 
   const bestiaryJsx =

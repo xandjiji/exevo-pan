@@ -32,35 +32,35 @@ const AuctionsGrid = ({
   const { homepage, common } = useTranslations()
 
   const bestiaryJsxList = [
-    <div>
-      <p className="text-tsm mb-2 font-light">
-        {templateMessage(common.BestiaryBanner.heading, {
-          link: (
-            <a
-              href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopaa`}
-              target="_blank"
-              rel="noopener external nofollow noreferrer"
-              className="text-primaryHighlight font-bold tracking-wide"
-            >
-              Bestiary Arena
-            </a>
-          ),
-        })}
-      </p>
-
-      <a
-        href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopaa`}
-        target="_blank"
-        rel="noopener external nofollow noreferrer"
-        className="block h-[60px]"
-      >
-        <img
-          alt="Open Summon Scroll"
-          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
-          src="https://i.imgur.com/tZ7ba1h.png"
-        />
-      </a>
-    </div>,
+    // <div>
+    //   <p className="text-tsm mb-2 font-light">
+    //     {templateMessage(common.BestiaryBanner.heading, {
+    //       link: (
+    //         <a
+    //           href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopaa`}
+    //           target="_blank"
+    //           rel="noopener external nofollow noreferrer"
+    //           className="text-primaryHighlight font-bold tracking-wide"
+    //         >
+    //           Bestiary Arena
+    //         </a>
+    //       ),
+    //     })}
+    //   </p>
+    //
+    //   <a
+    //     href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopaa`}
+    //     target="_blank"
+    //     rel="noopener external nofollow noreferrer"
+    //     className="block h-[60px]"
+    //   >
+    //     <img
+    //       alt="Open Summon Scroll"
+    //       className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
+    //       src="https://i.imgur.com/tZ7ba1h.png"
+    //     />
+    //   </a>
+    // </div>,
     <div>
       <p className="text-tsm mb-2 font-light">
         {templateMessage(common.BestiaryBanner.heading, {
