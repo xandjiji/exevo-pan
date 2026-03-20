@@ -141,19 +141,20 @@ const Footer = ({
             className="flex flex-col gap-6 overflow-hidden"
           >
             <div className="flex flex-col flex-wrap items-center justify-center gap-6 sm:flex-row">
-              <a href={useLocalizedHref(routes.EXEVOPRO)}>
+              <a
+                target="_blank"
+                rel="noopener external nofollow"
+                href={common.otPokemonCta.link}
+              >
                 <Card>
-                  <ExevoPanIcon width={36} height={36} />
-
-                  <span>
-                    {templateMessage(common.exevoProCTA, {
-                      exevoPro: (
-                        <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
-                          Exevo Pro
-                        </strong>
-                      ),
-                    })}
-                  </span>
+                  <img
+                    src="https://i.imgur.com/4nGKNBu.png"
+                    width={250}
+                    height={48}
+                    alt={common.otPokemonCta.text}
+                    loading="lazy"
+                    style={{ filter: 'drop-shadow(0 0 1px black)' }}
+                  />
                 </Card>
               </a>
 
