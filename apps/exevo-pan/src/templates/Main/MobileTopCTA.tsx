@@ -39,6 +39,25 @@ const MobileTopCTA = () => {
           </span>
         </a>
       </li>
+
+      <li className="col-span-full h-8">
+        <a
+          className="flex h-full w-full items-center justify-center gap-2 bg-[#3b3b65] px-2 font-bold text-[#ffd600]"
+          target="_blank"
+          rel="noopener external nofollow noreferrer"
+          href={common.otPokemonCta.link}
+        >
+          <img
+            src="https://i.imgur.com/tqU04Ck.png"
+            alt="otPokemon"
+            width={18}
+            height={18}
+          />
+          <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
+            {common.otPokemonCta.text}
+          </span>
+        </a>
+      </li>
     </ul>
   )
 }
