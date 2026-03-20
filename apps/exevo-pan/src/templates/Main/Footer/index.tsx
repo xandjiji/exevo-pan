@@ -146,7 +146,7 @@ const Footer = ({
                 rel="noopener external nofollow"
                 href={common.otPokemonCta.link}
               >
-                <Card>
+                <Card variant="secondary">
                   <img
                     src="https://i.imgur.com/4nGKNBu.png"
                     width={250}
