@@ -564,15 +564,17 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (typeof guildName !== 'string') return redirect
 
-  const guild = await db
+  const rawGuild = await db
     .selectFrom('Guild')
     .selectAll()
     .where('name', '=', guildName)
     .executeTakeFirst()
 
-  if (!guild) return redirect
+  if (!rawGuild) return redirect
 
-  const [guildMembers, guildApplications] = await Promise.all([
+  const guild: typeof rawGuild = { ...rawGuild, private: !!rawGuild.private }
+
+  const [rawGuildMembers, guildApplications] = await Promise.all([
     db
       .selectFrom('GuildMember')
       .selectAll()
@@ -586,6 +588,11 @@ export const getServerSideProps: GetServerSideProps = async ({
       .orderBy('createdAt', 'desc')
       .execute(),
   ])
+
+  const guildMembers: typeof rawGuildMembers = rawGuildMembers.map((m) => ({
+    ...m,
+    disabledNotifications: !!m.disabledNotifications,
+  }))
 
   const isMember = guildMembers.some(({ userId }) => userId === token?.id)
   const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
