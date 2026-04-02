@@ -180,5 +180,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       bestiaryBannerVariant: Math.random(),
       // tibiaBountyResponse,
     },
+    revalidate: 180,
   }
 }
