@@ -118,7 +118,7 @@ export default {
   },
   otPokemonCta: {
     text: 'Play otPokémon',
-    link: 'https://eu.otpokemon.com',
+    link: 'https://eu.otpokemon.com/exevo',
   },
   TibiaBlackjackCta: {
     text: 'Play Tibia Blackjack',
