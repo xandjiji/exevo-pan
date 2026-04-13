@@ -103,14 +103,36 @@ export default class BlogClient {
     return response.text()
   }
 
+  static async getStaticPostDataFile(): Promise<Record<string, BlogPost[]>> {
+    if (
+      process.env.NODE_ENV === 'development' &&
+      typeof window === 'undefined'
+    ) {
+      try {
+        const { promises: fs } = await import('fs')
+
+        const result = await fs.readFile(
+          '/home/xand/exevo-pan/apps/blog-worker/src/PostData.json',
+          'utf-8',
+        )
+        return JSON.parse(result) as Record<string, BlogPost[]>
+      } catch (error) {
+        console.warn(`Failed to read post data.`, error)
+      }
+    }
+
+    const response = await fetch(`${this.blogStaticUrl}/${POST_DATA_FILE}`)
+
+    const data: Record<string, BlogPost[]> = await response.json()
+    return data
+  }
+
   static async getEveryPostLocale({
     pageSize,
     excludedSlug,
     showHidden = false,
   }: GetEveryPostLocaleProps): Promise<AllBlogPosts> {
-    const response = await fetch(`${this.blogStaticUrl}/${POST_DATA_FILE}`)
-
-    const data: Record<string, BlogPost[]> = await response.json()
+    const data = await this.getStaticPostDataFile()
     const paginatedData = {} as AllBlogPosts
 
     Object.keys(data).forEach((localeRoute) => {
