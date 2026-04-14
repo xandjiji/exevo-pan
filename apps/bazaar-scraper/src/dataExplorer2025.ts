@@ -3,6 +3,7 @@
 /* eslint-disable no-continue */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-param-reassign */
+import { inspect } from 'util'
 import fetch from 'node-fetch'
 import fs from 'fs'
 import readline from 'readline'
@@ -52,8 +53,13 @@ import serverJsonData from '../Output/ServerData.json'
 
 const BASE_AUCTION_FEE = 50
 const AUCTION_TAX = 0.12
+const START_YEAR = 2020
 const TARGET_YEAR = 2025
 const TOP_INVESTED_LIMIT = 20
+const YEAR_RANGE = Array.from(
+  { length: TARGET_YEAR - START_YEAR + 1 },
+  (_, index) => START_YEAR + index,
+)
 const REGION_LABELS: Record<string, string> = {
   BR: 'South America',
   NA: 'North America',
@@ -86,6 +92,12 @@ const serverPvpTypeById = Object.values(serverJsonData).reduce<
   acc[server.serverId] = server.pvpType.string
   return acc
 }, {})
+
+function getServerDataByIdx(idx: number) {
+  const list = Object.values(serverJsonData)
+
+  return list.find((s) => s.serverId === idx)!
+}
 
 const getCipsoftProfit = ({
   hasBeenBidded,
@@ -141,6 +153,25 @@ const getTcInvestedStats = (
     medianTcInvested: getMedian(values),
   }
 }
+
+const getYearlyAuctionStats = (auctions: PartialCharacterObject[]) =>
+  YEAR_RANGE.map((year) => {
+    const yearlyAuctions = auctions.filter(({ auctionEnd }) =>
+      isAuctionFromYear(auctionEnd, year),
+    )
+    const biddedYearlyAuctions = yearlyAuctions.filter(
+      ({ hasBeenBidded }) => hasBeenBidded,
+    )
+
+    return {
+      year,
+      auctionCount: yearlyAuctions.length,
+      biddedAuctionCount: biddedYearlyAuctions.length,
+      averageFinalBid: getAverage(
+        biddedYearlyAuctions.map(({ currentBid }) => currentBid),
+      ),
+    }
+  })
 
 const PURCHASE_FEATURES = [
   {
@@ -264,21 +295,24 @@ const exploreAuctionHistory = async () => {
   await history.load()
 
   const auctions = history.getEntireHistory()
+
+  const filteredAuctions: typeof auctions = []
+  const characterNameSet = new Set<string>([])
+
+  for (let i = auctions.length - 1; i >= 0; i--) {
+    const auction = auctions[i]
+
+    if (!characterNameSet.has(auction.nickname)) {
+      characterNameSet.add(auction.nickname)
+      filteredAuctions.push(auction)
+    }
+  }
+
   const uniqueCharacters = getLatestAuctionPerCharacter(auctions)
   const top20MostInvested = [...uniqueCharacters]
     .sort((a, b) => b.tcInvested - a.tcInvested || b.id - a.id)
     .slice(0, TOP_INVESTED_LIMIT + 1)
-    .map(
-      ({ id, nickname, tcInvested, currentBid, level, serverId }, index) => ({
-        rank: index + 1,
-        id,
-        nickname,
-        tcInvested,
-        currentBid,
-        level,
-        serverId,
-      }),
-    )
+    .map((data) => ({ ...data, serverData: getServerDataByIdx(data.serverId) }))
     .filter((a) => a.nickname !== 'Gbe allmounts outfitscharms')
   const uniqueTcInvestedAuctions = getLatestAuctionPerTcInvested(
     auctions.filter(({ hasBeenBidded }) => hasBeenBidded),
@@ -305,7 +339,7 @@ const exploreAuctionHistory = async () => {
         serverId,
       }),
     )
-  const auctions2025 = auctions.filter(({ auctionEnd }) =>
+  const auctions2025 = filteredAuctions.filter(({ auctionEnd }) =>
     isAuctionFromYear(auctionEnd, TARGET_YEAR),
   )
   const zeroTcInvestedAuctions2025 = auctions2025.filter(
@@ -362,11 +396,24 @@ const exploreAuctionHistory = async () => {
     }),
   )
   const purchaseFeatureStats = getPurchaseFeatureStats(auctions2025)
+  const yearlyAuctionStats = getYearlyAuctionStats(auctions)
+
+  let totalTCVolume = 0
+  let totalCipsoftProfit = 0
+  let totalTCVolume2025 = 0
+  let totalCipsoftProfit2025 = 0
+  const tcInvestedTotal = 0
+
+  let outfitBuyer = 0
+  let mountBuyer = 0
+  let outfitBuyer2025 = 0
+  let mountBuyer2025 = 0
+
   const storeMountOccurrenceCounts = getOccurrenceCounts(
-    auctions.flatMap(({ storeMounts }) => storeMounts),
+    filteredAuctions.flatMap(({ storeMounts }) => storeMounts),
   )
   const storeOutfitOccurrenceCounts = getOccurrenceCounts(
-    auctions.flatMap(({ storeOutfits }) =>
+    filteredAuctions.flatMap(({ storeOutfits }) =>
       storeOutfits.map(({ name }) => name),
     ),
   )
@@ -380,32 +427,17 @@ const exploreAuctionHistory = async () => {
     auctions2025.flatMap(({ storeMounts }) => storeMounts),
   )
 
-  let totalTCVolume = 0
-  let totalCipsoftProfit = 0
-  let totalTCVolume2025 = 0
-  let totalCipsoftProfit2025 = 0
-  const tcInvestedTotal = 0
-  const characterNameSet = new Set<string>([])
-
-  let outfitBuyer = 0
-  let mountBuyer = 0
-  let outfitBuyer2025 = 0
-  let mountBuyer2025 = 0
-
-  for (const auction of auctions) {
+  for (const auction of filteredAuctions) {
     const cipsoftProfit = getCipsoftProfit(auction)
     const isFrom2025 = isAuctionFromYear(auction.auctionEnd, TARGET_YEAR)
 
-    if (!characterNameSet.has(auction.nickname)) {
-      characterNameSet.add(auction.nickname)
-      if (isFrom2025) {
-        if (auction.storeOutfits) outfitBuyer2025++
-        if (auction.storeMounts) mountBuyer2025++
-      }
-
-      if (auction.storeOutfits) outfitBuyer++
-      if (auction.storeMounts) mountBuyer++
+    if (isFrom2025) {
+      if (auction.storeOutfits.length) outfitBuyer2025++
+      if (auction.storeMounts.length) mountBuyer2025++
     }
+
+    if (auction.storeOutfits.length) outfitBuyer++
+    if (auction.storeMounts.length) mountBuyer++
 
     totalCipsoftProfit += cipsoftProfit
     if (isFrom2025) totalCipsoftProfit2025 += cipsoftProfit
@@ -431,29 +463,43 @@ const exploreAuctionHistory = async () => {
       outfitBuyer2025,
     )
 
-  console.log({
-    totalTCVolume,
-    totalCipsoftProfit,
-    totalTCVolume2025,
-    totalCipsoftProfit2025,
-  })
-  console.log({ zeroTcInvested2025Stats })
-  console.table(zeroTcInvested2025ByRegion)
-  console.table(tcInvested2025ByRegion)
-  console.table(tcInvested2025ByPvpType)
-  console.log({
-    purchaseFeatureSubsetAuctionCount: purchaseFeatureStats.consideredAuctions,
-  })
-  console.table(purchaseFeatureStats.breakdown)
-  console.table(top20BuyerAdvantage)
+  // console.log({
+  //   totalTCVolume,
+  //   totalCipsoftProfit,
+  //   totalTCVolume2025,
+  //   totalCipsoftProfit2025,
+  // })
+  // console.log({ zeroTcInvested2025Stats })
+  // console.table(zeroTcInvested2025ByRegion)
+  // console.table(tcInvested2025ByRegion)
+  // console.table(tcInvested2025ByPvpType)
+  // console.log({
+  //   purchaseFeatureSubsetAuctionCount: purchaseFeatureStats.consideredAuctions,
+  // })
+  // console.table(purchaseFeatureStats.breakdown)
+  // console.table(top20BuyerAdvantage)
+  //
+  // console.log('store occurences')
+  // console.table(storeMountOccurrenceCountsWithPercentage)
+  // console.table(storeOutfitOccurrenceCountsWithPercentage)
 
-  console.log('store occurences')
-  console.table(storeMountOccurrenceCountsWithPercentage)
-  console.table(storeOutfitOccurrenceCountsWithPercentage)
-
-  console.log('store occurences2025')
-  console.table(storeMountOccurrenceCounts2025WithPercentage)
-  console.table(storeOutfitOccurrenceCounts2025WithPercentage)
+  // console.log('store occurences2025')
+  // console.table(storeMountOccurrenceCounts2025WithPercentage)
+  // console.table(storeOutfitOccurrenceCounts2025WithPercentage)
+  //
+  // console.table(yearlyAuctionStats)
+  // fs.writeFileSync('topinvest.json', JSON.stringify(top20MostInvested))
+  // console.log(
+  //   inspect(top20MostInvested, {
+  //     showHidden: false,
+  //     depth: null,
+  //     colors: true,
+  //   }),
+  // )
+  console.log({
+    outfitBuyer: outfitBuyer / characterNameSet.size,
+    mountBuyer: mountBuyer / characterNameSet.size,
+  })
 }
 
 // exploreRaw()
