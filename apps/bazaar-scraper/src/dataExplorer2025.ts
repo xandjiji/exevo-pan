@@ -342,6 +342,13 @@ const exploreAuctionHistory = async () => {
   const auctions2025 = filteredAuctions.filter(({ auctionEnd }) =>
     isAuctionFromYear(auctionEnd, TARGET_YEAR),
   )
+
+  const auctionsFrom2025 = filteredAuctions.filter(
+    ({ auctionEnd }) =>
+      isAuctionFromYear(auctionEnd, TARGET_YEAR) ||
+      isAuctionFromYear(auctionEnd, 2026),
+  )
+
   const zeroTcInvestedAuctions2025 = auctions2025.filter(
     ({ tcInvested }) => tcInvested === 0,
   )
@@ -409,23 +416,29 @@ const exploreAuctionHistory = async () => {
   let outfitBuyer2025 = 0
   let mountBuyer2025 = 0
 
+  const excludedMounts = new Set([
+    'Shadow Draptor',
+    'Steelbeak',
+    'Crimson Ray',
+    'Armoured War Horse',
+  ])
+
   const storeMountOccurrenceCounts = getOccurrenceCounts(
     filteredAuctions.flatMap(({ storeMounts }) => storeMounts),
-  )
+  ).filter((n) => !excludedMounts.has(n.name))
   const storeOutfitOccurrenceCounts = getOccurrenceCounts(
     filteredAuctions.flatMap(({ storeOutfits }) =>
       storeOutfits.map(({ name }) => name),
     ),
   )
-
   const storeOutfitOccurrenceCounts2025 = getOccurrenceCounts(
-    auctions2025.flatMap(({ storeOutfits }) =>
+    auctionsFrom2025.flatMap(({ storeOutfits }) =>
       storeOutfits.map(({ name }) => name),
     ),
   )
   const storeMountOccurrenceCounts2025 = getOccurrenceCounts(
-    auctions2025.flatMap(({ storeMounts }) => storeMounts),
-  )
+    auctionsFrom2025.flatMap(({ storeMounts }) => storeMounts),
+  ).filter((n) => !excludedMounts.has(n.name))
 
   for (const auction of filteredAuctions) {
     const cipsoftProfit = getCipsoftProfit(auction)
@@ -479,13 +492,13 @@ const exploreAuctionHistory = async () => {
   // console.table(purchaseFeatureStats.breakdown)
   // console.table(top20BuyerAdvantage)
   //
-  // console.log('store occurences')
-  // console.table(storeMountOccurrenceCountsWithPercentage)
-  // console.table(storeOutfitOccurrenceCountsWithPercentage)
+  console.log('store occurences')
+  console.table(storeMountOccurrenceCountsWithPercentage)
+  console.table(storeOutfitOccurrenceCountsWithPercentage)
 
-  // console.log('store occurences2025')
-  // console.table(storeMountOccurrenceCounts2025WithPercentage)
-  // console.table(storeOutfitOccurrenceCounts2025WithPercentage)
+  console.log('store occurences2025')
+  console.table(storeMountOccurrenceCounts2025WithPercentage)
+  console.table(storeOutfitOccurrenceCounts2025WithPercentage)
   //
   // console.table(yearlyAuctionStats)
   // fs.writeFileSync('topinvest.json', JSON.stringify(top20MostInvested))

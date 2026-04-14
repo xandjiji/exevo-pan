@@ -3,29 +3,29 @@ import { SpritePortrait, Text } from 'components/Atoms'
 import { CosmeticEntry, TopCosmeticsProps } from './types'
 
 const topOutfits: CosmeticEntry[] = [
-  { name: 'Retro Warrior', percentage: '5,4%', price: 870 },
-  { name: 'Retro Hunter', percentage: '1,5%', price: 870 },
-  { name: 'Conjurer', percentage: '1.1%', price: 720 },
-  { name: 'Rune Master', percentage: '1,1%', price: 870 },
-  { name: 'Retro Knight', percentage: '0,8%', price: 870 },
-  { name: 'Sinister Archer', percentage: '0.7%', price: 600 },
-  { name: 'Entrepreneur', percentage: '0,8%', price: 750 },
-  { name: 'Retro Citizen', percentage: '0,7%', price: 870 },
-  { name: 'Ranger', percentage: '0,7%', price: 750 },
-  { name: 'Champion', percentage: '0,5%', price: 570 },
+  { name: 'Retro Warrior', percentage: '46%', price: 870 },
+  { name: 'Retro Hunter', percentage: '13,3%', price: 870 },
+  { name: 'Rune Master', percentage: '10,3%', price: 870 },
+  { name: 'Conjurer', percentage: '8,3%', price: 720 },
+  { name: 'Retro Citizen', percentage: '7,3%', price: 870 },
+  { name: 'Retro Knight', percentage: '7,2%', price: 870 },
+  { name: 'Ghost Blade', percentage: '6,8%', price: 600 },
+  { name: 'Entrepreneur', percentage: '5,9%', price: 750 },
+  { name: 'Sinister Archer', percentage: '5,6%', price: 600 },
+  { name: 'Ranger', percentage: '5,2%', price: 750 },
 ]
 
 const topMounts: CosmeticEntry[] = [
-  { name: 'Shadow Draptor', percentage: '1,3%', price: 870 },
-  { name: 'Crimson Ray', percentage: '0,7%', price: 870 },
-  { name: 'Armoured War Horse', percentage: '0,6%', price: 870 },
-  { name: 'Steelbeak', percentage: '0,5%', price: 870 },
-  { name: 'Gloomwurm', percentage: '0,5%', price: 870 }, // new
-  { name: 'Tempest', percentage: '0,4%', price: 900 },
-  { name: 'Prismatic Unicorn', percentage: '0,4%', price: 870 },
-  { name: 'Silverneck', percentage: '0,4%', price: 720 },
-  { name: 'Night Waccoon', percentage: '0,3%', price: 750 },
-  { name: 'Winter King', percentage: '0,3%', price: 450 }, // new
+  { name: 'Gloomwurm', percentage: '9,4%', price: 870 },
+  { name: 'Darkfire Devourer', percentage: '6,5%', price: 1500 },
+  { name: 'Gorgon Hydra', percentage: '6,1%', price: 870 },
+  { name: 'Prismatic Unicorn', percentage: '5,3%', price: 870 },
+  { name: 'Tempest', percentage: '5,3%', price: 900 },
+  { name: 'Silverneck', percentage: '4,4%', price: 720 },
+  { name: 'Death Crawler', percentage: '4%', price: 600 },
+  { name: 'Winter King', percentage: '3,9%', price: 450 },
+  { name: 'Cerberus Champion', percentage: '3,8%', price: 750 },
+  { name: 'Flamesteed', percentage: '3,6%', price: 900 },
 ]
 
 const TopCosmetics = ({ mounts }: TopCosmeticsProps) => {
