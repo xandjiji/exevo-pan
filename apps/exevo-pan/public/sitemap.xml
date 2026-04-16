@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
     <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -6,7 +5,7 @@
         
   <url>
         <loc>https://exevopan.com/</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>always</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/"/>
@@ -16,7 +15,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/statistics</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics"/>
@@ -26,7 +25,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/statistics/highscores</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics/highscores"/>
@@ -36,7 +35,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/blog</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog"/>
@@ -46,7 +45,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/highlight-auction</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>always</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/highlight-auction"/>
@@ -56,7 +55,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/calculators</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators"/>
@@ -66,7 +65,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/calculators/exercise-weapons</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/exercise-weapons"/>
@@ -76,7 +75,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/calculators/stamina</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/stamina"/>
@@ -86,7 +85,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/calculators/charm-damage</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/charm-damage"/>
@@ -96,7 +95,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/calculators/imbuements-cost</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/imbuements-cost"/>
@@ -106,7 +105,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/calculators/loot-split</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/loot-split"/>
@@ -116,7 +115,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/bosses</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/bosses"/>
@@ -126,7 +125,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/bosses/hunting-groups</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>daily</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/bosses/hunting-groups"/>
@@ -136,7 +135,7 @@
     </url>
   <url>
         <loc>https://exevopan.com/exevo-pro</loc>
-        <lastmod>2026-02-02</lastmod>
+        <lastmod>2026-04-16</lastmod>
         <changefreq>monthly</changefreq>
         
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/exevo-pro"/>
@@ -146,6 +145,16 @@
     </url>
   
   <url>
+        <loc>https://exevopan.com/blog/financial-report-2025</loc>
+        <lastmod>2026-04-14</lastmod>
+        <changefreq>monthly</changefreq>
+        
+        <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/financial-report-2025"/>
+<xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/financial-report-2025"/>
+<xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/financial-report-2025"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://exevopan.com/blog/financial-report-2025"/>
+    </url>
+<url>
         <loc>https://exevopan.com/blog/bestiary-arena</loc>
         <lastmod>2025-04-04</lastmod>
         <changefreq>monthly</changefreq>
