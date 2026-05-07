@@ -23,6 +23,8 @@ export const pluckPremiumFilters = (
   storeMountSet: DEFAULT_FILTER_OPTIONS.storeMountSet,
   tags: new Set([...filterOptions.tags].filter((tag) => !proTagsSet.has(tag))),
   tcInvested: DEFAULT_FILTER_OPTIONS.tcInvested,
+  minBid: DEFAULT_FILTER_OPTIONS.minBid,
+  maxBid: DEFAULT_FILTER_OPTIONS.maxBid,
   auctionIds: DEFAULT_FILTER_OPTIONS.auctionIds,
 })
 
@@ -36,6 +38,8 @@ export const pluckPremiumParameters = (searchParams: URLSearchParams) => {
   searchParams.delete(filterSchema.storeMountSet.urlKey)
 
   searchParams.delete(filterSchema.tcInvested.urlKey)
+  searchParams.delete(filterSchema.minBid.urlKey)
+  searchParams.delete(filterSchema.maxBid.urlKey)
 
   const tagParams = searchParams.get(filterSchema.tags.urlKey)
   if (tagParams) {

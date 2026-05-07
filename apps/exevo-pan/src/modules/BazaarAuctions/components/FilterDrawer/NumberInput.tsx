@@ -6,6 +6,7 @@ type NumberInputProps = {
   dispatchValue: (value: number) => void
   initialValue: number
   defaultValue: number
+  customStep?: (current: number, direction: 1 | -1) => number
 } & Omit<InputProps, 'ref'> &
   AccessibleLabelProps
 
@@ -13,6 +14,7 @@ const NumberInput = ({
   dispatchValue,
   initialValue,
   defaultValue,
+  customStep,
   ...props
 }: NumberInputProps) => {
   const [value, setValue] = useState<string | number>(initialValue)
@@ -24,6 +26,18 @@ const NumberInput = ({
   const isInvalid =
     (props.max !== undefined && +value > +props.max) ||
     (props.min !== undefined && +value < +props.min)
+
+  const handleKeyDown =
+    customStep &&
+    ((e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return
+      e.preventDefault()
+      const direction = e.key === 'ArrowUp' ? 1 : -1
+      const current = value === '' ? defaultValue : +value
+      const next = customStep(current, direction)
+      setValue(next)
+      dispatchValue(next)
+    })
 
   return (
     <Input
@@ -39,6 +53,7 @@ const NumberInput = ({
       error={value !== '' && isInvalid}
       enterKeyHint="next"
       {...props}
+      onKeyDown={handleKeyDown ?? props.onKeyDown}
     />
   )
 }

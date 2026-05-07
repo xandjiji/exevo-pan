@@ -48,6 +48,23 @@ const freeTags = Object.keys(tagsDictionary).filter(
   (tag) => !proTagsSet.has(tag),
 )
 
+// Auctions cluster heavily at low bids, so we use coarser steps as the
+// value grows. Floor is 57 (the smallest current-bid Tibia accepts).
+const bidStep = (current: number, direction: 1 | -1): number => {
+  if (direction === 1) {
+    if (current < 60) return 60
+    if (current < 100) return Math.min(100, Math.floor(current / 10) * 10 + 10)
+    if (current < 5000)
+      return Math.min(5000, Math.floor(current / 100) * 100 + 100)
+    return Math.floor(current / 1000) * 1000 + 1000
+  }
+  if (current <= 60) return 57
+  if (current <= 100) return Math.max(60, Math.ceil(current / 10) * 10 - 10)
+  if (current <= 5000)
+    return Math.max(100, Math.ceil(current / 100) * 100 - 100)
+  return Math.max(5000, Math.ceil(current / 1000) * 1000 - 1000)
+}
+
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const { common, homepage } = useTranslations()
   const i18n = homepage.FilterDrawer
@@ -118,6 +135,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [tcInvested, setTcInvested] = useDebouncedFilter({
     key: 'tcInvested',
     controlledValue: filterState.tcInvested,
+  })
+
+  const [minBid, setMinBid] = useDebouncedFilter({
+    key: 'minBid',
+    controlledValue: filterState.minBid,
+  })
+
+  const [maxBid, setMaxBid] = useDebouncedFilter({
+    key: 'maxBid',
+    controlledValue: filterState.maxBid,
   })
 
   const [minCharmPoints, setMinCharmPoints] = useDebouncedFilter({
@@ -568,6 +595,61 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               }
             />
           </div>
+        </FilterGroup>
+
+        <FilterGroup
+          label={
+            <span
+              className={clsx(
+                'flex items-center gap-1',
+                isPro && 'text-rare font-bold',
+              )}
+            >
+              <img
+                src={tibiaCoinSrc}
+                alt="Tibia Coin"
+                width={12}
+                height={12}
+                className="pixelated"
+                style={{ translate: '0 1px' }}
+              />
+              {i18n.labels.bidValue}
+            </span>
+          }
+        >
+          <div className="grid w-72 grid-cols-2 gap-1.5">
+            <NumberInput
+              min={DEFAULT_FILTER_OPTIONS.minBid}
+              max={maxBid}
+              label={i18n.labels.minBid}
+              placeholder={DEFAULT_FILTER_OPTIONS.minBid.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.minBid}
+              initialValue={minBid}
+              dispatchValue={setMinBid}
+              enterKeyHint="next"
+              customStep={bidStep}
+              disabled={!isPro}
+              className={clsx(
+                isPro ? 'child:text-rare child:font-bold' : 'mb-1',
+              )}
+            />
+            <NumberInput
+              min={minBid}
+              max={DEFAULT_FILTER_OPTIONS.maxBid}
+              label={i18n.labels.maxBid}
+              placeholder={DEFAULT_FILTER_OPTIONS.maxBid.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.maxBid}
+              initialValue={maxBid}
+              dispatchValue={setMaxBid}
+              enterKeyHint="next"
+              customStep={bidStep}
+              disabled={!isPro}
+              className={clsx(
+                isPro ? 'child:text-rare child:font-bold' : 'mb-1',
+              )}
+            />
+          </div>
+          {isPro ? <></> : <S.ExevoProExclusive />}
         </FilterGroup>
 
         <FilterGroup>
