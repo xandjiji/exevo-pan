@@ -2,15 +2,15 @@ import clsx from 'clsx'
 import styles from './styles.module.css'
 
 const distributionData = {
-  dummy: '45,8%',
-  goldPouch: '23,1%',
-  imbuementShrine: '20,4%',
-  rewardShrine: '38,7%',
-  mailbox: '8,9%',
-  charmExpansion: '26,7%',
-  preySlot: '63,3%',
-  hirelings: '25,1%',
-  huntingSlot: '2,4%',
+  dummy: '51,6%',
+  goldPouch: '33,1%',
+  imbuementShrine: '25,4%',
+  rewardShrine: '47%',
+  mailbox: '10,3%',
+  charmExpansion: '51,2%',
+  preySlot: '67,1%',
+  hirelings: '49,6%',
+  huntingSlot: '6,6%',
 }
 
 const Percentage = (args: JSX.IntrinsicElements['span']) => (

@@ -1,4 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
+import { useRouter } from 'next/router'
 import clsx from 'clsx'
 import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
 import { loadThumbnail } from 'utils'
@@ -10,6 +11,7 @@ import { NewstickerProps } from './types'
 
 const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
   const { common } = useTranslations()
+  const { locale } = useRouter()
 
   return (
     <aside
@@ -70,7 +72,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
         ))}
       </div>
 
-      <TibiaBlackjack.Banner className="hidden md:block" />
+      {locale !== 'pt' && <TibiaBlackjack.Banner className="hidden md:block" />}
     </aside>
   )
 }

@@ -34,11 +34,23 @@ const components = {
   TopSpenders: dynamic(
     () => import('modules/Blog/components/Post/custom/TopSpenders'),
   ),
+  TopSpenders2025: dynamic(
+    () => import('modules/Blog/components/Post/custom/TopSpenders/index2025'),
+  ),
   StoreItemDistribution: dynamic(
     () => import('modules/Blog/components/Post/custom/StoreItemDistribution'),
   ),
+  StoreItemDistribution2025: dynamic(
+    () =>
+      import(
+        'modules/Blog/components/Post/custom/StoreItemDistribution/index2025'
+      ),
+  ),
   TopCosmetics: dynamic(
     () => import('modules/Blog/components/Post/custom/TopCosmetics'),
+  ),
+  TopCosmetics2025: dynamic(
+    () => import('modules/Blog/components/Post/custom/TopCosmetics/index2025'),
   ),
   GoodAuction: dynamic(
     () => import('modules/Blog/components/Post/custom/HighlightAuctions/good'),

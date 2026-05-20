@@ -121,7 +121,7 @@ export default defaultComposer(defaultTranslations, {
   },
   otPokemonCta: {
     text: 'Jogar otPokémon',
-    link: 'https://otpokemon.com',
+    link: 'https://otpokemon.com/exevo',
   },
   TibiaBlackjackCta: {
     text: 'Jogar Tibia Blackjack',

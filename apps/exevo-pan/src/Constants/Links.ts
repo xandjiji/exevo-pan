@@ -26,5 +26,6 @@ export const links = {
   TIBIA_TRADE: 'https://tibiatrade.gg',
   BESTIARY_ARENA: 'https://bestiaryarena.com',
   TIBIA_BOUNTY: 'https://tibiabounty.com/',
-  TIBIA_CHRONICLES: 'https://www.tibiachronicles.com/?utm_source=exevopan',
+  TIBIA_CHRONICLES:
+    'https://www.tibiachronicles.com/download?utm_source=exevopan',
 }

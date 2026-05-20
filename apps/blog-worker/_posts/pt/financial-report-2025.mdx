@@ -1,0 +1,145 @@
+---
+title: "Analisando o relatório financeiro de 2025 da Cipsoft junto ao Bazaar"
+description: Vamos analisar o quão bem foi o ano de 2025 para a Cipsoft, revisando seus números e comparando com o que nós podemos saber através do Char Bazaar!
+date: 14-04-2026
+thumbnail: /blog/thumbnails/goldPile.png
+author: Ksu
+tags:
+  - article
+---
+
+### Introdução 
+
+A Cipsoft recentemente publicou seu último relatório financeiro anual, mostrando um aumento na receita de quase `+20%` comparado ao ano anterior!
+
+<Image
+  src="https://www.cipsoft.com/images/Content/CipSoft-Umsatzzahlen-2025-EN.png"
+  width={936}
+  height={318}
+  align="center"
+  caption={
+    <>
+      Receita anual da Cipsoft. 2025 foi o seu melhor ano até agora, com um total de 28 milhões de euros.
+<br />
+      Fonte: <ExternalLink href="https://www.cipsoft.com/en/company">
+        Cipsoft
+      </ExternalLink>.
+    </>
+  }
+  alt="Receita anual da Cipsoft de 2001 a 2025."
+  unoptimized
+/>
+
+---
+
+2025 foi um ano bem cheio para a Cipsoft. Aqui está um resumo dos eventos mais relevantes que podem explicar esse ótimo resultado:
+- <strong>Monk anunciado:</strong> isso pegou todo mundo de surpresa e esse anúncio fez muito barulho. Houve muitas notícias circulando por aí a respeito e você pode ter certeza que isso trouxe muitos jogadores novos e antigos. <small>(Fevereiro/2025)</small>
+- <strong>MultiPayer:</strong> um sistema de pagamentos para outras empresas de jogos. <small>(Março/2025)</small>
+- <strong>The Settlers Online:</strong> absorveu o desenvolvimento e operação de um jogo da Ubisoft Blue Byte <small>(Abril/2025)</small>
+- <strong>Bons Winter e Summer updates:</strong> muitas melhorias de qualidade de vida (Opacidade de magias, multi-action hotkeys, imbuement scrolls, conteúdo para novatos) e conteúdos bem aprovados (weapon proficiency e weekly tasks)
+
+Um ótimo ano ainda mais considerando que eles tiveram que alocar muitos recursos por conta da quinta vocação.
+
+
+Todo esse esforço parece ter trazido retorno para a Cipsoft. A gente não sabe atribuir quanto de receita veio de cada um desses eventos, mas eu apostaria que o <strong>lançamento do Monk</strong> teve o maior impacto 🚀
+
+## O que podemos saber pelo Char Bazaar?
+
+Em 2025, o Bazaar teve um volume total de <code><TibiaCoin value={721376674} /></code> em leilões bem sucedidos. Neste mesmo ano, a Cipsoft embolsou um total de <code><TibiaCoin value={98672129} /></code> em taxas e comissões.
+
+Isso significa que o Char Bazaar sozinho foi responsável por aproximadamente `13%` de toda a receita de 2025 da Cipsoft.
+
+Apesar da menor quantidade de leilões nos últimos anos, a média de valor dos personagens subiu muito:
+
+|  Ano |     Número de leilões      | Valor médio de leilão |
+| :-----------: | :-----------------------: | :--: | 
+|    2020     | 59,641 | <TibiaCoin value={1526} /> |
+|    2021     | 156,866 | <TibiaCoin value={2253} /> |
+|    2022     | 227,344 | <TibiaCoin value={3110} /> |
+|    2023     | 221,171 | <TibiaCoin value={3240} /> |
+|    2024     | 184,868 | <TibiaCoin value={3444} /> |
+|    2025     | 191,321 | <TibiaCoin value={3770} /> |
+<small align="center">
+(Apenas leilões com lance foram considerados)
+</small>
+
+
+### Análise da loja do jogo
+
+Fuçando pelos personagens leiloados no bazar a gente consegue descobrir algumas informações bem interessantes quanto aos hábitos de consumo dos jogadores. Se você tem curiosidade de saber o quanto alguns jogadores podem chegar a gastar em um jogo como o Tibia, aqui está os top 20 personagens com mais Tibia Coins gastas encontrados no Bazaar:
+
+<TopSpenders2025
+  characterLabel="Personagem"
+  spentLabel="Gasto"
+  soldForLabel="Vendido por"
+/>
+<small align="center">
+  Dica: clique em um personagem para ver mais detalhes!
+</small>
+
+## Items mais populares da store
+
+Aqui está a popularidade de algumas utilidades vendidas na loja:
+
+<StoreItemDistribution2025 />
+
+<small align="center">
+  (Apenas personagens com pelo menos 1 utilidade comprada foram considerados)
+</small>
+
+---
+
+Se você comparar com a nossa <SlugLink href="store-analysis">análise anterior</SlugLink> <small>(Abril/2022)</small>, você perceberá que houve um aumento expressivo na popularidade dos seguinte itens da loja:
+- Weekly task slot: `2,4%` -> `6,6%`
+- Charm expansion: `26,7%` -> `51,2%`
+- Hirelings: `25%` -> `49,6%`
+- Gold pouch: `23%` -> `33,1%`
+
+Dá pra perceber como retrabalhar alguns sistemas do jogo como os <strong>Charms</strong> e as novas <strong>Weekly Tasks</strong> podem ter um impacto positivo na receita da Cipsoft. Sabendo disso, será que não rolaria alguma melhoria na Gold Pouch em algum momento no futuro? 👀
+
+## Cosméticos mais populares da loja
+
+Desde a nossa última análise, parece que a lista de montarias e outfits mais populares não mudou muito. Cerca de `40%` de todas as outfits da loja e `52%` de todas as montarias da loja foram encontradas em menos de `1%` de todos os leilões. Isso _talvez_ é um sintoma de que a pesquisa de temáticas para cosmeticos da Cipsoft não é o forte deles.
+
+Também parece que os cosméticos da loja que tiveram algum tipo de oferta especial venderam muito melhor. Talvez a Cipsoft pudesse experimentar um pouco mais com promoções esporádicas ou conteudo exclusivo limitado para aumentar a sua receita 📈
+
+De qualquer forma, aqui está o top 10 **outfits da loja** mais populares desde 2025:
+
+<TopCosmetics2025 />
+
+---
+
+...e aqui está as top 10 **montarias da loja** mais populares desde 2025:
+
+<TopCosmetics2025 mounts />
+
+<small align="center">
+(Excluindo montarias de ofertas especiais)
+</small>
+
+---
+
+As **Retro Outfits** ainda são de longe a temática mais popular. Pra se ter uma ideia, todas as retro outfits combinadas venderam <strong>pelo menos</strong> <code><TibiaCoin value={49294200} /></code>, olhando apenas para personagens do Bazaar. É seguro dizer que vendeu bem mais do que isso.
+
+A <strong>Retro Warrior</strong> outfit é quase `4x` mais popular que o segundo colocado. Apenas o GOAT 👑
+
+A montaria **Gloomwurm** também foi um bom acerto da Cipsoft. E o fato de que a montaria **Darkfire Devourer** está com alta popularidade indica que o **Rotten Blood Bundle** vendeu muito bem.
+
+## Números gerais
+
+- Volume total no Bazaar: <TibiaCoin value={3451886307} />
+- Receita total da Cipsoft com o Bazaar: <TibiaCoin value={495528020} />
+- Total de TC investido nos personagens encontrados no Bazaar: <TibiaCoin value={1718404375} />
+- Personagens do Bazaar que compraram alguma outfit: `14%`
+- Personagens do Bazaar que compraram alguma montaria: `9%`
+
+---
+
+Se você tem interesse em acessar dados exclusivos do Char Bazaar (como o número de Tibia Coins investidos em cada personagem), talvez você queira conferir o nosso <RouteLink href="/exevo-pro"><strong><span
+className="rare-gradient-text">Exevo Pro</span></strong></RouteLink>, que você pode adquirir com desconto agora mesmo usando:
+
+<div className="text-center mx-auto">
+<RouteLink href="/exevo-pro">
+<Coupon coupon="10%DEAL" />
+</RouteLink>
+</div>

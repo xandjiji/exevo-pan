@@ -1,4 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
+import { useRouter } from 'next/router'
 import { loadRawSrc } from 'utils'
 import { links } from 'Constants'
 
@@ -9,22 +10,25 @@ const tbjSrc = loadRawSrc('/assets/tibiablackjack-24x24.png')
 
 const MobileTopCTA = () => {
   const { common } = useTranslations()
+  const { locale } = useRouter()
 
   return (
     <ul className="grid grid-cols-2 text-center text-xs tracking-widest md:hidden">
-      <li className="h-8">
-        <a
-          className="flex h-full w-full items-center justify-center gap-2 bg-[#333333] px-2 font-bold text-[#70d967]"
-          target="_blank"
-          rel="noopener external nofollow noreferrer"
-          href={links.TIBIA_BLACKJACK}
-        >
-          <img src={tbjSrc} alt="Tibia Blackjack" width={24} height={24} />
-          <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
-            {common.TibiaBlackjackCta.text}
-          </span>
-        </a>
-      </li>
+      {locale !== 'pt' && (
+        <li className="h-8">
+          <a
+            className="flex h-full w-full items-center justify-center gap-2 bg-[#333333] px-2 font-bold text-[#70d967]"
+            target="_blank"
+            rel="noopener external nofollow noreferrer"
+            href={links.TIBIA_BLACKJACK}
+          >
+            <img src={tbjSrc} alt="Tibia Blackjack" width={24} height={24} />
+            <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
+              {common.TibiaBlackjackCta.text}
+            </span>
+          </a>
+        </li>
+      )}
 
       <li className="h-8">
         <a
@@ -40,9 +44,11 @@ const MobileTopCTA = () => {
         </a>
       </li>
 
-      <li className="col-span-full h-8">
+      <li className={`${locale !== 'pt' ? 'col-span-full' : ''} h-8`}>
         <a
-          className="flex h-full w-full items-center justify-center gap-2 bg-[#3b3b65] px-2 font-bold text-[#ffd600]"
+          className={`flex h-full w-full items-center justify-center gap-2 ${
+            locale === 'pt' ? 'bg-[#333333]' : 'bg-[#3b3b65]'
+          } px-2 font-bold text-[#ffd600]`}
           target="_blank"
           rel="noopener external nofollow noreferrer"
           href={common.otPokemonCta.link}
