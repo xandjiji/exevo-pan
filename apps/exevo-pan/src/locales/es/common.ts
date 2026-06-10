@@ -117,7 +117,7 @@ export default defaultComposer(defaultTranslations, {
   RemoveItem: 'Eliminar el artículo',
   TibiaCoinsCta: {
     text: 'Compra Tibia Coins',
-    link: 'https://edgartc.mx',
+    link: 'https://wa.me/528332996705',
   },
   TibiaBlackjackCta: {
     text: 'Jugar Tibia Blackjack',

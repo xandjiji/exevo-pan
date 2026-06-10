@@ -15,7 +15,7 @@ export const links = {
   CIPSOFT: 'https://www.cipsoft.com',
   UNLICENSE: 'https://unlicense.org',
   TIBIA_BLACKJACK: 'https://tbj.one/r/xand',
-  EDGAR_TC: 'https://edgartc.mx/',
+  EDGAR_TC: 'https://wa.me/528332996705',
   REI_DOS_COINS: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
   TIBIA_REFERRAL:
     'https://www.tibia.com/mmorpg/free-multiplayer-online-role-playing-game.php?taftoken=8b6dfcab-6353-4f07-b895-bf8716d007e1',
