@@ -22,6 +22,7 @@ export default NextAuth({
       clientId: process.env.DISCORD_CLIENT_ID as string,
       clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
       authorization: { params: { scope: 'email identify' } },
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   callbacks: {
