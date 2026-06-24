@@ -30,6 +30,7 @@ import AuctionSummary from './AuctionSummary'
 import DateDiffGrid from './DateDiffGrid'
 import { useRangeDatePicker } from './useRangeDatePicker'
 import {
+  formatAuctionEndTooltip,
   getHighlightStatus,
   getTimezoneDiff,
   isPastDate,
@@ -315,6 +316,13 @@ const PaymentList = () => {
                             </CharacterLink>
                           )}
                           <p>{email}</p>
+
+                          <p>
+                            Auction ends:{' '}
+                            <strong>
+                              {formatAuctionEndTooltip(auctionEnd)}
+                            </strong>
+                          </p>
                         </div>
                       }
                     >

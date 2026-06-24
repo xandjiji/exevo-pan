@@ -60,3 +60,34 @@ export const offsettedCurrentISODate = (timezoneOffsetMinutes: number) =>
   ).toLocaleString('pt-BR', {
     hour12: false,
   })
+
+const formatRelativeTimeFromNow = (date: Date | number): string => {
+  const diffMs = +new Date(date) - Date.now()
+  const absDiffMs = Math.abs(diffMs)
+  const isFuture = diffMs > 0
+  const prefix = isFuture ? 'in ' : ''
+  const suffix = isFuture ? '' : ' ago'
+
+  if (absDiffMs < MILLISECONDS_IN.HOUR) {
+    const minutes = Math.max(1, Math.round(absDiffMs / MILLISECONDS_IN.MINUTE))
+
+    return `(${prefix}${minutes} minute${minutes === 1 ? '' : 's'}${suffix})`
+  }
+
+  if (absDiffMs < MILLISECONDS_IN.DAY) {
+    const hours = Math.round(absDiffMs / MILLISECONDS_IN.HOUR)
+
+    return `(${prefix}${hours} hour${hours === 1 ? '' : 's'}${suffix})`
+  }
+
+  const days = Math.round(absDiffMs / MILLISECONDS_IN.DAY)
+
+  return `(${prefix}${days} day${days === 1 ? '' : 's'}${suffix})`
+}
+
+export const formatAuctionEndTooltip = (auctionEnd: Date | number): string => {
+  const date = new Date(auctionEnd)
+  const readable = date.toLocaleString('pt-BR', { hour12: false })
+
+  return `${readable} ${formatRelativeTimeFromNow(date)}`
+}
