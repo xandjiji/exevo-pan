@@ -511,6 +511,14 @@ export const outfits: OutfitToken[] = [
     value: 870,
   },
   {
+    name: 'Necromancer',
+    id: {
+      male: 1845,
+      female: 1846,
+    },
+    value: 870,
+  },
+  {
     name: 'Bat Knight',
     id: {
       male: 1874,
@@ -519,10 +527,26 @@ export const outfits: OutfitToken[] = [
     value: 870,
   },
   {
-    name: 'Necromancer',
+    name: 'Phoenix Evoker',
     id: {
-      male: 1845,
-      female: 1846,
+      male: 1920,
+      female: 1921,
+    },
+    value: 870,
+  },
+  {
+    name: 'Aerial Disciple',
+    id: {
+      male: 1936,
+      female: 1937,
+    },
+    value: 870,
+  },
+  {
+    name: 'Vampire Noble',
+    id: {
+      male: 1948,
+      female: 1949,
     },
     value: 870,
   },

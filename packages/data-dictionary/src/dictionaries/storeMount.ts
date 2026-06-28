@@ -846,6 +846,36 @@ const mounts: MountToken[] = [
     id: 1844,
     value: 870,
   },
+  {
+    name: 'Battle Werewolf',
+    id: 1873,
+    value: 870,
+  },
+  {
+    name: 'Flame Bear',
+    id: 1919,
+    value: 870,
+  },
+  {
+    name: 'Guardian Lion',
+    id: 1935,
+    value: 870,
+  },
+  {
+    name: 'Vampiric Hound',
+    id: 1945,
+    value: 870,
+  },
+  {
+    name: 'Night Hound',
+    id: 1946,
+    value: 870,
+  },
+  {
+    name: 'Infernal Hound',
+    id: 1947,
+    value: 870,
+  },
 ]
 
 export const priceMap = cosmeticToPriceMap(mounts)
