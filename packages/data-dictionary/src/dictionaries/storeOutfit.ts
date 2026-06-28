@@ -548,7 +548,7 @@ export const outfits: OutfitToken[] = [
       male: 1948,
       female: 1949,
     },
-    value: 870,
+    value: 750,
   },
 ]
 
