@@ -108,7 +108,6 @@ export default ({
         <div className="grid gap-2">
           <ExevoProCTA />
           <PokemonCTA />
-          <TibiaChroniclesCTA />
         </div>
         <BestiaryArenaCTA />
       </div>
