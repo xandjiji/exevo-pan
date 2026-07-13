@@ -116,6 +116,9 @@ export default {
     text: 'Get Tibia Coins',
     link: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
   },
+  iglaOTS: {
+    text: 'Play IglaOTS',
+  },
   otPokemonCta: {
     text: 'Play otPokémon',
     link: 'https://eu.otpokemon.com/exevo',

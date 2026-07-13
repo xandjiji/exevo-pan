@@ -44,7 +44,7 @@ const MobileTopCTA = () => {
         </a>
       </li>
 
-      <li className={`${locale !== 'pt' ? 'col-span-full' : ''} h-8`}>
+      <li className="h-8">
         <a
           className={`flex h-full w-full items-center justify-center gap-2 ${
             locale === 'pt' ? 'bg-[#333333]' : 'bg-[#3b3b65]'
@@ -61,6 +61,25 @@ const MobileTopCTA = () => {
           />
           <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
             {common.otPokemonCta.text}
+          </span>
+        </a>
+      </li>
+
+      <li className={`${locale === 'pt' ? 'col-span-full' : ''} h-8`}>
+        <a
+          className="flex h-full w-full items-center justify-center gap-2 bg-[#352020] px-2 font-bold text-[#ffd600]"
+          target="_blank"
+          rel="noopener external nofollow noreferrer"
+          href={links.IGLAOTS}
+        >
+          <img
+            src="https://i.imgur.com/SBLyH3X.png"
+            alt="IglaOTS"
+            width={18}
+            height={18}
+          />
+          <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
+            {common.iglaOTS.text}
           </span>
         </a>
       </li>
