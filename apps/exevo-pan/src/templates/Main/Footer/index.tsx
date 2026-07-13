@@ -155,6 +155,27 @@ const Footer = ({
                     height={48}
                     alt={common.otPokemonCta.text}
                     loading="lazy"
+                    style={{
+                      filter: 'drop-shadow(0 0 1px black)',
+                      marginTop: 6,
+                      marginBottom: 5,
+                    }}
+                  />
+                </Card>
+              </a>
+
+              <a
+                target="_blank"
+                rel="noopener external nofollow"
+                href={links.IGLAOTS}
+              >
+                <Card variant="secondary">
+                  <img
+                    src="https://i.imgur.com/ucbqQmN.png"
+                    width={251}
+                    height={59}
+                    alt="IglaOTS"
+                    loading="lazy"
                     style={{ filter: 'drop-shadow(0 0 1px black)' }}
                   />
                 </Card>
@@ -217,7 +238,10 @@ const Footer = ({
             </div>
 
             <div className="relative overflow-hidden">
-              <div className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+              <div
+                className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent"
+                id="igla-shadow"
+              />
 
               {bestiaryJsx}
             </div>
