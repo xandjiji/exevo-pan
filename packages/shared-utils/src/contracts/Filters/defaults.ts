@@ -24,6 +24,8 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   achievementPoints: 0,
   minCharmPoints: 0,
   maxCharmPoints: 50000,
+  minBid: 57,
+  maxBid: 5000000000,
   tcInvested: 0,
   tags: new Set([]),
   skillKey: new Set([]),
