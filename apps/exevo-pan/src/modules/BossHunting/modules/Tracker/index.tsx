@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
 import { Hero } from 'templates'
 import { useRouter } from 'next/router'
@@ -26,6 +26,8 @@ const Tracker = ({
   bestiaryBannerVariant,
 }: BossTrackerProps) => {
   const { common, bossTracker } = useTranslations()
+
+  const [loaded, setLoaded] = useState(false)
 
   const bossChances: typeof initialBossChances = useMemo(
     () => ({
@@ -108,18 +110,17 @@ const Tracker = ({
         })}
       </p>
 
-      <a
-        href={`${links.BESTIARY_ARENA}/?t=exevobossbb`}
-        target="_blank"
-        rel="noopener external nofollow noreferrer"
-        className="block h-[60px]"
-      >
-        <img
-          alt="Open Exaltation Chest"
-          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
-          src="https://i.imgur.com/wJigmCt.png"
-        />
-      </a>
+      <iframe
+        src={`${links.BESTIARY_ARENA}/promo-chest?tag=exevobossbb`}
+        width="468"
+        height="60"
+        scrolling="no"
+        loading="lazy"
+        frameBorder={0}
+        title="Bestiary Arena"
+        onLoad={() => setLoaded(true)}
+        className={loaded ? 'shadow-lg' : ''}
+      />
     </div>,
   ]
 

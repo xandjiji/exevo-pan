@@ -31,6 +31,7 @@ const AuctionsGrid = ({
 }: AuctionsGridProps) => {
   const { homepage, common } = useTranslations()
 
+  const [loaded, setLoaded] = useState(false)
   const bestiaryJsxList = [
     // <div>
     //   <p className="text-tsm mb-2 font-light">
@@ -77,18 +78,17 @@ const AuctionsGrid = ({
         })}
       </p>
 
-      <a
-        href={`${links.BESTIARY_ARENA}/?t=exevoscrolltopbb`}
-        target="_blank"
-        rel="noopener external nofollow noreferrer"
-        className="block h-[60px]"
-      >
-        <img
-          alt="Open Exaltation Chest"
-          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
-          src="https://i.imgur.com/wJigmCt.png"
-        />
-      </a>
+      <iframe
+        src={`${links.BESTIARY_ARENA}/promo-chest?tag=exevoscrolltopbb`}
+        width="468"
+        height="60"
+        scrolling="no"
+        loading="lazy"
+        frameBorder={0}
+        title="Bestiary Arena"
+        onLoad={() => setLoaded(true)}
+        className={loaded ? 'shadow-lg' : ''}
+      />
     </div>,
   ]
 

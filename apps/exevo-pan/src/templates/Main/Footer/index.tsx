@@ -64,6 +64,7 @@ const Footer = ({
   const { locale } = useRouter()
 
   const [now] = useState(() => Date.now())
+  const [loaded, setLoaded] = useState(false)
 
   const bestiaryJsxList = [
     <div className="lgr:mb-[20px] mx-auto w-min">
@@ -83,18 +84,17 @@ const Footer = ({
         })}
       </p>
 
-      <a
-        href={`${links.BESTIARY_ARENA}/?t=exevofooterbb`}
-        target="_blank"
-        rel="noopener external nofollow noreferrer"
-        className="block h-[60px]"
-      >
-        <img
-          alt="Open Exaltation Chest"
-          className="pixelated mx-auto h-[60px] w-[468px] shadow-lg"
-          src="https://i.imgur.com/wJigmCt.png"
-        />
-      </a>
+      <iframe
+        src={`${links.BESTIARY_ARENA}/promo-chest?tag=exevofooterbb`}
+        width="468"
+        height="60"
+        scrolling="no"
+        loading="lazy"
+        frameBorder={0}
+        title="Bestiary Arena"
+        onLoad={() => setLoaded(true)}
+        className={loaded ? 'shadow-lg' : ''}
+      />
     </div>,
     // <div className="lgr:mb-[20px] mx-auto w-min">
     //   <p className="text-tsm mb-1.5 font-light">
