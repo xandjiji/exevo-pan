@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-has-content */
+import { useState } from 'react'
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { loadRawSrc } from 'utils'
@@ -61,6 +62,8 @@ const Footer = ({
 }: FooterProps) => {
   const { common } = useTranslations()
   const { locale } = useRouter()
+
+  const [now] = useState(() => Date.now())
 
   const bestiaryJsxList = [
     <div className="lgr:mb-[20px] mx-auto w-min">
@@ -217,10 +220,35 @@ const Footer = ({
             </div>
 
             <div className="relative overflow-hidden">
-              <div className="z-1 lgr:hidden from-primary absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+              <div className="z-1 lgr:hidden from-primary pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
 
               {bestiaryJsx}
             </div>
+          </div>
+        )}
+
+        {variant === 'primary' && now >= 1784325600000 && (
+          <div
+            className="relative mx-auto -mt-2 block w-full overflow-hidden"
+            id="kaz-ad"
+          >
+            <div className="z-1 lgr:hidden from-primary pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+
+            <a
+              href="https://kazordoom.com/partner/exevopan"
+              target="_blank"
+              rel="noopener external nofollow"
+              className="mx-auto block w-min"
+            >
+              <img
+                src="https://i.imgur.com/UZKLq88.gif"
+                width="600"
+                height="90"
+                alt="Kazordoom"
+                loading="lazy"
+                className="rounded shadow-md"
+              />
+            </a>
           </div>
         )}
 

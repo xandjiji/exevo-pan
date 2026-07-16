@@ -278,4 +278,8 @@ textarea {
     align-items: center;
     gap: 32px;
   }
+
+  #kaz-ad {
+    margin-top: -28px;
+  }
 }
