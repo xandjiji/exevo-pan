@@ -227,7 +227,7 @@ const Footer = ({
           </div>
         )}
 
-        {variant === 'primary' && now >= 1784325600000 && (
+        {variant === 'primary' && (
           <div
             className="relative mx-auto -mt-2 block w-full overflow-hidden"
             id="kaz-ad"
