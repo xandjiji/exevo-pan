@@ -28,4 +28,5 @@ export const links = {
   TIBIA_BOUNTY: 'https://tibiabounty.com/',
   TIBIA_CHRONICLES:
     'https://www.tibiachronicles.com/download?utm_source=exevopan',
+  IGLAOTS: 'https://iglaots.net',
 }

@@ -279,7 +279,22 @@ textarea {
     gap: 32px;
   }
 
-  #kaz-ad {
+  #bottom-footer {
     margin-top: -28px;
+    flex-direction: row;
+    align-items: center;
+    width: min-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #igla-ad {
+    margin: 0;
+  }
+  #kaz-ad {
+    margin: 0;
+  }
+  #kaz-ad a {
+    margin: 0;
   }
 }

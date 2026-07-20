@@ -119,6 +119,9 @@ export default defaultComposer(defaultTranslations, {
     text: 'Comprar Tibia Coins',
     link: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
   },
+  iglaOTS: {
+    text: 'Jogar IglaOTS',
+  },
   otPokemonCta: {
     text: 'Jogar otPokémon',
     link: 'https://otpokemon.com/exevo',

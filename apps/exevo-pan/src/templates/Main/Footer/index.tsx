@@ -229,26 +229,50 @@ const Footer = ({
 
         {variant === 'primary' && (
           <div
-            className="relative mx-auto -mt-2 block w-full overflow-hidden"
-            id="kaz-ad"
+            id="bottom-footer"
+            className="-mt-2 flex w-full flex-col gap-4 overflow-hidden"
           >
-            <div className="z-1 lgr:hidden from-primary pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+            <div className="mx-auto block w-min" id="igla-ad">
+              <a
+                href={links.IGLAOTS}
+                target="_blank"
+                rel="noopener external nofollow"
+              >
+                <Card variant="secondary">
+                  <img
+                    src="https://i.imgur.com/ucbqQmN.png"
+                    width={251}
+                    height={59}
+                    alt="IglaOTS"
+                    loading="lazy"
+                    style={{ filter: 'drop-shadow(0 0 1px black)' }}
+                  />
+                </Card>
+              </a>
+            </div>
 
-            <a
-              href="https://kazordoom.com/partner/exevopan"
-              target="_blank"
-              rel="noopener external nofollow"
-              className="mx-auto block w-min"
+            <div
+              id="kaz-ad"
+              className="relative mx-auto block w-full overflow-hidden"
             >
-              <img
-                src="https://i.imgur.com/UZKLq88.gif"
-                width="600"
-                height="90"
-                alt="Kazordoom"
-                loading="lazy"
-                className="rounded shadow-md"
-              />
-            </a>
+              <div className="z-1 lgr:hidden from-primary pointer-events-none absolute top-0 right-0 h-full w-8 bg-gradient-to-l to-transparent" />
+
+              <a
+                href="https://kazordoom.com/partner/exevopan"
+                target="_blank"
+                rel="noopener external nofollow"
+                className="mx-auto block w-min"
+              >
+                <img
+                  src="https://i.imgur.com/UZKLq88.gif"
+                  width="600"
+                  height="90"
+                  alt="Kazordoom"
+                  loading="lazy"
+                  className="rounded shadow-md"
+                />
+              </a>
+            </div>
           </div>
         )}
 
