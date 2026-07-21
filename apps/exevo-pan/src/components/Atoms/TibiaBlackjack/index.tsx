@@ -16,7 +16,7 @@ export const Banner = memo(
       href={links.TIBIA_BLACKJACK}
       {...props}
     >
-      <div className="text-onPrimary text-tsm flex items-center gap-1 whitespace-nowrap uppercase">
+      <div className="text-onPrimary text-tsm flex items-center gap-1 whitespace-nowrap font-bold uppercase">
         <FadeImage
           src="https://i.imgur.com/PVGQaYL.png"
           alt="Tibia Blackjack"
