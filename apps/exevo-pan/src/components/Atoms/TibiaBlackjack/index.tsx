@@ -2,16 +2,13 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 import { FadeImage } from 'components/Atoms'
-import { loadRawSrc } from 'utils'
 import { links } from 'Constants'
-
-const logoMdSrc = loadRawSrc('/assets/tibiablackjack.png')
 
 export const Banner = memo(
   ({ className, ...props }: JSX.IntrinsicElements['a']) => (
     <a
       className={clsx(
-        'card clickable bg-black/40 p-1 transition-all hover:bg-black/30',
+        'card clickable bg-black/40 px-1.5 py-1 transition-all hover:bg-black/30',
         className,
       )}
       target="_blank"
@@ -19,14 +16,16 @@ export const Banner = memo(
       href={links.TIBIA_BLACKJACK}
       {...props}
     >
-      <FadeImage
-        className="self-start"
-        src={logoMdSrc}
-        alt="Tibia Blackjack"
-        width={97}
-        height={61}
-        loading="lazy"
-      />
+      <div className="text-onPrimary text-tsm flex items-center gap-1 whitespace-nowrap uppercase">
+        <FadeImage
+          src="https://i.imgur.com/PVGQaYL.png"
+          alt="Tibia Blackjack"
+          width={18}
+          height={18}
+          loading="lazy"
+        />{' '}
+        Play TibiaBlackjack
+      </div>
     </a>
   ),
 )
