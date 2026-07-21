@@ -3,10 +3,7 @@ import { useRouter } from 'next/router'
 import { loadRawSrc } from 'utils'
 import { links } from 'Constants'
 
-const ravenSrc = loadRawSrc('/assets/ravendawn-ico.png')
 const tcSrc = loadRawSrc('/assets/tibiaCoins.gif')
-const tbjSrc = loadRawSrc('/assets/tibiablackjack-24x24.png')
-// const noPingSrc = loadRawSrc('/assets/noping-mini.png')
 
 const MobileTopCTA = () => {
   const { common } = useTranslations()
@@ -22,7 +19,12 @@ const MobileTopCTA = () => {
             rel="noopener external nofollow noreferrer"
             href={links.TIBIA_BLACKJACK}
           >
-            <img src={tbjSrc} alt="Tibia Blackjack" width={24} height={24} />
+            <img
+              src="https://i.imgur.com/GNZ4DMD.png"
+              alt="Tibia Blackjack"
+              width={22}
+              height={22}
+            />
             <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
               {common.TibiaBlackjackCta.text}
             </span>
