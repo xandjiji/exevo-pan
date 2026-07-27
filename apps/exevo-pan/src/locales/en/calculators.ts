@@ -21,7 +21,7 @@ export default {
         'Compare Tibia charm damage and average procs to choose the best charm.',
     },
     ImbuementsCost: {
-      title: 'Tibia Imbuement Calculator',
+      title: 'Tibia Imbuement Price Calculator',
       description:
         'Calculate the cheapest Tibia imbuement materials and gold token costs.',
     },

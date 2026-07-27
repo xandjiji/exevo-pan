@@ -24,7 +24,7 @@ export default defaultComposer(defaultTranslations, {
         'Compare o dano médio dos charms no Tibia e escolha a melhor opção.',
     },
     ImbuementsCost: {
-      title: 'Calculadora de Imbuements Tibia',
+      title: 'Calcular preços de Imbuements Tibia',
       description:
         'Calcule a forma mais barata de comprar materiais e gold tokens para imbuements.',
     },
