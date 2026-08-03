@@ -141,6 +141,7 @@ export function normalizeData(
   paginationData: PaginationOptions,
 ): FilterResponse {
   if (paginationData.pageSize <= 10) return filterResponse
+  if (paginationData.pageSize === 50) return filterResponse
 
   return { ...filterResponse, page: filterResponse.page.map(normalize) }
 }
