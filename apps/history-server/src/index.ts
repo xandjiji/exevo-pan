@@ -4,6 +4,7 @@ import {
   deserializeFilter,
   deserializePagination,
   deserializeSort,
+  normalizeData,
 } from 'shared-utils/dist/contracts/Filters/schemas'
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
@@ -29,7 +30,8 @@ const main = async () => {
     const filterOptions = deserializeFilter({ currentParams })
     const sortOptions = deserializeSort({ currentParams })
     const paginationOptions = deserializePagination({ currentParams })
-    paginationOptions.pageSize = Math.min(paginationOptions.pageSize, 10)
+    const originPaginationOptions = { ...paginationOptions }
+    paginationOptions.pageSize = Math.min(paginationOptions.pageSize, 20)
 
     const filteredAuctions = filterCharacters({
       auctions,
@@ -39,10 +41,10 @@ const main = async () => {
     const sortedAuctions = applySort(filteredAuctions, sortOptions)
     const paginatedData = paginateData(sortedAuctions, paginationOptions)
 
-    const responseBody: FilterResponse = {
-      ...paginatedData,
-      ...sortOptions,
-    }
+    const responseBody: FilterResponse = normalizeData(
+      { ...paginatedData, ...sortOptions },
+      originPaginationOptions,
+    )
 
     broadcast(`${timer.elapsedTime()} ${url}`, 'success')
     response.json(responseBody)

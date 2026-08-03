@@ -3,6 +3,7 @@ import {
   deserializeFilter,
   deserializePagination,
   deserializeSort,
+  normalizeData,
 } from 'shared-utils/dist/contracts/Filters/schemas'
 import { auctions } from './Data/auctions'
 import { filterOldAuctions } from './utils'
@@ -27,7 +28,8 @@ export default {
     const filterOptions = deserializeFilter({ currentParams })
     const sortOptions = deserializeSort({ currentParams })
     const paginationOptions = deserializePagination({ currentParams })
-    paginationOptions.pageSize = Math.min(paginationOptions.pageSize, 10)
+    const originPaginationOptions = { ...paginationOptions }
+    paginationOptions.pageSize = Math.min(paginationOptions.pageSize, 20)
 
     const filteredAuctions = filterCharacters({
       auctions: currentAuctions,
@@ -38,10 +40,10 @@ export default {
 
     const paginatedData = paginateData(sortedAuctions, paginationOptions)
 
-    const responseBody = {
-      ...paginatedData,
-      ...sortOptions,
-    }
+    const responseBody: FilterResponse = normalizeData(
+      { ...paginatedData, ...sortOptions },
+      originPaginationOptions,
+    )
 
     return new Response(JSON.stringify(responseBody), { status: 200, headers })
   },
