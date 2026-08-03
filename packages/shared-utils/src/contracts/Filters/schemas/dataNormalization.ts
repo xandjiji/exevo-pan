@@ -88,7 +88,6 @@ function normalize(data: CharacterObject): CharacterObject {
   const normalized: CharacterObject = {
     ...data,
     id: getId(),
-    nickname: getNormalizeString(10),
     auctionEnd: getAuctionEnd(),
     currentBid: getNormalizeBid(),
     hasBeenBidded: getNormalizeBoolean(),
