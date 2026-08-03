@@ -27,6 +27,7 @@ export default {
     const filterOptions = deserializeFilter({ currentParams })
     const sortOptions = deserializeSort({ currentParams })
     const paginationOptions = deserializePagination({ currentParams })
+    paginationOptions.pageSize = Math.min(paginationOptions.pageSize, 10)
 
     const filteredAuctions = filterCharacters({
       auctions: currentAuctions,

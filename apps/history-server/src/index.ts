@@ -8,7 +8,7 @@ import {
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
-import { Timer, getMedian, canBeUsedForEstimations } from './utils'
+import { canBeUsedForEstimations, getMedian, Timer } from './utils'
 import { exposeLocalhost } from './localtunnel'
 
 const { PORT, STAGING } = process.env
@@ -29,6 +29,7 @@ const main = async () => {
     const filterOptions = deserializeFilter({ currentParams })
     const sortOptions = deserializeSort({ currentParams })
     const paginationOptions = deserializePagination({ currentParams })
+    paginationOptions.pageSize = Math.min(paginationOptions.pageSize, 10)
 
     const filteredAuctions = filterCharacters({
       auctions,
