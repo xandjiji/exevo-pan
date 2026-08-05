@@ -12,6 +12,7 @@ export default {
     const headers = new Headers()
     headers.set('Content-Type', 'application/json')
     headers.set('Access-Control-Allow-Origin', '*')
+    headers.set('Cache-Control', 'public, max-age=30, s-maxage=120')
 
     if (request.method !== 'GET') {
       return new Response(
