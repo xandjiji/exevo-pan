@@ -38,7 +38,8 @@ export default async (request: VercelRequest) => {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
-          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=60',
+          'Cache-Control':
+            'public, max-age=60, s-maxage=60, stale-while-revalidate=60',
         },
       })
     }
@@ -50,7 +51,8 @@ export default async (request: VercelRequest) => {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=60',
+        'Cache-Control':
+          'public, max-age=60, s-maxage=60, stale-while-revalidate=60',
       },
     })
   } catch (error) {
