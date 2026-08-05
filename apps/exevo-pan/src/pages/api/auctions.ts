@@ -8,12 +8,7 @@ const isPro = (token: JWT | null) => token && token.proStatus
 export default async (request: VercelRequest) => {
   const { method, url } = request
 
-  if (
-    method !== 'GET'
-    // request[process.env.API_A as 'body'][process.env.API_D as 'string'](
-    //   process.env.API_B,
-    // )
-  ) {
+  if (method !== 'GET') {
     return new Response(JSON.stringify({ error: `${method} not allowed` }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
@@ -43,6 +38,7 @@ export default async (request: VercelRequest) => {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=60',
         },
       })
     }
@@ -54,6 +50,7 @@ export default async (request: VercelRequest) => {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=60',
       },
     })
   } catch (error) {
