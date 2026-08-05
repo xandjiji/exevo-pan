@@ -88,6 +88,16 @@ export const filterSchema: SchemaCodec<FilterOptions> = {
     defaultValue: DEFAULT_FILTER_OPTIONS.maxCharmPoints,
     decode: codecs.decode.Number,
   },
+  minBid: {
+    urlKey: 'minBid',
+    defaultValue: DEFAULT_FILTER_OPTIONS.minBid,
+    decode: codecs.decode.Number,
+  },
+  maxBid: {
+    urlKey: 'maxBid',
+    defaultValue: DEFAULT_FILTER_OPTIONS.maxBid,
+    decode: codecs.decode.Number,
+  },
   tcInvested: {
     urlKey: 'tcInvested',
     defaultValue: DEFAULT_FILTER_OPTIONS.tcInvested,

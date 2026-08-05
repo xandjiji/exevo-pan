@@ -22,7 +22,7 @@ const FilterGroup = ({
       <Label htmlFor={htmlFor} className="relative mb-2 block">
         {newSticker && (
           <Sticker
-            localStorageKey={label}
+            localStorageKey={typeof label === 'string' ? label : htmlFor ?? ''}
             className="absolute bottom-full right-full"
             style={{ transform: 'rotate(-15deg)' }}
           >

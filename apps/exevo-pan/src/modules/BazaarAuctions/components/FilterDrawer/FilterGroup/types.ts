@@ -1,5 +1,5 @@
 export interface FilterGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  label?: string
+  label?: React.ReactNode
   htmlFor?: string
   children: JSX.Element | JSX.Element[]
   newSticker?: boolean
