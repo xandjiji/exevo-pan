@@ -2245,6 +2245,26 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Gilded Warlord Sword',
     value: 250,
   },
+  'barebone grill': {
+    name: 'Barebone Grill',
+    value: 120,
+  },
+  'dark mosaic floor': {
+    name: 'Dark Mosaic Floor',
+    value: 30,
+  },
+  'bamboo room divider': {
+    name: 'Bamboo Room Divider',
+    value: 60,
+  },
+  'gothic stone room divider': {
+    name: 'Gothic Stone Room Divider',
+    value: 60,
+  },
+  'skull carpet': {
+    name: 'Skull Carpet',
+    value: 30,
+  },
   /* HUNTING TASKS */
   'bronze hunter trophy': {
     name: 'Bronze Hunter Trophy',
@@ -2391,6 +2411,11 @@ export const storeItems: Record<string, StoreItem> = {
   /* BOSSTIARY */
   'podium of vigour': {
     name: 'Podium of Vigour',
+    value: 0,
+  },
+  /* OTHERS */
+  'sand floor in a bucket': {
+    name: 'Sand Floor in a Bucket',
     value: 0,
   },
 }
