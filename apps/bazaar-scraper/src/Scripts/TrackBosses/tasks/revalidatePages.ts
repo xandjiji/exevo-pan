@@ -4,7 +4,7 @@ import { broadcast, coloredText, tabBroadcast, TrackETA } from 'logging'
 import { ExevoPanClient } from 'services'
 import { retryWrapper } from 'utils'
 
-const ROUTE_PATH = 'boss-tracker'
+const ROUTE_PATH = 'bosses'
 
 const revalidateServer = retryWrapper((serverName?: string) =>
   ExevoPanClient.revalidate(
@@ -20,7 +20,7 @@ export const revalidatePages = async (
   const task = new TrackETA(serverList.length + 1, 'Page revalidation')
 
   tabBroadcast(
-    `revalidating ${coloredText('/boss-tracker', 'neutral')}...`,
+    `revalidating ${coloredText('/bosses', 'neutral')}...`,
     'neutral',
   )
   await revalidateServer()
