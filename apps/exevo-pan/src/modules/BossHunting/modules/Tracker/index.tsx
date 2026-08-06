@@ -134,6 +134,7 @@ const Tracker = ({
         title="Boss Tracker"
         offset
         subtitle={subtitle}
+        updatedAt={bossChances.lastUpdated}
         className="md:-mb-16"
       />
 

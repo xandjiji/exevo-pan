@@ -10,6 +10,7 @@ const Hero = ({
   offset = false,
   hueRotation,
   dimension = 240,
+  updatedAt,
   className,
   ...props
 }: HeroProps) => (
@@ -52,7 +53,11 @@ const Hero = ({
         {title}
       </h1>
       {!!subtitle && (
-        <span className="text-s block whitespace-nowrap font-light italic tracking-wide opacity-90 md:text-base">
+        <span
+          id="hero-subtitle-id"
+          data-updated-at={updatedAt}
+          className="text-s block whitespace-nowrap font-light italic tracking-wide opacity-90 md:text-base"
+        >
           {subtitle}
         </span>
       )}

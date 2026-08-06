@@ -5,4 +5,5 @@ export interface HeroProps extends React.HTMLAttributes<HTMLDivElement> {
   offset?: boolean
   hueRotation?: number
   dimension?: number
+  updatedAt?: number
 }
